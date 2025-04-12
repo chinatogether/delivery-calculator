@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты расчета доставки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: #E74C3C;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .summary {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .summary p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .packaging {
+            margin-bottom: 20px;
+        }
+        .packaging h2 {
+            color: #AA4444;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr.footer-row td {
+            font-weight: bold;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #E74C3C;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 48%;
+        }
+        button:hover {
+            background-color: #C0392B;
+        }
+    </style>
+</head>
+<body>
+    <h1>Результаты расчета стоимости доставки</h1>
+    <div class="container">
+        <!-- Верхний блок с основной информацией -->
+        <div class="summary">
+            <h2>Основная информация:</h2>
+            <p><strong>Вес товара:</strong> <span id="weight"></span> кг</p>
+            <p><strong>Объем:</strong> <span id="volume"></span> м³</p>
+            <p><strong>Плотность:</strong> <span id="density"></span> кг/м³</p>
+            <p><strong>Стоимость товара:</strong> <span id="cost"></span> $</p>
+            <p><strong>Количество упаковок:</strong> <span id="quantity"></span></p>
+        </div>
+
+        <!-- Блоки с упаковками -->
+        <div id="packaging-section"></div>
+
+        <!-- Кнопки -->
+        <div class="button-container">
+            <button id="backButton">Вернуться назад</button>
+            <button id="saveButton">Сохранить расчет</button>
+        </div>
+    </div>
+
+    <script>
+        try {
+            // Извлекаем данные из localStorage
+            const resultsParam = localStorage.getItem("calculationResults");
+            if (!resultsParam) {
+                throw new Error("Данные не найдены!");
+            }
+
+            // Парсим JSON с обработкой ошибок
+            let results;
+            try {
+                results = JSON.parse(resultsParam);
+            } catch (parseError) {
+                throw new Error("Некорректные данные в localStorage.");
+            }
+
+            if (!results || !results.generalInformation) {
+                throw new Error("Некорректные данные.");
+            }
+
+            // Заполняем основную информацию
+            document.getElementById("weight").textContent = parseFloat(results.generalInformation.weight).toFixed(2);
+            document.getElementById("volume").textContent = parseFloat(results.generalInformation.volume).toFixed(2);
+            document.getElementById("density").textContent = parseFloat(results.generalInformation.density).toFixed(2);
+            document.getElementById("cost").textContent = parseFloat(results.generalInformation.productCost).toLocaleString('en-US', { minimumFractionDigits: 2 });
+            document.getElementById("quantity").textContent = results.generalInformation.boxCount;
+
+            // Функция для создания таблицы упаковки
+            function createPackagingTable(packagingType, data) {
+                const section = document.createElement("div");
+                section.classList.add("packaging");
+
+                const title = document.createElement("h2");
+                title.textContent = packagingType;
+                section.appendChild(title);
+
+                const table = document.createElement("table");
+
+                // Заголовки таблицы
+                const headerRow = table.insertRow();
+                const headers = ["Показатель", "Обычная доставка", "Быстрая доставка"];
+                headers.forEach(headerText => {
+                    const th = document.createElement("th");
+                    th.textContent = headerText;
+                    headerRow.appendChild(th);
+                });
+
+                // Строки данных
+                const rows = [
+                    { label: "Вес с упаковкой", value1: parseFloat(data.packedWeight), value2: parseFloat(data.packedWeight) },
+                    { label: "Стоимость упаковки", value1: parseFloat(data.packagingCost), value2: parseFloat(data.packagingCost) },
+                    { label: "Стоимость доставки", value1: parseFloat(data.deliveryCostRegular), value2: parseFloat(data.deliveryCostFast) },
+                    { label: "Стоимость разгрузочных работ", value1: parseFloat(data.unloadCost), value2: parseFloat(data.unloadCost) },
+                    { label: "Стоимость страховки", value1: parseFloat(data.insurance), value2: parseFloat(data.insurance) }
+                ];
+
+                rows.forEach(rowData => {
+                    const row = table.insertRow();
+                    const cells = [rowData.label, rowData.value1, rowData.value2];
+                    cells.forEach(cellText => {
+                        const cell = document.createElement("td");
+                        cell.textContent = typeof cellText === "number" ? cellText.toLocaleString('en-US', { minimumFractionDigits: 2 }) : cellText;
+                        row.appendChild(cell);
+                    });
+                });
+
+                // Итоговая строка
+                const footerRow = table.insertRow();
+                footerRow.classList.add("footer-row");
+                const footerCells = ["Итого сумма всех стоимостей выше", parseFloat(data.totalRegular), parseFloat(data.totalFast)];
+                footerCells.forEach(cellText => {
+                    const cell = document.createElement("td");
+                    cell.textContent = typeof cellText === "number" ? cellText.toLocaleString('en-US', { minimumFractionDigits: 2 }) : cellText;
+                    cell.style.fontWeight = "bold";
+                    footerRow.appendChild(cell);
+                });
+
+                section.appendChild(table);
+                return section;
+            }
+
+            // Генерация блоков для каждого типа упаковки
+            const packagingSection = document.getElementById("packaging-section");
+            const packagingTypes = {
+                bag: "Мешок",
+                corners: "Картонные уголки",
+                frame: "Деревянный каркас"
+            };
+
+            for (const [key, title] of Object.entries(packagingTypes)) {
+                const packagingData = results[key];
+                if (packagingData) {
+                    const table = createPackagingTable(title, packagingData);
+                    packagingSection.appendChild(table);
+                }
+            }
+
+            // Кнопка "Вернуться назад"
+            document.getElementById("backButton").addEventListener("click", function () {
+                window.location.href = "/"; // Перенаправляем на главную страницу
+            });
+
+            // Кнопка "Сохранить расчет"
+            document.getElementById("saveButton").addEventListener("click", function () {
+                // Сохраняем результаты в localStorage с уникальным ключом
+                const savedCalculations = JSON.parse(localStorage.getItem("savedCalculations")) || [];
+                savedCalculations.push(results); // Добавляем текущий расчет
+                localStorage.setItem("savedCalculations", JSON.stringify(savedCalculations));
+                alert("Расчет успешно сохранен! Вы можете просмотреть сохраненные расчеты позже.");
+            });
+        } catch (error) {
+            alert("Ошибка при обработке данных: " + error.message);
+            console.error("Ошибка:", error);
+            window.location.href = "/"; // Возвращаемся на главную страницу
+        }
+    </script>
+</body>
+</html>
