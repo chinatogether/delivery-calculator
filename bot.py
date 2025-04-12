@@ -22,7 +22,7 @@ async def delete_webhook():
 async def start(message: types.Message):
     user_id = message.from_user.id
     username = message.from_user.username or "unknown"
-    web_app_url = f"https://chinatogether.github.io/delivery-calculator/index.html?telegram_id={user_id}&username={username}"
+    web_app_url = f"https://emiliskhakov.github.io/delivery_calculator/index.html?telegram_id={user_id}&username={username}"
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(
