@@ -83,15 +83,60 @@
         <!-- Верхний блок с основной информацией -->
         <div class="summary">
             <h2>Основная информация:</h2>
-            <p><strong>Вес товара:</strong> <span id="weight"></span> кг</p>
-            <p><strong>Объем:</strong> <span id="volume"></span> м³</p>
-            <p><strong>Плотность:</strong> <span id="density"></span> кг/м³</p>
-            <p><strong>Стоимость товара:</strong> <span id="cost"></span> $</p>
-            <p><strong>Количество упаковок:</strong> <span id="quantity"></span></p>
+            <p><strong>Вес товара:</strong> <span id="weight">{{ results.generalInformation.weight }}</span> кг</p>
+            <p><strong>Объем:</strong> <span id="volume">{{ results.generalInformation.volume }}</span> м³</p>
+            <p><strong>Плотность:</strong> <span id="density">{{ results.generalInformation.density }}</span> кг/м³</p>
+            <p><strong>Стоимость товара:</strong> <span id="cost">{{ results.generalInformation.productCost }}</span> $</p>
+            <p><strong>Количество упаковок:</strong> <span id="quantity">{{ results.generalInformation.boxCount }}</span></p>
         </div>
 
         <!-- Блоки с упаковками -->
-        <div id="packaging-section"></div>
+        <div id="packaging-section">
+            {% for key, title in [('bag', 'Мешок'), ('corners', 'Картонные уголки'), ('frame', 'Деревянный каркас')] %}
+                {% if results[key] %}
+                    <div class="packaging">
+                        <h2>{{ title }}</h2>
+                        <table>
+                            <tr>
+                                <th>Показатель</th>
+                                <th>Обычная доставка</th>
+                                <th>Быстрая доставка</th>
+                            </tr>
+                            <tr>
+                                <td>Вес с упаковкой</td>
+                                <td>{{ "%.2f"|format(results[key].packedWeight) }}</td>
+                                <td>{{ "%.2f"|format(results[key].packedWeight) }}</td>
+                            </tr>
+                            <tr>
+                                <td>Стоимость упаковки</td>
+                                <td>{{ "%.2f"|format(results[key].packagingCost) }}</td>
+                                <td>{{ "%.2f"|format(results[key].packagingCost) }}</td>
+                            </tr>
+                            <tr>
+                                <td>Стоимость доставки</td>
+                                <td>{{ "%.2f"|format(results[key].deliveryCostRegular) }}</td>
+                                <td>{{ "%.2f"|format(results[key].deliveryCostFast) }}</td>
+                            </tr>
+                            <tr>
+                                <td>Стоимость разгрузочных работ</td>
+                                <td>{{ "%.2f"|format(results[key].unloadCost) }}</td>
+                                <td>{{ "%.2f"|format(results[key].unloadCost) }}</td>
+                            </tr>
+                            <tr>
+                                <td>Стоимость страховки</td>
+                                <td>{{ "%.2f"|format(results[key].insurance) }}</td>
+                                <td>{{ "%.2f"|format(results[key].insurance) }}</td>
+                            </tr>
+                            <tr class="footer-row">
+                                <td>Итого сумма всех стоимостей выше</td>
+                                <td>{{ "%.2f"|format(results[key].totalRegular) }}</td>
+                                <td>{{ "%.2f"|format(results[key].totalFast) }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
 
         <!-- Кнопки -->
         <div class="button-container">
@@ -101,120 +146,14 @@
     </div>
 
     <script>
-        try {
-            // Извлекаем данные из localStorage
-            const resultsParam = localStorage.getItem("calculationResults");
-            if (!resultsParam) {
-                throw new Error("Данные не найдены!");
-            }
+        // Обработчики событий для кнопок
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.location.href = "/"; // Перенаправляем на главную страницу
+        });
 
-            // Парсим JSON с обработкой ошибок
-            let results;
-            try {
-                results = JSON.parse(resultsParam);
-            } catch (parseError) {
-                throw new Error("Некорректные данные в localStorage.");
-            }
-
-            if (!results || !results.generalInformation) {
-                throw new Error("Некорректные данные.");
-            }
-
-            // Заполняем основную информацию
-            document.getElementById("weight").textContent = parseFloat(results.generalInformation.weight).toFixed(2);
-            document.getElementById("volume").textContent = parseFloat(results.generalInformation.volume).toFixed(2);
-            document.getElementById("density").textContent = parseFloat(results.generalInformation.density).toFixed(2);
-            document.getElementById("cost").textContent = parseFloat(results.generalInformation.productCost).toLocaleString('en-US', { minimumFractionDigits: 2 });
-            document.getElementById("quantity").textContent = results.generalInformation.boxCount;
-
-            // Функция для создания таблицы упаковки
-            function createPackagingTable(packagingType, data) {
-                const section = document.createElement("div");
-                section.classList.add("packaging");
-
-                const title = document.createElement("h2");
-                title.textContent = packagingType;
-                section.appendChild(title);
-
-                const table = document.createElement("table");
-
-                // Заголовки таблицы
-                const headerRow = table.insertRow();
-                const headers = ["Показатель", "Обычная доставка", "Быстрая доставка"];
-                headers.forEach(headerText => {
-                    const th = document.createElement("th");
-                    th.textContent = headerText;
-                    headerRow.appendChild(th);
-                });
-
-                // Строки данных
-                const rows = [
-                    { label: "Вес с упаковкой", value1: parseFloat(data.packedWeight), value2: parseFloat(data.packedWeight) },
-                    { label: "Стоимость упаковки", value1: parseFloat(data.packagingCost), value2: parseFloat(data.packagingCost) },
-                    { label: "Стоимость доставки", value1: parseFloat(data.deliveryCostRegular), value2: parseFloat(data.deliveryCostFast) },
-                    { label: "Стоимость разгрузочных работ", value1: parseFloat(data.unloadCost), value2: parseFloat(data.unloadCost) },
-                    { label: "Стоимость страховки", value1: parseFloat(data.insurance), value2: parseFloat(data.insurance) }
-                ];
-
-                rows.forEach(rowData => {
-                    const row = table.insertRow();
-                    const cells = [rowData.label, rowData.value1, rowData.value2];
-                    cells.forEach(cellText => {
-                        const cell = document.createElement("td");
-                        cell.textContent = typeof cellText === "number" ? cellText.toLocaleString('en-US', { minimumFractionDigits: 2 }) : cellText;
-                        row.appendChild(cell);
-                    });
-                });
-
-                // Итоговая строка
-                const footerRow = table.insertRow();
-                footerRow.classList.add("footer-row");
-                const footerCells = ["Итого сумма всех стоимостей выше", parseFloat(data.totalRegular), parseFloat(data.totalFast)];
-                footerCells.forEach(cellText => {
-                    const cell = document.createElement("td");
-                    cell.textContent = typeof cellText === "number" ? cellText.toLocaleString('en-US', { minimumFractionDigits: 2 }) : cellText;
-                    cell.style.fontWeight = "bold";
-                    footerRow.appendChild(cell);
-                });
-
-                section.appendChild(table);
-                return section;
-            }
-
-            // Генерация блоков для каждого типа упаковки
-            const packagingSection = document.getElementById("packaging-section");
-            const packagingTypes = {
-                bag: "Мешок",
-                corners: "Картонные уголки",
-                frame: "Деревянный каркас"
-            };
-
-            for (const [key, title] of Object.entries(packagingTypes)) {
-                const packagingData = results[key];
-                if (packagingData) {
-                    const table = createPackagingTable(title, packagingData);
-                    packagingSection.appendChild(table);
-                }
-            }
-
-            // Кнопка "Вернуться назад"
-            document.getElementById("backButton").addEventListener("click", function () {
-                window.location.href = "/"; // Перенаправляем на главную страницу
-            });
-
-            // Кнопка "Сохранить расчет"
-            document.getElementById("saveButton").addEventListener("click", function () {
-                // Сохраняем результаты в localStorage с уникальным ключом
-                const savedCalculations = JSON.parse(localStorage.getItem("savedCalculations")) || [];
-                savedCalculations.push(results); // Добавляем текущий расчет
-                localStorage.setItem("savedCalculations", JSON.stringify(savedCalculations));
-                alert("Расчет успешно сохранен! Вы можете просмотреть сохраненные расчеты позже.");
-            });
-        } catch (error) {
-            alert("Ошибка при обработке данных: " + error.message);
-            console.error("Ошибка:", error);
-            window.location.href = "/"; // Возвращаемся на главную страницу
-        }
+        document.getElementById("saveButton").addEventListener("click", function () {
+            alert("Расчет успешно сохранен! Вы можете просмотреть сохраненные расчеты позже.");
+        });
     </script>
 </body>
 </html>
