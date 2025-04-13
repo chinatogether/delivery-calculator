@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Результаты расчета</title>
     <style>
-        /* Стили для страницы */
+        /* Стили остаются без изменений */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -59,22 +59,16 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Получаем данные из контекста Flask (передаются через render_template)
-            const results = {{ results | tojson | safe }};
+            // Получаем данные из localStorage
+            const results = JSON.parse(localStorage.getItem("calculationResults"));
 
             if (!results || !results.generalInformation) {
-                // Если данных нет, показываем сообщение об ошибке
                 document.getElementById("error-message").textContent = "Ошибка: Данные для отображения отсутствуют.";
                 document.getElementById("error-message").style.display = "block";
                 return;
             }
 
             try {
-                // Проверяем структуру данных
-                if (!results.generalInformation || !results.bag || !results.corners || !results.frame) {
-                    throw new Error("Некорректная структура данных");
-                }
-
                 // Генерируем HTML с результатами
                 const container = document.getElementById("results-container");
                 container.innerHTML = `
@@ -136,7 +130,6 @@
                     </div>
                 `;
             } catch (error) {
-                // Если произошла ошибка при обработке данных, показываем сообщение
                 document.getElementById("error-message").textContent = `Ошибка: ${error.message}`;
                 document.getElementById("error-message").style.display = "block";
                 console.error("Ошибка при обработке данных:", error);
