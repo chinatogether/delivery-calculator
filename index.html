@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Форма для расчета доставки</title>
     <style>
-        /* Общие настройки */
+        /* Стили остаются без изменений */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -95,11 +95,12 @@
     <!-- Логотип -->
     <img src="https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20(2).jpg" alt="China Together" class="logo">
     <h1>Расчет стоимости доставки</h1>
+
     <form id="deliveryForm" style="flex-grow: 1;">
         <!-- Категория товара -->
         <label for="category">Категория товара:</label>
         <select id="category" name="category" tabindex="1">
-            <option value="Обычные товары">Обычные товары</option>
+            <option value="Обычные товары">Обычные товара</option>
             <option value="Текстиль">Текстиль</option>
             <option value="Одежда">Одежда</option>
             <option value="Обувь">Обувь</option>
@@ -125,56 +126,47 @@
         <input type="submit" value="Рассчитать стоимость" tabindex="8">
     </form>
     <script>
-        // Инициализация Telegram WebApp
-        const tg = window.Telegram.WebApp;
+        // Фиктивные данные пользователя (можно заменить на реальные)
+        const telegramId = "123456789"; // Тестовый ID
+        const username = "test_user";   // Тестовый никнейм
 
-        // Получение данных пользователя Telegram
-        const user = tg.initDataUnsafe?.user;
-        if (user) {
-            const telegramId = user.id;
-            const username = user.username || "unknown";
+        document.getElementById("deliveryForm").addEventListener("submit", function (event) {
+            event.preventDefault();
 
-            // Отправка данных в форму
-            document.getElementById("deliveryForm").addEventListener("submit", function (event) {
-                event.preventDefault();
+            // Получаем данные с параметрами
+            const category = document.getElementById("category").value;
+            const weight = parseFloat(document.getElementById("weight").value);
+            const length = parseFloat(document.getElementById("length").value);
+            const width = parseFloat(document.getElementById("width").value);
+            const height = parseFloat(document.getElementById("height").value);
+            const cost = parseFloat(document.getElementById("cost").value);
+            const quantity = parseInt(document.getElementById("quantity").value);
 
-                // Получаем данные с параметрами
-                const category = document.getElementById("category").value;
-                const weight = parseFloat(document.getElementById("weight").value);
-                const length = parseFloat(document.getElementById("length").value);
-                const width = parseFloat(document.getElementById("width").value);
-                const height = parseFloat(document.getElementById("height").value);
-                const cost = parseFloat(document.getElementById("cost").value);
-                const quantity = parseInt(document.getElementById("quantity").value);
+            // Строим URL для запроса
+            const url = `http://84.201.187.187:8061/calculate?category=${encodeURIComponent(category)}&weight=${weight}&length=${length}&width=${width}&height=${height}&cost=${cost}&quantity=${quantity}&telegram_id=${telegramId}&username=${username}`;
 
-                // Строим URL для запроса
-                const url = `http://84.201.187.187:8061/calculate?category=${encodeURIComponent(category)}&weight=${weight}&length=${length}&width=${width}&height=${height}&cost=${cost}&quantity=${quantity}&telegram_id=${telegramId}&username=${username}`;
-
-                // Делаем запрос к Flask API
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            alert(data.error);
-                        } else {
-                            try {
-                                // Сохраняем данные в localStorage
-                                localStorage.setItem("calculationResults", JSON.stringify(data));
-                                // Переходим на страницу с результатами
-                                window.location.href = "/result.html";
-                            } catch (error) {
-                                alert("Ошибка при обработке данных: " + error.message);
-                                console.error("Поврежденный JSON:", data);
-                            }
+            // Делаем запрос к Flask API
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        try {
+                            // Сохраняем данные в localStorage
+                            localStorage.setItem("calculationResults", JSON.stringify(data));
+                            // Переходим на страницу с результатами
+                            window.location.href = "/result.html";
+                        } catch (error) {
+                            alert("Ошибка при обработке данных: " + error.message);
+                            console.error("Поврежденный JSON:", data);
                         }
-                    })
-                    .catch(error => {
-                        alert("Ошибка при выполнении запроса: " + error.message);
-                    });
-            });
-        } else {
-            alert("Не удалось получить данные пользователя Telegram.");
-        }
+                    }
+                })
+                .catch(error => {
+                    alert("Ошибка при выполнении запроса: " + error.message);
+                });
+        });
     </script>
 </body>
 </html>
