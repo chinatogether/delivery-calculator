@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма для расчета доставки</title>
+    <style>
+        /* Стили остаются без изменений */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #E74C3C;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            max-width: 150px;
+            height: auto;
+        }
+        form {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 0 auto 20px auto;
+            max-width: 400px;
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #AA4444;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #E74C3C;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: auto;
+        }
+        input[type="submit"]:hover {
+            background-color: #C0392B;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            form {
+                padding: 15px;
+            }
+            input, select {
+                padding: 10px;
+                font-size: 14px;
+            }
+            input[type="submit"] {
+                padding: 12px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Логотип -->
+    <img src="https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20(2).jpg" alt="China Together" class="logo">
+    <h1>Расчет стоимости доставки</h1>
+
+    <form id="deliveryForm" style="flex-grow: 1;">
+        <!-- Категория товара -->
+        <label for="category">Категория товара:</label>
+        <select id="category" name="category" tabindex="1">
+            <option value="Обычные товары">Обычные товара</option>
+            <option value="Текстиль">Текстиль</option>
+            <option value="Одежда">Одежда</option>
+            <option value="Обувь">Обувь</option>
+            <option value="Нижнее белье">Нижнее белье</option>
+        </select>
+        <!-- Вес одной коробки -->
+        <label for="weight">Вес одной коробки (кг):</label>
+        <input type="number" id="weight" name="weight" required min="0.1" step="any" tabindex="2" placeholder="Введите вес">
+        <!-- Размеры коробки -->
+        <label for="length">Длина коробки (см):</label>
+        <input type="number" id="length" name="length" required min="1" step="any" tabindex="3" placeholder="Введите длину">
+        <label for="width">Ширина коробки (см):</label>
+        <input type="number" id="width" name="width" required min="1" step="any" tabindex="4" placeholder="Введите ширину">
+        <label for="height">Высота коробки (см):</label>
+        <input type="number" id="height" name="height" required min="1" step="any" tabindex="5" placeholder="Введите высоту">
+        <!-- Стоимость товара -->
+        <label for="cost">Стоимость товара ($):</label>
+        <input type="number" id="cost" name="cost" required min="0.01" step="any" tabindex="6" placeholder="Введите стоимость">
+        <!-- Количество коробок -->
+        <label for="quantity">Количество коробок:</label>
+        <input type="number" id="quantity" name="quantity" required min="1" step="1" tabindex="7" placeholder="Введите количество">
+        <!-- Кнопка отправки формы -->
+        <input type="submit" value="Рассчитать стоимость" tabindex="8">
+    </form>
+    <script>
+        // Фиктивные данные пользователя (можно заменить на реальные)
+        const telegramId = "123456789"; // Тестовый ID
+        const username = "test_user";   // Тестовый никнейм
+
+        document.getElementById("deliveryForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Получаем данные с параметрами
+            const category = document.getElementById("category").value;
+            const weight = parseFloat(document.getElementById("weight").value);
+            const length = parseFloat(document.getElementById("length").value);
+            const width = parseFloat(document.getElementById("width").value);
+            const height = parseFloat(document.getElementById("height").value);
+            const cost = parseFloat(document.getElementById("cost").value);
+            const quantity = parseInt(document.getElementById("quantity").value);
+
+            // Строим URL для запроса
+            const url = `http://84.201.187.187:8061/calculate?category=${encodeURIComponent(category)}&weight=${weight}&length=${length}&width=${width}&height=${height}&cost=${cost}&quantity=${quantity}&telegram_id=${telegramId}&username=${username}`;
+
+            // Делаем запрос к Flask API
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        try {
+                            // Сохраняем данные в localStorage
+                            localStorage.setItem("calculationResults", JSON.stringify(data));
+                            // Переходим на страницу с результатами
+                            window.location.href = "/result.html";
+                        } catch (error) {
+                            alert("Ошибка при обработке данных: " + error.message);
+                            console.error("Поврежденный JSON:", data);
+                        }
+                    }
+                })
+                .catch(error => {
+                    alert("Ошибка при выполнении запроса: " + error.message);
+                });
+        });
+    </script>
+</body>
+</html>
