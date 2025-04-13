@@ -59,18 +59,19 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Проверяем наличие данных в localStorage
-            const results = localStorage.getItem("calculationResults");
+            // Проверяем наличие данных в URL
+            const resultsParam = new URLSearchParams(window.location.search).get('results');
 
-            if (!results) {
+            if (!resultsParam) {
                 // Если данных нет, показываем сообщение об ошибке
+                document.getElementById("error-message").textContent = "Ошибка: Данные для отображения отсутствуют.";
                 document.getElementById("error-message").style.display = "block";
                 return;
             }
 
             try {
                 // Парсим данные из JSON
-                const parsedResults = JSON.parse(results);
+                const parsedResults = JSON.parse(decodeURIComponent(resultsParam));
 
                 // Проверяем структуру данных
                 if (!parsedResults.generalInformation || !parsedResults.bag || !parsedResults.corners || !parsedResults.frame) {
