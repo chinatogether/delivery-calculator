@@ -22,13 +22,12 @@ async def delete_webhook():
 async def start(message: types.Message):
     user_id = message.from_user.id
     username = message.from_user.username or "unknown"
+    
+    # URL для открытия веб-приложения с параметрами telegram_id и username
     web_app_url = f"https://emiliskhakov.github.io/delivery_calculator/index.html?telegram_id={user_id}&username={username}"
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(
-            text="Открыть форму",
-            web_app=types.WebAppInfo(url=web_app_url)
-        )]
+        [InlineKeyboardButton(text="Открыть форму", web_app=types.WebAppInfo(url=web_app_url))]
     ])
     await message.reply("Нажмите кнопку, чтобы открыть форму:", reply_markup=keyboard)
 
