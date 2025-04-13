@@ -59,10 +59,10 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Проверяем наличие данных в URL
-            const resultsParam = new URLSearchParams(window.location.search).get('results');
+            // Получаем данные из контекста Flask (передаются через render_template)
+            const results = {{ results | tojson | safe }};
 
-            if (!resultsParam) {
+            if (!results || !results.generalInformation) {
                 // Если данных нет, показываем сообщение об ошибке
                 document.getElementById("error-message").textContent = "Ошибка: Данные для отображения отсутствуют.";
                 document.getElementById("error-message").style.display = "block";
@@ -70,11 +70,8 @@
             }
 
             try {
-                // Парсим данные из JSON
-                const parsedResults = JSON.parse(decodeURIComponent(resultsParam));
-
                 // Проверяем структуру данных
-                if (!parsedResults.generalInformation || !parsedResults.bag || !parsedResults.corners || !parsedResults.frame) {
+                if (!results.generalInformation || !results.bag || !results.corners || !results.frame) {
                     throw new Error("Некорректная структура данных");
                 }
 
@@ -83,14 +80,14 @@
                 container.innerHTML = `
                     <div class="summary">
                         <h2>Основная информация:</h2>
-                        <p><strong>Категория:</strong> ${parsedResults.generalInformation.category}</p>
-                        <p><strong>Общий вес:</strong> ${parsedResults.generalInformation.weight.toFixed(2)} кг</p>
-                        <p><strong>Объем:</strong> ${parsedResults.generalInformation.volume.toFixed(2)} м³</p>
-                        <p><strong>Плотность:</strong> ${parsedResults.generalInformation.density.toFixed(2)} кг/м³</p>
-                        <p><strong>Стоимость товара:</strong> ${parsedResults.generalInformation.productCost.toFixed(2)} $</p>
-                        <p><strong>Процент страхования:</strong> ${parsedResults.generalInformation.insuranceRate}</p>
-                        <p><strong>Сумма страхового платежа:</strong> ${parsedResults.generalInformation.insuranceAmount.toFixed(2)} $</p>
-                        <p><strong>Количество коробок:</strong> ${parsedResults.generalInformation.boxCount}</p>
+                        <p><strong>Категория:</strong> ${results.generalInformation.category}</p>
+                        <p><strong>Общий вес:</strong> ${results.generalInformation.weight.toFixed(2)} кг</p>
+                        <p><strong>Объем:</strong> ${results.generalInformation.volume.toFixed(2)} м³</p>
+                        <p><strong>Плотность:</strong> ${results.generalInformation.density.toFixed(2)} кг/м³</p>
+                        <p><strong>Стоимость товара:</strong> ${results.generalInformation.productCost.toFixed(2)} $</p>
+                        <p><strong>Процент страхования:</strong> ${results.generalInformation.insuranceRate}</p>
+                        <p><strong>Сумма страхового платежа:</strong> ${results.generalInformation.insuranceAmount.toFixed(2)} $</p>
+                        <p><strong>Количество коробок:</strong> ${results.generalInformation.boxCount}</p>
                     </div>
                     <div class="summary">
                         <h2>Упаковка:</h2>
@@ -107,33 +104,33 @@
                             </tr>
                             <tr>
                                 <td>Мешок</td>
-                                <td>${parsedResults.bag.packedWeight.toFixed(2)}</td>
-                                <td>${parsedResults.bag.packagingCost.toFixed(2)}</td>
-                                <td>${parsedResults.bag.unloadCost.toFixed(2)}</td>
-                                <td>${parsedResults.bag.insurance.toFixed(2)}</td>
-                                <td>${parsedResults.bag.deliveryCostRegular.toFixed(2)}</td>
-                                <td>${parsedResults.bag.deliveryCostFast.toFixed(2)}</td>
-                                <td>${parsedResults.bag.totalRegular.toFixed(2)} / ${parsedResults.bag.totalFast.toFixed(2)}</td>
+                                <td>${results.bag.packedWeight.toFixed(2)}</td>
+                                <td>${results.bag.packagingCost.toFixed(2)}</td>
+                                <td>${results.bag.unloadCost.toFixed(2)}</td>
+                                <td>${results.bag.insurance.toFixed(2)}</td>
+                                <td>${results.bag.deliveryCostRegular.toFixed(2)}</td>
+                                <td>${results.bag.deliveryCostFast.toFixed(2)}</td>
+                                <td>${results.bag.totalRegular.toFixed(2)} / ${results.bag.totalFast.toFixed(2)}</td>
                             </tr>
                             <tr>
                                 <td>Картонные уголки</td>
-                                <td>${parsedResults.corners.packedWeight.toFixed(2)}</td>
-                                <td>${parsedResults.corners.packagingCost.toFixed(2)}</td>
-                                <td>${parsedResults.corners.unloadCost.toFixed(2)}</td>
-                                <td>${parsedResults.corners.insurance.toFixed(2)}</td>
-                                <td>${parsedResults.corners.deliveryCostRegular.toFixed(2)}</td>
-                                <td>${parsedResults.corners.deliveryCostFast.toFixed(2)}</td>
-                                <td>${parsedResults.corners.totalRegular.toFixed(2)} / ${parsedResults.corners.totalFast.toFixed(2)}</td>
+                                <td>${results.corners.packedWeight.toFixed(2)}</td>
+                                <td>${results.corners.packagingCost.toFixed(2)}</td>
+                                <td>${results.corners.unloadCost.toFixed(2)}</td>
+                                <td>${results.corners.insurance.toFixed(2)}</td>
+                                <td>${results.corners.deliveryCostRegular.toFixed(2)}</td>
+                                <td>${results.corners.deliveryCostFast.toFixed(2)}</td>
+                                <td>${results.corners.totalRegular.toFixed(2)} / ${results.corners.totalFast.toFixed(2)}</td>
                             </tr>
                             <tr>
                                 <td>Деревянный каркас</td>
-                                <td>${parsedResults.frame.packedWeight.toFixed(2)}</td>
-                                <td>${parsedResults.frame.packagingCost.toFixed(2)}</td>
-                                <td>${parsedResults.frame.unloadCost.toFixed(2)}</td>
-                                <td>${parsedResults.frame.insurance.toFixed(2)}</td>
-                                <td>${parsedResults.frame.deliveryCostRegular.toFixed(2)}</td>
-                                <td>${parsedResults.frame.deliveryCostFast.toFixed(2)}</td>
-                                <td>${parsedResults.frame.totalRegular.toFixed(2)} / ${parsedResults.frame.totalFast.toFixed(2)}</td>
+                                <td>${results.frame.packedWeight.toFixed(2)}</td>
+                                <td>${results.frame.packagingCost.toFixed(2)}</td>
+                                <td>${results.frame.unloadCost.toFixed(2)}</td>
+                                <td>${results.frame.insurance.toFixed(2)}</td>
+                                <td>${results.frame.deliveryCostRegular.toFixed(2)}</td>
+                                <td>${results.frame.deliveryCostFast.toFixed(2)}</td>
+                                <td>${results.frame.totalRegular.toFixed(2)} / ${results.frame.totalFast.toFixed(2)}</td>
                             </tr>
                         </table>
                     </div>
