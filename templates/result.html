@@ -81,14 +81,21 @@
     <h1>Результаты расчета стоимости доставки</h1>
     <div class="container">
         <!-- Верхний блок с основной информацией -->
+        {% if results.generalInformation %}
         <div class="summary">
             <h2>Основная информация:</h2>
-            <p><strong>Вес товара:</strong> <span id="weight">{{ results.generalInformation.weight }}</span> кг</p>
-            <p><strong>Объем:</strong> <span id="volume">{{ results.generalInformation.volume }}</span> м³</p>
-            <p><strong>Плотность:</strong> <span id="density">{{ results.generalInformation.density }}</span> кг/м³</p>
-            <p><strong>Стоимость товара:</strong> <span id="cost">{{ results.generalInformation.productCost }}</span> $</p>
-            <p><strong>Количество упаковок:</strong> <span id="quantity">{{ results.generalInformation.boxCount }}</span></p>
+            <p><strong>Категория:</strong> {{ results.generalInformation.category }}</p>
+            <p><strong>Вес товара:</strong> {{ "%.2f"|format(results.generalInformation.weight) }} кг</p>
+            <p><strong>Объем:</strong> {{ "%.2f"|format(results.generalInformation.volume) }} м³</p>
+            <p><strong>Плотность:</strong> {{ "%.2f"|format(results.generalInformation.density) }} кг/м³</p>
+            <p><strong>Стоимость товара:</strong> {{ "%.2f"|format(results.generalInformation.productCost) }} $</p>
+            <p><strong>Процент страхования:</strong> {{ results.generalInformation.insuranceRate }}</p>
+            <p><strong>Сумма страхового платежа:</strong> {{ "%.2f"|format(results.generalInformation.insuranceAmount) }} $</p>
+            <p><strong>Количество упаковок:</strong> {{ results.generalInformation.boxCount }}</p>
         </div>
+        {% else %}
+        <p>Основная информация не найдена.</p>
+        {% endif %}
 
         <!-- Блоки с упаковками -->
         <div id="packaging-section">
@@ -113,11 +120,6 @@
                                 <td>{{ "%.2f"|format(results[key].packagingCost) }}</td>
                             </tr>
                             <tr>
-                                <td>Стоимость доставки</td>
-                                <td>{{ "%.2f"|format(results[key].deliveryCostRegular) }}</td>
-                                <td>{{ "%.2f"|format(results[key].deliveryCostFast) }}</td>
-                            </tr>
-                            <tr>
                                 <td>Стоимость разгрузочных работ</td>
                                 <td>{{ "%.2f"|format(results[key].unloadCost) }}</td>
                                 <td>{{ "%.2f"|format(results[key].unloadCost) }}</td>
@@ -127,13 +129,20 @@
                                 <td>{{ "%.2f"|format(results[key].insurance) }}</td>
                                 <td>{{ "%.2f"|format(results[key].insurance) }}</td>
                             </tr>
+                            <tr>
+                                <td>Стоимость доставки</td>
+                                <td>{{ "%.2f"|format(results[key].deliveryCostRegular) }}</td>
+                                <td>{{ "%.2f"|format(results[key].deliveryCostFast) }}</td>
+                            </tr>
                             <tr class="footer-row">
-                                <td>Итого сумма всех стоимостей выше</td>
+                                <td>Итоговая стоимость</td>
                                 <td>{{ "%.2f"|format(results[key].totalRegular) }}</td>
                                 <td>{{ "%.2f"|format(results[key].totalFast) }}</td>
                             </tr>
                         </table>
                     </div>
+                {% else %}
+                    <p>Данные для "{{ title }}" не найдены.</p>
                 {% endif %}
             {% endfor %}
         </div>
