@@ -85,13 +85,13 @@
         <div class="summary">
             <h2>Основная информация:</h2>
             <p><strong>Категория:</strong> {{ results.generalInformation.category }}</p>
-            <p><strong>Вес товара:</strong> {{ "%.2f"|format(results.generalInformation.weight) }} кг</p>
+            <p><strong>Общий вес:</strong> {{ "%.2f"|format(results.generalInformation.weight) }} кг</p>
             <p><strong>Объем:</strong> {{ "%.2f"|format(results.generalInformation.volume) }} м³</p>
             <p><strong>Плотность:</strong> {{ "%.2f"|format(results.generalInformation.density) }} кг/м³</p>
             <p><strong>Стоимость товара:</strong> {{ "%.2f"|format(results.generalInformation.productCost) }} $</p>
             <p><strong>Процент страхования:</strong> {{ results.generalInformation.insuranceRate }}</p>
             <p><strong>Сумма страхового платежа:</strong> {{ "%.2f"|format(results.generalInformation.insuranceAmount) }} $</p>
-            <p><strong>Количество упаковок:</strong> {{ results.generalInformation.boxCount }}</p>
+            <p><strong>Количество коробок:</strong> {{ results.generalInformation.boxCount }}</p>
         </div>
         {% else %}
         <p>Основная информация не найдена.</p>
