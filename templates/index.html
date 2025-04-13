@@ -134,20 +134,25 @@
             event.preventDefault();
 
             // Получаем данные с параметрами
-            const category = document.getElementById("category").value;
-            const weight = parseFloat(document.getElementById("weight").value);
-            const length = parseFloat(document.getElementById("length").value);
-            const width = parseFloat(document.getElementById("width").value);
-            const height = parseFloat(document.getElementById("height").value);
-            const cost = parseFloat(document.getElementById("cost").value);
-            const quantity = parseInt(document.getElementById("quantity").value);
+            const category = encodeURIComponent(document.getElementById("category").value);
+            const weight = encodeURIComponent(parseFloat(document.getElementById("weight").value));
+            const length = encodeURIComponent(parseFloat(document.getElementById("length").value));
+            const width = encodeURIComponent(parseFloat(document.getElementById("width").value));
+            const height = encodeURIComponent(parseFloat(document.getElementById("height").value));
+            const cost = encodeURIComponent(parseFloat(document.getElementById("cost").value));
+            const quantity = encodeURIComponent(parseInt(document.getElementById("quantity").value));
 
             // Строим URL для запроса
-            const url = `http://84.201.187.187:8061/calculate?category=${encodeURIComponent(category)}&weight=${weight}&length=${length}&width=${width}&height=${height}&cost=${cost}&quantity=${quantity}&telegram_id=${telegramId}&username=${username}`;
+            const url = `http://84.201.187.187:8061/calculate?category=${category}&weight=${weight}&length=${length}&width=${width}&height=${height}&cost=${cost}&quantity=${quantity}&telegram_id=${telegramId}&username=${username}`;
 
             // Делаем запрос к Flask API
             fetch(url)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.error) {
                         alert(data.error);
@@ -165,6 +170,7 @@
                 })
                 .catch(error => {
                     alert("Ошибка при выполнении запроса: " + error.message);
+                    console.error("Ошибка:", error);
                 });
         });
     </script>
