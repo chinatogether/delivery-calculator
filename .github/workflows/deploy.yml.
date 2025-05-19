@@ -26,7 +26,7 @@ jobs:
       - name: Deploy to VM
         run: |
           chinatogether@compute-vm-2-1-10-ssd-1743330944918 <<EOF
-          cd ~/your_project_directory
+          cd ~/xlsx-web
           git pull origin main
           source venv/bin/activate
           pip install -r requirements.txt
