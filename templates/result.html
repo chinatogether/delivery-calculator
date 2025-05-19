@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Расчет доставки из Китая</title>
     <style>
         :root {
@@ -16,6 +17,13 @@
         
         * {
             box-sizing: border-box;
+=======
+    <title>Результаты расчета</title>
+    <style>
+        /* Стили остаются без изменений */
+        body {
+            font-family: Arial, sans-serif;
+>>>>>>> 9dd40b7 (Test CI/CD deployment)
             margin: 0;
             padding: 0;
         }
@@ -26,10 +34,16 @@
             color: var(--text-color);
             background-color: var(--light-gray);
             padding: 20px;
+<<<<<<< HEAD
+=======
+            background-color: #f9f9f9;
+            color: #333;
+>>>>>>> 9dd40b7 (Test CI/CD deployment)
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+<<<<<<< HEAD
         }
         
         .container {
@@ -304,6 +318,126 @@
                     }
                 });
             });
+=======
+        }
+        h1 {
+            color: #E74C3C;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .summary {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Результаты расчета</h1>
+
+    <div id="results-container"></div>
+    <div id="error-message" class="error-message" style="display: none;">Ошибка: Данные для отображения отсутствуют.</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Получаем данные из localStorage
+            const results = JSON.parse(localStorage.getItem("calculationResults"));
+
+            if (!results || !results.generalInformation) {
+                document.getElementById("error-message").textContent = "Ошибка: Данные для отображения отсутствуют.";
+                document.getElementById("error-message").style.display = "block";
+                return;
+            }
+
+            try {
+                // Генерируем HTML с результатами
+                const container = document.getElementById("results-container");
+                container.innerHTML = `
+                    <div class="summary">
+                        <h2>Основная информация:</h2>
+                        <p><strong>Категория:</strong> ${results.generalInformation.category}</p>
+                        <p><strong>Общий вес:</strong> ${results.generalInformation.weight.toFixed(2)} кг</p>
+                        <p><strong>Объем:</strong> ${results.generalInformation.volume.toFixed(2)} м³</p>
+                        <p><strong>Плотность:</strong> ${results.generalInformation.density.toFixed(2)} кг/м³</p>
+                        <p><strong>Стоимость товара:</strong> ${results.generalInformation.productCost.toFixed(2)} $</p>
+                        <p><strong>Процент страхования:</strong> ${results.generalInformation.insuranceRate}</p>
+                        <p><strong>Сумма страхового платежа:</strong> ${results.generalInformation.insuranceAmount.toFixed(2)} $</p>
+                        <p><strong>Количество коробок:</strong> ${results.generalInformation.boxCount}</p>
+                    </div>
+                    <div class="summary">
+                        <h2>Упаковка:</h2>
+                        <table>
+                            <tr>
+                                <th>Тип упаковки</th>
+                                <th>Вес с упаковкой (кг)</th>
+                                <th>Стоимость упаковки ($)</th>
+                                <th>Стоимость разгрузки ($)</th>
+                                <th>Страховка ($)</th>
+                                <th>Обычная доставка ($)</th>
+                                <th>Быстрая доставка ($)</th>
+                                <th>Итоговая стоимость ($)</th>
+                            </tr>
+                            <tr>
+                                <td>Мешок</td>
+                                <td>${results.bag.packedWeight.toFixed(2)}</td>
+                                <td>${results.bag.packagingCost.toFixed(2)}</td>
+                                <td>${results.bag.unloadCost.toFixed(2)}</td>
+                                <td>${results.bag.insurance.toFixed(2)}</td>
+                                <td>${results.bag.deliveryCostRegular.toFixed(2)}</td>
+                                <td>${results.bag.deliveryCostFast.toFixed(2)}</td>
+                                <td>${results.bag.totalRegular.toFixed(2)} / ${results.bag.totalFast.toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td>Картонные уголки</td>
+                                <td>${results.corners.packedWeight.toFixed(2)}</td>
+                                <td>${results.corners.packagingCost.toFixed(2)}</td>
+                                <td>${results.corners.unloadCost.toFixed(2)}</td>
+                                <td>${results.corners.insurance.toFixed(2)}</td>
+                                <td>${results.corners.deliveryCostRegular.toFixed(2)}</td>
+                                <td>${results.corners.deliveryCostFast.toFixed(2)}</td>
+                                <td>${results.corners.totalRegular.toFixed(2)} / ${results.corners.totalFast.toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td>Деревянный каркас</td>
+                                <td>${results.frame.packedWeight.toFixed(2)}</td>
+                                <td>${results.frame.packagingCost.toFixed(2)}</td>
+                                <td>${results.frame.unloadCost.toFixed(2)}</td>
+                                <td>${results.frame.insurance.toFixed(2)}</td>
+                                <td>${results.frame.deliveryCostRegular.toFixed(2)}</td>
+                                <td>${results.frame.deliveryCostFast.toFixed(2)}</td>
+                                <td>${results.frame.totalRegular.toFixed(2)} / ${results.frame.totalFast.toFixed(2)}</td>
+                            </tr>
+                        </table>
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById("error-message").textContent = `Ошибка: ${error.message}`;
+                document.getElementById("error-message").style.display = "block";
+                console.error("Ошибка при обработке данных:", error);
+            }
+>>>>>>> 9dd40b7 (Test CI/CD deployment)
         });
     </script>
 </body>
