@@ -1,0 +1,34 @@
+name: Deploy to VM
+
+on:
+  push:
+    branches:
+      - main # Выберите ветку, на которую будет реагировать workflow
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Клонируем репозиторий
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Настройка SSH
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan your_vm_ip >> ~/.ssh/known_hosts
+
+      # 3. Подключение к ВМ и выполнение команд
+      - name: Deploy to VM
+        run: |
+          chinatogether@compute-vm-2-1-10-ssd-1743330944918 <<EOF
+          cd ~/your_project_directory
+          git pull origin main
+          source venv/bin/activate
+          pip install -r requirements.txt
+          sudo systemctl restart your_service_name
+          EOF
