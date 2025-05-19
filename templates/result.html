@@ -3,279 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Результаты расчета доставки</title>
+    <title>Расчет доставки из Китая</title>
     <style>
+        :root {
+            --primary-color: #E74C3C;
+            --secondary-color: #3498db;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --border-color: #ddd;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
         body {
             font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
             line-height: 1.6;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
+            color: var(--text-color);
+            background-color: var(--light-gray);
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 200px;
+            height: auto;
+        }
+        
         h1 {
-            color: #E74C3C;
+            color: var(--primary-color);
             text-align: center;
             margin-bottom: 30px;
+            font-size: 1.8rem;
         }
+        
         .card {
-            background: white;
+            background: var(--white);
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 25px;
             margin-bottom: 30px;
         }
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
+        
+        .form-group {
             margin-bottom: 20px;
         }
-        .info-item {
-            margin-bottom: 10px;
-        }
-        .info-item strong {
+        
+        label {
             display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
             color: #555;
-            margin-bottom: 5px;
-            font-size: 0.9em;
         }
-        .info-item span {
-            font-size: 1.1em;
-            color: #222;
-        }
-        table {
+        
+        input, select {
             width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 0.9em;
-        }
-        th, td {
             padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f8f8f8;
-            font-weight: bold;
-            color: #555;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        .total-cell {
-            font-weight: bold;
-            color: #E74C3C;
-        }
-        .btn {
-            display: inline-block;
-            background-color: #E74C3C;
-            color: white;
-            padding: 12px 25px;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            text-align: center;
-            transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1em;
-            margin-top: 20px;
+            font-size: 16px;
+            transition: border-color 0.3s;
         }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
         .btn:hover {
             background-color: #C0392B;
         }
-        .btn-container {
+        
+        .loading {
+            display: none;
             text-align: center;
-            margin-top: 30px;
+            margin-top: 15px;
         }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary-color);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         .error-message {
-            color: #E74C3C;
-            background-color: #ffebee;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px 0;
-            text-align: center;
+            color: var(--primary-color);
+            margin-top: 10px;
+            font-size: 14px;
             display: none;
         }
-        .delivery-option {
-            font-weight: bold;
-        }
-        .fast-option {
-            color: #E74C3C;
-        }
-        .regular-option {
-            color: #3498db;
-        }
-
+        
         @media (max-width: 768px) {
-            .info-grid {
-                grid-template-columns: 1fr;
+            .card {
+                padding: 15px;
             }
-            table {
-                display: block;
-                overflow-x: auto;
+            
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Результаты расчета доставки</h1>
+        <img src="https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20(2).jpg" alt="China Together" class="logo">
+        <h1>Расчет стоимости доставки из Китая</h1>
         
-        <div id="error-message" class="error-message">
-            Ошибка: Не удалось загрузить данные расчета. Пожалуйста, попробуйте снова.
-        </div>
-        
-        <div id="results-container">
-            <!-- Результаты будут вставлены сюда -->
-        </div>
-        
-        <div class="btn-container">
-            <a href="/index.html" class="btn">Сделать новый расчет</a>
+        <div class="card">
+            <form id="deliveryForm">
+                <div class="form-group">
+                    <label for="category">Категория товара:</label>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>Выберите категорию</option>
+                        <option value="Обычные товары">Обычные товары</option>
+                        <option value="Текстиль">Текстиль</option>
+                        <option value="Одежда">Одежда</option>
+                        <option value="Обувь">Обувь</option>
+                        <option value="Нижнее белье">Нижнее белье</option>
+                    </select>
+                    <div id="categoryError" class="error-message">Пожалуйста, выберите категорию</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="weight">Вес одной коробки (кг):</label>
+                    <input type="number" id="weight" name="weight" min="0.1" step="0.01" required placeholder="Например: 5.5">
+                    <div id="weightError" class="error-message">Введите корректный вес (минимум 0.1 кг)</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="length">Длина коробки (см):</label>
+                    <input type="number" id="length" name="length" min="1" step="0.1" required placeholder="Например: 30">
+                    <div id="lengthError" class="error-message">Введите корректную длину (минимум 1 см)</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="width">Ширина коробки (см):</label>
+                    <input type="number" id="width" name="width" min="1" step="0.1" required placeholder="Например: 20">
+                    <div id="widthError" class="error-message">Введите корректную ширину (минимум 1 см)</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="height">Высота коробки (см):</label>
+                    <input type="number" id="height" name="height" min="1" step="0.1" required placeholder="Например: 15">
+                    <div id="heightError" class="error-message">Введите корректную высоту (минимум 1 см)</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cost">Стоимость товара ($):</label>
+                    <input type="number" id="cost" name="cost" min="0.01" step="0.01" required placeholder="Например: 100.50">
+                    <div id="costError" class="error-message">Введите корректную стоимость (минимум $0.01)</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity">Количество коробок:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" required placeholder="Например: 2">
+                    <div id="quantityError" class="error-message">Введите корректное количество (минимум 1)</div>
+                </div>
+                
+                <button type="submit" class="btn">Рассчитать стоимость</button>
+                
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Идет расчет...</p>
+                </div>
+            </form>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Получаем сохраненные результаты из localStorage
-            const results = JSON.parse(localStorage.getItem('calculationResults'));
-            const container = document.getElementById('results-container');
-            const errorElement = document.getElementById('error-message');
+            const form = document.getElementById('deliveryForm');
+            const loadingElement = document.getElementById('loading');
             
-            if (!results || !results.generalInformation) {
-                errorElement.style.display = 'block';
-                container.innerHTML = '';
-                return;
-            }
-            
-            try {
-                // Форматируем дату
-                const now = new Date();
-                const formattedDate = now.toLocaleDateString('ru-RU', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
+            // Валидация формы
+            function validateForm() {
+                let isValid = true;
                 
-                // Создаем HTML с результатами
-                container.innerHTML = `
-                    <div class="card">
-                        <h2>Общая информация</h2>
-                        <p>Расчет выполнен: ${formattedDate}</p>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <strong>Категория товара</strong>
-                                <span>${results.generalInformation.category}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Общий вес</strong>
-                                <span>${results.generalInformation.weight.toFixed(2)} кг</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Объем груза</strong>
-                                <span>${results.generalInformation.volume.toFixed(2)} м³</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Плотность</strong>
-                                <span>${results.generalInformation.density.toFixed(2)} кг/м³</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Стоимость товара</strong>
-                                <span>${results.generalInformation.productCost.toFixed(2)} $</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Страховка (${results.generalInformation.insuranceRate})</strong>
-                                <span>${results.generalInformation.insuranceAmount.toFixed(2)} $</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Количество коробок</strong>
-                                <span>${results.generalInformation.boxCount}</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <h2>Детализация стоимости</h2>
-                        
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Тип упаковки</th>
-                                    <th>Вес с упаковкой</th>
-                                    <th>Стоимость упаковки</th>
-                                    <th>Стоимость разгрузки</th>
-                                    <th>Страховка</th>
-                                    <th>Доставка</th>
-                                    <th>Итого</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Мешок</td>
-                                    <td>${results.bag.packedWeight.toFixed(2)} кг</td>
-                                    <td>${results.bag.packagingCost.toFixed(2)} $</td>
-                                    <td>${results.bag.unloadCost.toFixed(2)} $</td>
-                                    <td>${results.bag.insurance.toFixed(2)} $</td>
-                                    <td>
-                                        <span class="delivery-option regular-option">Обычная: ${results.bag.deliveryCostRegular.toFixed(2)} $</span><br>
-                                        <span class="delivery-option fast-option">Быстрая: ${results.bag.deliveryCostFast.toFixed(2)} $</span>
-                                    </td>
-                                    <td class="total-cell">
-                                        <span class="delivery-option regular-option">${results.bag.totalRegular.toFixed(2)} $</span><br>
-                                        <span class="delivery-option fast-option">${results.bag.totalFast.toFixed(2)} $</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Картонные уголки</td>
-                                    <td>${results.corners.packedWeight.toFixed(2)} кг</td>
-                                    <td>${results.corners.packagingCost.toFixed(2)} $</td>
-                                    <td>${results.corners.unloadCost.toFixed(2)} $</td>
-                                    <td>${results.corners.insurance.toFixed(2)} $</td>
-                                    <td>
-                                        <span class="delivery-option regular-option">Обычная: ${results.corners.deliveryCostRegular.toFixed(2)} $</span><br>
-                                        <span class="delivery-option fast-option">Быстрая: ${results.corners.deliveryCostFast.toFixed(2)} $</span>
-                                    </td>
-                                    <td class="total-cell">
-                                        <span class="delivery-option regular-option">${results.corners.totalRegular.toFixed(2)} $</span><br>
-                                        <span class="delivery-option fast-option">${results.corners.totalFast.toFixed(2)} $</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Деревянный каркас</td>
-                                    <td>${results.frame.packedWeight.toFixed(2)} кг</td>
-                                    <td>${results.frame.packagingCost.toFixed(2)} $</td>
-                                    <td>${results.frame.unloadCost.toFixed(2)} $</td>
-                                    <td>${results.frame.insurance.toFixed(2)} $</td>
-                                    <td>
-                                        <span class="delivery-option regular-option">Обычная: ${results.frame.deliveryCostRegular.toFixed(2)} $</span><br>
-                                        <span class="delivery-option fast-option">Быстрая: ${results.frame.deliveryCostFast.toFixed(2)} $</span>
-                                    </td>
-                                    <td class="total-cell">
-                                        <span class="delivery-option regular-option">${results.frame.totalRegular.toFixed(2)} $</span><br>
-                                        <span class="delivery-option fast-option">${results.frame.totalFast.toFixed(2)} $</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <p><small>* Все цены указаны в долларах США. Итоговая стоимость включает: упаковку, разгрузку, страховку и доставку.</small></p>
-                    </div>
-                `;
-            } catch (error) {
-                console.error('Ошибка при отображении результатов:', error);
-                errorElement.textContent = `Ошибка: ${error.message}`;
-                errorElement.style.display = 'block';
-                container.innerHTML = '';
+                // Проверка категории
+                if (!document.getElementById('category').value) {
+                    document.getElementById('categoryError').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('categoryError').style.display = 'none';
+                }
+                
+                // Проверка веса
+                const weight = parseFloat(document.getElementById('weight').value);
+                if (isNaN(weight) || weight < 0.1) {
+                    document.getElementById('weightError').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('weightError').style.display = 'none';
+                }
+                
+                // Аналогичные проверки для остальных полей...
+                
+                return isValid;
             }
+            
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                
+                if (!validateForm()) {
+                    return;
+                }
+                
+                try {
+                    // Показываем индикатор загрузки
+                    loadingElement.style.display = 'block';
+                    
+                    // Получаем данные формы
+                    const formData = {
+                        category: encodeURIComponent(document.getElementById('category').value),
+                        weight: encodeURIComponent(parseFloat(document.getElementById('weight').value)),
+                        length: encodeURIComponent(parseFloat(document.getElementById('length').value)),
+                        width: encodeURIComponent(parseFloat(document.getElementById('width').value)),
+                        height: encodeURIComponent(parseFloat(document.getElementById('height').value)),
+                        cost: encodeURIComponent(parseFloat(document.getElementById('cost').value)),
+                        quantity: encodeURIComponent(parseInt(document.getElementById('quantity').value)),
+                        telegram_id: "123456789", // Тестовые данные
+                        username: "test_user"     // Тестовые данные
+                    };
+                    
+                    // Формируем URL запроса
+                    const queryString = Object.keys(formData)
+                        .map(key => `${key}=${formData[key]}`)
+                        .join('&');
+                    const url = `http://84.201.187.187:8061/calculate?${queryString}`;
+                    
+                    // Отправляем запрос
+                    const response = await fetch(url);
+                    
+                    if (!response.ok) {
+                        throw new Error(`Ошибка HTTP: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.error) {
+                        throw new Error(data.error);
+                    }
+                    
+                    // Сохраняем результаты и переходим на страницу с результатами
+                    localStorage.setItem('calculationResults', JSON.stringify(data));
+                    window.location.href = '/result.html';
+                    
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                    alert(`Произошла ошибка: ${error.message}`);
+                } finally {
+                    loadingElement.style.display = 'none';
+                }
+            });
+            
+            // Динамическая валидация полей
+            document.querySelectorAll('input, select').forEach(element => {
+                element.addEventListener('input', function() {
+                    const errorElement = document.getElementById(`${this.id}Error`);
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                });
+            });
         });
     </script>
 </body>
