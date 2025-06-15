@@ -24,7 +24,7 @@ async def start(message: types.Message):
     username = message.from_user.username or "unknown"
     
     # URL для открытия веб-приложения с параметрами telegram_id и username
-    web_app_url = f"https://emiliskhakov.github.io/delivery_calculator/index.html?telegram_id={user_id}&username={username}"
+    web_app_url = f"https:/china-together.ru/?telegram_id={user_id}&username={username}"
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="Открыть форму", web_app=types.WebAppInfo(url=web_app_url))]
