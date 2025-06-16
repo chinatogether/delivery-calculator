@@ -2,443 +2,596 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Расчет доставки из Китая</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Результаты расчета - China Together</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
             --primary-color: #E74C3C;
             --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
             --text-color: #333;
-            --light-gray: #f5f5f5;
+            --light-gray: #f8f9fa;
             --white: #ffffff;
-            --border-color: #ddd;
+            --border-color: #e9ecef;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            
+            /* Telegram Web App цвета */
+            --tg-theme-bg-color: var(--white);
+            --tg-theme-text-color: var(--text-color);
+            --tg-theme-hint-color: #999;
+            --tg-theme-button-color: var(--primary-color);
+            --tg-theme-button-text-color: var(--white);
         }
         
         * {
             box-sizing: border-box;
-=======
-    <title>Результаты расчета</title>
-    <style>
-        /* Стили остаются без изменений */
-        body {
-            font-family: Arial, sans-serif;
->>>>>>> 9dd40b7 (Test CI/CD deployment)
             margin: 0;
             padding: 0;
         }
         
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--light-gray);
-            padding: 20px;
-<<<<<<< HEAD
-=======
-            background-color: #f9f9f9;
-            color: #333;
->>>>>>> 9dd40b7 (Test CI/CD deployment)
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-<<<<<<< HEAD
+            color: var(--tg-theme-text-color);
+            background: var(--tg-theme-bg-color);
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
         }
         
         .container {
-            max-width: 600px;
-            width: 100%;
+            max-width: 100%;
+            padding: 16px;
             margin: 0 auto;
+            padding-bottom: 80px;
         }
         
-        .logo {
-            display: block;
-            margin: 0 auto 20px;
-            max-width: 200px;
-            height: auto;
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-top: 8px;
         }
         
         h1 {
             color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 30px;
             font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--tg-theme-hint-color);
+            font-size: 0.95rem;
         }
         
         .card {
             background: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 25px;
-            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(184, 178, 178, 0.08);
+            padding: 20px;
+            margin-bottom: 16px;
+            animation: slideIn 0.3s ease-out;
         }
         
-        .form-group {
-            margin-bottom: 20px;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
+        .card h2 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        input, select {
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        @media (min-width: 480px) {
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            color: var(--tg-theme-hint-color);
+            font-size: 0.9rem;
+        }
+        
+        .info-value {
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-align: right;
+        }
+        
+        .info-value.highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .info-value.secondary {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .comparison-table {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        
+        .comparison-table table {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 16px;
-            transition: border-color 0.3s;
+            border-collapse: collapse;
+            font-size: 0.9rem;
         }
         
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary-color);
+        .comparison-table th,
+        .comparison-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .comparison-table th {
+            background: rgba(231, 76, 60, 0.05);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .comparison-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
         }
         
         .btn {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            background-color: var(--primary-color);
-            color: white;
+            padding: 16px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--white);
         }
         
-        .btn:hover {
-            background-color: #C0392B;
+        .btn-primary {
+            background: var(--primary-color);
         }
         
-        .loading {
-            display: none;
-            text-align: center;
-            margin-top: 15px;
+        .btn-secondary {
+            background: var(--secondary-color);
         }
         
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top: 4px solid var(--primary-color);
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
+        .btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
         }
         
-        .error-message {
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .error {
+            background: rgba(231, 76, 60, 0.1);
             color: var(--primary-color);
-            margin-top: 10px;
-            font-size: 14px;
-            display: none;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
         }
         
-        @media (max-width: 768px) {
+        /* Темная тема (если включена в Telegram) */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --tg-theme-bg-color: #1a1a1a;
+                --tg-theme-text-color: #ffffff;
+                --white: #2a2a2a;
+                --border-color: #3a3a3a;
+            }
+            
             .card {
-                padding: 15px;
+                background: #3a3a3a;
+            }
+            
+            .comparison-table th {
+                background: rgba(197, 64, 49, 0.1);
+            }
+        }
+        
+        /* Оптимизация для маленьких экранов */
+        @media (max-width: 480px) {
+            .container {
+                padding: 12px;
+            }
+            
+            .card {
+                padding: 16px;
             }
             
             h1 {
                 font-size: 1.5rem;
-                margin-bottom: 20px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20(2).jpg" alt="China Together" class="logo">
-        <h1>Расчет стоимости доставки из Китая</h1>
-        
-        <div class="card">
-            <form id="deliveryForm">
-                <div class="form-group">
-                    <label for="category">Категория товара:</label>
-                    <select id="category" name="category" required>
-                        <option value="" disabled selected>Выберите категорию</option>
-                        <option value="Обычные товары">Обычные товары</option>
-                        <option value="Текстиль">Текстиль</option>
-                        <option value="Одежда">Одежда</option>
-                        <option value="Обувь">Обувь</option>
-                        <option value="Нижнее белье">Нижнее белье</option>
-                    </select>
-                    <div id="categoryError" class="error-message">Пожалуйста, выберите категорию</div>
+        {% if results %}
+            <div class="header">
+                <h1>✅ Расчет выполнен успешно!</h1>
+                <p class="subtitle">Выберите оптимальный вариант доставки</p>
+            </div>
+            
+            <!-- Общая информация -->
+            <div class="card">
+                <h2>
+                    <span>📋</span>
+                    <span>Общая информация</span>
+                </h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Категория</span>
+                        <span class="info-value">{{ results.generalInformation.category }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Общий вес</span>
+                        <span class="info-value">{{ "%.2f"|format(results.generalInformation.weight) }} кг</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Плотность</span>
+                        <span class="info-value">{{ "%.2f"|format(results.generalInformation.density) }} кг/м³</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Стоимость товара</span>
+                        <span class="info-value">${{ "%.2f"|format(results.generalInformation.productCost) }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Страховка</span>
+                        <span class="info-value">{{ results.generalInformation.insuranceRate }} (${{ "%.2f"|format(results.generalInformation.insuranceAmount) }})</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Объем</span>
+                        <span class="info-value">{{ "%.2f"|format(results.generalInformation.volume) }} м³</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Коробок</span>
+                        <span class="info-value">{{ results.generalInformation.boxCount }} шт.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Сравнительная таблица -->
+            <div class="card">
+                <h2>
+                    <span>💰</span>
+                    <span>Сравнение вариантов доставки</span>
+                </h2>
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Упаковка</th>
+                                <th>Быстрая</th>
+                                <th>Обычная</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>📦 Мешок</td>
+                                <td class="highlight">${{ "%.2f"|format(results.bag.totalFast) }}</td>
+                                <td class="secondary">${{ "%.2f"|format(results.bag.totalRegular) }}</td>
+                            </tr>
+                            <tr>
+                                <td>📐 Картонные уголки</td>
+                                <td class="highlight">${{ "%.2f"|format(results.corners.totalFast) }}</td>
+                                <td class="secondary">${{ "%.2f"|format(results.corners.totalRegular) }}</td>
+                            </tr>
+                            <tr>
+                                <td>🪵 Деревянный каркас</td>
+                                <td class="highlight">${{ "%.2f"|format(results.frame.totalFast) }}</td>
+                                <td class="secondary">${{ "%.2f"|format(results.frame.totalRegular) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Детальная разбивка по упаковкам -->
+            <details class="card">
+                <summary style="cursor: pointer; font-weight: 600; padding: 8px 0;">
+                    📊 Подробная разбивка стоимости
+                </summary>
+                
+                <!-- Мешок -->
+                <div style="margin-top: 16px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 8px; color: var(--primary-color);">📦 Мешок</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Вес с упаковкой</span>
+                            <span class="info-value">{{ "%.2f"|format(results.bag.packedWeight) }} кг</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Упаковка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.bag.packagingCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Разгрузка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.bag.unloadCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Доставка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.bag.deliveryCostFast) }} / ${{ "%.2f"|format(results.bag.deliveryCostRegular) }}</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="weight">Вес одной коробки (кг):</label>
-                    <input type="number" id="weight" name="weight" min="0.1" step="0.01" required placeholder="Например: 5.5">
-                    <div id="weightError" class="error-message">Введите корректный вес (минимум 0.1 кг)</div>
+                <!-- Картонные уголки -->
+                <div style="margin-top: 16px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 8px; color: var(--primary-color);">📐 Картонные уголки</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Вес с упаковкой</span>
+                            <span class="info-value">{{ "%.2f"|format(results.corners.packedWeight) }} кг</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Упаковка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.corners.packagingCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Разгрузка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.corners.unloadCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Доставка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.corners.deliveryCostFast) }} / ${{ "%.2f"|format(results.corners.deliveryCostRegular) }}</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="length">Длина коробки (см):</label>
-                    <input type="number" id="length" name="length" min="1" step="0.1" required placeholder="Например: 30">
-                    <div id="lengthError" class="error-message">Введите корректную длину (минимум 1 см)</div>
+                <!-- Деревянный каркас -->
+                <div style="margin-top: 16px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 8px; color: var(--primary-color);">🪵 Деревянный каркас</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Вес с упаковкой</span>
+                            <span class="info-value">{{ "%.2f"|format(results.frame.packedWeight) }} кг</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Упаковка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.frame.packagingCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Разгрузка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.frame.unloadCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Доставка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.frame.deliveryCostFast) }} / ${{ "%.2f"|format(results.frame.deliveryCostRegular) }}</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="width">Ширина коробки (см):</label>
-                    <input type="number" id="width" name="width" min="1" step="0.1" required placeholder="Например: 20">
-                    <div id="widthError" class="error-message">Введите корректную ширину (минимум 1 см)</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="height">Высота коробки (см):</label>
-                    <input type="number" id="height" name="height" min="1" step="0.1" required placeholder="Например: 15">
-                    <div id="heightError" class="error-message">Введите корректную высоту (минимум 1 см)</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="cost">Стоимость товара ($):</label>
-                    <input type="number" id="cost" name="cost" min="0.01" step="0.01" required placeholder="Например: 100.50">
-                    <div id="costError" class="error-message">Введите корректную стоимость (минимум $0.01)</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="quantity">Количество коробок:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" required placeholder="Например: 2">
-                    <div id="quantityError" class="error-message">Введите корректное количество (минимум 1)</div>
-                </div>
-                
-                <button type="submit" class="btn">Рассчитать стоимость</button>
-                
-                <div id="loading" class="loading">
-                    <div class="spinner"></div>
-                    <p>Идет расчет...</p>
-                </div>
-            </form>
-        </div>
+            </details>
+            
+            <div class="action-buttons card">
+                <button class="btn btn-primary" id="saveBtn">
+                    <span>💾</span>
+                    <span>Сохранить в CSV</span>
+                </button>
+                <a href="/" class="btn btn-secondary">
+                    <span>🔄</span>
+                    <span>Новый расчет</span>
+                </a>
+            </div>
+            
+        {% else %}
+            <div class="error">
+                <p>❌ Данные для отображения отсутствуют.</p>
+                <p>Пожалуйста, выполните расчет на <a href="/" style="color: var(--primary-color);">главной странице</a>.</p>
+            </div>
+        {% endif %}
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('deliveryForm');
-            const loadingElement = document.getElementById('loading');
-            
-            // Валидация формы
-            function validateForm() {
-                let isValid = true;
-                
-                // Проверка категории
-                if (!document.getElementById('category').value) {
-                    document.getElementById('categoryError').style.display = 'block';
-                    isValid = false;
-                } else {
-                    document.getElementById('categoryError').style.display = 'none';
-                }
-                
-                // Проверка веса
-                const weight = parseFloat(document.getElementById('weight').value);
-                if (isNaN(weight) || weight < 0.1) {
-                    document.getElementById('weightError').style.display = 'block';
-                    isValid = false;
-                } else {
-                    document.getElementById('weightError').style.display = 'none';
-                }
-                
-                // Аналогичные проверки для остальных полей...
-                
-                return isValid;
-            }
-            
-            form.addEventListener('submit', async function(event) {
-                event.preventDefault();
-                
-                if (!validateForm()) {
-                    return;
-                }
-                
-                try {
-                    // Показываем индикатор загрузки
-                    loadingElement.style.display = 'block';
-                    
-                    // Получаем данные формы
-                    const formData = {
-                        category: encodeURIComponent(document.getElementById('category').value),
-                        weight: encodeURIComponent(parseFloat(document.getElementById('weight').value)),
-                        length: encodeURIComponent(parseFloat(document.getElementById('length').value)),
-                        width: encodeURIComponent(parseFloat(document.getElementById('width').value)),
-                        height: encodeURIComponent(parseFloat(document.getElementById('height').value)),
-                        cost: encodeURIComponent(parseFloat(document.getElementById('cost').value)),
-                        quantity: encodeURIComponent(parseInt(document.getElementById('quantity').value)),
-                        telegram_id: "123456789", // Тестовые данные
-                        username: "test_user"     // Тестовые данные
-                    };
-                    
-                    // Формируем URL запроса
-                    const queryString = Object.keys(formData)
-                        .map(key => `${key}=${formData[key]}`)
-                        .join('&');
-                    const url = `http://84.201.187.187:8061/calculate?${queryString}`;
-                    
-                    // Отправляем запрос
-                    const response = await fetch(url);
-                    
-                    if (!response.ok) {
-                        throw new Error(`Ошибка HTTP: ${response.status}`);
-                    }
-                    
-                    const data = await response.json();
-                    
-                    if (data.error) {
-                        throw new Error(data.error);
-                    }
-                    
-                    // Сохраняем результаты и переходим на страницу с результатами
-                    localStorage.setItem('calculationResults', JSON.stringify(data));
-                    window.location.href = '/result.html';
-                    
-                } catch (error) {
-                    console.error('Ошибка:', error);
-                    alert(`Произошла ошибка: ${error.message}`);
-                } finally {
-                    loadingElement.style.display = 'none';
-                }
-            });
-            
-            // Динамическая валидация полей
-            document.querySelectorAll('input, select').forEach(element => {
-                element.addEventListener('input', function() {
-                    const errorElement = document.getElementById(`${this.id}Error`);
-                    if (errorElement) {
-                        errorElement.style.display = 'none';
-                    }
-                });
-            });
-=======
+        // Инициализация Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+        
+        // Применяем тему Telegram
+        if (tg.themeParams) {
+            document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color || '#f5f5f5');
+            document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color || '#000000');
+            document.documentElement.style.setProperty('--tg-theme-hint-color', tg.themeParams.hint_color || '#999999');
+            document.documentElement.style.setProperty('--tg-theme-button-color', tg.themeParams.button_color || '#E74C3C');
+            document.documentElement.style.setProperty('--tg-theme-button-text-color', tg.themeParams.button_text_color || '#ffffff');
         }
-        h1 {
-            color: #E74C3C;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .summary {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            max-width: 600px;
-            width: 100%;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .error-message {
-            color: red;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Результаты расчета</h1>
-
-    <div id="results-container"></div>
-    <div id="error-message" class="error-message" style="display: none;">Ошибка: Данные для отображения отсутствуют.</div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Получаем данные из localStorage
-            const results = JSON.parse(localStorage.getItem("calculationResults"));
-
-            if (!results || !results.generalInformation) {
-                document.getElementById("error-message").textContent = "Ошибка: Данные для отображения отсутствуют.";
-                document.getElementById("error-message").style.display = "block";
-                return;
-            }
-
+        
+        {% if results %}
+        // Подготавливаем данные для отправки в бот
+        const resultsData = {
+            category: "{{ results.generalInformation.category }}",
+            totalWeight: {{ results.generalInformation.weight }},
+            density: {{ results.generalInformation.density }},
+            productCost: {{ results.generalInformation.productCost }},
+            insuranceRate: "{{ results.generalInformation.insuranceRate }}",
+            insuranceAmount: {{ results.generalInformation.insuranceAmount }},
+            volume: {{ results.generalInformation.volume }},
+            boxCount: {{ results.generalInformation.boxCount }},
+            bagTotalFast: {{ results.bag.totalFast }},
+            bagTotalRegular: {{ results.bag.totalRegular }},
+            cornersTotalFast: {{ results.corners.totalFast }},
+            cornersTotalRegular: {{ results.corners.totalRegular }},
+            frameTotalFast: {{ results.frame.totalFast }},
+            frameTotalRegular: {{ results.frame.totalRegular }}
+        };
+        
+        // Кнопка сохранения в CSV
+        document.getElementById('saveBtn').addEventListener('click', async function() {
             try {
-                // Генерируем HTML с результатами
-                const container = document.getElementById("results-container");
-                container.innerHTML = `
-                    <div class="summary">
-                        <h2>Основная информация:</h2>
-                        <p><strong>Категория:</strong> ${results.generalInformation.category}</p>
-                        <p><strong>Общий вес:</strong> ${results.generalInformation.weight.toFixed(2)} кг</p>
-                        <p><strong>Объем:</strong> ${results.generalInformation.volume.toFixed(2)} м³</p>
-                        <p><strong>Плотность:</strong> ${results.generalInformation.density.toFixed(2)} кг/м³</p>
-                        <p><strong>Стоимость товара:</strong> ${results.generalInformation.productCost.toFixed(2)} $</p>
-                        <p><strong>Процент страхования:</strong> ${results.generalInformation.insuranceRate}</p>
-                        <p><strong>Сумма страхового платежа:</strong> ${results.generalInformation.insuranceAmount.toFixed(2)} $</p>
-                        <p><strong>Количество коробок:</strong> ${results.generalInformation.boxCount}</p>
-                    </div>
-                    <div class="summary">
-                        <h2>Упаковка:</h2>
-                        <table>
-                            <tr>
-                                <th>Тип упаковки</th>
-                                <th>Вес с упаковкой (кг)</th>
-                                <th>Стоимость упаковки ($)</th>
-                                <th>Стоимость разгрузки ($)</th>
-                                <th>Страховка ($)</th>
-                                <th>Обычная доставка ($)</th>
-                                <th>Быстрая доставка ($)</th>
-                                <th>Итоговая стоимость ($)</th>
-                            </tr>
-                            <tr>
-                                <td>Мешок</td>
-                                <td>${results.bag.packedWeight.toFixed(2)}</td>
-                                <td>${results.bag.packagingCost.toFixed(2)}</td>
-                                <td>${results.bag.unloadCost.toFixed(2)}</td>
-                                <td>${results.bag.insurance.toFixed(2)}</td>
-                                <td>${results.bag.deliveryCostRegular.toFixed(2)}</td>
-                                <td>${results.bag.deliveryCostFast.toFixed(2)}</td>
-                                <td>${results.bag.totalRegular.toFixed(2)} / ${results.bag.totalFast.toFixed(2)}</td>
-                            </tr>
-                            <tr>
-                                <td>Картонные уголки</td>
-                                <td>${results.corners.packedWeight.toFixed(2)}</td>
-                                <td>${results.corners.packagingCost.toFixed(2)}</td>
-                                <td>${results.corners.unloadCost.toFixed(2)}</td>
-                                <td>${results.corners.insurance.toFixed(2)}</td>
-                                <td>${results.corners.deliveryCostRegular.toFixed(2)}</td>
-                                <td>${results.corners.deliveryCostFast.toFixed(2)}</td>
-                                <td>${results.corners.totalRegular.toFixed(2)} / ${results.corners.totalFast.toFixed(2)}</td>
-                            </tr>
-                            <tr>
-                                <td>Деревянный каркас</td>
-                                <td>${results.frame.packedWeight.toFixed(2)}</td>
-                                <td>${results.frame.packagingCost.toFixed(2)}</td>
-                                <td>${results.frame.unloadCost.toFixed(2)}</td>
-                                <td>${results.frame.insurance.toFixed(2)}</td>
-                                <td>${results.frame.deliveryCostRegular.toFixed(2)}</td>
-                                <td>${results.frame.deliveryCostFast.toFixed(2)}</td>
-                                <td>${results.frame.totalRegular.toFixed(2)} / ${results.frame.totalFast.toFixed(2)}</td>
-                            </tr>
-                        </table>
-                    </div>
-                `;
+                // Вибрация при нажатии
+                if (tg && tg.HapticFeedback) {
+                    tg.HapticFeedback.impactOccurred('light');
+                }
+                
+                this.disabled = true;
+                this.innerHTML = '<span>⏳</span><span>Сохранение...</span>';
+                
+                // Получаем telegram_id из URL или из Telegram Web App
+                let telegramId = null;
+                if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                    telegramId = tg.initDataUnsafe.user.id;
+                } else {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    telegramId = urlParams.get('telegram_id');
+                }
+                
+                // Отправляем запрос на генерацию CSV
+                const response = await fetch('/generate_csv', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        telegram_id: telegramId,
+                        results: {
+                            generalInformation: {{ results.generalInformation | tojson }},
+                            bag: {{ results.bag | tojson }},
+                            corners: {{ results.corners | tojson }},
+                            frame: {{ results.frame | tojson }}
+                        }
+                    })
+                });
+                
+                if (response.ok) {
+                    // Получаем файл
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = `china_together_${new Date().getTime()}.csv`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    
+                    // Вибрация успеха
+                    if (tg && tg.HapticFeedback) {
+                        tg.HapticFeedback.notificationOccurred('success');
+                    }
+                    
+                    // Отправляем данные в Telegram
+                    if (tg && tg.sendData) {
+                        tg.sendData(JSON.stringify({
+                            action: 'csv_saved',
+                            ...resultsData
+                        }));
+                    }
+                    
+                    // Показываем уведомление
+                    if (tg && tg.showAlert) {
+                        tg.showAlert('✅ Файл успешно сохранен!');
+                    }
+                } else {
+                    throw new Error('Ошибка при сохранении файла');
+                }
+                
             } catch (error) {
-                document.getElementById("error-message").textContent = `Ошибка: ${error.message}`;
-                document.getElementById("error-message").style.display = "block";
-                console.error("Ошибка при обработке данных:", error);
+                console.error('Ошибка:', error);
+                
+                if (tg && tg.HapticFeedback) {
+                    tg.HapticFeedback.notificationOccurred('error');
+                }
+                
+                if (tg && tg.showAlert) {
+                    tg.showAlert('❌ Ошибка при сохранении файла');
+                }
+            } finally {
+                this.disabled = false;
+                this.innerHTML = '<span>💾</span><span>Сохранить в CSV</span>';
             }
->>>>>>> 9dd40b7 (Test CI/CD deployment)
         });
-    </script>
-</body>
-</html>
+        
+        // Настройка кнопки "Назад"
+        if (tg && tg.BackButton) {
+            tg.BackButton.show();
+            tg.BackButton.onClick(() => {
+                window.location.href = '/';
+            });
+        }
+        
+        // Настройка главной кнопки для возврата в бот
+        if (tg && tg.MainButton) {
+            tg.MainButton.text = "Вернуться в бот";
+            tg.MainButton.color = "#3498db";
+            tg.MainButton.show();
+            
+            tg.MainButton.onClick(() => {
+                // Отправляем данные расчета в бот перед закрытием
+                if (tg.sendData) {
+                    tg.sendData(JSON.stringify({
+                        action: 'view_completed',
+                        ...resultsData
+                    }));
+                }
+                // Небольшая задержка для отправки данных
+                setTimeout(() => {
+                    tg.close();
+                }, 100);
+            });
+        }
+        
+        {% endif %}

@@ -1,0 +1,478 @@
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        /* Компактные features для мобильных */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 12px 8px;
+            background: rgba(231, 76, 60, 0.05);
+            border-radius: 8px;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 4px;
+        }
+        
+        .feature h3 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        
+        .feature p {
+            display: none; /* Скрываем описание на мобильных */
+        }
+        
+        @media (min-width: 480px) {
+            .feature p {
+                display: block;
+                font-size: 0.8rem;
+                color: var(--tg-theme-hint-color);
+                margin-top: 4px;
+            }
+        }
+        
+        /* Telegram Web App специфичные стили */
+        .tg-info {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Убираем лишние отступы для Telegram Web App */
+        @media (max-width: 480px) {
+            .container {
+                padding: 12px;
+            }
+            
+            .card {
+                padding: 16px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Темная тема (если включена в Telegram) */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --tg-theme-bg-color: #1a1a1a;
+                --tg-theme-text-color: #ffffff;
+                --white: #2a2a2a;
+                --border-color: #3a3a3a;
+            }
+            
+            .card {
+                background: #2a2a2a;
+            }
+            
+            input, select {
+                background: #1a1a1a;
+                border-color: #3a3a3a;
+                color: #ffffff;
+            }
+            
+            .feature {
+                background: rgba(231, 76, 60, 0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">CT</div>
+            <h1>China Together</h1>
+            <p class="subtitle">Расчет доставки из Китая</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">📦</div>
+                <h3>Точный расчет</h3>
+                <p>Все виды упаковки</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚀</div>
+                <h3>Быстро</h3>
+                <p>Мгновенный результат</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Аналитика</h3>
+                <p>Сохраняем историю</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="tg-info" id="userInfo">
+                <span>💬</span>
+                <span id="userInfoText">Загрузка данных пользователя...</span>
+            </div>
+            
+            <form id="deliveryForm">
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span>📋</span>
+                        <span>Основная информация</span>
+                    </h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="category">Категория товара:</label>
+                            <select id="category" name="category" required>
+                                <option value="" disabled selected>Выберите категорию</option>
+                                <option value="Обычные товары">📦 Обычные товары</option>
+                                <option value="Текстиль">🧵 Текстиль</option>
+                                <option value="Одежда">👕 Одежда</option>
+                                <option value="Обувь">👟 Обувь</option>
+                                <option value="Нижнее белье">👙 Нижнее белье</option>
+                            </select>
+                            <div id="categoryError" class="error-message">Выберите категорию</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="quantity">Количество коробок:</label>
+                            <div class="input-group">
+                                <input type="number" id="quantity" name="quantity" min="1" required placeholder="1" value="1">
+                                <span class="input-icon">📦</span>
+                            </div>
+                            <div id="quantityError" class="error-message">Введите количество</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span>⚖️</span>
+                        <span>Характеристики коробки</span>
+                    </h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="weight">Вес (кг):</label>
+                            <div class="input-group">
+                                <input type="number" id="weight" name="weight" min="0.1" step="0.01" required placeholder="5.5">
+                                <span class="input-icon">⚖️</span>
+                            </div>
+                            <div id="weightError" class="error-message">Введите вес</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cost">Стоимость ($):</label>
+                            <div class="input-group">
+                                <input type="number" id="cost" name="cost" min="0.01" step="0.01" required placeholder="100">
+                                <span class="input-icon">💰</span>
+                            </div>
+                            <div id="costError" class="error-message">Введите стоимость</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span>📏</span>
+                        <span>Размеры коробки (см)</span>
+                    </h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="length">Длина:</label>
+                            <input type="number" id="length" name="length" min="1" step="0.1" required placeholder="30">
+                            <div id="lengthError" class="error-message">Введите длину</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="width">Ширина:</label>
+                            <input type="number" id="width" name="width" min="1" step="0.1" required placeholder="20">
+                            <div id="widthError" class="error-message">Введите ширину</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="height">Высота:</label>
+                            <input type="number" id="height" name="height" min="1" step="0.1" required placeholder="15">
+                            <div id="heightError" class="error-message">Введите высоту</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn" id="calculateBtn">
+                    <span>🧮</span>
+                    <span>Рассчитать стоимость</span>
+                </button>
+                
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p><strong>Выполняем расчет...</strong></p>
+                    <p>Анализируем тарифы</p>
+                </div>
+                
+                <div id="successMessage" class="success-message">
+                    ✅ Расчет выполнен! Перенаправление...
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand(); // Разворачиваем приложение на весь экран
+        
+        // Получаем данные пользователя
+        let telegramUserId = null;
+        let telegramUsername = null;
+        
+        // Проверяем, откуда пришел пользователь
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+            // Данные из Telegram Web App
+            telegramUserId = tg.initDataUnsafe.user.id;
+            telegramUsername = tg.initDataUnsafe.user.username || `user_${tg.initDataUnsafe.user.id}`;
+        } else {
+            // Данные из URL параметров (для тестирования)
+            const urlParams = new URLSearchParams(window.location.search);
+            telegramUserId = urlParams.get('telegram_id') || 'test_user';
+            telegramUsername = urlParams.get('username') || 'test_username';
+        }
+        
+        // Применяем тему Telegram
+        if (tg.themeParams) {
+            document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color || '#ffffff');
+            document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color || '#000000');
+            document.documentElement.style.setProperty('--tg-theme-hint-color', tg.themeParams.hint_color || '#999999');
+            document.documentElement.style.setProperty('--tg-theme-button-color', tg.themeParams.button_color || '#E74C3C');
+            document.documentElement.style.setProperty('--tg-theme-button-text-color', tg.themeParams.button_text_color || '#ffffff');
+        }
+        
+        // Обработка формы
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('deliveryForm');
+            const loadingElement = document.getElementById('loading');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Функция валидации
+            function validateForm() {
+                let isValid = true;
+                const fields = [
+                    { id: 'category', validator: (val) => val !== '', message: 'Выберите категорию' },
+                    { id: 'weight', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.1, message: 'Минимум 0.1 кг' },
+                    { id: 'length', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' },
+                    { id: 'width', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' },
+                    { id: 'height', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' },
+                    { id: 'cost', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.01, message: 'Минимум $0.01' },
+                    { id: 'quantity', validator: (val) => !isNaN(val) && parseInt(val) >= 1, message: 'Минимум 1' }
+                ];
+                
+                fields.forEach(field => {
+                    const element = document.getElementById(field.id);
+                    const errorElement = document.getElementById(`${field.id}Error`);
+                    const value = element.value.trim();
+                    
+                    if (!field.validator(value)) {
+                        errorElement.textContent = field.message;
+                        errorElement.style.display = 'block';
+                        element.style.borderColor = '#dc3545';
+                        isValid = false;
+                    } else {
+                        errorElement.style.display = 'none';
+                        element.style.borderColor = 'var(--border-color)';
+                    }
+                });
+                
+                return isValid;
+            }
+            
+            // Обработчик отправки формы
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                
+                if (!validateForm()) {
+                    // Вибрация при ошибке (если поддерживается)
+                    if (tg && tg.HapticFeedback) {
+                        tg.HapticFeedback.notificationOccurred('error');
+                    }
+                    return;
+                }
+                
+                try {
+                    // Вибрация при начале расчета
+                    if (tg && tg.HapticFeedback) {
+                        tg.HapticFeedback.impactOccurred('medium');
+                    }
+                    
+                    // Показываем индикатор загрузки
+                    loadingElement.style.display = 'block';
+                    calculateBtn.disabled = true;
+                    calculateBtn.innerHTML = '<span>⏳</span><span>Выполняем расчет...</span>';
+                    successMessage.style.display = 'none';
+                    
+                    // Получаем данные формы
+                    const formData = {
+                        category: encodeURIComponent(document.getElementById('category').value),
+                        weight: encodeURIComponent(parseFloat(document.getElementById('weight').value)),
+                        length: encodeURIComponent(parseFloat(document.getElementById('length').value)),
+                        width: encodeURIComponent(parseFloat(document.getElementById('width').value)),
+                        height: encodeURIComponent(parseFloat(document.getElementById('height').value)),
+                        cost: encodeURIComponent(parseFloat(document.getElementById('cost').value)),
+                        quantity: encodeURIComponent(parseInt(document.getElementById('quantity').value)),
+                        telegram_id: telegramUserId,
+                        username: telegramUsername
+                    };
+                    
+                    // Формируем URL запроса
+                    const queryString = Object.keys(formData)
+                        .map(key => `${key}=${formData[key]}`)
+                        .join('&');
+                    const url = `/calculate?${queryString}`;
+                    
+                    // Отправляем запрос
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Ошибка HTTP: ${response.status}`);
+                    }
+                    
+                    // Проверяем, является ли ответ перенаправлением
+                    if (response.redirected) {
+                        // Показываем сообщение об успехе
+                        successMessage.style.display = 'block';
+                        
+                        // Подготавливаем данные для отправки в бот
+                        const resultUrl = new URL(response.url);
+                        const resultsParam = resultUrl.searchParams.get('results');
+                        if (resultsParam) {
+                            const results = JSON.parse(decodeURIComponent(resultsParam));
+                            
+                            // Подготавливаем данные для бота
+                            const dataForBot = {
+                                category: results.generalInformation.category,
+                                totalWeight: results.generalInformation.weight,
+                                density: results.generalInformation.density,
+                                productCost: results.generalInformation.productCost,
+                                insuranceRate: results.generalInformation.insuranceRate,
+                                insuranceAmount: results.generalInformation.insuranceAmount,
+                                volume: results.generalInformation.volume,
+                                boxCount: results.generalInformation.boxCount,
+                                bagTotalFast: results.bag.totalFast,
+                                bagTotalRegular: results.bag.totalRegular,
+                                cornersTotalFast: results.corners.totalFast,
+                                cornersTotalRegular: results.corners.totalRegular,
+                                frameTotalFast: results.frame.totalFast,
+                                frameTotalRegular: results.frame.totalRegular
+                            };
+                            
+                            // Отправляем данные в Telegram бот
+                            if (tg && tg.sendData) {
+                                tg.sendData(JSON.stringify(dataForBot));
+                            }
+                        }
+                        
+                        // Вибрация успеха
+                        if (tg && tg.HapticFeedback) {
+                            tg.HapticFeedback.notificationOccurred('success');
+                        }
+                        
+                        // Перенаправляем на страницу результатов
+                        setTimeout(() => {
+                            window.location.href = response.url;
+                        }, 1500);
+                        
+                        return;
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.error) {
+                        throw new Error(data.error);
+                    }
+                    
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                    
+                    // Вибрация ошибки
+                    if (tg && tg.HapticFeedback) {
+                        tg.HapticFeedback.notificationOccurred('error');
+                    }
+                    
+                    // Показываем ошибку
+                    if (tg && tg.showAlert) {
+                        try {
+                            tg.showAlert(`Произошла ошибка: ${error.message}`);
+                        } catch (e) {
+                            // Если showAlert не работает, используем обычный alert
+                            alert(`Произошла ошибка: ${error.message}`);
+                        }
+                    } else {
+                        alert(`Произошла ошибка: ${error.message}`);
+                    }
+                } finally {
+                    loadingElement.style.display = 'none';
+                    calculateBtn.disabled = false;
+                    calculateBtn.innerHTML = '<span>🧮</span><span>Рассчитать стоимость</span>';
+                }
+            });
+            
+            // Динамическая валидация полей
+            document.querySelectorAll('input, select').forEach(element => {
+                element.addEventListener('input', function() {
+                    const errorElement = document.getElementById(`${this.id}Error`);
+                    if (errorElement && errorElement.style.display === 'block') {
+                        errorElement.style.display = 'none';
+                        this.style.borderColor = 'var(--border-color)';
+                    }
+                });
+                
+                element.addEventListener('blur', function() {
+                    validateForm();
+                });
+            });
+            
+            // Обработка кнопки "Назад" в Telegram
+            if (tg && tg.BackButton) {
+                tg.BackButton.show();
+                tg.BackButton.onClick(() => {
+                    if (confirm('Вы уверены, что хотите выйти? Несохраненные данные будут потеряны.')) {
+                        tg.close();
+                    }
+                });
+            }
+            
+            // Настройка главной кнопки Telegram (альтернатива submit)
+            if (tg && tg.MainButton) {
+                tg.MainButton.text = "Рассчитать стоимость";
+                tg.MainButton.color = "#E74C3C";
+                tg.MainButton.textColor = "#ffffff";
+                tg.MainButton.show();
+                
+                tg.MainButton.onClick(() => {
+                    form.dispatchEvent(new Event('submit'));
+                });
+            }
+        });
+    </script>
+</body>
+</html>

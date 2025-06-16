@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты расчета - China Together</title>
+    <link rel="icon" href="data:,">
+    <meta name="robots" content="noindex, nofollow">
+    <script src="https://telegram.org/js/telegram-web-app.js "></script>
+    <style>
+        :root {
+            --primary-color: #E74C3C;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --border-color: #e9ecef;
+            
+            /* Telegram Web App цвета */
+            --tg-theme-bg-color: var(--light-gray);
+            --tg-theme-text-color: var(--text-color);
+            --tg-theme-hint-color: #999;
+            --tg-theme-button-color: var(--primary-color);
+            --tg-theme-button-text-color: var(--white);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--tg-theme-bg-color);
+            color: var(--tg-theme-text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 16px;
+            padding-bottom: 80px; /* Отступ для кнопок Telegram */
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--tg-theme-hint-color);
+            font-size: 0.9rem;
+        }
+        
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .card h2 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        @media (min-width: 480px) {
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            color: var(--tg-theme-hint-color);
+            font-size: 0.9rem;
+        }
+        
+        .info-value {
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-align: right;
+        }
+        
+        .info-value.highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .info-value.secondary {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* Компактная таблица сравнения */
+        .comparison-table {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .comparison-table th {
+            background: rgba(231, 76, 60, 0.05);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .comparison-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 16px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--white);
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary-color);
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .error {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--primary-color);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        /* Темная тема */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --tg-theme-bg-color: #1a1a1a;
+                --tg-theme-text-color: #ffffff;
+                --white: #2a2a2a;
+                --light-gray: #1a1a1a;
+                --border-color: #3a3a3a;
+            }
+            
+            .comparison-table th {
+                background: rgba(231, 76, 60, 0.2);
+            }
+        }
+        
+        /* Анимация появления карточек */
+        .card {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Оптимизация для маленьких экранов */
+        @media (max-width: 360px) {
+            .container {
+                padding: 12px;
+            }
+            
+            .card {
+                padding: 12px;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if results %}
+            <div class="header">
+                <h1>✅ Расчет выполнен успешно!</h1>
+                <p class="subtitle">Выберите оптимальный вариант доставки</p>
+            </div>
+            
+            <!-- Общая информация -->
+            <div class="card">
+                <h2>
+                    <span>📋</span>
+                    <span>Общая информация</span>
+                </h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Категория</span>
+                        <span class="info-value">{{ results.generalInformation.category }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Общий вес</span>
+                        <span class="info-value">{{ "%.2f"|format(results.generalInformation.weight) }} кг</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Плотность</span>
+                        <span class="info-value">{{ "%.2f"|format(results.generalInformation.density) }} кг/м³</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Стоимость товара</span>
+                        <span class="info-value">${{ "%.2f"|format(results.generalInformation.productCost) }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Страховка</span>
+                        <span class="info-value">{{ results.generalInformation.insuranceRate }} (${{ "%.2f"|format(results.generalInformation.insuranceAmount) }})</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Объем</span>
+                        <span class="info-value">{{ "%.2f"|format(results.generalInformation.volume) }} м³</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Коробок</span>
+                        <span class="info-value">{{ results.generalInformation.boxCount }} шт.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Сравнительная таблица -->
+            <div class="card">
+                <h2>
+                    <span>💰</span>
+                    <span>Сравнение вариантов доставки</span>
+                </h2>
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Упаковка</th>
+                                <th>Быстрая</th>
+                                <th>Обычная</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>📦 Мешок</td>
+                                <td class="highlight">${{ "%.2f"|format(results.bag.totalFast) }}</td>
+                                <td class="secondary">${{ "%.2f"|format(results.bag.totalRegular) }}</td>
+                            </tr>
+                            <tr>
+                                <td>📐 Картонные уголки</td>
+                                <td class="highlight">${{ "%.2f"|format(results.corners.totalFast) }}</td>
+                                <td class="secondary">${{ "%.2f"|format(results.corners.totalRegular) }}</td>
+                            </tr>
+                            <tr>
+                                <td>🪵 Деревянный каркас</td>
+                                <td class="highlight">${{ "%.2f"|format(results.frame.totalFast) }}</td>
+                                <td class="secondary">${{ "%.2f"|format(results.frame.totalRegular) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Детальная разбивка по упаковкам -->
+            <details class="card">
+                <summary style="cursor: pointer; font-weight: 600; padding: 8px 0;">
+                    📊 Подробная разбивка стоимости
+                </summary>
+                
+                <!-- Мешок -->
+                <div style="margin-top: 16px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 8px; color: var(--primary-color);">📦 Мешок</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Вес с упаковкой</span>
+                            <span class="info-value">{{ "%.2f"|format(results.bag.packedWeight) }} кг</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Упаковка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.bag.packagingCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Разгрузка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.bag.unloadCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Доставка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.bag.deliveryCostFast) }} / ${{ "%.2f"|format(results.bag.deliveryCostRegular) }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Картонные уголки -->
+                <div style="margin-top: 16px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 8px; color: var(--primary-color);">📐 Картонные уголки</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Вес с упаковкой</span>
+                            <span class="info-value">{{ "%.2f"|format(results.corners.packedWeight) }} кг</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Упаковка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.corners.packagingCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Разгрузка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.corners.unloadCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Доставка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.corners.deliveryCostFast) }} / ${{ "%.2f"|format(results.corners.deliveryCostRegular) }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Деревянный каркас -->
+                <div style="margin-top: 16px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 8px; color: var(--primary-color);">🪵 Деревянный каркас</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Вес с упаковкой</span>
+                            <span class="info-value">{{ "%.2f"|format(results.frame.packedWeight) }} кг</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Упаковка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.frame.packagingCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Разгрузка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.frame.unloadCost) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Доставка</span>
+                            <span class="info-value">${{ "%.2f"|format(results.frame.deliveryCostFast) }} / ${{ "%.2f"|format(results.frame.deliveryCostRegular) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="saveBtn">
+                    <span>💾</span>
+                    <span>Сохранить в CSV</span>
+                </button>
+                <a href="/" class="btn btn-secondary">
+                    <span>🔄</span>
+                    <span>Новый расчет</span>
+                </a>
+            </div>
+            
+        {% else %}
+            <div class="error">
+                <p>❌ Данные для отображения отсутствуют.</p>
+                <p>Пожалуйста, выполните расчет на <a href="/" style="color: var(--primary-color);">главной странице</a>.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Инициализация Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+        
+        // Применяем тему Telegram
+        if (tg.themeParams) {
+            document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color || '#f5f5f5');
+            document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color || '#000000');
+            document.documentElement.style.setProperty('--tg-theme-hint-color', tg.themeParams.hint_color || '#999999');
+            document.documentElement.style.setProperty('--tg-theme-button-color', tg.themeParams.button_color || '#E74C3C');
+            document.documentElement.style.setProperty('--tg-theme-button-text-color', tg.themeParams.button_text_color || '#ffffff');
+        }
+        
+        {% if results %}
+        // Подготавливаем данные для отправки в бот
+        const resultsData = {
+            category: "{{ results.generalInformation.category }}",
+            totalWeight: {{ results.generalInformation.weight }},
+            density: {{ results.generalInformation.density }},
+            productCost: {{ results.generalInformation.productCost }},
+            insuranceRate: "{{ results.generalInformation.insuranceRate }}",
+            insuranceAmount: {{ results.generalInformation.insuranceAmount }},
+            volume: {{ results.generalInformation.volume }},
+            boxCount: {{ results.generalInformation.boxCount }},
+            bagTotalFast: {{ results.bag.totalFast }},
+            bagTotalRegular: {{ results.bag.totalRegular }},
+            cornersTotalFast: {{ results.corners.totalFast }},
+            cornersTotalRegular: {{ results.corners.totalRegular }},
+            frameTotalFast: {{ results.frame.totalFast }},
+            frameTotalRegular: {{ results.frame.totalRegular }}
+        };
+        
+        // Кнопка сохранения в CSV
+        document.getElementById('saveBtn').addEventListener('click', async function() {
+            try {
+                // Вибрация при нажатии
+                if (tg.HapticFeedback) {
+                    tg.HapticFeedback.impactOccurred('light');
+                }
+                
+                this.disabled = true;
+                this.innerHTML = '<span>⏳</span><span>Сохранение...</span>';
+                
+                // Получаем telegram_id из URL или из Telegram Web App
+                let telegramId = null;
+                if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                    telegramId = tg.initDataUnsafe.user.id;
+                } else {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    telegramId = urlParams.get('telegram_id');
+                }
+                
+                // Отправляем запрос на генерацию CSV
+                const response = await fetch('/generate_csv', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        telegram_id: telegramId,
+                        results: {
+                            generalInformation: {{ results.generalInformation | tojson }},
+                            bag: {{ results.bag | tojson }},
+                            corners: {{ results.corners | tojson }},
+                            frame: {{ results.frame | tojson }}
+                        }
+                    })
+                });
+                
+                if (response.ok) {
+                    // Получаем файл
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = `china_together_${new Date().getTime()}.csv`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    
+                    // Вибрация успеха
+                    if (tg.HapticFeedback) {
+                        tg.HapticFeedback.notificationOccurred('success');
+                    }
+                    
+                    // Отправляем данные в Telegram
+                    if (tg.sendData) {
+                        tg.sendData(JSON.stringify({
+                            action: 'csv_saved',
+                            ...resultsData
+                        }));
+                    }
+                    
+                    // Показываем уведомление
+                    if (tg.showAlert) {
+                        tg.showAlert('✅ Файл успешно сохранен!');
+                    }
+                } else {
+                    throw new Error('Ошибка при сохранении файла');
+                }
+                
+            } catch (error) {
+                console.error('Ошибка:', error);
+                
+                if (tg.HapticFeedback) {
+                    tg.HapticFeedback.notificationOccurred('error');
+                }
+                
+                if (tg.showAlert) {
+                    tg.showAlert('❌ Ошибка при сохранении файла');
+                }
+            } finally {
+                this.disabled = false;
+                this.innerHTML = '<span>💾</span><span>Сохранить в CSV</span>';
+            }
+        });
+        
+        // Настройка кнопки "Назад"
+        tg.BackButton.show();
+        tg.BackButton.onClick(() => {
+            window.location.href = '/';
+        });
+        
+        // Настройка главной кнопки для возврата в бот
+        tg.MainButton.text = "Вернуться в бот";
+        tg.MainButton.color = "#3498db";
+        tg.MainButton.show();
+        
+        tg.MainButton.onClick(() => {
+            // Отправляем данные расчета в бот перед закрытием
+            if (tg.sendData) {
+                tg.sendData(JSON.stringify({
+                    action: 'view_completed',
+                    ...resultsData
+                }));
+            }
+            // Небольшая задержка для отправки данных
+            setTimeout(() => {
+                tg.close();
+            }, 100);
+        });
+        
+        {% endif %}
+    </script>
+</body>
+</html>
