@@ -424,10 +424,8 @@ def calculate():
         # Определяем процент страхования
         if cost_per_kg < 20:
             insurance_rate = Decimal('0.01')
-        elif 20 <= cost_per_kg < 30:
-            insurance_rate = Decimal('0.02')
         else:
-            insurance_rate = Decimal('0.03')
+            insurance_rate = Decimal('0.02')
 
         insurance = cost * insurance_rate
 
@@ -484,8 +482,12 @@ def calculate():
         packed_weight_corners = additional_weight_corners + total_weight
         packed_weight_frame = additional_weight_frame + total_weight
 
-        delivery_cost_fast = (fast_car_cost_per_kg * total_weight).quantize(Decimal('0.01'))
-        delivery_cost_regular = (regular_car_cost_per_kg * total_weight).quantize(Decimal('0.01'))
+        delivery_cost_fast_bag = (fast_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
+        delivery_cost_regular_bag = (regular_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
+        delivery_cost_fast_corners = (fast_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
+        delivery_cost_regular_corners = (regular_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
+        delivery_cost_fast_frame = (fast_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
+        delivery_cost_regular_frame = (regular_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
 
         # Формируем результаты
         results = {
@@ -501,44 +503,44 @@ def calculate():
             },
             "bag": {
                 "packedWeight": float(packed_weight_bag.quantize(Decimal('0.01'))),
-                "packagingCost": float((packaging_cost_bag * quantity).quantize(Decimal('0.01'))),
-                "unloadCost": float((unload_cost_bag * quantity).quantize(Decimal('0.01'))),
+                "packagingCost": float((packaging_cost_bag).quantize(Decimal('0.01'))),
+                "unloadCost": float((unload_cost_bag).quantize(Decimal('0.01'))),
                 "insurance": float(insurance.quantize(Decimal('0.01'))),
-                "deliveryCostFast": float(delivery_cost_fast),
-                "deliveryCostRegular": float(delivery_cost_regular),
+                "deliveryCostFast": float(delivery_cost_fast_bag),
+                "deliveryCostRegular": float(delivery_cost_regular_bag),
                 "totalFast": float(
-                    (packaging_cost_bag * quantity + unload_cost_bag * quantity + insurance + delivery_cost_fast).quantize(Decimal('0.01'))
+                    (packaging_cost_bag + unload_cost_bag + insurance + delivery_cost_fast).quantize(Decimal('0.01'))
                 ),
                 "totalRegular": float(
-                    (packaging_cost_bag * quantity + unload_cost_bag * quantity + insurance + delivery_cost_regular).quantize(Decimal('0.01'))
+                    (packaging_cost_bag + unload_cost_bag + insurance + delivery_cost_regular_bag).quantize(Decimal('0.01'))
                 )
             },
             "corners": {
                 "packedWeight": float(packed_weight_corners.quantize(Decimal('0.01'))),
-                "packagingCost": float((packaging_cost_corners * quantity).quantize(Decimal('0.01'))),
-                "unloadCost": float((unload_cost_corners * quantity).quantize(Decimal('0.01'))),
+                "packagingCost": float((packaging_cost_corners).quantize(Decimal('0.01'))),
+                "unloadCost": float((unload_cost_corners).quantize(Decimal('0.01'))),
                 "insurance": float(insurance.quantize(Decimal('0.01'))),
-                "deliveryCostFast": float(delivery_cost_fast),
-                "deliveryCostRegular": float(delivery_cost_regular),
+                "deliveryCostFast": float(delivery_cost_fast_corners),
+                "deliveryCostRegular": float(delivery_cost_regular_corners),
                 "totalFast": float(
-                    (packaging_cost_corners * quantity + unload_cost_corners * quantity + insurance + delivery_cost_fast).quantize(Decimal('0.01'))
+                    (packaging_cost_corners + unload_cost_corners + insurance + delivery_cost_fast_corners).quantize(Decimal('0.01'))
                 ),
                 "totalRegular": float(
-                    (packaging_cost_corners * quantity + unload_cost_corners * quantity + insurance + delivery_cost_regular).quantize(Decimal('0.01'))
+                    (packaging_cost_corners + unload_cost_corners + insurance + delivery_cost_regular_corners).quantize(Decimal('0.01'))
                 )
             },
             "frame": {
                 "packedWeight": float(packed_weight_frame.quantize(Decimal('0.01'))),
-                "packagingCost": float((packaging_cost_frame * quantity).quantize(Decimal('0.01'))),
-                "unloadCost": float((unload_cost_frame * quantity).quantize(Decimal('0.01'))),
+                "packagingCost": float((packaging_cost_frame).quantize(Decimal('0.01'))),
+                "unloadCost": float((unload_cost_frame).quantize(Decimal('0.01'))),
                 "insurance": float(insurance.quantize(Decimal('0.01'))),
-                "deliveryCostFast": float(delivery_cost_fast),
-                "deliveryCostRegular": float(delivery_cost_regular),
+                "deliveryCostFast": float(delivery_cost_fast_frame),
+                "deliveryCostRegular": float(delivery_cost_regular_frame),
                 "totalFast": float(
-                    (packaging_cost_frame * quantity + unload_cost_frame * quantity + insurance + delivery_cost_fast).quantize(Decimal('0.01'))
+                    (packaging_cost_frame + unload_cost_frame + insurance + delivery_cost_fast_frame).quantize(Decimal('0.01'))
                 ),
                 "totalRegular": float(
-                    (packaging_cost_frame * quantity + unload_cost_frame * quantity + insurance + delivery_cost_regular).quantize(Decimal('0.01'))
+                    (packaging_cost_frame + unload_cost_frame + insurance + delivery_cost_regular_frame).quantize(Decimal('0.01'))
                 )
             }
         }

@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 # Загрузка переменных окружения
 load_dotenv()
 API_TOKEN = os.getenv('API_TOKEN')
-WEB_APP_URL = os.getenv('WEB_APP_URL', 'http://84.201.187.187:8061')
+WEB_APP_URL = os.getenv('WEB_APP_URL', 'https://china-together.ru')
 
 # Инициализация бота и хранилища состояний
 bot = Bot(token=API_TOKEN)

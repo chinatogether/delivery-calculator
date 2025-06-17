@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>📊 Дашборд</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 20px;
+            color: #333;
+        }
+        h2 {
+            color: #e74c3c;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+        }
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            background-color: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a.button:hover {
+            background-color: #c0392b;
+        }
+        canvas {
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="/" class="button">← На главную</a>
+
+    <h2>📅 Расчеты по дням</h2>
+    <canvas id="calculationsByDayChart"></canvas>
+    <table>
+        <tr><th>Дата</th><th>Количество расчетов</th></tr>
+        {% for row in calculations_by_day %}
+        <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>👤 Топ пользователей по количеству расчетов</h2>
+    <canvas id="userCalculationsChart"></canvas>
+    <table>
+        <tr><th>Пользователь</th><th>Расчетов</th></tr>
+        {% for user, count in calculations_per_user %}
+        <tr><td>{{ user }}</td><td>{{ count }}</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>🕒 Последние расчеты за неделю</h2>
+    <table>
+        <tr><th>Пользователь</th><th>Категория</th><th>Время</th></tr>
+        {% for username, category, created_at in recent_calculations %}
+        <tr><td>{{ username }}</td><td>{{ category }}</td><td>{{ created_at.strftime('%d.%m.%Y %H:%M') }}</td></tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        // График: Расчеты по дням
+        const ctx1 = document.getElementById('calculationsByDayChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: [ {% for row in calculations_by_day %}"{{ row[0] }}",{% endfor %} ],
+                datasets: [{
+                    label: 'Количество расчетов',
+                    data: [ {% for row in calculations_by_day %}{{ row[1] }},{% endfor %} ],
+                    backgroundColor: 'rgba(230, 66, 53, 0.6)',
+                    borderColor: 'rgba(230, 66, 53, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Расчеты' }
+                    },
+                    x: {
+                        title: { display: true, text: 'Дата' }
+                    }
+                }
+            }
+        });
+
+        // График: Топ пользователей
+        const ctx2 = document.getElementById('userCalculationsChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: [ {% for user, count in calculations_per_user %}"{{ user }}",{% endfor %} ],
+                datasets: [{
+                    label: 'Количество расчетов',
+                    data: [ {% for user, count in calculations_per_user %}{{ count }},{% endfor %} ],
+                    backgroundColor: 'rgba(52, 152, 219, 0.6)',
+                    borderColor: 'rgba(52, 152, 219, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Расчеты' }
+                    },
+                    x: {
+                        title: { display: true, text: 'Пользователь' }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Расчет доставки из Китая - China Together</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
@@ -35,7 +36,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: var(--tg-theme-text-color);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #323033 0%, #323033 100%);
             min-height: 100vh;
             padding: 0;
             margin: 0;
@@ -342,7 +343,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">CT</div>
+            <img src="https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20(2).jpg" alt="China Together" class="logo">
             <h1>China Together</h1>
             <p class="subtitle">Расчет доставки из Китая</p>
         </div>
@@ -361,15 +362,11 @@
             <div class="feature">
                 <div class="feature-icon">📊</div>
                 <h3>Аналитика</h3>
-                <p>Сохраняем историю</p>
+                <p>Оптимизируем доставку</p>
             </div>
         </div>
         
         <div class="card">
-            <div class="tg-info" id="userInfo">
-                <span>💬</span>
-                <span id="userInfoText">Загрузка данных пользователя...</span>
-            </div>
             
             <form id="deliveryForm">
                 <div class="form-section">
@@ -605,32 +602,32 @@
                         // Подготавливаем данные для отправки в бот
                         const resultUrl = new URL(response.url);
                         const resultsParam = resultUrl.searchParams.get('results');
-                        if (resultsParam) {
-                            const results = JSON.parse(decodeURIComponent(resultsParam));
+                        // if (resultsParam) {
+                        //     const results = JSON.parse(decodeURIComponent(resultsParam));
                             
-                            // Подготавливаем данные для бота
-                            const dataForBot = {
-                                category: results.generalInformation.category,
-                                totalWeight: results.generalInformation.weight,
-                                density: results.generalInformation.density,
-                                productCost: results.generalInformation.productCost,
-                                insuranceRate: results.generalInformation.insuranceRate,
-                                insuranceAmount: results.generalInformation.insuranceAmount,
-                                volume: results.generalInformation.volume,
-                                boxCount: results.generalInformation.boxCount,
-                                bagTotalFast: results.bag.totalFast,
-                                bagTotalRegular: results.bag.totalRegular,
-                                cornersTotalFast: results.corners.totalFast,
-                                cornersTotalRegular: results.corners.totalRegular,
-                                frameTotalFast: results.frame.totalFast,
-                                frameTotalRegular: results.frame.totalRegular
-                            };
+                        //     // Подготавливаем данные для бота
+                        //     const dataForBot = {
+                        //         category: results.generalInformation.category,
+                        //         totalWeight: results.generalInformation.weight,
+                        //         density: results.generalInformation.density,
+                        //         productCost: results.generalInformation.productCost,
+                        //         insuranceRate: results.generalInformation.insuranceRate,
+                        //         insuranceAmount: results.generalInformation.insuranceAmount,
+                        //         volume: results.generalInformation.volume,
+                        //         boxCount: results.generalInformation.boxCount,
+                        //         bagTotalFast: results.bag.totalFast,
+                        //         bagTotalRegular: results.bag.totalRegular,
+                        //         cornersTotalFast: results.corners.totalFast,
+                        //         cornersTotalRegular: results.corners.totalRegular,
+                        //         frameTotalFast: results.frame.totalFast,
+                        //         frameTotalRegular: results.frame.totalRegular
+                        //     };
                             
-                            // Отправляем данные в Telegram бот
-                            if (tg && tg.sendData) {
-                                tg.sendData(JSON.stringify(dataForBot));
-                            }
-                        }
+                        //     // Отправляем данные в Telegram бот
+                        //     if (tg && tg.sendData) {
+                        //         tg.sendData(JSON.stringify(dataForBot));
+                        //     }
+                        // }
                         
                         // Вибрация успеха
                         if (tg && tg.HapticFeedback) {

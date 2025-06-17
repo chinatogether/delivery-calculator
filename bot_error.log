@@ -1,0 +1,71 @@
+INFO:__main__:Бот запущен!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:Бот запущен!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:Бот запущен!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450949859 is handled. Duration 226 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:Бот запущен!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:Бот запущен!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:Бот запущен!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:Бот запущен!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+ERROR:__main__:Ошибка получения истории: relation "delivery_test.user_calculations" does not exist
+LINE 3:             FROM delivery_test.user_calculations c
+                         ^
+
+INFO:aiogram.event:Update id=450949860 is handled. Duration 271 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949861 is handled. Duration 240 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949862 is handled. Duration 200 ms by bot id=7709869722
+ERROR:__main__:Ошибка получения истории: relation "delivery_test.user_calculations" does not exist
+LINE 3:             FROM delivery_test.user_calculations c
+                         ^
+
+INFO:aiogram.event:Update id=450949863 is handled. Duration 266 ms by bot id=7709869722
+ERROR:__main__:Ошибка получения истории: relation "delivery_test.user_calculations" does not exist
+LINE 3:             FROM delivery_test.user_calculations c
+                         ^
+
+INFO:aiogram.event:Update id=450949864 is handled. Duration 171 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949865 is handled. Duration 231 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949866 is handled. Duration 179 ms by bot id=7709869722
+ERROR:__main__:Ошибка получения истории: relation "delivery_test.user_calculations" does not exist
+LINE 3:             FROM delivery_test.user_calculations c
+                         ^
+
+INFO:aiogram.event:Update id=450949867 is handled. Duration 341 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:Бот запущен!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450949868 is handled. Duration 190 ms by bot id=7709869722
