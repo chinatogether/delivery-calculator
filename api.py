@@ -509,7 +509,7 @@ def calculate():
                 "deliveryCostFast": float(delivery_cost_fast_bag),
                 "deliveryCostRegular": float(delivery_cost_regular_bag),
                 "totalFast": float(
-                    (packaging_cost_bag + unload_cost_bag + insurance + delivery_cost_fast).quantize(Decimal('0.01'))
+                    (packaging_cost_bag + unload_cost_bag + insurance + delivery_cost_fast_bag).quantize(Decimal('0.01'))
                 ),
                 "totalRegular": float(
                     (packaging_cost_bag + unload_cost_bag + insurance + delivery_cost_regular_bag).quantize(Decimal('0.01'))

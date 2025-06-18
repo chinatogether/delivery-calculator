@@ -69,3 +69,17 @@ INFO:__main__:Бот запущен!
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
 INFO:aiogram.event:Update id=450949868 is handled. Duration 190 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:Бот запущен!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+ERROR:__main__:Ошибка получения истории: relation "delivery_test.user_calculations" does not exist
+LINE 3:             FROM delivery_test.user_calculations c
+                         ^
+
+INFO:aiogram.event:Update id=450949869 is handled. Duration 280 ms by bot id=7709869722
