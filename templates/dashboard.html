@@ -2,136 +2,681 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>📊 Дашборд</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Личный кабинет менеджера</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             color: #333;
         }
-        h2 {
-            color: #e74c3c;
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
         }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-card.primary { border-left-color: #667eea; }
+        .stat-card.success { border-left-color: #28a745; }
+        .stat-card.warning { border-left-color: #ffc107; }
+        .stat-card.danger { border-left-color: #dc3545; }
+        .stat-card.info { border-left-color: #17a2b8; }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .actions-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .action-btn.danger {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        }
+
+        .action-btn.success {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tables-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .table-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .table-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 30px;
+            margin-top: 10px;
         }
+
         th, td {
-            padding: 10px;
-            border: 1px solid #ccc;
+            padding: 12px 15px;
             text-align: left;
+            border-bottom: 1px solid #eee;
         }
+
         th {
-            background-color: #eee;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-weight: 600;
+            color: #495057;
+            position: sticky;
+            top: 0;
         }
-        a.button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-bottom: 20px;
-            background-color: #e74c3c;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+
+        tr:hover {
+            background-color: #f8f9fa;
         }
-        a.button:hover {
-            background-color: #c0392b;
-        }
-        canvas {
-            max-width: 600px;
+
+        .funnel-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
             margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .funnel-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .funnel-step {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .funnel-step::after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+
+        .funnel-step:last-child::after {
+            display: none;
+        }
+
+        .funnel-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .funnel-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .conversion-rate {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .upload-area {
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            background: rgba(102, 126, 234, 0.05);
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .upload-area input[type="file"] {
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .funnel-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .funnel-step::after {
+                content: '↓';
+                right: 50%;
+                top: 100%;
+                transform: translateX(50%);
+            }
+        }
+
+        .alert {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid;
+        }
+
+        .alert.success {
+            background: rgba(40, 167, 69, 0.1);
+            border-left-color: #28a745;
+            color: #155724;
+        }
+
+        .alert.error {
+            background: rgba(220, 53, 69, 0.1);
+            border-left-color: #dc3545;
+            color: #721c24;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Личный кабинет менеджера</h1>
+            <p>Система управления расчетами доставки из Китая</p>
+        </div>
 
-    <a href="/" class="button">← На главную</a>
+        <!-- Основная статистика -->
+        <div class="stats-grid">
+            <div class="stat-card primary">
+                <span class="stat-icon">📊</span>
+                <div class="stat-number" id="totalCalculations">{{ analytics.total_calculations or 0 }}</div>
+                <div class="stat-label">Всего расчетов</div>
+            </div>
+            <div class="stat-card success">
+                <span class="stat-icon">🔥</span>
+                <div class="stat-number" id="todayCalculations">{{ analytics.today_calculations or 0 }}</div>
+                <div class="stat-label">Расчетов сегодня (МСК)</div>
+            </div>
+            <div class="stat-card warning">
+                <span class="stat-icon">⚖️</span>
+                <div class="stat-number" id="avgWeight">{{ "%.1f"|format(analytics.avg_weight or 0) }} кг</div>
+                <div class="stat-label">Средний вес груза</div>
+            </div>
+            <div class="stat-card info">
+                <span class="stat-icon">👥</span>
+                <div class="stat-number" id="activeUsers">{{ analytics.active_users or 0 }}</div>
+                <div class="stat-label">Активных пользователей</div>
+            </div>
+            <div class="stat-card danger">
+                <span class="stat-icon">📦</span>
+                <div class="stat-number" id="popularCategory">{{ analytics.popular_category or "Нет данных" }}</div>
+                <div class="stat-label">Популярная категория</div>
+            </div>
+        </div>
 
-    <h2>📅 Расчеты по дням</h2>
-    <canvas id="calculationsByDayChart"></canvas>
-    <table>
-        <tr><th>Дата</th><th>Количество расчетов</th></tr>
-        {% for row in calculations_by_day %}
-        <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td></tr>
-        {% endfor %}
-    </table>
+        <!-- Панель действий -->
+        <div class="actions-panel">
+            <h3 style="margin-bottom: 20px; color: #333;">⚡ Быстрые действия</h3>
+            <div class="actions-grid">
+                <a href="#" class="action-btn" onclick="showUploadModal()">
+                    📁 Загрузить новый файл
+                </a>
+                <a href="/download" class="action-btn success">
+                    💾 Скачать текущий файл
+                </a>
+                <button class="action-btn" onclick="refreshData()">
+                    🔄 Обновить данные
+                </button>
+                <button class="action-btn danger" onclick="exportData()">
+                    📊 Экспорт отчета
+                </button>
+            </div>
+        </div>
 
-    <h2>👤 Топ пользователей по количеству расчетов</h2>
-    <canvas id="userCalculationsChart"></canvas>
-    <table>
-        <tr><th>Пользователь</th><th>Расчетов</th></tr>
-        {% for user, count in calculations_per_user %}
-        <tr><td>{{ user }}</td><td>{{ count }}</td></tr>
-        {% endfor %}
-    </table>
+        <!-- Воронка расчетов -->
+        <div class="funnel-container">
+            <h3 class="chart-title">🎯 Воронка пользователей</h3>
+            <div class="funnel-steps">
+                <div class="funnel-step">
+                    <div class="funnel-number" id="funnelVisits">{{ funnel_data.visits or 0 }}</div>
+                    <div class="funnel-label">Посещений</div>
+                </div>
+                <div class="funnel-step">
+                    <div class="funnel-number" id="funnelStarted">{{ funnel_data.started or 0 }}</div>
+                    <div class="funnel-label">Начали расчет</div>
+                    <div class="conversion-rate">{{ "%.1f"|format(funnel_data.conversion_started or 0) }}%</div>
+                </div>
+                <div class="funnel-step">
+                    <div class="funnel-number" id="funnelCompleted">{{ funnel_data.completed or 0 }}</div>
+                    <div class="funnel-label">Завершили расчет</div>
+                    <div class="conversion-rate">{{ "%.1f"|format(funnel_data.conversion_completed or 0) }}%</div>
+                </div>
+                <div class="funnel-step">
+                    <div class="funnel-number" id="funnelSaved">{{ funnel_data.saved or 0 }}</div>
+                    <div class="funnel-label">Сохранили результат</div>
+                    <div class="conversion-rate">{{ "%.1f"|format(funnel_data.conversion_saved or 0) }}%</div>
+                </div>
+            </div>
+        </div>
 
-    <h2>🕒 Последние расчеты за неделю</h2>
-    <table>
-        <tr><th>Пользователь</th><th>Категория</th><th>Время</th></tr>
-        {% for username, category, created_at in recent_calculations %}
-        <tr><td>{{ username }}</td><td>{{ category }}</td><td>{{ created_at.strftime('%d.%m.%Y %H:%M') }}</td></tr>
-        {% endfor %}
-    </table>
+        <!-- Графики -->
+        <div class="charts-grid">
+            <div class="chart-container">
+                <h3 class="chart-title">📈 Расчеты по дням</h3>
+                <canvas id="calculationsByDayChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3 class="chart-title">👑 Топ пользователей</h3>
+                <canvas id="userCalculationsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3 class="chart-title">📦 Популярные категории</h3>
+                <canvas id="categoriesChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3 class="chart-title">💰 Средняя стоимость по категориям</h3>
+                <canvas id="avgCostChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Таблицы -->
+        <div class="tables-container">
+            <div class="table-container">
+                <h3 class="table-title">🔥 Последние расчеты (24 часа)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Пользователь</th>
+                            <th>Категория</th>
+                            <th>Вес (кг)</th>
+                            <th>Стоимость ($)</th>
+                            <th>Время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for calc in recent_calculations %}
+                        <tr>
+                            <td>{{ calc.username or 'Аноним' }}</td>
+                            <td>{{ calc.category }}</td>
+                            <td>{{ "%.2f"|format(calc.total_weight or 0) }}</td>
+                            <td>{{ "%.2f"|format(calc.product_cost or 0) }}</td>
+                            <td>{{ calc.created_at.strftime('%d.%m %H:%M') if calc.created_at else '-' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-container">
+                <h3 class="table-title">📊 Детальная аналитика по пользователям</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Пользователь</th>
+                            <th>Расчетов</th>
+                            <th>Общий вес (кг)</th>
+                            <th>Общая стоимость ($)</th>
+                            <th>Последний расчет</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in user_analytics %}
+                        <tr>
+                            <td>{{ user.username or 'Аноним' }}</td>
+                            <td>{{ user.calculation_count }}</td>
+                            <td>{{ "%.2f"|format(user.total_weight or 0) }}</td>
+                            <td>{{ "%.2f"|format(user.total_cost or 0) }}</td>
+                            <td>{{ user.last_calculation.strftime('%d.%m.%Y %H:%M') if user.last_calculation else '-' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно загрузки файла -->
+    <div id="uploadModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 30px; border-radius: 15px; max-width: 500px; width: 90%;">
+            <h3 style="margin-bottom: 20px;">📁 Загрузка нового файла</h3>
+            <form method="post" enctype="multipart/form-data" action="/upload">
+                <div class="upload-area">
+                    <p>Перетащите файл сюда или выберите</p>
+                    <input type="file" name="file" accept=".xlsx,.xls" required>
+                </div>
+                <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 20px;">
+                    <button type="button" onclick="hideUploadModal()" class="action-btn" style="background: #6c757d;">
+                        Отмена
+                    </button>
+                    <button type="submit" class="action-btn success">
+                        Загрузить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script>
-        // График: Расчеты по дням
+        // Функции для модального окна
+        function showUploadModal() {
+            document.getElementById('uploadModal').style.display = 'flex';
+        }
+
+        function hideUploadModal() {
+            document.getElementById('uploadModal').style.display = 'none';
+        }
+
+        // График расчетов по дням
         const ctx1 = document.getElementById('calculationsByDayChart').getContext('2d');
         new Chart(ctx1, {
-            type: 'bar',
+            type: 'line',
             data: {
-                labels: [ {% for row in calculations_by_day %}"{{ row[0] }}",{% endfor %} ],
+                labels: [{% for row in calculations_by_day %}"{{ row[0] }}",{% endfor %}],
                 datasets: [{
                     label: 'Количество расчетов',
-                    data: [ {% for row in calculations_by_day %}{{ row[1] }},{% endfor %} ],
-                    backgroundColor: 'rgba(230, 66, 53, 0.6)',
-                    borderColor: 'rgba(230, 66, 53, 1)',
-                    borderWidth: 1
+                    data: [{% for row in calculations_by_day %}{{ row[1] }},{% endfor %}],
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderColor: 'rgba(102, 126, 234, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
                 }]
             },
             options: {
                 responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        title: { display: true, text: 'Расчеты' }
+                        grid: { color: 'rgba(0,0,0,0.1)' }
                     },
                     x: {
-                        title: { display: true, text: 'Дата' }
+                        grid: { color: 'rgba(0,0,0,0.1)' }
                     }
                 }
             }
         });
 
-        // График: Топ пользователей
+        // График топ пользователей
         const ctx2 = document.getElementById('userCalculationsChart').getContext('2d');
         new Chart(ctx2, {
             type: 'bar',
             data: {
-                labels: [ {% for user, count in calculations_per_user %}"{{ user }}",{% endfor %} ],
+                labels: [{% for user, count in calculations_per_user %}"{{ user[:15] }}...",{% endfor %}],
                 datasets: [{
-                    label: 'Количество расчетов',
-                    data: [ {% for user, count in calculations_per_user %}{{ count }},{% endfor %} ],
-                    backgroundColor: 'rgba(52, 152, 219, 0.6)',
-                    borderColor: 'rgba(52, 152, 219, 1)',
-                    borderWidth: 1
+                    label: 'Расчетов',
+                    data: [{% for user, count in calculations_per_user %}{{ count }},{% endfor %}],
+                    backgroundColor: 'rgba(40, 167, 69, 0.8)',
+                    borderColor: 'rgba(40, 167, 69, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5
                 }]
             },
             options: {
                 responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        title: { display: true, text: 'Расчеты' }
+                        grid: { color: 'rgba(0,0,0,0.1)' }
                     },
                     x: {
-                        title: { display: true, text: 'Пользователь' }
+                        grid: { display: false }
                     }
                 }
             }
         });
-    </script>
 
+        // График категорий (заглушка, данные нужно передать из backend)
+        const ctx3 = document.getElementById('categoriesChart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'doughnut',
+            data: {
+                labels: ['Электроника', 'Одежда', 'Бытовая техника', 'Другое'],
+                datasets: [{
+                    data: [30, 25, 20, 25],
+                    backgroundColor: [
+                        'rgba(102, 126, 234, 0.8)',
+                        'rgba(40, 167, 69, 0.8)',
+                        'rgba(255, 193, 7, 0.8)',
+                        'rgba(220, 53, 69, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // График средней стоимости (заглушка)
+        const ctx4 = document.getElementById('avgCostChart').getContext('2d');
+        new Chart(ctx4, {
+            type: 'bar',
+            data: {
+                labels: ['Электроника', 'Одежда', 'Бытовая техника', 'Другое'],
+                datasets: [{
+                    label: 'Средняя стоимость ($)',
+                    data: [150, 75, 200, 100],
+                    backgroundColor: 'rgba(118, 75, 162, 0.8)',
+                    borderColor: 'rgba(118, 75, 162, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(0,0,0,0.1)' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Функции для действий
+        function refreshData() {
+            window.location.reload();
+        }
+
+        function exportData() {
+            // Заглушка для экспорта
+            alert('Функция экспорта будет реализована');
+        }
+
+        // Автообновление данных каждые 5 минут
+        setInterval(() => {
+            fetch('/api/stats')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('totalCalculations').textContent = data.total_calculations;
+                    document.getElementById('todayCalculations').textContent = data.today_calculations;
+                    document.getElementById('activeUsers').textContent = data.active_users;
+                })
+                .catch(error => console.log('Ошибка обновления:', error));
+        }, 300000);
+    </script>
 </body>
 </html>

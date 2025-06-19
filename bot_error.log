@@ -13,7 +13,239 @@ INFO:aiogram.dispatcher:Polling stopped
 INFO:__main__:Бот запущен!
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
-INFO:aiogram.event:Update id=450949859 is handled. Duration 226 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+  File "/home/chinatogether/xlsx-web/bot.py", line 585
+    logger.error(f"Ошибка обработки callback: {
+                                              ^
+SyntaxError: '{' was never closed
+  File "/home/chinatogether/xlsx-web/bot.py", line 585
+    logger.error(f"Ошибка обработки callback: {
+                                              ^
+SyntaxError: '{' was never closed
+  File "/home/chinatogether/xlsx-web/bot.py", line 585
+    logger.error(f"Ошибка обработки callback: {
+                                              ^
+SyntaxError: '{' was never closed
+  File "/home/chinatogether/xlsx-web/bot.py", line 585
+    logger.error(f"Ошибка обработки callback: {
+                                              ^
+SyntaxError: '{' was never closed
+  File "/home/chinatogether/xlsx-web/bot.py", line 585
+    logger.error(f"Ошибка обработки callback: {
+                                              ^
+SyntaxError: '{' was never closed
+  File "/home/chinatogether/xlsx-web/bot.py", line 585
+    logger.error(f"Ошибка обработки callback: {
+                                              ^
+SyntaxError: '{' was never closed
+  File "/home/chinatogether/xlsx-web/bot.py", line 585
+    logger.error(f"Ошибка обработки callback: {
+                                              ^
+SyntaxError: '{' was never closed
+  File "/home/chinatogether/xlsx-web/bot.py", line 585
+    logger.error(f"Ошибка обработки callback: {
+                                              ^
+SyntaxError: '{' was never closed
+  File "/home/chinatogether/xlsx-web/bot.py", line 585
+    logger.error(f"Ошибка обработки callback: {
+                                              ^
+SyntaxError: '{' was never closed
+  File "/home/chinatogether/xlsx-web/bot.py", line 585
+    logger.error(f"Ошибка обработки callback: {
+                                              ^
+SyntaxError: '{' was never closed
+INFO:__main__:Бот запущен!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450949871 is handled. Duration 365 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949870 is handled. Duration 398 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949878 is not handled. Duration 296 ms by bot id=7709869722
+ERROR:aiogram.event:Cause exception while process update id=450949878 by bot id=7709869722
+TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+Traceback (most recent call last):
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/bot.py", line 208, in handle_callback
+    await callback.answer()
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/bot.py", line 441, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 257, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 179, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+INFO:aiogram.event:Update id=450949876 is not handled. Duration 360 ms by bot id=7709869722
+ERROR:aiogram.event:Cause exception while process update id=450949876 by bot id=7709869722
+TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+Traceback (most recent call last):
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/bot.py", line 208, in handle_callback
+    await callback.answer()
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/bot.py", line 441, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 257, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 179, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+INFO:aiogram.event:Update id=450949873 is handled. Duration 430 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949874 is handled. Duration 412 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949872 is handled. Duration 460 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949875 is handled. Duration 419 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949879 is handled. Duration 398 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949877 is not handled. Duration 409 ms by bot id=7709869722
+ERROR:aiogram.event:Cause exception while process update id=450949877 by bot id=7709869722
+TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+Traceback (most recent call last):
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/bot.py", line 208, in handle_callback
+    await callback.answer()
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/bot.py", line 441, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 257, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/session/aiohttp.py", line 179, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/chinatogether/xlsx-web/venv/lib/python3.12/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
 WARNING:aiogram.dispatcher:Received SIGTERM signal
 INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
 INFO:aiogram.dispatcher:Polling stopped
@@ -32,54 +264,6 @@ INFO:aiogram.dispatcher:Polling stopped
 INFO:__main__:Бот запущен!
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
-WARNING:aiogram.dispatcher:Received SIGTERM signal
-INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
-INFO:aiogram.dispatcher:Polling stopped
-INFO:__main__:Бот запущен!
-INFO:aiogram.dispatcher:Start polling
-INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
-ERROR:__main__:Ошибка получения истории: relation "delivery_test.user_calculations" does not exist
-LINE 3:             FROM delivery_test.user_calculations c
-                         ^
-
-INFO:aiogram.event:Update id=450949860 is handled. Duration 271 ms by bot id=7709869722
-INFO:aiogram.event:Update id=450949861 is handled. Duration 240 ms by bot id=7709869722
-INFO:aiogram.event:Update id=450949862 is handled. Duration 200 ms by bot id=7709869722
-ERROR:__main__:Ошибка получения истории: relation "delivery_test.user_calculations" does not exist
-LINE 3:             FROM delivery_test.user_calculations c
-                         ^
-
-INFO:aiogram.event:Update id=450949863 is handled. Duration 266 ms by bot id=7709869722
-ERROR:__main__:Ошибка получения истории: relation "delivery_test.user_calculations" does not exist
-LINE 3:             FROM delivery_test.user_calculations c
-                         ^
-
-INFO:aiogram.event:Update id=450949864 is handled. Duration 171 ms by bot id=7709869722
-INFO:aiogram.event:Update id=450949865 is handled. Duration 231 ms by bot id=7709869722
-INFO:aiogram.event:Update id=450949866 is handled. Duration 179 ms by bot id=7709869722
-ERROR:__main__:Ошибка получения истории: relation "delivery_test.user_calculations" does not exist
-LINE 3:             FROM delivery_test.user_calculations c
-                         ^
-
-INFO:aiogram.event:Update id=450949867 is handled. Duration 341 ms by bot id=7709869722
-WARNING:aiogram.dispatcher:Received SIGTERM signal
-INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
-INFO:aiogram.dispatcher:Polling stopped
-INFO:__main__:Бот запущен!
-INFO:aiogram.dispatcher:Start polling
-INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
-INFO:aiogram.event:Update id=450949868 is handled. Duration 190 ms by bot id=7709869722
-WARNING:aiogram.dispatcher:Received SIGTERM signal
-INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
-INFO:aiogram.dispatcher:Polling stopped
-INFO:__main__:Бот запущен!
-INFO:aiogram.dispatcher:Start polling
-INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
-ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
-WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
-INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
-ERROR:__main__:Ошибка получения истории: relation "delivery_test.user_calculations" does not exist
-LINE 3:             FROM delivery_test.user_calculations c
-                         ^
-
-INFO:aiogram.event:Update id=450949869 is handled. Duration 280 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949880 is handled. Duration 296 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949881 is handled. Duration 927 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949882 is handled. Duration 246 ms by bot id=7709869722
