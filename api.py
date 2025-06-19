@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect, send_file
+from flask import Flask, render_template, request, jsonify, redirect
 import psycopg2
 from decimal import Decimal, getcontext, InvalidOperation
 from urllib.parse import unquote, quote
@@ -8,15 +8,14 @@ import json
 from datetime import datetime, timedelta
 import os
 from functools import wraps
-import io
-import csv
+import re
 
 # Настройка точности для Decimal
 getcontext().prec = 6
 
 # Создание приложения Flask
 app = Flask(__name__, static_folder='static', template_folder='templates')
-CORS(app, origins=["https://telegram.org", "*"])  # Разрешаем запросы от Telegram
+CORS(app, origins=["https://telegram.org", "*"])
 
 # Настройка логирования
 logging.basicConfig(
@@ -39,16 +38,26 @@ DB_CONFIG = {
     "connect_timeout": 10
 }
 
-# Подключение к базе данных
 def connect_to_db():
+    """Подключение к базе данных"""
     try:
         return psycopg2.connect(**DB_CONFIG)
     except Exception as e:
         logger.error(f"Ошибка подключения к базе данных: {str(e)}")
         raise
 
-# Декоратор для обработки ошибок базы данных
+def safe_decimal(value, default=Decimal('0')):
+    """Безопасное преобразование в Decimal"""
+    try:
+        if value is None:
+            return default
+        return Decimal(str(value).replace(',', '.'))
+    except (InvalidOperation, ValueError, TypeError):
+        logger.warning(f"Ошибка при преобразовании значения '{value}' в Decimal")
+        return default
+
 def handle_db_errors(func):
+    """Декоратор для обработки ошибок базы данных"""
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
@@ -58,24 +67,12 @@ def handle_db_errors(func):
             return None
     return wrapper
 
-# Функция для безопасного преобразования значений в Decimal
-def safe_decimal(value, default=Decimal('0')):
-    """Преобразует значение в Decimal."""
-    try:
-        if value is None:
-            return default
-        return Decimal(str(value).replace(',', '.'))
-    except (InvalidOperation, ValueError, TypeError):
-        logger.warning(f"Ошибка при преобразовании значения '{value}' в Decimal")
-        return default
-
-# Создание таблиц, если их нет
 def init_database():
-    """Инициализирует структуру базы данных"""
+    """Создание таблиц в базе данных"""
     conn = connect_to_db()
     cursor = conn.cursor()
     try:
-        # Создаем схему, если её нет
+        # Создаем схему
         cursor.execute("CREATE SCHEMA IF NOT EXISTS delivery_test")
         
         # Таблица пользователей Telegram
@@ -131,6 +128,26 @@ def init_database():
             )
         """)
         
+        # Таблица заявок на выкуп и доставку
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS delivery_test.purchase_requests (
+                id SERIAL PRIMARY KEY,
+                telegram_user_id INTEGER REFERENCES delivery_test.telegram_users(id),
+                calculation_id INTEGER REFERENCES delivery_test.user_calculation(id),
+                email VARCHAR(255) NOT NULL,
+                telegram_contact VARCHAR(255) NOT NULL,
+                supplier_link TEXT,
+                order_amount VARCHAR(100),
+                promo_code VARCHAR(100),
+                additional_notes TEXT,
+                terms_accepted BOOLEAN DEFAULT FALSE,
+                status VARCHAR(50) DEFAULT 'new',
+                manager_notes TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        
         # Таблица действий пользователей
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS delivery_test.user_actions (
@@ -153,11 +170,10 @@ def init_database():
         cursor.close()
         conn.close()
 
-# Сохранение данных пользователя Telegram
 @handle_db_errors
 def save_telegram_user(telegram_id, username, first_name=None, last_name=None):
+    """Сохранение пользователя Telegram"""
     if not telegram_id:
-        logger.warning("telegram_id отсутствует")
         return None
         
     conn = connect_to_db()
@@ -176,20 +192,15 @@ def save_telegram_user(telegram_id, username, first_name=None, last_name=None):
         
         user_id = cursor.fetchone()[0]
         conn.commit()
-        logger.info(f"Пользователь сохранен/обновлен: telegram_id={telegram_id}, id={user_id}")
         return user_id
         
-    except Exception as e:
-        conn.rollback()
-        logger.error(f"Ошибка при сохранении пользователя: {str(e)}")
-        raise
     finally:
         cursor.close()
         conn.close()
 
-# Сохранение действия пользователя
 @handle_db_errors
 def save_user_action(telegram_id, action, details=None):
+    """Сохранение действия пользователя"""
     conn = connect_to_db()
     cursor = conn.cursor()
     try:
@@ -199,18 +210,14 @@ def save_user_action(telegram_id, action, details=None):
         """, (str(telegram_id), action, json.dumps(details) if details else None))
         
         conn.commit()
-        logger.info(f"Действие пользователя сохранено: {action}")
         
-    except Exception as e:
-        conn.rollback()
-        logger.error(f"Ошибка при сохранении действия: {str(e)}")
     finally:
         cursor.close()
         conn.close()
 
-# Сохранение входных данных
 @handle_db_errors
 def save_user_input_to_db(category, weight, length, width, height, cost, quantity, telegram_user_id=None):
+    """Сохранение входных данных пользователя"""
     conn = connect_to_db()
     cursor = conn.cursor()
     try:
@@ -224,25 +231,18 @@ def save_user_input_to_db(category, weight, length, width, height, cost, quantit
         
         input_id = cursor.fetchone()[0]
         conn.commit()
-        logger.info(f"Входные данные сохранены: ID={input_id}")
         return input_id
         
-    except Exception as e:
-        conn.rollback()
-        logger.error(f"Ошибка при сохранении входных данных: {str(e)}")
-        raise
     finally:
         cursor.close()
         conn.close()
 
-# Сохранение результатов расчета
 @handle_db_errors
-def save_user_calculation(
-    telegram_user_id, category, total_weight, density, product_cost, insurance_rate,
-    insurance_amount, volume, box_count, bag_total_fast, bag_total_regular,
-    corners_total_fast, corners_total_regular, frame_total_fast, frame_total_regular,
-    input_id=None
-):
+def save_user_calculation(telegram_user_id, category, total_weight, density, product_cost, 
+                         insurance_rate, insurance_amount, volume, box_count, bag_total_fast, 
+                         bag_total_regular, corners_total_fast, corners_total_regular, 
+                         frame_total_fast, frame_total_regular, input_id=None):
+    """Сохранение результатов расчета"""
     conn = connect_to_db()
     cursor = conn.cursor()
     try:
@@ -264,136 +264,103 @@ def save_user_calculation(
         
         calculation_id = cursor.fetchone()[0]
         conn.commit()
-        logger.info(f"Результаты расчета сохранены: ID={calculation_id}")
         return calculation_id
         
-    except Exception as e:
-        conn.rollback()
-        logger.error(f"Ошибка при сохранении расчета: {str(e)}")
-        raise
     finally:
         cursor.close()
         conn.close()
 
-# Получение статистики
 @handle_db_errors
-def get_analytics_data():
+def save_purchase_request(telegram_user_id, email, telegram_contact, supplier_link, order_amount, 
+                         promo_code, additional_notes, terms_accepted, calculation_id=None):
+    """Сохранение заявки на выкуп"""
     conn = connect_to_db()
     cursor = conn.cursor()
     try:
-        # Общее количество расчетов
-        cursor.execute("SELECT COUNT(*) FROM delivery_test.user_calculation")
-        total_calculations = cursor.fetchone()[0]
-        
-        # Расчеты сегодня
         cursor.execute("""
-            SELECT COUNT(*) FROM delivery_test.user_calculation 
-            WHERE created_at >= CURRENT_DATE
-        """)
-        today_calculations = cursor.fetchone()[0]
+            INSERT INTO delivery_test.purchase_requests (
+                telegram_user_id, calculation_id, email, telegram_contact, supplier_link,
+                order_amount, promo_code, additional_notes, terms_accepted, created_at, updated_at
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+            RETURNING id
+        """, (
+            telegram_user_id, calculation_id, email, telegram_contact, supplier_link,
+            order_amount, promo_code, additional_notes, terms_accepted
+        ))
         
-        # Средний вес
-        cursor.execute("SELECT AVG(total_weight) FROM delivery_test.user_calculation")
-        avg_weight = cursor.fetchone()[0] or 0
+        request_id = cursor.fetchone()[0]
+        conn.commit()
+        return request_id
         
-        # Популярная категория
-        cursor.execute("""
-            SELECT category, COUNT(*) as count 
-            FROM delivery_test.user_calculation 
-            GROUP BY category 
-            ORDER BY count DESC 
-            LIMIT 1
-        """)
-        popular_category_data = cursor.fetchone()
-        popular_category = popular_category_data[0] if popular_category_data else "Нет данных"
-        
-        # Активные пользователи за последние 7 дней
-        cursor.execute("""
-            SELECT COUNT(DISTINCT telegram_user_id) 
-            FROM delivery_test.user_calculation 
-            WHERE created_at >= CURRENT_DATE - INTERVAL '7 days'
-        """)
-        active_users = cursor.fetchone()[0]
-        
-        return {
-            'total_calculations': total_calculations,
-            'today_calculations': today_calculations,
-            'avg_weight': float(avg_weight) if avg_weight else 0,
-            'popular_category': popular_category,
-            'active_users': active_users
-        }
-        
-    except Exception as e:
-        logger.error(f"Ошибка при получении статистики: {str(e)}")
-        return None
     finally:
         cursor.close()
         conn.close()
 
-# Главная страница
+# МАРШРУТЫ
+
 @app.route('/')
 def index():
-    # Получаем параметры из URL (для Telegram Web App)
+    """Главная страница"""
     telegram_id = request.args.get('telegram_id')
     username = request.args.get('username')
     
-    # Сохраняем действие открытия страницы
     if telegram_id:
         save_user_action(telegram_id, 'page_opened', {'page': 'index'})
     
     return render_template('index.html')
 
-# API для статистики (можно использовать для внешнего дашборда)
-@app.route('/api/stats')
-def get_stats():
-    try:
-        # Проверка токена для API
-        api_token = request.headers.get('Authorization')
-        expected_token = os.getenv('API_STATS_TOKEN', None)
-        
-        if expected_token and api_token != f"Bearer {expected_token}":
-            return jsonify({"error": "Unauthorized"}), 401
-            
-        stats = get_analytics_data()
-        if stats is None:
-            return jsonify({"error": "Ошибка получения статистики"}), 500
-        return jsonify(stats)
-    except Exception as e:
-        logger.error(f"Ошибка в /api/stats: {str(e)}")
-        return jsonify({"error": str(e)}), 500
+@app.route('/order')
+def order_page():
+    """Страница заказа доставки"""
+    telegram_id = request.args.get('telegram_id')
+    username = request.args.get('username')
+    calculation_id = request.args.get('calculation_id')
+    
+    if telegram_id:
+        save_user_action(telegram_id, 'page_opened', {
+            'page': 'order', 
+            'calculation_id': calculation_id
+        })
+    
+    return render_template('order.html')
 
-# Страница результатов
 @app.route('/result')
 def result():
+    """Страница результатов"""
     results_param = request.args.get('results', None)
     telegram_id = request.args.get('telegram_id')
+    calculation_id = request.args.get('calculation_id')
     
     try:
         results = json.loads(unquote(results_param)) if results_param else {}
         
-        # Сохраняем действие просмотра результатов
         if telegram_id:
-            save_user_action(telegram_id, 'view_results', {'has_results': bool(results)})
+            save_user_action(telegram_id, 'view_results', {
+                'has_results': bool(results),
+                'calculation_id': calculation_id
+            })
         
-        if not all(key in results for key in ["generalInformation", "bag", "corners", "frame"]):
-            return render_template('result.html', error="Некорректная структура данных.")
+        if not results or not all(key in results for key in ["generalInformation", "bag", "corners", "frame"]):
+            return render_template('result.html', error="Некорректные данные для отображения.")
 
-        return render_template('result.html', results=results)
+        return render_template('result.html', results=results, calculation_id=calculation_id)
+        
     except Exception as e:
         logger.error(f"Ошибка на странице результатов: {str(e)}")
         return render_template('result.html', error="Произошла ошибка при обработке данных.")
 
-# Основной маршрут расчета
 @app.route('/calculate', methods=['GET', 'POST'])
 def calculate():
+    """Основной расчет доставки"""
     try:
-        # Получаем параметры
+        # Получаем данные
         if request.method == 'POST':
             data = request.get_json()
         else:
             data = request.args
         
-        # Декодирование параметров
+        # Извлекаем параметры
         category = unquote(str(data.get('category', ''))).strip()
         weight_per_box = safe_decimal(data.get('weight', 0))
         length = safe_decimal(data.get('length', 0))
@@ -406,7 +373,6 @@ def calculate():
 
         # Валидация
         if not all([category, weight_per_box > 0, length > 0, width > 0, height > 0, cost > 0, quantity > 0]):
-            logger.warning("Некорректные параметры для расчета")
             return jsonify({"error": "Не все параметры указаны корректно"}), 400
 
         # Сохраняем пользователя
@@ -414,19 +380,18 @@ def calculate():
         if telegram_id and telegram_id != 'test_user':
             telegram_user_id = save_telegram_user(telegram_id, username)
 
-        # Расчеты
+        # Выполняем расчеты
         volume_per_box = (length / Decimal(100)) * (width / Decimal(100)) * (height / Decimal(100))
         total_volume = volume_per_box * quantity
         density = weight_per_box / volume_per_box if volume_per_box > 0 else Decimal('0')
         total_weight = weight_per_box * quantity
-        cost_per_kg = cost / total_weight if total_weight > 0 else Decimal('0')
 
         # Определяем процент страхования
+        cost_per_kg = cost / total_weight if total_weight > 0 else Decimal('0')
         if cost_per_kg < 20:
             insurance_rate = Decimal('0.01')
         else:
             insurance_rate = Decimal('0.02')
-
         insurance = cost * insurance_rate
 
         # Получаем тарифы из БД
@@ -443,18 +408,14 @@ def calculate():
         """, (total_weight, total_weight))
         
         result_row_weight = cursor.fetchone()
-        
         if not result_row_weight:
             cursor.close()
             conn.close()
             return jsonify({"error": f"Вес {total_weight} кг вне диапазона тарифов"}), 400
 
-        # Преобразуем данные
-        (
-            min_weight, max_weight, packing_factor_bag, _, packaging_cost_bag, unload_cost_bag,
-            additional_weight_corners, _, packaging_cost_corners, unload_cost_corners,
-            additional_weight_frame, _, packaging_cost_frame, unload_cost_frame
-        ) = [safe_decimal(value) for value in result_row_weight]
+        (min_weight, max_weight, packing_factor_bag, _, packaging_cost_bag, unload_cost_bag,
+         additional_weight_corners, _, packaging_cost_corners, unload_cost_corners,
+         additional_weight_frame, _, packaging_cost_frame, unload_cost_frame) = [safe_decimal(value) for value in result_row_weight]
 
         # Тарифы по плотности
         cursor.execute("""
@@ -464,63 +425,32 @@ def calculate():
         """, (category, density, density))
         
         result_row_density = cursor.fetchone()
-        
         if not result_row_density:
             cursor.close()
             conn.close()
             return jsonify({"error": f"Плотность {density} кг/м³ вне диапазона для '{category}'"}), 400
 
-        (
-            category_db, min_density, max_density, fast_car_cost_per_kg, regular_car_cost_per_kg
-        ) = [safe_decimal(value) if isinstance(value, (int, float)) else value for value in result_row_density]
+        (category_db, min_density, max_density, fast_car_cost_per_kg, regular_car_cost_per_kg) = [
+            safe_decimal(value) if isinstance(value, (int, float)) else value for value in result_row_density]
 
         cursor.close()
         conn.close()
 
-        # Расчеты стоимости
+        # Расчеты стоимости для каждого типа упаковки
         packed_weight_bag = packing_factor_bag + total_weight
         packed_weight_corners = additional_weight_corners + total_weight
         packed_weight_frame = additional_weight_frame + total_weight
 
-
-        cost_per_kg = cost / total_weight if total_weight > 0 else Decimal('0')
+        # Расчет страховки для каждого типа
         cost_per_bag = cost / packed_weight_bag if packed_weight_bag > 0 else Decimal('0')
         cost_per_corners = cost / packed_weight_corners if packed_weight_corners > 0 else Decimal('0')
         cost_per_frame = cost / packed_weight_frame if packed_weight_frame > 0 else Decimal('0')
 
-        # Определяем процент страхования
-        if cost_per_kg < 20:
-            insurance_rate = Decimal('0.01')
-        else:
-            insurance_rate = Decimal('0.02')
+        insurance_bag = cost * (Decimal('0.01') if cost_per_bag < 20 else Decimal('0.02'))
+        insurance_corners = cost * (Decimal('0.01') if cost_per_corners < 20 else Decimal('0.02'))
+        insurance_frame = cost * (Decimal('0.01') if cost_per_frame < 20 else Decimal('0.02'))
 
-        insurance = cost * insurance_rate
-
-         # Определяем процент страхования коробка
-        if cost_per_bag < 20:
-            insurance_rate = Decimal('0.01')
-        else:
-            insurance_rate = Decimal('0.02')
-
-        insurance_bag  = cost * insurance_rate
-
-         # Определяем процент страхования уголки
-        if cost_per_corners < 20:
-            insurance_rate = Decimal('0.01')
-        else:
-            insurance_rate = Decimal('0.02')
-
-        insurance_corners = cost * insurance_rate
-        
-
-         # Определяем процент страхования палета
-        if cost_per_frame < 20:
-            insurance_rate = Decimal('0.01')
-        else:
-            insurance_rate = Decimal('0.02')
-
-        insurance_frame = cost * insurance_rate
-
+        # Расчет доставки
         delivery_cost_fast_bag = (fast_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
         delivery_cost_regular_bag = (regular_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
         delivery_cost_fast_corners = (fast_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
@@ -542,64 +472,48 @@ def calculate():
             },
             "bag": {
                 "packedWeight": float(packed_weight_bag.quantize(Decimal('0.01'))),
-                "packagingCost": float((packaging_cost_bag).quantize(Decimal('0.01'))),
-                "unloadCost": float((unload_cost_bag).quantize(Decimal('0.01'))),
+                "packagingCost": float(packaging_cost_bag.quantize(Decimal('0.01'))),
+                "unloadCost": float(unload_cost_bag.quantize(Decimal('0.01'))),
                 "insurance": float(insurance_bag.quantize(Decimal('0.01'))),
+                "insuranceRate": f"{(insurance_bag/cost * Decimal('100')).quantize(Decimal('1')):.0f}%",
                 "deliveryCostFast": float(delivery_cost_fast_bag),
                 "deliveryCostRegular": float(delivery_cost_regular_bag),
-                "totalFast": float(
-                    (packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_fast_bag).quantize(Decimal('0.01'))
-                ),
-                "totalRegular": float(
-                    (packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_regular_bag).quantize(Decimal('0.01'))
-                )
+                "totalFast": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_fast_bag).quantize(Decimal('0.01'))),
+                "totalRegular": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_regular_bag).quantize(Decimal('0.01')))
             },
             "corners": {
                 "packedWeight": float(packed_weight_corners.quantize(Decimal('0.01'))),
-                "packagingCost": float((packaging_cost_corners).quantize(Decimal('0.01'))),
-                "unloadCost": float((unload_cost_corners).quantize(Decimal('0.01'))),
+                "packagingCost": float(packaging_cost_corners.quantize(Decimal('0.01'))),
+                "unloadCost": float(unload_cost_corners.quantize(Decimal('0.01'))),
                 "insurance": float(insurance_corners.quantize(Decimal('0.01'))),
+                "insuranceRate": f"{(insurance_corners/cost * Decimal('100')).quantize(Decimal('1')):.0f}%",
                 "deliveryCostFast": float(delivery_cost_fast_corners),
                 "deliveryCostRegular": float(delivery_cost_regular_corners),
-                "totalFast": float(
-                    (packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_fast_corners).quantize(Decimal('0.01'))
-                ),
-                "totalRegular": float(
-                    (packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_regular_corners).quantize(Decimal('0.01'))
-                )
+                "totalFast": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_fast_corners).quantize(Decimal('0.01'))),
+                "totalRegular": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_regular_corners).quantize(Decimal('0.01')))
             },
             "frame": {
                 "packedWeight": float(packed_weight_frame.quantize(Decimal('0.01'))),
-                "packagingCost": float((packaging_cost_frame).quantize(Decimal('0.01'))),
-                "unloadCost": float((unload_cost_frame).quantize(Decimal('0.01'))),
+                "packagingCost": float(packaging_cost_frame.quantize(Decimal('0.01'))),
+                "unloadCost": float(unload_cost_frame.quantize(Decimal('0.01'))),
                 "insurance": float(insurance_frame.quantize(Decimal('0.01'))),
+                "insuranceRate": f"{(insurance_frame/cost * Decimal('100')).quantize(Decimal('1')):.0f}%",
                 "deliveryCostFast": float(delivery_cost_fast_frame),
                 "deliveryCostRegular": float(delivery_cost_regular_frame),
-                "totalFast": float(
-                    (packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_fast_frame).quantize(Decimal('0.01'))
-                ),
-                "totalRegular": float(
-                    (packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_regular_frame).quantize(Decimal('0.01'))
-                )
+                "totalFast": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_fast_frame).quantize(Decimal('0.01'))),
+                "totalRegular": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_regular_frame).quantize(Decimal('0.01')))
             }
         }
 
-        # Сохраняем данные
+        # Сохраняем данные в БД
         input_id = save_user_input_to_db(
-            category=category,
-            weight=float(weight_per_box),
-            length=float(length),
-            width=float(width),
-            height=float(height),
-            cost=float(cost),
-            quantity=quantity,
-            telegram_user_id=telegram_user_id
+            category=category, weight=float(weight_per_box), length=float(length),
+            width=float(width), height=float(height), cost=float(cost),
+            quantity=quantity, telegram_user_id=telegram_user_id
         )
 
-        # Сохраняем расчет
         calculation_id = save_user_calculation(
-            telegram_user_id=telegram_user_id,
-            category=category,
+            telegram_user_id=telegram_user_id, category=category,
             total_weight=float(total_weight.quantize(Decimal('0.01'))),
             density=float(density.quantize(Decimal('0.01'))),
             product_cost=float(cost),
@@ -624,14 +538,11 @@ def calculate():
                 'total_weight': float(total_weight)
             })
 
-        logger.info(f"Расчет выполнен для пользователя {username} (ID: {telegram_id})")
-
         # Возвращаем результат
         if request.method == 'POST':
             return jsonify(results)
         else:
-            # Перенаправляем на страницу результатов
-            results_url = f"/result?results={quote(json.dumps(results))}"
+            results_url = f"/result?results={quote(json.dumps(results))}&calculation_id={calculation_id}"
             if telegram_id:
                 results_url += f"&telegram_id={telegram_id}"
             return redirect(results_url)
@@ -640,135 +551,87 @@ def calculate():
         logger.error(f"Ошибка в calculate: {str(e)}")
         return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
 
-# Генерация CSV файла
-@app.route('/generate_csv', methods=['POST'])
-def generate_csv():
+@app.route('/submit_purchase_request', methods=['POST'])
+def submit_purchase_request():
+    """Создание заявки на выкуп и доставку"""
     try:
         data = request.get_json()
         telegram_id = data.get('telegram_id')
-        results = data.get('results')
+        calculation_id = data.get('calculation_id')
+        email = data.get('email', '').strip()
+        telegram_contact = data.get('telegram_contact', '').strip()
+        supplier_link = data.get('supplier_link', '').strip()
+        order_amount = data.get('order_amount', '').strip()
+        promo_code = data.get('promo_code', '').strip()
+        additional_notes = data.get('additional_notes', '').strip()
+        terms_accepted = data.get('terms_accepted', False)
         
-        if not results:
-            return jsonify({"error": "Нет данных для экспорта"}), 400
+        # Валидация
+        if not all([telegram_id, telegram_contact]):
+            return jsonify({"error": "Не все обязательные поля заполнены"}), 400
         
-        # Создаем CSV в памяти
-        output = io.StringIO()
-        writer = csv.writer(output)
+        if not terms_accepted:
+            return jsonify({"error": "Необходимо согласиться с условиями работы"}), 400
         
-        # Заголовок
-        writer.writerow(['China Together - Расчет доставки'])
-        writer.writerow(['Дата расчета:', datetime.now().strftime('%d.%m.%Y %H:%M')])
-        writer.writerow([])
+        # Генерируем email из telegram_id если не указан
+        if not email:
+            email = f"{telegram_id}@telegram.user"
         
-        # Общая информация
-        writer.writerow(['ОБЩАЯ ИНФОРМАЦИЯ'])
-        info = results.get('generalInformation', {})
-        writer.writerow(['Категория:', info.get('category', '')])
-        writer.writerow(['Общий вес (кг):', info.get('weight', '')])
-        writer.writerow(['Плотность (кг/м³):', info.get('density', '')])
-        writer.writerow(['Стоимость товара ($):', info.get('productCost', '')])
-        writer.writerow(['Страховка:', f"{info.get('insuranceRate', '')} (${info.get('insuranceAmount', '')})"])
-        writer.writerow(['Объем (м³):', info.get('volume', '')])
-        writer.writerow(['Количество коробок:', info.get('boxCount', '')])
-        writer.writerow([])
+        # Валидация Telegram контакта
+        if not (telegram_contact.startswith('@') or telegram_contact.startswith('https://t.me/')):
+            return jsonify({"error": "Telegram контакт должен начинаться с @ или https://t.me/"}), 400
         
-        # Сравнение вариантов
-        writer.writerow(['СРАВНЕНИЕ ВАРИАНТОВ ДОСТАВКИ'])
-        writer.writerow(['Тип упаковки', 'Быстрая доставка ($)', 'Обычная доставка ($)'])
-        writer.writerow(['Мешок', results['bag']['totalFast'], results['bag']['totalRegular']])
-        writer.writerow(['Картонные уголки', results['corners']['totalFast'], results['corners']['totalRegular']])
-        writer.writerow(['Деревянный каркас', results['frame']['totalFast'], results['frame']['totalRegular']])
-        writer.writerow([])
-        
-        # Детальная разбивка
-        for pack_type, pack_name in [('bag', 'МЕШОК'), ('corners', 'КАРТОННЫЕ УГОЛКИ'), ('frame', 'ДЕРЕВЯННЫЙ КАРКАС')]:
-            writer.writerow([f'ДЕТАЛИ - {pack_name}'])
-            pack_data = results.get(pack_type, {})
-            writer.writerow(['Вес с упаковкой (кг):', pack_data.get('packedWeight', '')])
-            writer.writerow(['Стоимость упаковки ($):', pack_data.get('packagingCost', '')])
-            writer.writerow(['Стоимость разгрузки ($):', pack_data.get('unloadCost', '')])
-            writer.writerow(['Доставка быстрая ($):', pack_data.get('deliveryCostFast', '')])
-            writer.writerow(['Доставка обычная ($):', pack_data.get('deliveryCostRegular', '')])
-            writer.writerow(['Итого быстрая ($):', pack_data.get('totalFast', '')])
-            writer.writerow(['Итого обычная ($):', pack_data.get('totalRegular', '')])
-            writer.writerow([])
-        
-        # Сохраняем действие
-        if telegram_id:
-            save_user_action(telegram_id, 'csv_exported', {'timestamp': datetime.now().isoformat()})
-        
-        # Конвертируем в байты
-        output.seek(0)
-        csv_bytes = io.BytesIO(output.getvalue().encode('utf-8-sig'))  # utf-8-sig для корректного отображения в Excel
-        
-        return send_file(
-            csv_bytes,
-            mimetype='text/csv',
-            as_attachment=True,
-            download_name=f'china_together_calculation_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
-        )
-        
-    except Exception as e:
-        logger.error(f"Ошибка при генерации CSV: {str(e)}")
-        return jsonify({"error": "Ошибка при создании файла"}), 500
-
-# История расчетов пользователя
-@app.route('/api/user_history/<telegram_id>')
-def get_user_history(telegram_id):
-    try:
+        # Получаем telegram_user_id
         conn = connect_to_db()
         cursor = conn.cursor()
-        
-        # Получаем историю расчетов
-        cursor.execute("""
-            SELECT 
-                c.id,
-                c.category,
-                c.total_weight,
-                c.product_cost,
-                c.bag_total_fast,
-                c.bag_total_regular,
-                c.corners_total_fast,
-                c.corners_total_regular,
-                c.frame_total_fast,
-                c.frame_total_regular,
-                c.created_at,
-                i.quantity
-            FROM delivery_test.user_calculation c
-            LEFT JOIN delivery_test.user_inputs i ON c.user_input_id = i.id
-            JOIN delivery_test.telegram_users u ON c.telegram_user_id = u.id
-            WHERE u.telegram_id = %s
-            ORDER BY c.created_at DESC
-            LIMIT 50
-        """, (str(telegram_id),))
-        
-        columns = [desc[0] for desc in cursor.description]
-        history = []
-        
-        for row in cursor.fetchall():
-            record = dict(zip(columns, row))
-            # Конвертируем datetime в строку
-            record['created_at'] = record['created_at'].strftime('%Y-%m-%d %H:%M:%S')
-            history.append(record)
-        
+        cursor.execute("SELECT id FROM delivery_test.telegram_users WHERE telegram_id = %s", (str(telegram_id),))
+        user_result = cursor.fetchone()
         cursor.close()
         conn.close()
         
-        return jsonify({
-            'success': True,
-            'history': history,
-            'count': len(history)
-        })
+        if not user_result:
+            return jsonify({"error": "Пользователь не найден"}), 404
         
+        telegram_user_id = user_result[0]
+        
+        # Сохраняем заявку
+        request_id = save_purchase_request(
+            telegram_user_id=telegram_user_id,
+            calculation_id=calculation_id if calculation_id else None,
+            email=email,
+            telegram_contact=telegram_contact,
+            supplier_link=supplier_link,
+            order_amount=order_amount,
+            promo_code=promo_code,
+            additional_notes=additional_notes,
+            terms_accepted=terms_accepted
+        )
+        
+        if request_id:
+            # Сохраняем действие
+            save_user_action(telegram_id, 'purchase_request_submitted', {
+                'request_id': request_id,
+                'calculation_id': calculation_id,
+                'email': email,
+                'order_amount': order_amount
+            })
+            
+            return jsonify({
+                "success": True,
+                "request_id": request_id,
+                "message": "Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время."
+            })
+        else:
+            return jsonify({"error": "Ошибка при создании заявки"}), 500
+            
     except Exception as e:
-        logger.error(f"Ошибка получения истории: {str(e)}")
-        return jsonify({'success': False, 'error': str(e)}), 500
+        logger.error(f"Ошибка при создании заявки: {str(e)}")
+        return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
 
-# Проверка здоровья приложения
 @app.route('/health')
 def health_check():
+    """Проверка работоспособности приложения"""
     try:
-        # Проверяем подключение к БД
         conn = connect_to_db()
         cursor = conn.cursor()
         cursor.execute("SELECT 1")
@@ -779,7 +642,7 @@ def health_check():
             "status": "healthy",
             "timestamp": datetime.now().isoformat(),
             "database": "connected",
-            "version": "2.0"
+            "version": "2.1"
         })
     except Exception as e:
         return jsonify({
@@ -787,21 +650,6 @@ def health_check():
             "timestamp": datetime.now().isoformat(),
             "error": str(e)
         }), 500
-
-# Webhook для Telegram (если понадобится в будущем)
-@app.route('/telegram_webhook', methods=['POST'])
-def telegram_webhook():
-    try:
-        data = request.get_json()
-        logger.info(f"Получен webhook от Telegram: {data}")
-        
-        # Здесь можно обрабатывать данные от Telegram
-        # Например, когда пользователь закрывает Web App
-        
-        return jsonify({"ok": True})
-    except Exception as e:
-        logger.error(f"Ошибка в webhook: {str(e)}")
-        return jsonify({"ok": False, "error": str(e)}), 500
 
 @app.errorhandler(404)
 def not_found_error(error):
@@ -816,93 +664,26 @@ def internal_error(error):
         return jsonify({"error": "Внутренняя ошибка сервера"}), 500
     return render_template('error.html', error="Внутренняя ошибка сервера"), 500
 
-# Middleware для логирования запросов
-@app.before_request
-def log_request():
-    logger.info(f"{request.method} {request.path} - IP: {request.remote_addr}")
-    if request.args:
-        logger.info(f"Query params: {dict(request.args)}")
-
-# Middleware для CORS и безопасности
 @app.after_request
 def after_request(response):
-    # CORS заголовки для Telegram Web App
+    """Добавляем заголовки безопасности"""
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    
-    # Заголовки безопасности
     response.headers['X-Content-Type-Options'] = 'nosniff'
-    response.headers['X-Frame-Options'] = 'ALLOWALL'  # Для работы в Telegram
+    response.headers['X-Frame-Options'] = 'ALLOWALL'
     response.headers['X-XSS-Protection'] = '1; mode=block'
-    
     return response
 
-# Функция для очистки старых данных (можно запускать по крону)
-def cleanup_old_data(days=90):
-    """Удаляет данные старше указанного количества дней"""
-    try:
-        conn = connect_to_db()
-        cursor = conn.cursor()
-        
-        cutoff_date = datetime.now() - timedelta(days=days)
-        
-        # Удаляем старые действия
-        cursor.execute("""
-            DELETE FROM delivery_test.user_actions 
-            WHERE created_at < %s
-        """, (cutoff_date,))
-        
-        deleted_actions = cursor.rowcount
-        
-        # Удаляем старые расчеты (но оставляем пользователей)
-        cursor.execute("""
-            DELETE FROM delivery_test.user_calculation 
-            WHERE created_at < %s
-        """, (cutoff_date,))
-        
-        deleted_calculations = cursor.rowcount
-        
-        conn.commit()
-        cursor.close()
-        conn.close()
-        
-        logger.info(f"Очистка завершена: удалено {deleted_actions} действий и {deleted_calculations} расчетов")
-        
-    except Exception as e:
-        logger.error(f"Ошибка при очистке данных: {str(e)}")
-
-# CLI команды для управления
-@app.cli.command()
-def init_db():
-    """Инициализировать базу данных"""
-    init_database()
-    print("База данных инициализирована")
-
-@app.cli.command()
-def cleanup():
-    """Очистить старые данные"""
-    cleanup_old_data()
-    print("Старые данные очищены")
-
 if __name__ == '__main__':
-    logger.info("=== Запуск China Together Delivery Calculator API v2.0 ===")
+    logger.info("=== Запуск China Together Delivery Calculator ===")
     
-    # Инициализируем БД при первом запуске
+    # Инициализируем БД
     try:
         init_database()
-        logger.info("✅ База данных готова к работе")
+        logger.info("✅ База данных готова")
     except Exception as e:
         logger.error(f"❌ Ошибка инициализации БД: {str(e)}")
-    
-    # Проверяем подключение
-    try:
-        conn = connect_to_db()
-        conn.close()
-        logger.info("✅ Подключение к базе данных успешно")
-    except Exception as e:
-        logger.error(f"❌ Ошибка подключения к БД: {str(e)}")
-        logger.warning("⚠️ Приложение может работать нестабильно!")
     
     # Запускаем сервер
     app.run(

@@ -269,3 +269,42 @@ INFO:aiogram.event:Update id=450949881 is handled. Duration 927 ms by bot id=770
 INFO:aiogram.event:Update id=450949882 is handled. Duration 246 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949883 is handled. Duration 319 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949884 is handled. Duration 179 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450949885 is not handled. Duration 0 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949886 is handled. Duration 204 ms by bot id=7709869722
+ERROR:__main__:Ошибка получения заявок: relation "delivery_test.purchase_requests" does not exist
+LINE 3:             FROM delivery_test.purchase_requests pr
+                         ^
+
+INFO:aiogram.event:Update id=450949887 is handled. Duration 156 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949888 is handled. Duration 243 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450949889 is handled. Duration 296 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949890 is handled. Duration 190 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949891 is handled. Duration 229 ms by bot id=7709869722

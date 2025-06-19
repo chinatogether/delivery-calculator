@@ -321,16 +321,6 @@
             <div class="section-title">📋 Заявка на выкуп и доставку товара</div>
             
             <form id="purchaseRequestForm">
-                <!-- Email -->
-                <div class="form-group">
-                    <label for="email">
-                        Электронная почта <span class="required">*</span>
-                    </label>
-                    <input type="email" id="email" name="email" required 
-                           placeholder="your.email@example.com">
-                    <div id="emailError" class="error-message"></div>
-                </div>
-
                 <!-- Telegram контакт -->
                 <div class="form-group">
                     <label for="telegramContact">
@@ -398,7 +388,7 @@
                     <label class="checkbox-wrapper">
                         <input type="checkbox" id="termsAccepted" name="termsAccepted" required>
                         <span class="checkbox-text">
-                            Отправляя заявку, Вы соглашаетесь с нашими <a href="#" onclick="showTerms()">условиями и правилами работы</a> <span class="required">*</span>
+                            Отправляя заявку, Вы соглашаетесь с нашими <a href="https://docs.google.com/document/d/1_T89jCHqaMsaHhlV1fz8guHp99bNYu4fzNXj_g7G2_M/edit?tab=t.0" target="_blank" style="color: var(--primary-color); text-decoration: underline;">условиями и правилами работы</a> <span class="required">*</span>
                         </span>
                     </label>
                     <div id="termsError" class="error-message"></div>
@@ -469,14 +459,6 @@
             let isValid = true;
             const fields = [
                 {
-                    id: 'email',
-                    validator: (val) => {
-                        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                        return emailPattern.test(val);
-                    },
-                    message: 'Введите корректный email'
-                },
-                {
                     id: 'telegramContact',
                     validator: (val) => val.startsWith('@') || val.startsWith('https://t.me/'),
                     message: 'Формат: @nickname или https://t.me/nickname'
@@ -545,7 +527,7 @@
                 const formData = {
                     telegram_id: telegramUserId,
                     calculation_id: calculationId,
-                    email: document.getElementById('email').value.trim(),
+                    email: `${telegramUserId}@telegram.user`, // Генерируем email из telegram_id
                     telegram_contact: document.getElementById('telegramContact').value.trim(),
                     supplier_link: document.getElementById('supplierLink').value.trim(),
                     order_amount: document.getElementById('orderAmount').value,
@@ -629,13 +611,6 @@
                 }
             });
         });
-
-        // Функция показа условий
-        function showTerms() {
-            if (tg && tg.showAlert) {
-                tg.showAlert('Условия и правила работы будут показаны в отдельном окне.');
-            }
-        }
 
         // Настройка кнопки "Назад"
         if (tg && tg.BackButton) {

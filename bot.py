@@ -62,15 +62,20 @@ def save_user_action(telegram_id, action, details=None):
 def get_main_keyboard(user_id, username):
     # Передаем параметры пользователя в URL веб-приложения
     web_app_url = f"{WEB_APP_URL}/?telegram_id={user_id}&username={username}"
+    order_app_url = f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}"
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(
-            text="📊 Открыть калькулятор", 
+            text="📊 Рассчитать доставку", 
             web_app=WebAppInfo(url=web_app_url)
         )],
         [InlineKeyboardButton(
-            text="📂 История расчетов", 
-            callback_data="history"
+            text="🚚 Заказать доставку", 
+            web_app=WebAppInfo(url=order_app_url)
+        )],
+        [InlineKeyboardButton(
+            text="📂 Мои заявки", 
+            callback_data="my_requests"
         )],
         [InlineKeyboardButton(
             text="❓ Помощь", 
@@ -84,15 +89,24 @@ def get_main_keyboard(user_id, username):
 async def start(message: types.Message):
     user_id = message.from_user.id
     username = message.from_user.username or f"user_{user_id}"
+    first_name = message.from_user.first_name or ""
     
     # Сохраняем действие пользователя
-    save_user_action(user_id, "start_command", {"username": username})
+    save_user_action(user_id, "start_command", {
+        "username": username,
+        "first_name": first_name
+    })
     
     keyboard = get_main_keyboard(user_id, username)
     
     await message.reply(
         "🚀 <b>Добро пожаловать в China Together!</b>\n\n"
-        "📦 Рассчитайте стоимость доставки из Китая за несколько секунд.\n\n"
+        "📦 Рассчитайте стоимость доставки из Китая и оформите заказ за несколько секунд.\n\n"
+        "🎯 <b>Что вы можете сделать:</b>\n"
+        "• 📊 Рассчитать точную стоимость доставки\n"
+        "• 🚚 Оформить заявку на выкуп и доставку\n"
+        "• 📂 Посмотреть свои заявки\n"
+        "• ❓ Получить помощь\n\n"
         "Выберите действие:",
         reply_markup=keyboard,
         parse_mode="HTML"
@@ -106,27 +120,111 @@ async def handle_web_app_data(message: types.Message):
         # Парсим данные от веб-приложения
         data = json.loads(message.web_app_data.data)
         user_id = message.from_user.id
+        username = message.from_user.username or f"user_{user_id}"
+        action = data.get('action', '')
         
         # Сохраняем действие
-        save_user_action(user_id, "calculation_completed", data)
+        save_user_action(user_id, f"webapp_{action}", data)
         
-        # Отправляем подтверждение пользователю
-        await message.reply(
-            "✅ <b>Расчет успешно выполнен!</b>\n\n"
-            f"📊 Категория: {data.get('category', 'Не указано')}\n"
-            f"⚖️ Общий вес: {data.get('totalWeight', 0)} кг\n"
-            f"💰 Стоимость товара: ${data.get('productCost', 0)}\n\n"
-            "Что вы хотите сделать дальше?",
-            reply_markup=InlineKeyboardMarkup(inline_keyboard=[
-                [InlineKeyboardButton(text="💾 Сохранить в CSV", callback_data=f"save_csv:{message.web_app_data.data}")],
-                [InlineKeyboardButton(text="🔄 Новый расчет", callback_data="new_calculation")],
-                [InlineKeyboardButton(text="📋 История расчетов", callback_data="history")]
-            ]),
-            parse_mode="HTML"
-        )
+        # Обрабатываем разные типы действий
+        if action == 'calculation_completed':
+            await handle_calculation_completed(message, data, user_id, username)
+        elif action == 'purchase_request_submitted':
+            await handle_purchase_request_submitted(message, data, user_id, username)
+        elif action == 'delivery_ordered':
+            await handle_delivery_ordered(message, data, user_id, username)
+        elif action == 'share_calculation':
+            await handle_share_calculation(message, data, user_id, username)
+        else:
+            await message.reply("✅ Данные получены и обработаны!")
+            
     except Exception as e:
         logger.error(f"Ошибка обработки данных веб-приложения: {e}")
         await message.reply("❌ Произошла ошибка при обработке данных.")
+
+# Обработка завершенного расчета
+async def handle_calculation_completed(message, data, user_id, username):
+    """Обработка завершенного расчета"""
+    await message.reply(
+        "✅ <b>Расчет успешно выполнен!</b>\n\n"
+        f"📊 Категория: {data.get('category', 'Не указано')}\n"
+        f"⚖️ Общий вес: {data.get('totalWeight', 0)} кг\n"
+        f"💰 Стоимость товара: ${data.get('productCost', 0)}\n\n"
+        f"💸 <b>Лучшие варианты доставки:</b>\n"
+        f"📦 Мешок: ${data.get('bagTotalRegular', 0):.2f} / ${data.get('bagTotalFast', 0):.2f}\n"
+        f"📐 Уголки: ${data.get('cornersTotalRegular', 0):.2f} / ${data.get('cornersTotalFast', 0):.2f}\n"
+        f"🪵 Каркас: ${data.get('frameTotalRegular', 0):.2f} / ${data.get('frameTotalFast', 0):.2f}\n\n"
+        "Что вы хотите сделать дальше?",
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(
+                text="🚚 Заказать доставку", 
+                web_app=WebAppInfo(url=f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}")
+            )],
+            [InlineKeyboardButton(text="🔄 Новый расчет", callback_data="new_calculation")],
+            [InlineKeyboardButton(text="📤 Поделиться", callback_data="share_last_calculation")]
+        ]),
+        parse_mode="HTML"
+    )
+
+# Обработка отправленной заявки на выкуп
+async def handle_purchase_request_submitted(message, data, user_id, username):
+    """Обработка отправленной заявки на выкуп"""
+    await message.reply(
+        "✅ <b>Заявка успешно отправлена!</b>\n\n"
+        f"📧 Email: {data.get('email', '')}\n"
+        f"💰 Сумма заказа: {data.get('order_amount', '')}\n"
+        f"📱 Telegram: {data.get('telegram_contact', '')}\n\n"
+        "🕐 <b>Менеджер свяжется с вами в рабочее время:</b>\n"
+        "ПН–ПТ с 10:00 до 18:00 по московскому времени\n\n"
+        "📞 Если у вас срочные вопросы, можете написать нашему менеджеру: @manager_username",
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="📂 Мои заявки", callback_data="my_requests")],
+            [InlineKeyboardButton(text="🔄 Новая заявка", callback_data="new_order")],
+            [InlineKeyboardButton(text="🏠 Главное меню", callback_data="main_menu")]
+        ]),
+        parse_mode="HTML"
+    )
+
+# Обработка заказа доставки
+async def handle_delivery_ordered(message, data, user_id, username):
+    """Обработка заказа доставки"""
+    package_names = {
+        'bag': '📦 Мешок',
+        'corners': '📐 Картонные уголки', 
+        'frame': '🪵 Деревянный каркас'
+    }
+    delivery_names = {
+        'fast': '🚀 Быстрая (5-7 дней)',
+        'regular': '🚢 Обычная (10-14 дней)'
+    }
+    
+    package_name = package_names.get(data.get('package_type', ''), 'Не указано')
+    delivery_name = delivery_names.get(data.get('delivery_type', ''), 'Не указано')
+    
+    await message.reply(
+        "✅ <b>Заказ доставки оформлен!</b>\n\n"
+        f"📦 Упаковка: {package_name}\n"
+        f"🚚 Доставка: {delivery_name}\n"
+        f"💰 Стоимость: ${data.get('total_cost', 0):.2f}\n"
+        f"⚖️ Вес: {data.get('weight', 0)} кг\n"
+        f"📊 Категория: {data.get('category', '')}\n\n"
+        "🕐 Менеджер свяжется с вами для подтверждения заказа в рабочее время.\n\n"
+        "📞 Вопросы? Пишите: @manager_username",
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="📂 Мои заказы", callback_data="my_orders")],
+            [InlineKeyboardButton(text="🔄 Новый расчет", callback_data="new_calculation")]
+        ]),
+        parse_mode="HTML"
+    )
+
+# Обработка поделиться расчетом
+async def handle_share_calculation(message, data, user_id, username):
+    """Обработка функции поделиться расчетом"""
+    share_text = data.get('text', '')
+    await message.reply(
+        f"📤 <b>Поделиться расчетом:</b>\n\n{share_text}",
+        parse_mode="HTML"
+    )
 
 # Обработка callback-запросов
 @dp.callback_query()
@@ -134,104 +232,130 @@ async def handle_callback(callback: CallbackQuery):
     user_id = callback.from_user.id
     username = callback.from_user.username or f"user_{user_id}"
     
-    # Сохранение в CSV
-    if callback.data.startswith("save_csv:"):
-        try:
-            # Извлекаем данные
-            data_json = callback.data.replace("save_csv:", "")
-            data = json.loads(data_json)
-            
-            # Генерируем CSV
-            csv_content = generate_csv(data)
-            
-            # Отправляем файл
-            from io import BytesIO
-            csv_file = BytesIO(csv_content.encode('utf-8'))
-            csv_file.name = f"calculation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-            
-            await callback.message.answer_document(
-                document=types.BufferedInputFile(
-                    file=csv_file.getvalue(),
-                    filename=csv_file.name
-                ),
-                caption="📄 Ваш расчет сохранен в CSV файле."
-            )
-            
-            # Сохраняем действие
-            save_user_action(user_id, "csv_saved", {"filename": csv_file.name})
-            
-        except Exception as e:
-            logger.error(f"Ошибка сохранения CSV: {e}")
-            await callback.answer("❌ Ошибка при сохранении файла", show_alert=True)
-    
-    # История расчетов
-    elif callback.data == "history":
-        history = get_user_history(user_id)
-        if history:
-            history_text = "<b>📋 История ваших расчетов:</b>\n\n"
-            for i, calc in enumerate(history[:10], 1):  # Показываем последние 10
-                history_text += (
-                    f"{i}. {calc['created_at'].strftime('%d.%m.%Y %H:%M')}\n"
-                    f"   Категория: {calc['category']}\n"
-                    f"   Вес: {calc['total_weight']} кг\n"
-                    f"   Мешок (быстро): ${calc['bag_total_fast']}\n\n"
+    # Мои заявки
+    if callback.data == "my_requests":
+        requests = get_user_purchase_requests(user_id)
+        if requests:
+            requests_text = "<b>📂 Ваши заявки на выкуп:</b>\n\n"
+            for i, req in enumerate(requests[:5], 1):  # Показываем последние 5
+                status_emoji = {
+                    'new': '🆕',
+                    'in_review': '👀', 
+                    'approved': '✅',
+                    'rejected': '❌',
+                    'completed': '🎉'
+                }.get(req['status'], '❓')
+                
+                requests_text += (
+                    f"{i}. {status_emoji} {req['created_at'][:16]}\n"
+                    f"   💰 Сумма: {req['order_amount']}\n"
+                    f"   📧 Email: {req['email']}\n"
+                    f"   📊 Статус: {req['status']}\n\n"
                 )
-            await callback.message.answer(history_text, parse_mode="HTML")
+            await callback.message.answer(requests_text, parse_mode="HTML")
         else:
-            await callback.message.answer("📭 У вас пока нет сохраненных расчетов.")
+            await callback.message.answer(
+                "📭 У вас пока нет заявок на выкуп.\n\n"
+                "Хотите оформить заявку?",
+                reply_markup=InlineKeyboardMarkup(inline_keyboard=[
+                    [InlineKeyboardButton(
+                        text="🚚 Заказать доставку", 
+                        web_app=WebAppInfo(url=f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}")
+                    )]
+                ])
+            )
         
-        save_user_action(user_id, "view_history")
+        save_user_action(user_id, "view_requests")
+    
+    # Мои заказы (доставки)
+    elif callback.data == "my_orders":
+        orders = get_user_delivery_orders(user_id)
+        if orders:
+            orders_text = "<b>📦 Ваши заказы доставки:</b>\n\n"
+            for i, order in enumerate(orders[:5], 1):  # Показываем последние 5
+                status_emoji = {
+                    'pending': '⏳',
+                    'confirmed': '✅',
+                    'in_progress': '🚛',
+                    'delivered': '🎉',
+                    'cancelled': '❌'
+                }.get(order['status'], '❓')
+                
+                orders_text += (
+                    f"{i}. {status_emoji} {order['created_at'][:16]}\n"
+                    f"   💰 Стоимость: ${order['total_cost']}\n"
+                    f"   📦 Упаковка: {order['selected_package_type']}\n"
+                    f"   🚚 Доставка: {order['selected_delivery_type']}\n\n"
+                )
+            await callback.message.answer(orders_text, parse_mode="HTML")
+        else:
+            await callback.message.answer("📭 У вас пока нет заказов доставки.")
+        
+        save_user_action(user_id, "view_orders")
     
     # Новый расчет
     elif callback.data == "new_calculation":
-        keyboard = get_main_keyboard(user_id, username)
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(
+                text="📊 Открыть калькулятор", 
+                web_app=WebAppInfo(url=f"{WEB_APP_URL}/?telegram_id={user_id}&username={username}")
+            )]
+        ])
         await callback.message.answer(
-            "🔄 Начните новый расчет:",
+            "🔄 Начните новый расчет доставки:",
             reply_markup=keyboard
         )
         save_user_action(user_id, "new_calculation")
     
+    # Новая заявка
+    elif callback.data == "new_order":
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(
+                text="🚚 Заказать доставку", 
+                web_app=WebAppInfo(url=f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}")
+            )]
+        ])
+        await callback.message.answer(
+            "🚚 Оформите новую заявку на доставку:",
+            reply_markup=keyboard
+        )
+        save_user_action(user_id, "new_order")
+    
+    # Главное меню
+    elif callback.data == "main_menu":
+        keyboard = get_main_keyboard(user_id, username)
+        await callback.message.answer(
+            "🏠 <b>Главное меню</b>\n\nВыберите действие:",
+            reply_markup=keyboard,
+            parse_mode="HTML"
+        )
+        save_user_action(user_id, "main_menu")
+    
     # Помощь
     elif callback.data == "help":
         help_text = (
-            "<b>❓ Как пользоваться калькулятором:</b>\n\n"
-            "1️⃣ Нажмите «Открыть калькулятор»\n"
+            "<b>❓ Как пользоваться сервисом:</b>\n\n"
+            "<b>📊 Расчет доставки:</b>\n"
+            "1️⃣ Нажмите «Рассчитать доставку»\n"
             "2️⃣ Заполните все поля формы\n"
-            "3️⃣ Нажмите «Рассчитать»\n"
-            "4️⃣ Получите детальный расчет\n"
-            "5️⃣ Сохраните результат в CSV\n\n"
-            "<b>📞 Поддержка:</b> @support_username"
+            "3️⃣ Получите детальный расчет\n\n"
+            "<b>🚚 Заказ доставки:</b>\n"
+            "1️⃣ Нажмите «Заказать доставку»\n"
+            "2️⃣ Заполните заявку\n"
+            "3️⃣ Менеджер свяжется с вами\n\n"
+            "<b>🕐 График работы:</b>\n"
+            "ПН–ПТ с 10:00 до 18:00 (МСК)\n\n"
+            "<b>📞 Поддержка:</b> @manager_username\n"
+            "<b>💬 Группа:</b> @china_together_group"
         )
         await callback.message.answer(help_text, parse_mode="HTML")
         save_user_action(user_id, "view_help")
     
     await callback.answer()
 
-# Функция генерации CSV
-def generate_csv(data):
-    """Генерирует CSV файл из данных расчета"""
-    csv_lines = [
-        "Параметр,Значение",
-        f"Категория,{data.get('category', '')}",
-        f"Общий вес (кг),{data.get('totalWeight', '')}",
-        f"Плотность (кг/м³),{data.get('density', '')}",
-        f"Стоимость товара ($),{data.get('productCost', '')}",
-        f"Страховка (%),{data.get('insuranceRate', '')}",
-        f"Сумма страховки ($),{data.get('insuranceAmount', '')}",
-        f"Объем (м³),{data.get('volume', '')}",
-        f"Количество коробок,{data.get('boxCount', '')}",
-        "",
-        "Тип упаковки,Быстрая доставка ($),Обычная доставка ($)",
-        f"Мешок,{data.get('bagTotalFast', '')},{data.get('bagTotalRegular', '')}",
-        f"Картонные уголки,{data.get('cornersTotalFast', '')},{data.get('cornersTotalRegular', '')}",
-        f"Деревянный каркас,{data.get('frameTotalFast', '')},{data.get('frameTotalRegular', '')}"
-    ]
-    
-    return "\n".join(csv_lines)
-
-# Функция получения истории пользователя
-def get_user_history(telegram_id):
-    """Получает историю расчетов пользователя из БД"""
+# Функция получения заявок пользователя на выкуп
+def get_user_purchase_requests(telegram_id):
+    """Получает заявки пользователя на выкуп из БД"""
     conn = connect_to_db()
     if not conn:
         return []
@@ -239,23 +363,58 @@ def get_user_history(telegram_id):
     try:
         cursor = conn.cursor()
         cursor.execute("""
-            SELECT c.*, u.telegram_id
-            FROM delivery_test.user_calculations c
-            JOIN delivery_test.telegram_users u ON c.telegram_user_id = u.id
+            SELECT pr.*, u.telegram_id
+            FROM delivery_test.purchase_requests pr
+            JOIN delivery_test.telegram_users u ON pr.telegram_user_id = u.id
             WHERE u.telegram_id = %s
-            ORDER BY c.created_at DESC
+            ORDER BY pr.created_at DESC
             LIMIT 10
         """, (str(telegram_id),))
         
         columns = [desc[0] for desc in cursor.description]
         results = []
         for row in cursor.fetchall():
-            results.append(dict(zip(columns, row)))
+            record = dict(zip(columns, row))
+            record['created_at'] = record['created_at'].strftime('%Y-%m-%d %H:%M')
+            results.append(record)
         
         cursor.close()
         return results
     except Exception as e:
-        logger.error(f"Ошибка получения истории: {e}")
+        logger.error(f"Ошибка получения заявок: {e}")
+        return []
+    finally:
+        conn.close()
+
+# Функция получения заказов доставки пользователя
+def get_user_delivery_orders(telegram_id):
+    """Получает заказы доставки пользователя из БД"""
+    conn = connect_to_db()
+    if not conn:
+        return []
+    
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT do.*, u.telegram_id
+            FROM delivery_test.delivery_orders do
+            JOIN delivery_test.telegram_users u ON do.telegram_user_id = u.id
+            WHERE u.telegram_id = %s
+            ORDER BY do.created_at DESC
+            LIMIT 10
+        """, (str(telegram_id),))
+        
+        columns = [desc[0] for desc in cursor.description]
+        results = []
+        for row in cursor.fetchall():
+            record = dict(zip(columns, row))
+            record['created_at'] = record['created_at'].strftime('%Y-%m-%d %H:%M')
+            results.append(record)
+        
+        cursor.close()
+        return results
+    except Exception as e:
+        logger.error(f"Ошибка получения заказов доставки: {e}")
         return []
     finally:
         conn.close()
@@ -269,7 +428,8 @@ async def main():
     # Удаляем webhook, если он активен
     await delete_webhook()
     
-    logger.info("Бот запущен!")
+    logger.info("🤖 China Together Bot запущен!")
+    logger.info(f"🌐 Web App URL: {WEB_APP_URL}")
     
     # Запускаем polling
     await dp.start_polling(bot)

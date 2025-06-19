@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -12,19 +11,12 @@
             --primary-color: #E74C3C;
             --secondary-color: #3498db;
             --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --text-color: #333;
-            --light-gray: #f8f9fa;
-            --white: #ffffff;
-            --border-color: #e9ecef;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-
-            /* Telegram Web App цвета */
+            --text-color: #ffffff;
+            --white: #333;
+            --border-color: #333;
             --tg-theme-bg-color: var(--white);
             --tg-theme-text-color: var(--text-color);
             --tg-theme-hint-color: #999;
-            --tg-theme-button-color: var(--primary-color);
-            --tg-theme-button-text-color: var(--white);
         }
 
         * {
@@ -34,13 +26,13 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
             line-height: 1.6;
             color: var(--tg-theme-text-color);
-            background: var(--tg-theme-bg-color);
+            background: linear-gradient(135deg, #323033 0%, #323033 100%);
+            min-height: 100vh;
             padding: 0;
             margin: 0;
-            overflow-x: hidden;
         }
 
         .container {
@@ -54,38 +46,27 @@
             text-align: center;
             margin-bottom: 24px;
             padding-top: 8px;
+            color: white;
         }
 
         h1 {
-            color: var(--primary-color);
+            color: white;
             font-size: 1.8rem;
             margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .subtitle {
-            color: var(--tg-theme-hint-color);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 0.95rem;
         }
 
         .card {
             background: var(--white);
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(184, 178, 178, 0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             padding: 20px;
             margin-bottom: 16px;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .card h2 {
@@ -133,18 +114,6 @@
             text-align: right;
         }
 
-        .info-value.highlight {
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .info-value.secondary {
-            color: var(--secondary-color);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
         .comparison-table {
             overflow-x: auto;
             margin-top: 20px;
@@ -158,7 +127,7 @@
 
         .comparison-table th,
         .comparison-table td {
-            padding: 10px;
+            padding: 12px 8px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
@@ -166,20 +135,72 @@
         .comparison-table th {
             background: rgba(231, 76, 60, 0.05);
             font-weight: 600;
-            position: sticky;
-            top: 0;
         }
 
-        .comparison-table td:last-child {
+        .comparison-table td:nth-child(2),
+        .comparison-table td:nth-child(3) {
             text-align: right;
             font-weight: 600;
         }
 
+        .fast-price {
+            color: var(--primary-color);
+        }
+
+        .regular-price {
+            color: var(--secondary-color);
+        }
+
+        .details-section {
+            margin-top: 16px;
+        }
+
+        .details-toggle {
+            cursor: pointer;
+            font-weight: 600;
+            padding: 12px 0;
+            border: none;
+            background: none;
+            color: var(--primary-color);
+            font-size: 1rem;
+            width: 100%;
+            text-align: left;
+        }
+
+        .details-content {
+            display: none;
+            padding-top: 16px;
+        }
+
+        .details-content.active {
+            display: block;
+        }
+
+        .package-details {
+            margin-bottom: 20px;
+            padding: 16px;
+            background: rgba(52, 152, 219, 0.05);
+            border-radius: 8px;
+        }
+
+        .package-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
         .action-buttons {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 12px;
             margin-top: 20px;
+        }
+
+        @media (min-width: 480px) {
+            .action-buttons {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
         }
 
         .btn {
@@ -195,29 +216,18 @@
             justify-content: center;
             gap: 8px;
             text-decoration: none;
-            color: var(--white);
+            color: white;
         }
 
+        .btn-success,
+        .btn-secondary,
         .btn-primary {
             background: var(--primary-color);
         }
 
-        .btn-secondary {
-            background: var(--secondary-color);
-        }
-
         .btn:hover:not(:disabled) {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn:active:not(:disabled) {
-            transform: translateY(0);
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
         }
 
         .error {
@@ -229,25 +239,6 @@
             margin: 20px 0;
         }
 
-        /* Темная тема (если включена в Telegram) */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --tg-theme-bg-color: #1a1a1a;
-                --tg-theme-text-color: #ffffff;
-                --white: #2a2a2a;
-                --border-color: #3a3a3a;
-            }
-
-            .card {
-                background: #3a3a3a;
-            }
-
-            .comparison-table th {
-                background: rgba(197, 64, 49, 0.1);
-            }
-        }
-
-        /* Оптимизация для маленьких экранов */
         @media (max-width: 480px) {
             .container {
                 padding: 12px;
@@ -261,17 +252,12 @@
                 font-size: 1.5rem;
             }
 
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-
             .action-buttons {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         {% if results %}
@@ -320,166 +306,160 @@
                 <span>💰</span>
                 <span>Сравнение вариантов доставки</span>
             </h2>
-            <span>Общая стоимость</span>
-            </h2>
             <div class="comparison-table">
                 <table>
                     <thead>
                         <tr>
                             <th>Упаковка</th>
-                            <th>Быстрая</th>
-                            <th>Обычная</th>
+                            <th>Быстрая доставка</th>
+                            <th>Обычная доставка</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>📦 Мешок</td>
-                            <td class="highlight">${{ "%.2f"|format(results.bag.totalFast) }}</td>
-                            <td class="secondary">${{ "%.2f"|format(results.bag.totalRegular) }}</td>
+                            <td class="fast-price">${{ "%.2f"|format(results.bag.totalFast) }}</td>
+                            <td class="regular-price">${{ "%.2f"|format(results.bag.totalRegular) }}</td>
                         </tr>
                         <tr>
                             <td>📐 Картонные уголки</td>
-                            <td class="highlight">${{ "%.2f"|format(results.corners.totalFast) }}</td>
-                            <td class="secondary">${{ "%.2f"|format(results.corners.totalRegular) }}</td>
+                            <td class="fast-price">${{ "%.2f"|format(results.corners.totalFast) }}</td>
+                            <td class="regular-price">${{ "%.2f"|format(results.corners.totalRegular) }}</td>
                         </tr>
                         <tr>
                             <td>🪵 Деревянный каркас</td>
-                            <td class="highlight">${{ "%.2f"|format(results.frame.totalFast) }}</td>
-                            <td class="secondary">${{ "%.2f"|format(results.frame.totalRegular) }}</td>
+                            <td class="fast-price">${{ "%.2f"|format(results.frame.totalFast) }}</td>
+                            <td class="regular-price">${{ "%.2f"|format(results.frame.totalRegular) }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Детальная разбивка по упаковкам -->
-        <details class="card">
-            <summary style="cursor: pointer; font-weight: 600; padding: 8px 0;">
-                📊 Подробная разбивка стоимости
-            </summary>
+        <!-- Детальная разбивка -->
+        <div class="card">
+            <div class="details-section">
+                <button class="details-toggle" onclick="toggleDetails()">
+                    📊 Подробная разбивка стоимости
+                </button>
+                <div class="details-content" id="detailsContent">
+                    
+                    <!-- Мешок -->
+                    <div class="package-details">
+                        <div class="package-title">📦 Мешок</div>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Вес с упаковкой</span>
+                                <span class="info-value">{{ "%.2f"|format(results.bag.packedWeight) }} кг</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Упаковка</span>
+                                <span class="info-value">${{ "%.2f"|format(results.bag.packagingCost) }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Разгрузка</span>
+                                <span class="info-value">${{ "%.2f"|format(results.bag.unloadCost) }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Страховка</span>
+                                <span class="info-value">{{ results.bag.insuranceRate }} (${{ "%.2f"|format(results.bag.insurance) }})</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Доставка быстрая</span>
+                                <span class="info-value">${{ "%.2f"|format(results.bag.deliveryCostFast) }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Доставка обычная</span>
+                                <span class="info-value">${{ "%.2f"|format(results.bag.deliveryCostRegular) }}</span>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Мешок -->
-            <div style="margin-top: 16px;">
-                <h3 style="font-size: 1rem; margin-bottom: 8px; color: var(--primary-color);">📦 Мешок</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-label">Вес с упаковкой</span>
-                        <span class="info-value">{{ "%.2f"|format(results.bag.packedWeight) }} кг</span>
+                    <!-- Картонные уголки -->
+                    <div class="package-details">
+                        <div class="package-title">📐 Картонные уголки</div>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Вес с упаковкой</span>
+                                <span class="info-value">{{ "%.2f"|format(results.corners.packedWeight) }} кг</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Упаковка</span>
+                                <span class="info-value">${{ "%.2f"|format(results.corners.packagingCost) }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Разгрузка</span>
+                                <span class="info-value">${{ "%.2f"|format(results.corners.unloadCost) }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Страховка</span>
+                                <span class="info-value">{{ results.corners.insuranceRate }} (${{ "%.2f"|format(results.corners.insurance) }})</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Доставка быстрая</span>
+                                <span class="info-value">${{ "%.2f"|format(results.corners.deliveryCostFast) }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Доставка обычная</span>
+                                <span class="info-value">${{ "%.2f"|format(results.corners.deliveryCostRegular) }}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Упаковка</span>
-                        <span class="info-value">${{ "%.2f"|format(results.bag.packagingCost) }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Разгрузка</span>
-                        <span class="info-value">${{ "%.2f"|format(results.bag.unloadCost) }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Страховка</span>
-                        <span class="info-value">{{ results.bag.insurance/results.generalInformation.productCost }} (${{
-                            "%.2f"|format(results.bag.insurance) }})</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Доставка</span>
-                        <span class="info-value">${{ "%.2f"|format(results.bag.deliveryCostFast) }} / ${{
-                            "%.2f"|format(results.bag.deliveryCostRegular) }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Доставка на 1 кг</span>
-                        <span class="info-value">${{
-                            "%.2f"|format(results.bag.deliveryCostFast/results.bag.packedWeight) }} / ${{
-                            "%.2f"|format(results.bag.deliveryCostRegular/results.bag.packedWeight) }}</span>
+
+                    <!-- Деревянный каркас -->
+                    <div class="package-details">
+                        <div class="package-title">🪵 Деревянный каркас</div>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Вес с упаковкой</span>
+                                <span class="info-value">{{ "%.2f"|format(results.frame.packedWeight) }} кг</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Упаковка</span>
+                                <span class="info-value">${{ "%.2f"|format(results.frame.packagingCost) }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Разгрузка</span>
+                                <span class="info-value">${{ "%.2f"|format(results.frame.unloadCost) }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Страховка</span>
+                                <span class="info-value">{{ results.frame.insuranceRate }} (${{ "%.2f"|format(results.frame.insurance) }})</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Доставка быстрая</span>
+                                <span class="info-value">${{ "%.2f"|format(results.frame.deliveryCostFast) }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Доставка обычная</span>
+                                <span class="info-value">${{ "%.2f"|format(results.frame.deliveryCostRegular) }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Картонные уголки -->
-            <div style="margin-top: 16px;">
-                <h3 style="font-size: 1rem; margin-bottom: 8px; color: var(--primary-color);">📐 Картонные уголки</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-label">Вес с упаковкой</span>
-                        <span class="info-value">{{ "%.2f"|format(results.corners.packedWeight) }} кг</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Упаковка</span>
-                        <span class="info-value">${{ "%.2f"|format(results.corners.packagingCost) }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Разгрузка</span>
-                        <span class="info-value">${{ "%.2f"|format(results.corners.unloadCost) }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Страховка</span>
-                        <span class="info-value">{{ results.corners.insurance/results.generalInformation.productCost }} (${{
-                            "%.2f"|format(results.corners.insurance) }})</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Доставка</span>
-                        <span class="info-value">${{ "%.2f"|format(results.corners.deliveryCostFast) }} / ${{
-                            "%.2f"|format(results.corners.deliveryCostRegular) }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Доставка на 1 кг</span>
-                        <span class="info-value">${{
-                            "%.2f"|format(results.corners.deliveryCostFast/results.corners.packedWeight) }} / ${{
-                            "%.2f"|format(results.corners.deliveryCostRegular/results.corners.packedWeight) }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Деревянный каркас -->
-            <div style="margin-top: 16px;">
-                <h3 style="font-size: 1rem; margin-bottom: 8px; color: var(--primary-color);">🪵 Деревянный каркас</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-label">Вес с упаковкой</span>
-                        <span class="info-value">{{ "%.2f"|format(results.frame.packedWeight) }} кг</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Упаковка</span>
-                        <span class="info-value">${{ "%.2f"|format(results.frame.packagingCost) }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Разгрузка</span>
-                        <span class="info-value">${{ "%.2f"|format(results.frame.unloadCost) }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Страховка</span>
-                        <span class="info-value">{{ results.frame.insurance/results.generalInformation.productCost }} (${{
-                            "%.2f"|format(results.frame.insurance) }})</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Доставка</span>
-                        <span class="info-value">${{ "%.2f"|format(results.frame.deliveryCostFast) }} / ${{
-                            "%.2f"|format(results.frame.deliveryCostRegular) }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Доставка на 1 кг</span>
-                        <span class="info-value">${{
-                            "%.2f"|format(results.frame.deliveryCostFast/results.frame.packedWeight) }} / ${{
-                            "%.2f"|format(results.frame.deliveryCostRegular/results.frame.packedWeight) }}</span>
-                    </div>
-                </div>
-            </div>
-        </details>
-
+        <!-- Кнопки действий -->
         <div class="action-buttons card">
-            <button class="btn btn-primary" id="saveBtn">
-                <span>💾</span>
-                <span>Сохранить в CSV</span>
-            </button>
+            <a href="/order?calculation_id={{ calculation_id }}" class="btn btn-success">
+                <span>🚚</span>
+                <span>Заказать доставку</span>
+            </a>
             <a href="/" class="btn btn-secondary">
                 <span>🔄</span>
                 <span>Новый расчет</span>
             </a>
+            <button class="btn btn-primary" id="shareBtn">
+                <span>📤</span>
+                <span>Поделиться</span>
+            </button>
         </div>
 
         {% else %}
         <div class="error">
             <p>❌ Данные для отображения отсутствуют.</p>
-            <p>Пожалуйста, выполните расчет на <a href="/" style="color: var(--primary-color);">главной странице</a>.
-            </p>
+            <p>Пожалуйста, выполните расчет на <a href="/" style="color: var(--primary-color);">главной странице</a>.</p>
         </div>
         {% endif %}
     </div>
@@ -492,116 +472,82 @@
 
         // Применяем тему Telegram
         if (tg.themeParams) {
-            document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color || '#f5f5f5');
+            document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color || '#ffffff');
             document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color || '#000000');
             document.documentElement.style.setProperty('--tg-theme-hint-color', tg.themeParams.hint_color || '#999999');
-            document.documentElement.style.setProperty('--tg-theme-button-color', tg.themeParams.button_color || '#E74C3C');
-            document.documentElement.style.setProperty('--tg-theme-button-text-color', tg.themeParams.button_text_color || '#ffffff');
+        }
+
+        // Функция переключения детальной информации
+        function toggleDetails() {
+            const content = document.getElementById('detailsContent');
+            const button = document.querySelector('.details-toggle');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                button.textContent = '📊 Подробная разбивка стоимости';
+            } else {
+                content.classList.add('active');
+                button.textContent = '📊 Скрыть подробности';
+            }
+            
+            // Вибрация при нажатии
+            if (tg && tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('light');
+            }
         }
 
         {% if results %}
-        // Подготавливаем данные для отправки в бот
+        // Данные результатов
         const resultsData = {
-            category: "{{ results.generalInformation.category }}",
-            totalWeight: {{ results.generalInformation.weight }},
-        density: { { results.generalInformation.density } },
-        productCost: { { results.generalInformation.productCost } },
-        insuranceRate: "{{ results.generalInformation.insuranceRate }}",
-            insuranceAmount: { { results.generalInformation.insuranceAmount } },
-        volume: { { results.generalInformation.volume } },
-        boxCount: { { results.generalInformation.boxCount } },
-        bagTotalFast: { { results.bag.totalFast } },
-        bagTotalRegular: { { results.bag.totalRegular } },
-        cornersTotalFast: { { results.corners.totalFast } },
-        cornersTotalRegular: { { results.corners.totalRegular } },
-        frameTotalFast: { { results.frame.totalFast } },
-        frameTotalRegular: { { results.frame.totalRegular } }
+            generalInformation: {{ results.generalInformation | tojson }},
+            bag: {{ results.bag | tojson }},
+            corners: {{ results.corners | tojson }},
+            frame: {{ results.frame | tojson }}
         };
 
-        // Кнопка сохранения в CSV
-        document.getElementById('saveBtn').addEventListener('click', async function () {
-            try {
-                // Вибрация при нажатии
-                if (tg && tg.HapticFeedback) {
-                    tg.HapticFeedback.impactOccurred('light');
-                }
-
-                this.disabled = true;
-                this.innerHTML = '<span>⏳</span><span>Сохранение...</span>';
-
-                // Получаем telegram_id из URL или из Telegram Web App
-                let telegramId = null;
-                if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-                    telegramId = tg.initDataUnsafe.user.id;
-                } else {
-                    const urlParams = new URLSearchParams(window.location.search);
-                    telegramId = urlParams.get('telegram_id');
-                }
-
-                // Отправляем запрос на генерацию CSV
-                const response = await fetch('/generate_csv', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        telegram_id: telegramId,
-                        results: {
-                            generalInformation: {{ results.generalInformation | tojson }},
-                    bag: {{ results.bag | tojson }},
-            corners: { { results.corners | tojson } },
-            frame: { { results.frame | tojson } }
+        // Получаем telegram_id
+        let telegramId = null;
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+            telegramId = tg.initDataUnsafe.user.id;
+        } else {
+            const urlParams = new URLSearchParams(window.location.search);
+            telegramId = urlParams.get('telegram_id');
         }
-                    })
-                });
 
-        if (response.ok) {
-            // Получаем файл
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            a.download = `china_together_${new Date().getTime()}.csv`;
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-
-            // Вибрация успеха
+        // Обработчик кнопки "Поделиться"
+        document.getElementById('shareBtn').addEventListener('click', function() {
+            // Вибрация при нажатии
             if (tg && tg.HapticFeedback) {
-                tg.HapticFeedback.notificationOccurred('success');
+                tg.HapticFeedback.impactOccurred('light');
             }
 
-            // Отправляем данные в Telegram
+            // Формируем текст для отправки
+            const shareText = `🧮 Расчет доставки China Together\n\n` +
+                `📦 Категория: ${resultsData.generalInformation.category}\n` +
+                `⚖️ Вес: ${resultsData.generalInformation.weight} кг\n` +
+                `💰 Стоимость товара: ${resultsData.generalInformation.productCost}\n\n` +
+                `💸 Варианты доставки:\n` +
+                `📦 Мешок: ${resultsData.bag.totalRegular} / ${resultsData.bag.totalFast}\n` +
+                `📐 Уголки: ${resultsData.corners.totalRegular} / ${resultsData.corners.totalFast}\n` +
+                `🪵 Каркас: ${resultsData.frame.totalRegular} / ${resultsData.frame.totalFast}\n\n` +
+                `Рассчитайте свою доставку: @ChinaTogetherBot`;
+
+            // Отправляем в Telegram
             if (tg && tg.sendData) {
                 tg.sendData(JSON.stringify({
-                    action: 'csv_saved',
-                    ...resultsData
+                    action: 'share_calculation',
+                    text: shareText,
+                    results: resultsData
                 }));
+            } else {
+                // Если Telegram недоступен, копируем в буфер обмена
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('Текст скопирован в буфер обмена!');
+                }).catch(() => {
+                    // Показываем текст в alert если копирование не работает
+                    alert(shareText);
+                });
             }
-
-            // Показываем уведомление
-            if (tg && tg.showAlert) {
-                tg.showAlert('✅ Файл успешно сохранен!');
-            }
-        } else {
-            throw new Error('Ошибка при сохранении файла');
-        }
-                
-            } catch (error) {
-            console.error('Ошибка:', error);
-
-            if (tg && tg.HapticFeedback) {
-                tg.HapticFeedback.notificationOccurred('error');
-            }
-
-            if (tg && tg.showAlert) {
-                tg.showAlert('❌ Ошибка при сохранении файла');
-            }
-        } finally {
-            this.disabled = false;
-            this.innerHTML = '<span>💾</span><span>Сохранить в CSV</span>';
-        }
         });
 
         // Настройка кнопки "Назад"
@@ -612,25 +558,17 @@
             });
         }
 
-        // Настройка главной кнопки для возврата в бот
+        // Настройка главной кнопки
         if (tg && tg.MainButton) {
-            tg.MainButton.text = "Вернуться в бот";
-            tg.MainButton.color = "#3498db";
+            tg.MainButton.text = "Заказать доставку";
+            tg.MainButton.color = "#27ae60";
             tg.MainButton.show();
 
             tg.MainButton.onClick(() => {
-                // Отправляем данные расчета в бот перед закрытием
-                if (tg.sendData) {
-                    tg.sendData(JSON.stringify({
-                        action: 'view_completed',
-                        ...resultsData
-                    }));
-                }
-                // Небольшая задержка для отправки данных
-                setTimeout(() => {
-                    tg.close();
-                }, 100);
+                window.location.href = `/order?calculation_id={{ calculation_id }}`;
             });
         }
-
         {% endif %}
+    </script>
+</body>
+</html>
