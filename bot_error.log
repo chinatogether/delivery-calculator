@@ -267,3 +267,5 @@ INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - '
 INFO:aiogram.event:Update id=450949880 is handled. Duration 296 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949881 is handled. Duration 927 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949882 is handled. Duration 246 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949883 is handled. Duration 319 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949884 is handled. Duration 179 ms by bot id=7709869722

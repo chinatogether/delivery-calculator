@@ -1992,3 +1992,80 @@ jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was loo
 2025-06-19 19:17:04,936 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:17:04] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
 2025-06-19 19:17:22,168 - __main__ - INFO - GET / - IP: 127.0.0.1
 2025-06-19 19:17:22,169 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:17:22] "GET / HTTP/1.1" 200 -
+2025-06-19 19:18:04,075 - __main__ - INFO - GET /wordpress/wp-admin/setup-config.php - IP: 127.0.0.1
+2025-06-19 19:18:04,076 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:18:04] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-19 19:18:37,885 - __main__ - INFO - GET /wp-admin/setup-config.php - IP: 127.0.0.1
+2025-06-19 19:18:37,886 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:18:37] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-19 19:18:48,089 - __main__ - INFO - GET /wordpress/wp-admin/setup-config.php - IP: 127.0.0.1
+2025-06-19 19:18:48,089 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:18:48] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-19 19:34:40,434 - __main__ - INFO - === Запуск China Together Delivery Calculator API v2.0 ===
+2025-06-19 19:34:40,540 - __main__ - INFO - База данных успешно инициализирована
+2025-06-19 19:34:40,540 - __main__ - INFO - ✅ База данных готова к работе
+2025-06-19 19:34:40,551 - __main__ - INFO - ✅ Подключение к базе данных успешно
+2025-06-19 19:34:41,094 - __main__ - INFO - === Запуск China Together Delivery Calculator API v2.0 ===
+2025-06-19 19:34:41,107 - __main__ - INFO - База данных успешно инициализирована
+2025-06-19 19:34:41,107 - __main__ - INFO - ✅ База данных готова к работе
+2025-06-19 19:34:41,117 - __main__ - INFO - ✅ Подключение к базе данных успешно
+2025-06-19 19:34:41,510 - __main__ - INFO - === Запуск China Together Delivery Calculator API v2.0 ===
+2025-06-19 19:34:41,524 - __main__ - INFO - База данных успешно инициализирована
+2025-06-19 19:34:41,524 - __main__ - INFO - ✅ База данных готова к работе
+2025-06-19 19:34:41,535 - __main__ - INFO - ✅ Подключение к базе данных успешно
+2025-06-19 19:34:42,027 - __main__ - INFO - === Запуск China Together Delivery Calculator API v2.0 ===
+2025-06-19 19:34:42,040 - __main__ - INFO - База данных успешно инициализирована
+2025-06-19 19:34:42,040 - __main__ - INFO - ✅ База данных готова к работе
+2025-06-19 19:34:42,050 - __main__ - INFO - ✅ Подключение к базе данных успешно
+2025-06-19 19:34:42,515 - __main__ - INFO - === Запуск China Together Delivery Calculator API v2.0 ===
+2025-06-19 19:34:42,525 - __main__ - INFO - База данных успешно инициализирована
+2025-06-19 19:34:42,526 - __main__ - INFO - ✅ База данных готова к работе
+2025-06-19 19:34:42,534 - __main__ - INFO - ✅ Подключение к базе данных успешно
+2025-06-19 19:34:42,617 - __main__ - INFO - GET / - IP: 127.0.0.1
+2025-06-19 19:34:42,618 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:34:42] "GET / HTTP/1.1" 200 -
+2025-06-19 19:34:56,168 - __main__ - INFO - GET /calculate - IP: 127.0.0.1
+2025-06-19 19:34:56,168 - __main__ - INFO - Query params: {'category': 'Обычные товары', 'weight': '100', 'length': '20', 'width': '60', 'height': '125', 'cost': '1250', 'quantity': '1', 'telegram_id': 'test_user', 'username': 'test_username'}
+2025-06-19 19:34:56,203 - __main__ - INFO - Входные данные сохранены: ID=117
+2025-06-19 19:34:56,220 - __main__ - INFO - Результаты расчета сохранены: ID=51
+2025-06-19 19:34:56,241 - __main__ - INFO - Действие пользователя сохранено: calculation_completed
+2025-06-19 19:34:56,241 - __main__ - INFO - Расчет выполнен для пользователя test_username (ID: test_user)
+2025-06-19 19:34:56,242 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:34:56] "[32mGET /calculate?category=Обычные%20товары&weight=100&length=20&width=60&height=125&cost=1250&quantity=1&telegram_id=test_user&username=test_username HTTP/1.1[0m" 302 -
+2025-06-19 19:34:56,268 - __main__ - INFO - GET /result - IP: 127.0.0.1
+2025-06-19 19:34:56,268 - __main__ - INFO - Query params: {'results': '{"generalInformation": {"category": "\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435 \\u0442\\u043e\\u0432\\u0430\\u0440\\u044b", "weight": 100.0, "density": 666.67, "productCost": 1250.0, "insuranceRate": "1%", "insuranceAmount": 12.5, "volume": 0.15, "boxCount": 1}, "bag": {"packedWeight": 102.0, "packagingCost": 12.0, "unloadCost": 16.0, "insurance": 12.5, "deliveryCostFast": 234.6, "deliveryCostRegular": 153.0, "totalFast": 275.1, "totalRegular": 193.5}, "corners": {"packedWeight": 106.0, "packagingCost": 32.0, "unloadCost": 16.0, "insurance": 12.5, "deliveryCostFast": 243.8, "deliveryCostRegular": 159.0, "totalFast": 304.3, "totalRegular": 219.5}, "frame": {"packedWeight": 122.0, "packagingCost": 24.0, "unloadCost": 16.0, "insurance": 12.5, "deliveryCostFast": 280.6, "deliveryCostRegular": 183.0, "totalFast": 333.1, "totalRegular": 235.5}}', 'telegram_id': 'test_user'}
+2025-06-19 19:34:56,287 - __main__ - INFO - Действие пользователя сохранено: view_results
+2025-06-19 19:34:56,289 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:34:56] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"weight":%20100.0,%20"density":%20666.67,%20"productCost":%201250.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%2012.5,%20"volume":%200.15,%20"boxCount":%201},%20"bag":%20{"packedWeight":%20102.0,%20"packagingCost":%2012.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20234.6,%20"deliveryCostRegular":%20153.0,%20"totalFast":%20275.1,%20"totalRegular":%20193.5},%20"corners":%20{"packedWeight":%20106.0,%20"packagingCost":%2032.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20243.8,%20"deliveryCostRegular":%20159.0,%20"totalFast":%20304.3,%20"totalRegular":%20219.5},%20"frame":%20{"packedWeight":%20122.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20280.6,%20"deliveryCostRegular":%20183.0,%20"totalFast":%20333.1,%20"totalRegular":%20235.5}}&telegram_id=test_user HTTP/1.1" 200 -
+2025-06-19 19:34:57,829 - __main__ - INFO - GET /result - IP: 127.0.0.1
+2025-06-19 19:34:57,829 - __main__ - INFO - Query params: {'results': '{"generalInformation": {"category": "\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435 \\u0442\\u043e\\u0432\\u0430\\u0440\\u044b", "weight": 100.0, "density": 666.67, "productCost": 1250.0, "insuranceRate": "1%", "insuranceAmount": 12.5, "volume": 0.15, "boxCount": 1}, "bag": {"packedWeight": 102.0, "packagingCost": 12.0, "unloadCost": 16.0, "insurance": 12.5, "deliveryCostFast": 234.6, "deliveryCostRegular": 153.0, "totalFast": 275.1, "totalRegular": 193.5}, "corners": {"packedWeight": 106.0, "packagingCost": 32.0, "unloadCost": 16.0, "insurance": 12.5, "deliveryCostFast": 243.8, "deliveryCostRegular": 159.0, "totalFast": 304.3, "totalRegular": 219.5}, "frame": {"packedWeight": 122.0, "packagingCost": 24.0, "unloadCost": 16.0, "insurance": 12.5, "deliveryCostFast": 280.6, "deliveryCostRegular": 183.0, "totalFast": 333.1, "totalRegular": 235.5}}', 'telegram_id': 'test_user'}
+2025-06-19 19:34:57,845 - __main__ - INFO - Действие пользователя сохранено: view_results
+2025-06-19 19:34:57,847 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:34:57] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"weight":%20100.0,%20"density":%20666.67,%20"productCost":%201250.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%2012.5,%20"volume":%200.15,%20"boxCount":%201},%20"bag":%20{"packedWeight":%20102.0,%20"packagingCost":%2012.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20234.6,%20"deliveryCostRegular":%20153.0,%20"totalFast":%20275.1,%20"totalRegular":%20193.5},%20"corners":%20{"packedWeight":%20106.0,%20"packagingCost":%2032.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20243.8,%20"deliveryCostRegular":%20159.0,%20"totalFast":%20304.3,%20"totalRegular":%20219.5},%20"frame":%20{"packedWeight":%20122.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20280.6,%20"deliveryCostRegular":%20183.0,%20"totalFast":%20333.1,%20"totalRegular":%20235.5}}&telegram_id=test_user HTTP/1.1" 200 -
+2025-06-19 19:35:22,890 - __main__ - INFO - GET /robots.txt - IP: 127.0.0.1
+2025-06-19 19:35:22,891 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:35:22] "[33mGET /robots.txt HTTP/1.1[0m" 404 -
+2025-06-19 19:35:24,117 - __main__ - INFO - GET /wordpress/wp-admin/setup-config.php - IP: 127.0.0.1
+2025-06-19 19:35:24,118 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:35:24] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-19 19:35:59,522 - __main__ - INFO - GET /wp-admin/setup-config.php - IP: 127.0.0.1
+2025-06-19 19:35:59,523 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:35:59] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-19 19:36:38,190 - __main__ - INFO - GET /wp-admin/setup-config.php - IP: 127.0.0.1
+2025-06-19 19:36:38,191 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:36:38] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-19 19:36:53,178 - __main__ - INFO - GET /wordpress/wp-admin/setup-config.php - IP: 127.0.0.1
+2025-06-19 19:36:53,179 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:36:53] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-19 19:48:58,772 - __main__ - INFO - GET /.git/config - IP: 127.0.0.1
+2025-06-19 19:48:58,773 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:48:58] "[33mGET /.git/config HTTP/1.1[0m" 404 -
+2025-06-19 19:53:31,832 - __main__ - INFO - GET / - IP: 127.0.0.1
+2025-06-19 19:53:31,833 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:53:31] "GET / HTTP/1.1" 200 -
+2025-06-19 19:54:17,049 - __main__ - INFO - GET /wordpress/wp-admin/setup-config.php - IP: 127.0.0.1
+2025-06-19 19:54:17,050 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:54:17] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-19 19:54:27,184 - __main__ - INFO - GET /wp-admin/setup-config.php - IP: 127.0.0.1
+2025-06-19 19:54:27,184 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:54:27] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-19 19:54:32,871 - __main__ - INFO - GET / - IP: 85.142.100.138
+2025-06-19 19:54:32,872 - werkzeug - INFO - 85.142.100.138 - - [19/Jun/2025 19:54:32] "GET / HTTP/1.0" 200 -
+2025-06-19 19:54:33,871 - __main__ - INFO - GET / - IP: 127.0.0.1
+2025-06-19 19:54:33,871 - __main__ - INFO - Query params: {'telegram_id': '138138847', 'username': 'dukudrin'}
+2025-06-19 19:54:33,911 - __main__ - INFO - Действие пользователя сохранено: page_opened
+2025-06-19 19:54:33,912 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:54:33] "GET /?telegram_id=138138847&username=dukudrin HTTP/1.1" 200 -
+2025-06-19 19:54:36,750 - __main__ - INFO - GET /wp-admin/setup-config.php - IP: 127.0.0.1
+2025-06-19 19:54:36,751 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:54:36] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-19 19:55:50,715 - __main__ - INFO - GET /wordpress/wp-admin/setup-config.php - IP: 127.0.0.1
+2025-06-19 19:55:50,715 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:55:50] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-19 19:57:14,362 - __main__ - INFO - GET / - IP: 127.0.0.1
+2025-06-19 19:57:14,363 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:57:14] "GET / HTTP/1.1" 200 -
+2025-06-19 19:59:51,477 - __main__ - INFO - GET / - IP: 127.0.0.1
+2025-06-19 19:59:51,477 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:59:51] "GET / HTTP/1.1" 200 -
+2025-06-19 19:59:51,510 - __main__ - INFO - GET / - IP: 127.0.0.1
+2025-06-19 19:59:51,510 - werkzeug - INFO - 127.0.0.1 - - [19/Jun/2025 19:59:51] "GET / HTTP/1.1" 200 -

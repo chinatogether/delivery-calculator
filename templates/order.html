@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Заказать доставку - China Together</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        :root {
+            --primary-color: #E74C3C;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --text-color: #333;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --border-color: #e9ecef;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+            /* Telegram Web App цвета */
+            --tg-theme-bg-color: var(--white);
+            --tg-theme-text-color: var(--text-color);
+            --tg-theme-hint-color: #999;
+            --tg-theme-button-color: var(--primary-color);
+            --tg-theme-button-text-color: var(--white);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--tg-theme-text-color);
+            background: linear-gradient(135deg, #323033 0%, #323033 100%);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 16px;
+            margin: 0 auto;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-top: 8px;
+            color: white;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .info-section {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(52, 152, 219, 0.05) 100%);
+            border: 2px solid rgba(52, 152, 219, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-title {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-section {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(39, 174, 96, 0.05) 100%);
+            border: 2px solid rgba(39, 174, 96, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .section-title {
+            color: var(--success-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: var(--tg-theme-text-color);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            background: var(--tg-theme-bg-color);
+            color: var(--tg-theme-text-color);
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--success-color);
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: none;
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .required {
+            color: var(--primary-color);
+        }
+
+        .help-text {
+            font-size: 0.8rem;
+            color: var(--tg-theme-hint-color);
+            margin-top: 4px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success-color);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            margin-top: 2px;
+            transform: scale(1.2);
+            width: auto;
+        }
+
+        .checkbox-text {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .checkbox-text a {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        /* Темная тема */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --tg-theme-bg-color: #1a1a1a;
+                --tg-theme-text-color: #ffffff;
+                --white: #2a2a2a;
+                --border-color: #3a3a3a;
+            }
+
+            .card, .form-section, .info-section {
+                background: #2a2a2a;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                background: #1a1a1a;
+                border-color: #3a3a3a;
+                color: #ffffff;
+            }
+        }
+
+        /* Мобильная оптимизация */
+        @media (max-width: 480px) {
+            .container {
+                padding: 12px;
+            }
+
+            .card, .form-section {
+                padding: 16px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-group input[type="number"] {
+                font-size: 16px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20(2).jpg" alt="China Together" class="logo">
+            <h1>📋 Заказать доставку</h1>
+            <p class="subtitle">Оформите заявку на выкуп и доставку товара</p>
+        </div>
+
+        <!-- Информационная секция -->
+        <div class="info-section">
+            <div class="info-title">
+                <span>ℹ️</span>
+                <span>Важная информация</span>
+            </div>
+            <div>
+                <p>Чтобы оформить заказ, рассчитать доставку или просто задать вопросы менеджеру, нужно оставить заявку. Менеджер свяжется с вами в рабочее время.</p>
+                <div style="margin-top: 12px; font-weight: 500;">
+                    📅 <strong>График работы:</strong> ПН–ПТ с 10:00 до 18:00 по московскому времени<br>
+                    🇨🇳 Время в Китае — на 5 часов больше, чем в Москве
+                </div>
+            </div>
+        </div>
+
+        <!-- Форма заявки -->
+        <div class="form-section">
+            <div class="section-title">📋 Заявка на выкуп и доставку товара</div>
+            
+            <form id="purchaseRequestForm">
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">
+                        Электронная почта <span class="required">*</span>
+                    </label>
+                    <input type="email" id="email" name="email" required 
+                           placeholder="your.email@example.com">
+                    <div id="emailError" class="error-message"></div>
+                </div>
+
+                <!-- Telegram контакт -->
+                <div class="form-group">
+                    <label for="telegramContact">
+                        Ссылка на ваш личный телеграм <span class="required">*</span>
+                    </label>
+                    <input type="text" id="telegramContact" name="telegramContact" required 
+                           placeholder="@nickname или https://t.me/nickname">
+                    <div class="help-text">
+                        В формате: "https://t.me/nickname" или "@nickname"<br>
+                        Если у вас его нет, добавьте. Это необходимо для дальнейшей коммуникации.
+                    </div>
+                    <div id="telegramContactError" class="error-message"></div>
+                </div>
+
+                <!-- Ссылка на поставщика -->
+                <div class="form-group">
+                    <label for="supplierLink">
+                        Ссылка на поставщика на 1688
+                    </label>
+                    <textarea id="supplierLink" name="supplierLink" 
+                              placeholder="Вставьте ссылку на товар или поставщика. Если поставщика нет, мы поможем вам его найти."
+                              style="min-height: 80px; resize: vertical;"></textarea>
+                    <div class="help-text">
+                        Если поставщика нет, мы поможем вам его найти.
+                    </div>
+                </div>
+
+                <!-- Сумма заказа -->
+                <div class="form-group">
+                    <label for="orderAmount">
+                        На какую сумму планируете заказ? <span class="required">*</span>
+                    </label>
+                    <select id="orderAmount" name="orderAmount" required>
+                        <option value="" disabled selected>Выберите сумму заказа</option>
+                        <option value="3000-5000 юаней">3000-5000 юаней</option>
+                        <option value="5000-10000 юаней">5000-10000 юаней</option>
+                        <option value="10000-20000 юаней">10000-20000 юаней</option>
+                        <option value="20000-50000 юаней">20000-50000 юаней</option>
+                        <option value="50000+ юаней">50000+ юаней</option>
+                        <option value="Другое">Другое (укажите в комментариях)</option>
+                    </select>
+                    <div class="help-text">
+                        Минимальная сумма для заказа у одного поставщика составляет 3000 юаней
+                    </div>
+                    <div id="orderAmountError" class="error-message"></div>
+                </div>
+
+                <!-- Промокод -->
+                <div class="form-group">
+                    <label for="promoCode">Промокод</label>
+                    <input type="text" id="promoCode" name="promoCode" 
+                           placeholder="Введите промокод, если есть">
+                </div>
+
+                <!-- Дополнительные комментарии -->
+                <div class="form-group">
+                    <label for="additionalNotes">Дополнительные комментарии</label>
+                    <textarea id="additionalNotes" name="additionalNotes" 
+                              placeholder="Расскажите подробнее о вашем заказе, особых требованиях или задайте вопросы..."
+                              style="min-height: 100px; resize: vertical;"></textarea>
+                </div>
+
+                <!-- Согласие с условиями -->
+                <div class="form-group">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="termsAccepted" name="termsAccepted" required>
+                        <span class="checkbox-text">
+                            Отправляя заявку, Вы соглашаетесь с нашими <a href="#" onclick="showTerms()">условиями и правилами работы</a> <span class="required">*</span>
+                        </span>
+                    </label>
+                    <div id="termsError" class="error-message"></div>
+                </div>
+
+                <!-- Кнопка отправки -->
+                <button type="submit" class="btn btn-success" id="submitRequestBtn">
+                    <span>📤</span>
+                    <span>Отправить заявку</span>
+                </button>
+            </form>
+            
+            <div id="successMessage" class="success-message">
+                ✅ Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время.
+            </div>
+            
+            <div style="margin-top: 16px; padding: 12px; background: rgba(39, 174, 96, 0.05); border-radius: 8px; font-size: 0.85rem; color: var(--tg-theme-hint-color); text-align: center;">
+                🙏 Спасибо за доверие!
+            </div>
+        </div>
+
+        <!-- Кнопка назад -->
+        <div class="card">
+            <a href="/" class="btn btn-secondary">
+                <span>🔙</span>
+                <span>Вернуться на главную</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+
+        // Применяем тему Telegram
+        if (tg.themeParams) {
+            document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color || '#ffffff');
+            document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color || '#000000');
+            document.documentElement.style.setProperty('--tg-theme-hint-color', tg.themeParams.hint_color || '#999999');
+            document.documentElement.style.setProperty('--tg-theme-button-color', tg.themeParams.button_color || '#E74C3C');
+            document.documentElement.style.setProperty('--tg-theme-button-text-color', tg.themeParams.button_text_color || '#ffffff');
+        }
+
+        // Получаем данные пользователя
+        let telegramUserId = null;
+        let telegramUsername = null;
+        let calculationId = null;
+
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+            telegramUserId = tg.initDataUnsafe.user.id;
+            telegramUsername = tg.initDataUnsafe.user.username || `user_${tg.initDataUnsafe.user.id}`;
+        } else {
+            const urlParams = new URLSearchParams(window.location.search);
+            telegramUserId = urlParams.get('telegram_id') || 'test_user';
+            telegramUsername = urlParams.get('username') || 'test_username';
+            calculationId = urlParams.get('calculation_id');
+        }
+
+        // Предзаполняем Telegram контакт, если известен username
+        if (telegramUsername && telegramUsername !== 'test_username') {
+            document.getElementById('telegramContact').value = `@${telegramUsername}`;
+        }
+
+        // Функция валидации формы
+        function validateForm() {
+            let isValid = true;
+            const fields = [
+                {
+                    id: 'email',
+                    validator: (val) => {
+                        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                        return emailPattern.test(val);
+                    },
+                    message: 'Введите корректный email'
+                },
+                {
+                    id: 'telegramContact',
+                    validator: (val) => val.startsWith('@') || val.startsWith('https://t.me/'),
+                    message: 'Формат: @nickname или https://t.me/nickname'
+                },
+                {
+                    id: 'orderAmount',
+                    validator: (val) => val !== '',
+                    message: 'Выберите сумму заказа'
+                },
+                {
+                    id: 'termsAccepted',
+                    validator: () => document.getElementById('termsAccepted').checked,
+                    message: 'Необходимо согласиться с условиями'
+                }
+            ];
+            
+            fields.forEach(field => {
+                const element = document.getElementById(field.id);
+                const errorElement = document.getElementById(`${field.id}Error`);
+                const value = field.id === 'termsAccepted' ? null : element.value.trim();
+                
+                if (!field.validator(value)) {
+                    if (errorElement) {
+                        errorElement.textContent = field.message;
+                        errorElement.style.display = 'block';
+                    }
+                    if (field.id !== 'termsAccepted') {
+                        element.style.borderColor = '#dc3545';
+                    }
+                    isValid = false;
+                } else {
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                    if (field.id !== 'termsAccepted') {
+                        element.style.borderColor = 'var(--border-color)';
+                    }
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Обработчик формы
+        document.getElementById('purchaseRequestForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            if (!validateForm()) {
+                if (tg && tg.HapticFeedback) {
+                    tg.HapticFeedback.notificationOccurred('error');
+                }
+                return;
+            }
+            
+            try {
+                if (tg && tg.HapticFeedback) {
+                    tg.HapticFeedback.impactOccurred('medium');
+                }
+                
+                const submitBtn = document.getElementById('submitRequestBtn');
+                const successMessage = document.getElementById('successMessage');
+                
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span>⏳</span><span>Отправляем заявку...</span>';
+                
+                const formData = {
+                    telegram_id: telegramUserId,
+                    calculation_id: calculationId,
+                    email: document.getElementById('email').value.trim(),
+                    telegram_contact: document.getElementById('telegramContact').value.trim(),
+                    supplier_link: document.getElementById('supplierLink').value.trim(),
+                    order_amount: document.getElementById('orderAmount').value,
+                    promo_code: document.getElementById('promoCode').value.trim(),
+                    additional_notes: document.getElementById('additionalNotes').value.trim(),
+                    terms_accepted: document.getElementById('termsAccepted').checked
+                };
+                
+                const response = await fetch('/submit_purchase_request', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    if (tg && tg.HapticFeedback) {
+                        tg.HapticFeedback.notificationOccurred('success');
+                    }
+                    
+                    // Отправляем данные в Telegram
+                    if (tg && tg.sendData) {
+                        tg.sendData(JSON.stringify({
+                            action: 'purchase_request_submitted',
+                            request_id: result.request_id,
+                            email: formData.email,
+                            order_amount: formData.order_amount,
+                            telegram_contact: formData.telegram_contact
+                        }));
+                    }
+                    
+                    // Показываем успешное сообщение
+                    successMessage.style.display = 'block';
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Меняем кнопку
+                    submitBtn.innerHTML = '<span>✅</span><span>Заявка отправлена</span>';
+                    submitBtn.style.background = 'var(--secondary-color)';
+                    
+                    // Очищаем форму
+                    document.getElementById('purchaseRequestForm').reset();
+                    
+                    // Показываем уведомление в Telegram
+                    if (tg && tg.showAlert) {
+                        tg.showAlert('✅ ' + result.message);
+                    }
+                    
+                } else {
+                    throw new Error(result.error || 'Неизвестная ошибка');
+                }
+                
+            } catch (error) {
+                console.error('Ошибка при отправке заявки:', error);
+                
+                if (tg && tg.HapticFeedback) {
+                    tg.HapticFeedback.notificationOccurred('error');
+                }
+                
+                if (tg && tg.showAlert) {
+                    tg.showAlert('❌ Ошибка при отправке заявки: ' + error.message);
+                }
+                
+                const submitBtn = document.getElementById('submitRequestBtn');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>📤</span><span>Отправить заявку</span>';
+            }
+        });
+
+        // Динамическая валидация полей
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('input', function() {
+                const errorElement = document.getElementById(`${this.id}Error`);
+                if (errorElement && errorElement.style.display === 'block') {
+                    errorElement.style.display = 'none';
+                    if (this.type !== 'checkbox') {
+                        this.style.borderColor = 'var(--border-color)';
+                    }
+                }
+            });
+        });
+
+        // Функция показа условий
+        function showTerms() {
+            if (tg && tg.showAlert) {
+                tg.showAlert('Условия и правила работы будут показаны в отдельном окне.');
+            }
+        }
+
+        // Настройка кнопки "Назад"
+        if (tg && tg.BackButton) {
+            tg.BackButton.show();
+            tg.BackButton.onClick(() => {
+                window.history.back();
+            });
+        }
+
+        // Настройка главной кнопки
+        if (tg && tg.MainButton) {
+            tg.MainButton.text = "Отправить заявку";
+            tg.MainButton.color = "#27ae60";
+            tg.MainButton.show();
+
+            tg.MainButton.onClick(() => {
+                document.getElementById('purchaseRequestForm').dispatchEvent(new Event('submit'));
+            });
+        }
+    </script>
+</body>
+</html>

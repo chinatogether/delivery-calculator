@@ -376,8 +376,8 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label">Страховка</span>
-                        <span class="info-value">{{ results.generalInformation.insuranceRate }} (${{
-                            "%.2f"|format(results.generalInformation.insuranceAmount) }})</span>
+                        <span class="info-value">{{ results.bag.insurance/results.generalInformation.productCost }} (${{
+                            "%.2f"|format(results.bag.insurance) }})</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Доставка</span>
@@ -411,8 +411,8 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label">Страховка</span>
-                        <span class="info-value">{{ results.generalInformation.insuranceRate }} (${{
-                            "%.2f"|format(results.generalInformation.insuranceAmount) }})</span>
+                        <span class="info-value">{{ results.corners.insurance/results.generalInformation.productCost }} (${{
+                            "%.2f"|format(results.corners.insurance) }})</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Доставка</span>
@@ -446,8 +446,8 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label">Страховка</span>
-                        <span class="info-value">{{ results.generalInformation.insuranceRate }} (${{
-                            "%.2f"|format(results.generalInformation.insuranceAmount) }})</span>
+                        <span class="info-value">{{ results.frame.insurance/results.generalInformation.productCost }} (${{
+                            "%.2f"|format(results.frame.insurance) }})</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Доставка</span>
