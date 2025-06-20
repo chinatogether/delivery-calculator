@@ -833,3 +833,25 @@ INFO:aiogram.event:Update id=450949915 is handled. Duration 91 ms by bot id=7709
 INFO:aiogram.event:Update id=450949916 is handled. Duration 89 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949917 is handled. Duration 234 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949918 is handled. Duration 94 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949919 is handled. Duration 316 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949920 is handled. Duration 129 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949921 is handled. Duration 57 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949922 is handled. Duration 145 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949923 is handled. Duration 333 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949924 is handled. Duration 198 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450949925 is handled. Duration 255 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949926 is handled. Duration 166 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949927 is handled. Duration 83 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949928 is handled. Duration 97 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949929 is handled. Duration 185 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949930 is handled. Duration 184 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949931 is handled. Duration 175 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949932 is handled. Duration 197 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949933 is handled. Duration 228 ms by bot id=7709869722

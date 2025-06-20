@@ -202,6 +202,10 @@
             cursor: not-allowed;
         }
 
+        .btn-secondary {
+            background: var(--secondary-color);
+        }
+
         .success-message {
             background: rgba(39, 174, 96, 0.1);
             color: var(--success-color);
@@ -213,20 +217,28 @@
             border: 1px solid rgba(39, 174, 96, 0.3);
         }
 
+        /* Исправленные стили для checkbox */
         .checkbox-wrapper {
             display: flex;
             align-items: flex-start;
             gap: 12px;
             cursor: pointer;
-            padding: 12px;
+            padding: 16px;
             background: rgba(231, 76, 60, 0.05);
-            border-radius: 8px;
-            border: 1px solid rgba(231, 76, 60, 0.2);
-            transition: all 0.2s ease;
+            border-radius: 12px;
+            border: 2px solid rgba(231, 76, 60, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .checkbox-wrapper:hover {
             background: rgba(231, 76, 60, 0.1);
+            border-color: rgba(231, 76, 60, 0.4);
+        }
+
+        .checkbox-wrapper.checked {
+            background: rgba(39, 174, 96, 0.1);
+            border-color: rgba(39, 174, 96, 0.4);
         }
 
         .checkbox-wrapper input[type="checkbox"] {
@@ -234,189 +246,60 @@
             height: 20px;
             margin: 0;
             cursor: pointer;
-            accent-color: var(--primary-color);
+            position: relative;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .checkbox-wrapper input[type="checkbox"]:checked {
+            background: var(--success-color);
+            border-color: var(--success-color);
+        }
+
+        .checkbox-wrapper input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .checkbox-wrapper input[type="checkbox"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
         }
 
         .checkbox-text {
             font-size: 0.9rem;
             line-height: 1.4;
             color: var(--text-color);
+            flex: 1;
         }
 
         .checkbox-text a {
             color: var(--primary-color);
             text-decoration: underline;
             font-weight: 500;
+            transition: color 0.2s ease;
         }
 
         .checkbox-text a:hover {
             color: #c0392b;
-        };
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .info-title {
-            color: var(--secondary-color);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .form-section {
-            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(39, 174, 96, 0.05) 100%);
-            border: 2px solid rgba(39, 174, 96, 0.2);
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .section-title {
-            color: var(--success-color);
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
-            color: var(--tg-theme-text-color);
-            font-size: 0.9rem;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1.5px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.2s ease;
-            background: var(--tg-theme-bg-color);
-            color: var(--tg-theme-text-color);
-            -webkit-appearance: none;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--success-color);
-            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
-        }
-
-        .error-message {
-            color: #dc3545;
-            font-size: 0.85rem;
-            margin-top: 4px;
-            display: none;
-            animation: shake 0.3s ease-in-out;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .required {
-            color: var(--primary-color);
-        }
-
-        .help-text {
-            font-size: 0.8rem;
-            color: var(--tg-theme-hint-color);
-            margin-top: 4px;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .btn-success {
-            background: var(--success-color);
-            color: var(--white);
-        }
-
-        .btn-secondary {
-            background: var(--secondary-color);
-            color: var(--white);
-        }
-
-        .btn:hover:not(:disabled) {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn:active:not(:disabled) {
-            transform: translateY(0);
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .success-message {
-            background: rgba(39, 174, 96, 0.1);
-            color: var(--success-color);
-            padding: 16px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 20px 0;
-            display: none;
-        }
-
-        .checkbox-wrapper {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .checkbox-wrapper input[type="checkbox"] {
-            margin-top: 2px;
-            transform: scale(1.2);
-            width: auto;
-        }
-
-        .checkbox-text {
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .checkbox-text a {
-            color: var(--primary-color);
-            text-decoration: underline;
         }
 
         /* Темная тема */
         @media (prefers-color-scheme: dark) {
             :root {
-                --tg-theme-bg-color: #1a1a1a;
-                --tg-theme-text-color: #ffffff;
+                --text-color: #ffffff;
                 --white: #2a2a2a;
                 --border-color: #3a3a3a;
             }
@@ -431,6 +314,11 @@
                 background: #1a1a1a;
                 border-color: #3a3a3a;
                 color: #ffffff;
+            }
+
+            .checkbox-wrapper input[type="checkbox"] {
+                background: #1a1a1a;
+                border-color: #3a3a3a;
             }
         }
 
@@ -450,6 +338,10 @@
 
             .form-group input[type="number"] {
                 font-size: 16px !important;
+            }
+
+            .checkbox-wrapper {
+                padding: 12px;
             }
         }
     </style>
@@ -546,17 +438,17 @@
 
                 <!-- Согласие с условиями -->
                 <div class="form-group">
-                    <label class="checkbox-wrapper">
+                    <div class="checkbox-wrapper" id="termsWrapper">
                         <input type="checkbox" id="termsAccepted" name="termsAccepted" required>
-                        <span class="checkbox-text">
-                            Отправляя заявку, Вы соглашаетесь с нашими <a href="https://docs.google.com/document/d/1_T89jCHqaMsaHhlV1fz8guHp99bNYu4fzNXj_g7G2_M/edit?tab=t.0" target="_blank" style="color: var(--primary-color); text-decoration: underline;">условиями и правилами работы</a> <span class="required">*</span>
-                        </span>
-                    </label>
+                        <div class="checkbox-text">
+                            Отправляя заявку, Вы соглашаетесь с нашими <a href="https://docs.google.com/document/d/1_T89jCHqaMsaHhlV1fz8guHp99bNYu4fzNXj_g7G2_M/edit?tab=t.0" target="_blank">условиями и правилами работы</a> <span class="required">*</span>
+                        </div>
+                    </div>
                     <div id="termsError" class="error-message"></div>
                 </div>
 
                 <!-- Кнопка отправки -->
-                <button type="submit" class="btn btn-success" id="submitRequestBtn">
+                <button type="submit" class="btn" id="submitRequestBtn">
                     <span>📤</span>
                     <span>Отправить заявку</span>
                 </button>
@@ -566,7 +458,7 @@
                 ✅ Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время.
             </div>
             
-            <div style="margin-top: 16px; padding: 12px; background: rgba(39, 174, 96, 0.05); border-radius: 8px; font-size: 0.85rem; color: var(--tg-theme-hint-color); text-align: center;">
+            <div style="margin-top: 16px; padding: 12px; background: rgba(39, 174, 96, 0.05); border-radius: 8px; font-size: 0.85rem; color: var(--hint-color); text-align: center;">
                 🙏 Спасибо за доверие!
             </div>
         </div>
@@ -588,11 +480,9 @@
 
         // Применяем тему Telegram
         if (tg.themeParams) {
-            document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color || '#ffffff');
-            document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color || '#000000');
-            document.documentElement.style.setProperty('--tg-theme-hint-color', tg.themeParams.hint_color || '#999999');
-            document.documentElement.style.setProperty('--tg-theme-button-color', tg.themeParams.button_color || '#E74C3C');
-            document.documentElement.style.setProperty('--tg-theme-button-text-color', tg.themeParams.button_text_color || '#ffffff');
+            document.documentElement.style.setProperty('--text-color', tg.themeParams.text_color || '#ffffff');
+            document.documentElement.style.setProperty('--white', tg.themeParams.bg_color || '#2a2a2a');
+            document.documentElement.style.setProperty('--border-color', tg.themeParams.hint_color || '#444444');
         }
 
         // Получаем данные пользователя
@@ -613,6 +503,42 @@
         // Предзаполняем Telegram контакт, если известен username
         if (telegramUsername && telegramUsername !== 'test_username') {
             document.getElementById('telegramContact').value = `@${telegramUsername}`;
+        }
+
+        // Обработка checkbox - исправленная версия
+        const termsCheckbox = document.getElementById('termsAccepted');
+        const termsWrapper = document.getElementById('termsWrapper');
+
+        // Обработчик клика по всему wrapper
+        termsWrapper.addEventListener('click', function(e) {
+            // Проверяем, что клик не по ссылке
+            if (e.target.tagName !== 'A') {
+                e.preventDefault();
+                termsCheckbox.checked = !termsCheckbox.checked;
+                updateCheckboxStyle();
+                
+                // Убираем ошибку при проставлении галочки
+                if (termsCheckbox.checked) {
+                    const errorElement = document.getElementById('termsError');
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                }
+            }
+        });
+
+        // Обработчик изменения состояния checkbox
+        termsCheckbox.addEventListener('change', function() {
+            updateCheckboxStyle();
+        });
+
+        // Функция обновления стиля checkbox
+        function updateCheckboxStyle() {
+            if (termsCheckbox.checked) {
+                termsWrapper.classList.add('checked');
+            } else {
+                termsWrapper.classList.remove('checked');
+            }
         }
 
         // Функция валидации формы
@@ -688,7 +614,7 @@
                 const formData = {
                     telegram_id: telegramUserId,
                     calculation_id: calculationId,
-                    email: `${telegramUserId}@telegram.user`, // Генерируем email из telegram_id
+                    email: `${telegramUserId}@telegram.user`,
                     telegram_contact: document.getElementById('telegramContact').value.trim(),
                     supplier_link: document.getElementById('supplierLink').value.trim(),
                     order_amount: document.getElementById('orderAmount').value,
@@ -733,6 +659,7 @@
                     
                     // Очищаем форму
                     document.getElementById('purchaseRequestForm').reset();
+                    updateCheckboxStyle(); // Обновляем стиль checkbox после сброса
                     
                     // Показываем уведомление в Telegram
                     if (tg && tg.showAlert) {
@@ -791,6 +718,9 @@
                 document.getElementById('purchaseRequestForm').dispatchEvent(new Event('submit'));
             });
         }
+
+        // Инициализация стиля checkbox при загрузке
+        updateCheckboxStyle();
     </script>
 </body>
 </html>

@@ -1,7 +1,15 @@
 import asyncio
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo, CallbackQuery
+from aiogram.types import (
+    InlineKeyboardMarkup, 
+    InlineKeyboardButton, 
+    WebAppInfo, 
+    CallbackQuery,
+    ReplyKeyboardMarkup,
+    KeyboardButton,
+    ReplyKeyboardRemove
+)
 from aiogram.types.web_app_data import WebAppData
 from aiogram.fsm.storage.memory import MemoryStorage
 from dotenv import load_dotenv
@@ -58,27 +66,60 @@ def save_user_action(telegram_id, action, details=None):
     finally:
         conn.close()
 
-# Создание главного меню
-def get_main_keyboard(user_id, username):
-    web_app_url = f"{WEB_APP_URL}/?telegram_id={user_id}&username={username}"
-    order_app_url = f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}"
+# Создание reply-клавиатуры (главное меню)
+def get_main_reply_keyboard():
+    keyboard = ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text="📊 Рассчитать доставку"),
+                KeyboardButton(text="🚚 Заказать доставку")
+            ],
+            [
+                KeyboardButton(text="📂 Мои заявки"),
+                KeyboardButton(text="💬 Связаться с менеджером")
+            ],
+            [
+                KeyboardButton(text="📱 Дополнительно"),
+                KeyboardButton(text="❓ Помощь")
+            ]
+        ],
+        resize_keyboard=True,
+        one_time_keyboard=False,
+        input_field_placeholder="Выберите действие или напишите сообщение..."
+    )
+    return keyboard
+
+# Создание reply-клавиатуры для дополнительных опций
+def get_additional_reply_keyboard():
+    keyboard = ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text="📋 История расчетов"),
+                KeyboardButton(text="📞 Поддержка")
+            ],
+            [
+                KeyboardButton(text="🔙 Главное меню")
+            ]
+        ],
+        resize_keyboard=True,
+        one_time_keyboard=False,
+        input_field_placeholder="Выберите опцию..."
+    )
+    return keyboard
+
+# Создание inline-клавиатуры для веб-приложений
+def get_webapp_inline_keyboard(user_id, username, action="calculate"):
+    if action == "calculate":
+        web_app_url = f"{WEB_APP_URL}/?telegram_id={user_id}&username={username}"
+        button_text = "📊 Открыть калькулятор"
+    else:  # order
+        web_app_url = f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}"
+        button_text = "🚚 Открыть форму заказа"
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(
-            text="📊 Рассчитать доставку", 
+            text=button_text, 
             web_app=WebAppInfo(url=web_app_url)
-        )],
-        [InlineKeyboardButton(
-            text="🚚 Заказать доставку", 
-            web_app=WebAppInfo(url=order_app_url)
-        )],
-        [InlineKeyboardButton(
-            text="📂 Мои заявки", 
-            callback_data="my_requests"
-        )],
-        [InlineKeyboardButton(
-            text="📱 Больше опций", 
-            callback_data="more_options"
         )]
     ])
     return keyboard
@@ -154,7 +195,7 @@ async def start(message: types.Message):
         "first_name": first_name
     })
     
-    keyboard = get_main_keyboard(user_id, username)
+    keyboard = get_main_reply_keyboard()
     
     await message.reply(
         f"🚀 <b>Добро пожаловать, {first_name}!</b>\n\n"
@@ -165,32 +206,198 @@ async def start(message: types.Message):
         "• 📂 Отслеживание статуса заказов\n"
         "• 💬 Ответы на ваши вопросы\n"
         "• 👨‍💼 Связь с менеджерами\n\n"
-        "💡 <b>Просто напишите мне сообщение или выберите действие:</b>",
+        "💡 <b>Используйте кнопки меню ниже или просто напишите мне сообщение:</b>",
         reply_markup=keyboard,
         parse_mode="HTML"
     )
 
-# Обработка текстовых сообщений
+# Обработка reply-кнопок
+@dp.message(F.text.in_([
+    "📊 Рассчитать доставку", 
+    "🚚 Заказать доставку", 
+    "📂 Мои заявки",
+    "💬 Связаться с менеджером",
+    "📱 Дополнительно",
+    "❓ Помощь",
+    "📋 История расчетов",
+    "📞 Поддержка",
+    "🔙 Главное меню"
+]))
+async def handle_reply_buttons(message: types.Message):
+    user_id = message.from_user.id
+    username = message.from_user.username or f"user_{user_id}"
+    text = message.text
+    
+    save_user_action(user_id, "reply_button", {"button": text})
+    
+    if text == "📊 Рассчитать доставку":
+        keyboard = get_webapp_inline_keyboard(user_id, username, "calculate")
+        await message.reply(
+            "📊 <b>Калькулятор доставки</b>\n\n"
+            "Нажмите кнопку ниже, чтобы открыть калькулятор и рассчитать стоимость доставки вашего груза из Китая.\n\n"
+            "В калькуляторе вы сможете:\n"
+            "• Выбрать категорию товара\n"
+            "• Указать вес и размеры\n"
+            "• Выбрать тип упаковки\n"
+            "• Получить точную стоимость",
+            reply_markup=keyboard,
+            parse_mode="HTML"
+        )
+    
+    elif text == "🚚 Заказать доставку":
+        keyboard = get_webapp_inline_keyboard(user_id, username, "order")
+        await message.reply(
+            "🚚 <b>Заказ доставки</b>\n\n"
+            "Нажмите кнопку ниже, чтобы оформить заявку на выкуп и доставку товаров из Китая.\n\n"
+            "💡 <b>Что нужно будет указать:</b>\n"
+            "• Ваш Telegram для связи\n"
+            "• Ссылку на поставщика (если есть)\n"
+            "• Планируемую сумму заказа\n"
+            "• Дополнительные пожелания\n\n"
+            "🕐 Менеджер свяжется с вами в рабочее время (ПН-ПТ 10:00-18:00 МСК)",
+            reply_markup=keyboard,
+            parse_mode="HTML"
+        )
+    
+    elif text == "📂 Мои заявки":
+        await handle_my_requests(message, user_id)
+    
+    elif text == "💬 Связаться с менеджером":
+        await handle_contact_manager(message, user_id)
+    
+    elif text == "📱 Дополнительно":
+        keyboard = get_additional_reply_keyboard()
+        await message.reply(
+            "📱 <b>Дополнительные функции:</b>\n\n"
+            "📋 <b>История расчетов</b> - ваши предыдущие расчеты\n"
+            "📞 <b>Поддержка</b> - контакты и рабочее время\n\n"
+            "Выберите нужную опцию:",
+            reply_markup=keyboard,
+            parse_mode="HTML"
+        )
+    
+    elif text == "❓ Помощь":
+        await handle_help(message, user_id)
+    
+    elif text == "📋 История расчетов":
+        await message.reply(
+            "📋 <b>История расчетов</b>\n\n"
+            "Функция находится в разработке. Скоро вы сможете просматривать все свои предыдущие расчеты доставки.\n\n"
+            "💡 Пока что используйте калькулятор для новых расчетов.",
+            parse_mode="HTML"
+        )
+    
+    elif text == "📞 Поддержка":
+        await handle_support(message, user_id)
+    
+    elif text == "🔙 Главное меню":
+        keyboard = get_main_reply_keyboard()
+        await message.reply(
+            "🏠 <b>Главное меню</b>\n\n"
+            "Выберите действие или просто напишите мне сообщение!",
+            reply_markup=keyboard,
+            parse_mode="HTML"
+        )
+
+# Обработка текстовых сообщений (кроме команд кнопок)
 @dp.message(F.text)
 async def handle_text_message(message: types.Message):
     user_id = message.from_user.id
     username = message.from_user.username or f"user_{user_id}"
     text = message.text
     
+    # Пропускаем обработку, если это текст кнопки
+    button_texts = [
+        "📊 Рассчитать доставку", "🚚 Заказать доставку", "📂 Мои заявки",
+        "💬 Связаться с менеджером", "📱 Дополнительно", "❓ Помощь",
+        "📋 История расчетов", "📞 Поддержка", "🔙 Главное меню"
+    ]
+    
+    if text in button_texts:
+        return
+    
     save_user_action(user_id, "text_message", {"text": text})
     
     smart_response = get_smart_response(text)
-    keyboard = get_main_keyboard(user_id, username)
-    
-    # Если пользователь спрашивает о менеджере
-    if any(word in text.lower() for word in ['менеджер', 'поддержка', 'помощь']):
-        keyboard = get_more_options_menu(user_id, username)
+    keyboard = get_main_reply_keyboard()
     
     await message.reply(
         smart_response,
         reply_markup=keyboard,
         parse_mode="HTML"
     )
+
+# Вспомогательные функции для обработки действий
+async def handle_my_requests(message, user_id):
+    requests = get_user_purchase_requests(user_id)
+    if requests:
+        requests_text = "<b>📂 Ваши заявки на выкуп:</b>\n\n"
+        for i, req in enumerate(requests[:5], 1):
+            status_emoji = {
+                'new': '🆕', 'in_review': '👀', 'approved': '✅',
+                'rejected': '❌', 'completed': '🎉'
+            }.get(req['status'], '❓')
+            
+            requests_text += (
+                f"{i}. {status_emoji} {req['created_at'][:16]}\n"
+                f"   💰 Сумма: {req['order_amount']}\n"
+                f"   📧 Email: {req['email']}\n\n"
+            )
+        await message.reply(requests_text, parse_mode="HTML")
+    else:
+        username = message.from_user.username or f"user_{user_id}"
+        keyboard = get_webapp_inline_keyboard(user_id, username, "order")
+        await message.reply(
+            "📭 У вас пока нет заявок на выкуп.\n\n"
+            "Хотите оформить заявку?",
+            reply_markup=keyboard
+        )
+    save_user_action(user_id, "view_requests")
+
+async def handle_contact_manager(message, user_id):
+    manager_text = (
+        "👨‍💼 <b>Связь с менеджером</b>\n\n"
+        "Наши специалисты готовы помочь вам:\n\n"
+        "🎯 <b>Главный менеджер:</b> @manager_username\n"
+        "💬 <b>Общий чат поддержки:</b> @china_together_support\n"
+        "📧 <b>Email:</b> manager@china-together.com\n\n"
+        "🕐 <b>Рабочее время:</b>\n"
+        "ПН–ПТ с 10:00 до 18:00 (МСК)\n"
+        "🇨🇳 В Китае: 15:00 до 23:00\n\n"
+        "⚡ <b>Для быстрой связи напишите:</b> @manager_username"
+    )
+    await message.reply(manager_text, parse_mode="HTML")
+    save_user_action(user_id, "manager_contact_viewed")
+
+async def handle_help(message, user_id):
+    help_text = (
+        "<b>❓ Как пользоваться сервисом:</b>\n\n"
+        "<b>📊 Расчет доставки:</b>\n"
+        "1️⃣ Нажмите «📊 Рассчитать доставку»\n"
+        "2️⃣ Заполните все поля формы\n"
+        "3️⃣ Получите детальный расчет\n\n"
+        "<b>🚚 Заказ доставки:</b>\n"
+        "1️⃣ Нажмите «🚚 Заказать доставку»\n"
+        "2️⃣ Заполните заявку\n"
+        "3️⃣ Менеджер свяжется с вами\n\n"
+        "<b>📞 Поддержка:</b> @manager_username"
+    )
+    await message.reply(help_text, parse_mode="HTML")
+    save_user_action(user_id, "view_help")
+
+async def handle_support(message, user_id):
+    support_text = (
+        "📞 <b>Поддержка China Together</b>\n\n"
+        "Наши менеджеры готовы помочь вам:\n\n"
+        "📞 <b>Менеджер:</b> @manager_username\n"
+        "💬 <b>Группа поддержки:</b> @china_together_support\n"
+        "📧 <b>Email:</b> support@china-together.com\n\n"
+        "🕐 <b>Время работы:</b>\n"
+        "ПН–ПТ с 10:00 до 18:00 (МСК)\n\n"
+        "⚡ <b>Быстрая связь:</b> напишите @manager_username"
+    )
+    await message.reply(support_text, parse_mode="HTML")
+    save_user_action(user_id, "support_contacted")
 
 # Обработка данных от веб-приложения
 @dp.message(F.web_app_data)
@@ -216,6 +423,7 @@ async def handle_web_app_data(message: types.Message):
 
 # Обработка завершенного расчета
 async def handle_calculation_completed(message, data, user_id, username):
+    keyboard = get_webapp_inline_keyboard(user_id, username, "order")
     await message.reply(
         "✅ <b>Расчет успешно выполнен!</b>\n\n"
         f"📊 Категория: {data.get('category', 'Не указано')}\n"
@@ -247,129 +455,32 @@ async def handle_purchase_request_submitted(message, data, user_id, username):
         parse_mode="HTML"
     )
 
-# Обработка callback-запросов
+# Обработка callback-запросов (остается для inline-кнопок)
 @dp.callback_query()
 async def handle_callback(callback: CallbackQuery):
     user_id = callback.from_user.id
     username = callback.from_user.username or f"user_{user_id}"
     
-    # Больше опций
-    if callback.data == "more_options":
-        keyboard = get_more_options_menu(user_id, username)
-        await callback.message.edit_text(
-            "📱 <b>Дополнительные опции:</b>\n\n"
-            "💬 <b>Связаться с менеджером</b> - прямая связь с нашим специалистом\n"
-            "📋 <b>История расчетов</b> - ваши предыдущие расчеты\n"
-            "📞 <b>Поддержка</b> - контакты и рабочее время\n"
-            "❓ <b>Помощь</b> - подробная инструкция\n\n"
-            "Выберите нужную опцию:",
-            reply_markup=keyboard,
-            parse_mode="HTML"
+    if callback.data == "new_calculation":
+        keyboard = get_webapp_inline_keyboard(user_id, username, "calculate")
+        await callback.message.answer(
+            "🔄 Начните новый расчет доставки:",
+            reply_markup=keyboard
         )
-        save_user_action(user_id, "more_options_opened")
+        save_user_action(user_id, "new_calculation")
     
-    # Назад к главному меню
+    elif callback.data == "my_requests":
+        await handle_my_requests(callback.message, user_id)
+    
     elif callback.data == "back_to_main":
-        keyboard = get_main_keyboard(user_id, username)
-        await callback.message.edit_text(
+        keyboard = get_main_reply_keyboard()
+        await callback.message.answer(
             "🏠 <b>Главное меню</b>\n\n"
             "Выберите действие или просто напишите мне сообщение!",
             reply_markup=keyboard,
             parse_mode="HTML"
         )
         save_user_action(user_id, "back_to_main")
-    
-    # Связь с менеджером
-    elif callback.data == "contact_manager":
-        manager_text = (
-            "👨‍💼 <b>Связь с менеджером</b>\n\n"
-            "Наши специалисты готовы помочь вам:\n\n"
-            "🎯 <b>Главный менеджер:</b> @manager_username\n"
-            "💬 <b>Общий чат поддержки:</b> @china_together_support\n"
-            "📧 <b>Email:</b> manager@china-together.com\n\n"
-            "🕐 <b>Рабочее время:</b>\n"
-            "ПН–ПТ с 10:00 до 18:00 (МСК)\n"
-            "🇨🇳 В Китае: 15:00 до 23:00\n\n"
-            "⚡ <b>Для быстрой связи напишите:</b> @manager_username"
-        )
-        await callback.message.answer(manager_text, parse_mode="HTML")
-        save_user_action(user_id, "manager_contact_viewed")
-    
-    # Мои заявки
-    elif callback.data == "my_requests":
-        requests = get_user_purchase_requests(user_id)
-        if requests:
-            requests_text = "<b>📂 Ваши заявки на выкуп:</b>\n\n"
-            for i, req in enumerate(requests[:5], 1):
-                status_emoji = {
-                    'new': '🆕', 'in_review': '👀', 'approved': '✅',
-                    'rejected': '❌', 'completed': '🎉'
-                }.get(req['status'], '❓')
-                
-                requests_text += (
-                    f"{i}. {status_emoji} {req['created_at'][:16]}\n"
-                    f"   💰 Сумма: {req['order_amount']}\n"
-                    f"   📧 Email: {req['email']}\n\n"
-                )
-            await callback.message.answer(requests_text, parse_mode="HTML")
-        else:
-            await callback.message.answer(
-                "📭 У вас пока нет заявок на выкуп.\n\n"
-                "Хотите оформить заявку?",
-                reply_markup=InlineKeyboardMarkup(inline_keyboard=[
-                    [InlineKeyboardButton(
-                        text="🚚 Заказать доставку", 
-                        web_app=WebAppInfo(url=f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}")
-                    )]
-                ])
-            )
-        save_user_action(user_id, "view_requests")
-    
-    # Поддержка
-    elif callback.data == "support":
-        support_text = (
-            "📞 <b>Поддержка China Together</b>\n\n"
-            "Наши менеджеры готовы помочь вам:\n\n"
-            "📞 <b>Менеджер:</b> @manager_username\n"
-            "💬 <b>Группа поддержки:</b> @china_together_support\n"
-            "📧 <b>Email:</b> support@china-together.com\n\n"
-            "🕐 <b>Время работы:</b>\n"
-            "ПН–ПТ с 10:00 до 18:00 (МСК)\n\n"
-            "⚡ <b>Быстрая связь:</b> напишите @manager_username"
-        )
-        await callback.message.answer(support_text, parse_mode="HTML")
-        save_user_action(user_id, "support_contacted")
-    
-    # Помощь
-    elif callback.data == "help":
-        help_text = (
-            "<b>❓ Как пользоваться сервисом:</b>\n\n"
-            "<b>📊 Расчет доставки:</b>\n"
-            "1️⃣ Нажмите «Рассчитать доставку»\n"
-            "2️⃣ Заполните все поля формы\n"
-            "3️⃣ Получите детальный расчет\n\n"
-            "<b>🚚 Заказ доставки:</b>\n"
-            "1️⃣ Нажмите «Заказать доставку»\n"
-            "2️⃣ Заполните заявку\n"
-            "3️⃣ Менеджер свяжется с вами\n\n"
-            "<b>📞 Поддержка:</b> @manager_username"
-        )
-        await callback.message.answer(help_text, parse_mode="HTML")
-        save_user_action(user_id, "view_help")
-    
-    # Новый расчет
-    elif callback.data == "new_calculation":
-        keyboard = InlineKeyboardMarkup(inline_keyboard=[
-            [InlineKeyboardButton(
-                text="📊 Открыть калькулятор", 
-                web_app=WebAppInfo(url=f"{WEB_APP_URL}/?telegram_id={user_id}&username={username}")
-            )]
-        ])
-        await callback.message.answer(
-            "🔄 Начните новый расчет доставки:",
-            reply_markup=keyboard
-        )
-        save_user_action(user_id, "new_calculation")
     
     await callback.answer()
 

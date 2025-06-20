@@ -2794,3 +2794,32 @@ jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was loo
 2025-06-20 12:53:50,815 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:53:50] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
 2025-06-20 12:55:41,292 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:55:41] "POST /submit_purchase_request HTTP/1.1" 200 -
 2025-06-20 13:01:41,490 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:01:41] "[33mGET /admin/assets/css/jquery-ui.css HTTP/1.1[0m" 404 -
+2025-06-20 13:03:09,891 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:03:09] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 13:03:30,165 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:03:30] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 13:03:50,182 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:03:50] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 13:06:14,210 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:06:14] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 13:08:42,161 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:08:42] "GET /?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-20 13:09:15,593 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:09:15] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-20 13:11:46,570 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 13:11:46,581 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 13:11:46,581 - __main__ - INFO - ✅ База данных готова
+2025-06-20 13:11:47,093 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 13:11:47,107 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 13:11:47,107 - __main__ - INFO - ✅ База данных готова
+2025-06-20 13:11:47,525 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 13:11:47,536 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 13:11:47,537 - __main__ - INFO - ✅ База данных готова
+2025-06-20 13:11:48,006 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 13:11:48,017 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 13:11:48,017 - __main__ - INFO - ✅ База данных готова
+2025-06-20 13:11:48,517 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 13:11:48,531 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 13:11:48,532 - __main__ - INFO - ✅ База данных готова
+2025-06-20 13:11:51,979 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:11:51] "GET /order?calculation_id=None HTTP/1.1" 200 -
+2025-06-20 13:11:53,944 - werkzeug - INFO - 178.66.159.13 - - [20/Jun/2025 13:11:53] "GET / HTTP/1.1" 200 -
+2025-06-20 13:12:03,217 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:12:03] "GET /order?calculation_id=None HTTP/1.1" 200 -
+2025-06-20 13:12:09,371 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:12:09] "GET /order?calculation_id=None HTTP/1.1" 200 -
+2025-06-20 13:12:28,105 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:12:28] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-20 13:13:09,396 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:13:09] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-20 13:17:16,561 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:17:16] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-20 13:17:23,074 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:17:23] "POST /submit_purchase_request HTTP/1.1" 200 -
