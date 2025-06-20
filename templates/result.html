@@ -12,8 +12,15 @@
             --secondary-color: #3498db;
             --success-color: #27ae60;
             --text-color: #ffffff;
-            --white: #333;
-            --border-color: #333;
+            --white: #333333;
+            --dark-card: #2a2a2a;
+            --border-color: #444444;
+            --hint-color: #999999;
+        }secondary-color: #3498db;
+            --success-color: #27ae60;
+            --text-color: #333;
+            --white: #ffffff;
+            --border-color: #e9ecef;
             --tg-theme-bg-color: var(--white);
             --tg-theme-text-color: var(--text-color);
             --tg-theme-hint-color: #999;
@@ -442,18 +449,14 @@
 
         <!-- Кнопки действий -->
         <div class="action-buttons card">
-            <a href="/order?calculation_id={{ calculation_id }}" class="btn btn-success">
+            <a href="/order?calculation_id={{ calculation_id }}" class="btn">
                 <span>🚚</span>
                 <span>Заказать доставку</span>
             </a>
-            <a href="/" class="btn btn-secondary">
+            <a href="/" class="btn">
                 <span>🔄</span>
                 <span>Новый расчет</span>
             </a>
-            <button class="btn btn-primary" id="shareBtn">
-                <span>📤</span>
-                <span>Поделиться</span>
-            </button>
         </div>
 
         {% else %}
@@ -514,42 +517,6 @@
             telegramId = urlParams.get('telegram_id');
         }
 
-        // Обработчик кнопки "Поделиться"
-        document.getElementById('shareBtn').addEventListener('click', function() {
-            // Вибрация при нажатии
-            if (tg && tg.HapticFeedback) {
-                tg.HapticFeedback.impactOccurred('light');
-            }
-
-            // Формируем текст для отправки
-            const shareText = `🧮 Расчет доставки China Together\n\n` +
-                `📦 Категория: ${resultsData.generalInformation.category}\n` +
-                `⚖️ Вес: ${resultsData.generalInformation.weight} кг\n` +
-                `💰 Стоимость товара: ${resultsData.generalInformation.productCost}\n\n` +
-                `💸 Варианты доставки:\n` +
-                `📦 Мешок: ${resultsData.bag.totalRegular} / ${resultsData.bag.totalFast}\n` +
-                `📐 Уголки: ${resultsData.corners.totalRegular} / ${resultsData.corners.totalFast}\n` +
-                `🪵 Каркас: ${resultsData.frame.totalRegular} / ${resultsData.frame.totalFast}\n\n` +
-                `Рассчитайте свою доставку: @ChinaTogetherBot`;
-
-            // Отправляем в Telegram
-            if (tg && tg.sendData) {
-                tg.sendData(JSON.stringify({
-                    action: 'share_calculation',
-                    text: shareText,
-                    results: resultsData
-                }));
-            } else {
-                // Если Telegram недоступен, копируем в буфер обмена
-                navigator.clipboard.writeText(shareText).then(() => {
-                    alert('Текст скопирован в буфер обмена!');
-                }).catch(() => {
-                    // Показываем текст в alert если копирование не работает
-                    alert(shareText);
-                });
-            }
-        });
-
         // Настройка кнопки "Назад"
         if (tg && tg.BackButton) {
             tg.BackButton.show();
@@ -561,7 +528,7 @@
         // Настройка главной кнопки
         if (tg && tg.MainButton) {
             tg.MainButton.text = "Заказать доставку";
-            tg.MainButton.color = "#27ae60";
+            tg.MainButton.color = "#E74C3C";
             tg.MainButton.show();
 
             tg.MainButton.onClick(() => {

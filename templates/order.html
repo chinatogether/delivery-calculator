@@ -11,19 +11,11 @@
             --primary-color: #E74C3C;
             --secondary-color: #3498db;
             --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --text-color: #333;
-            --light-gray: #f8f9fa;
-            --white: #ffffff;
-            --border-color: #e9ecef;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-
-            /* Telegram Web App цвета */
-            --tg-theme-bg-color: var(--white);
-            --tg-theme-text-color: var(--text-color);
-            --tg-theme-hint-color: #999;
-            --tg-theme-button-color: var(--primary-color);
-            --tg-theme-button-text-color: var(--white);
+            --text-color: #ffffff;
+            --white: #333333;
+            --dark-card: #2a2a2a;
+            --border-color: #444444;
+            --hint-color: #999999;
         }
 
         * {
@@ -35,8 +27,8 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: var(--tg-theme-text-color);
-            background: linear-gradient(135deg, #323033 0%, #323033 100%);
+            color: var(--text-color);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
             min-height: 100vh;
             padding: 0;
             margin: 0;
@@ -54,7 +46,6 @@
             text-align: center;
             margin-bottom: 24px;
             padding-top: 8px;
-            color: white;
         }
 
         .logo {
@@ -63,34 +54,204 @@
             object-fit: cover;
             border-radius: 50%;
             margin-bottom: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 3px solid rgba(231, 76, 60, 0.3);
         }
 
         h1 {
-            color: white;
+            color: var(--text-color);
             font-size: 1.8rem;
             margin-bottom: 8px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .subtitle {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--hint-color);
             font-size: 1rem;
         }
 
         .card {
-            background: var(--white);
+            background: var(--dark-card);
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             padding: 20px;
             margin-bottom: 16px;
+            border: 1px solid var(--border-color);
         }
 
         .info-section {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(52, 152, 219, 0.05) 100%);
+            background: rgba(52, 152, 219, 0.1);
             border: 2px solid rgba(52, 152, 219, 0.2);
             border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-title {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-section {
+            background: rgba(39, 174, 96, 0.1);
+            border: 2px solid rgba(39, 174, 96, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .section-title {
+            color: var(--success-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            background: var(--white);
+            color: var(--text-color);
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--success-color);
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: none;
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .required {
+            color: var(--primary-color);
+        }
+
+        .help-text {
+            font-size: 0.8rem;
+            color: var(--hint-color);
+            margin-top: 4px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success-color);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+            border: 1px solid rgba(39, 174, 96, 0.3);
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            padding: 12px;
+            background: rgba(231, 76, 60, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-wrapper:hover {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+        }
+
+        .checkbox-text {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--text-color);
+        }
+
+        .checkbox-text a {
+            color: var(--primary-color);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .checkbox-text a:hover {
+            color: #c0392b;
+        };
             padding: 20px;
             margin-bottom: 20px;
         }

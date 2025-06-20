@@ -320,3 +320,516 @@ INFO:__main__:🌐 Web App URL: https://china-together.ru
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
 INFO:aiogram.event:Update id=450949896 is handled. Duration 1216 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 253
+    elif callback.data == "main_menu_dropdown":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 326
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+  File "/home/chinatogether/xlsx-web/bot.py", line 531
+    elif callback.data == "more_options":
+    ^^^^
+SyntaxError: invalid syntax
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450949910 is not handled. Duration 153 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949897 is handled. Duration 612 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949899 is handled. Duration 587 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949905 is handled. Duration 497 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949902 is handled. Duration 580 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949900 is handled. Duration 644 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949906 is handled. Duration 566 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949898 is handled. Duration 738 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949903 is handled. Duration 650 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949901 is handled. Duration 732 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949907 is handled. Duration 611 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949908 is handled. Duration 634 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949904 is handled. Duration 742 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949909 is handled. Duration 695 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949911 is handled. Duration 174 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949912 is handled. Duration 211 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949913 is handled. Duration 149 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949914 is handled. Duration 208 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949915 is handled. Duration 91 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949916 is handled. Duration 89 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949917 is handled. Duration 234 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949918 is handled. Duration 94 ms by bot id=7709869722

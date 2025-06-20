@@ -2725,3 +2725,72 @@ jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was loo
 2025-06-20 12:06:00,643 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:06:00] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
 2025-06-20 12:21:32,195 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:21:32] "GET / HTTP/1.1" 200 -
 2025-06-20 12:22:44,200 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:22:44] "GET / HTTP/1.1" 200 -
+2025-06-20 12:23:50,660 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:23:50] "GET /?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-20 12:24:01,969 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:24:01] "[32mGET /calculate?category=Текстиль&weight=10&length=30&width=40&height=50&cost=20&quantity=1&telegram_id=148440745&username=emilienches HTTP/1.1[0m" 302 -
+2025-06-20 12:24:02,109 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:24:02] "GET /result?results={"generalInformation":%20{"category":%20"\\u0422\\u0435\\u043a\\u0441\\u0442\\u0438\\u043b\\u044c",%20"weight":%2010.0,%20"density":%20166.67,%20"productCost":%2020.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%200.2,%20"volume":%200.06,%20"boxCount":%201},%20"bag":%20{"packedWeight":%2010.3,%20"packagingCost":%203.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2033.99,%20"deliveryCostRegular":%2025.75,%20"totalFast":%2041.19,%20"totalRegular":%2032.95},%20"corners":%20{"packedWeight":%2011.0,%20"packagingCost":%208.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2036.3,%20"deliveryCostRegular":%2027.5,%20"totalFast":%2048.5,%20"totalRegular":%2039.7},%20"frame":%20{"packedWeight":%2014.0,%20"packagingCost":%2015.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2046.2,%20"deliveryCostRegular":%2035.0,%20"totalFast":%2065.4,%20"totalRegular":%2054.2}}&calculation_id=59&telegram_id=148440745 HTTP/1.1" 200 -
+2025-06-20 12:24:03,688 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:24:03] "GET /result?results={"generalInformation":%20{"category":%20"\\u0422\\u0435\\u043a\\u0441\\u0442\\u0438\\u043b\\u044c",%20"weight":%2010.0,%20"density":%20166.67,%20"productCost":%2020.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%200.2,%20"volume":%200.06,%20"boxCount":%201},%20"bag":%20{"packedWeight":%2010.3,%20"packagingCost":%203.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2033.99,%20"deliveryCostRegular":%2025.75,%20"totalFast":%2041.19,%20"totalRegular":%2032.95},%20"corners":%20{"packedWeight":%2011.0,%20"packagingCost":%208.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2036.3,%20"deliveryCostRegular":%2027.5,%20"totalFast":%2048.5,%20"totalRegular":%2039.7},%20"frame":%20{"packedWeight":%2014.0,%20"packagingCost":%2015.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2046.2,%20"deliveryCostRegular":%2035.0,%20"totalFast":%2065.4,%20"totalRegular":%2054.2}}&calculation_id=59&telegram_id=148440745 HTTP/1.1" 200 -
+2025-06-20 12:24:38,958 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:24:38] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 12:25:41,412 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:25:41] "GET /order?calculation_id=59 HTTP/1.1" 200 -
+2025-06-20 12:26:19,265 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:26:19] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 12:26:33,662 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:26:33] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 12:26:56,122 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:26:56] "GET / HTTP/1.1" 200 -
+2025-06-20 12:27:01,911 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:27:01] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 12:31:15,234 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:31:15,254 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:31:15,254 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:31:15,268 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-20 12:31:15,268 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-20 12:31:16,283 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:31:16,393 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:31:16,393 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:31:16,757 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:31:16,768 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:31:16,768 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:31:17,287 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:31:17,299 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:31:17,299 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:31:17,774 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:31:17,786 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:31:17,786 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:31:18,171 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:31:18,184 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:31:18,185 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:35:17,744 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:35:17] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"weight":%20100.0,%20"density":%20666.67,%20"productCost":%201250.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%2012.5,%20"volume":%200.15,%20"boxCount":%201},%20"bag":%20{"packedWeight":%20102.0,%20"packagingCost":%2012.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20234.6,%20"deliveryCostRegular":%20153.0,%20"totalFast":%20275.1,%20"totalRegular":%20193.5},%20"corners":%20{"packedWeight":%20106.0,%20"packagingCost":%2032.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20243.8,%20"deliveryCostRegular":%20159.0,%20"totalFast":%20304.3,%20"totalRegular":%20219.5},%20"frame":%20{"packedWeight":%20122.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20280.6,%20"deliveryCostRegular":%20183.0,%20"totalFast":%20333.1,%20"totalRegular":%20235.5}}&telegram_id=test_user HTTP/1.1" 200 -
+2025-06-20 12:35:28,171 - werkzeug - INFO - 178.66.159.13 - - [20/Jun/2025 12:35:28] "GET / HTTP/1.1" 200 -
+2025-06-20 12:35:30,570 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:35:30] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"weight":%20100.0,%20"density":%20666.67,%20"productCost":%201250.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%2012.5,%20"volume":%200.15,%20"boxCount":%201},%20"bag":%20{"packedWeight":%20102.0,%20"packagingCost":%2012.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20234.6,%20"deliveryCostRegular":%20153.0,%20"totalFast":%20275.1,%20"totalRegular":%20193.5},%20"corners":%20{"packedWeight":%20106.0,%20"packagingCost":%2032.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20243.8,%20"deliveryCostRegular":%20159.0,%20"totalFast":%20304.3,%20"totalRegular":%20219.5},%20"frame":%20{"packedWeight":%20122.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20280.6,%20"deliveryCostRegular":%20183.0,%20"totalFast":%20333.1,%20"totalRegular":%20235.5}}&telegram_id=test_user HTTP/1.1" 200 -
+2025-06-20 12:37:48,825 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:37:48] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"weight":%20100.0,%20"density":%20666.67,%20"productCost":%201250.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%2012.5,%20"volume":%200.15,%20"boxCount":%201},%20"bag":%20{"packedWeight":%20102.0,%20"packagingCost":%2012.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20234.6,%20"deliveryCostRegular":%20153.0,%20"totalFast":%20275.1,%20"totalRegular":%20193.5},%20"corners":%20{"packedWeight":%20106.0,%20"packagingCost":%2032.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20243.8,%20"deliveryCostRegular":%20159.0,%20"totalFast":%20304.3,%20"totalRegular":%20219.5},%20"frame":%20{"packedWeight":%20122.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%2012.5,%20"deliveryCostFast":%20280.6,%20"deliveryCostRegular":%20183.0,%20"totalFast":%20333.1,%20"totalRegular":%20235.5}}&telegram_id=test_user HTTP/1.1" 200 -
+2025-06-20 12:37:52,963 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:37:52] "GET /order?calculation_id=None HTTP/1.1" 200 -
+2025-06-20 12:40:00,693 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:40:00] "GET /order?calculation_id=None HTTP/1.1" 200 -
+2025-06-20 12:42:40,610 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:42:40,621 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:42:40,622 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:42:40,634 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-20 12:42:40,634 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-20 12:42:40,794 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:42:40,817 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:42:40,818 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:42:41,310 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:42:41,323 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:42:41,323 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:42:41,810 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:42:41,822 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:42:41,822 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:42:42,344 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:42:42,357 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:42:42,357 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:42:42,842 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-20 12:42:42,856 - __main__ - INFO - База данных успешно инициализирована
+2025-06-20 12:42:42,856 - __main__ - INFO - ✅ База данных готова
+2025-06-20 12:43:36,286 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:43:36] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 12:44:44,916 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:44:44] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 12:45:19,602 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:45:19] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 12:46:34,614 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:46:34] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-20 12:53:50,815 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:53:50] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-20 12:55:41,292 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 12:55:41] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-20 13:01:41,490 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 13:01:41] "[33mGET /admin/assets/css/jquery-ui.css HTTP/1.1[0m" 404 -

@@ -11,19 +11,11 @@
             --primary-color: #E74C3C;
             --secondary-color: #3498db;
             --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --text-color: #333;
-            --light-gray: #f8f9fa;
-            --white: #ffffff;
-            --border-color: #e9ecef;
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
-            
-            /* Telegram Web App цвета */
-            --tg-theme-bg-color: var(--white);
-            --tg-theme-text-color: var(--text-color);
-            --tg-theme-hint-color: #999;
-            --tg-theme-button-color: var(--primary-color);
-            --tg-theme-button-text-color: var(--white);
+            --text-color: #ffffff;
+            --white: #333333;
+            --dark-card: #2a2a2a;
+            --border-color: #444444;
+            --hint-color: #999999;
         }
         
         * {
@@ -35,15 +27,14 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: var(--tg-theme-text-color);
-            background: linear-gradient(135deg, #323033 0%, #323033 100%);
+            color: var(--text-color);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
             min-height: 100vh;
             padding: 0;
             margin: 0;
             overflow-x: hidden;
         }
         
-        /* Адаптивный контейнер для Telegram Web App */
         .container {
             max-width: 100%;
             padding: 16px;
@@ -54,7 +45,6 @@
             text-align: center;
             margin-bottom: 24px;
             padding-top: 8px;
-            color: white;
         }
         
         .logo {
@@ -63,28 +53,29 @@
             object-fit: cover;
             border-radius: 50%;
             margin-bottom: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 3px solid rgba(231, 76, 60, 0.3);
         }
         
         h1 {
-            color: white;
+            color: var(--text-color);
             font-size: 2.2rem;
             margin-bottom: 8px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
         .subtitle {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--hint-color);
             font-size: 1.1rem;
         }
         
         .card {
-            background: var(--white);
+            background: var(--dark-card);
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             padding: 20px;
             margin-bottom: 16px;
+            border: 1px solid var(--border-color);
         }
         
         .form-section {
@@ -121,7 +112,7 @@
             display: block;
             margin-bottom: 6px;
             font-weight: 500;
-            color: var(--tg-theme-text-color);
+            color: var(--text-color);
             font-size: 0.9rem;
         }
         
@@ -132,21 +123,20 @@
             border-radius: 8px;
             font-size: 16px;
             transition: all 0.2s ease;
-            background: var(--tg-theme-bg-color);
-            color: var(--tg-theme-text-color);
+            background: var(--white);
+            color: var(--text-color);
             -webkit-appearance: none;
         }
         
         input:focus, select:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
         }
         
-        /* Стили для мобильных устройств */
         @media (max-width: 480px) {
             input[type="number"] {
-                font-size: 16px !important; /* Предотвращает zoom на iOS */
+                font-size: 16px !important;
             }
         }
         
@@ -159,7 +149,7 @@
             right: 12px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--tg-theme-hint-color);
+            color: var(--hint-color);
             font-size: 1.1rem;
             pointer-events: none;
         }
@@ -167,8 +157,8 @@
         .btn {
             width: 100%;
             padding: 16px;
-            background: var(--tg-theme-button-color);
-            color: var(--tg-theme-button-text-color);
+            background: var(--primary-color);
+            color: white;
             border: none;
             border-radius: 8px;
             font-size: 16px;
@@ -184,7 +174,7 @@
         
         .btn:hover:not(:disabled) {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
         }
         
         .btn:active:not(:disabled) {
@@ -201,14 +191,15 @@
             text-align: center;
             margin-top: 20px;
             padding: 20px;
-            background: rgba(231, 76, 60, 0.05);
+            background: rgba(231, 76, 60, 0.1);
             border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
         
         .spinner {
             width: 40px;
             height: 40px;
-            border: 3px solid rgba(231, 76, 60, 0.1);
+            border: 3px solid rgba(231, 76, 60, 0.2);
             border-radius: 50%;
             border-top: 3px solid var(--primary-color);
             animation: spin 1s linear infinite;
@@ -221,7 +212,7 @@
         }
         
         .error-message {
-            color: #dc3545;
+            color: #ff6b6b;
             font-size: 0.85rem;
             margin-top: 4px;
             display: none;
@@ -243,9 +234,9 @@
             background: rgba(39, 174, 96, 0.1);
             border-radius: 6px;
             text-align: center;
+            border: 1px solid rgba(39, 174, 96, 0.3);
         }
         
-        /* Компактные features для мобильных */
         .features {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -256,8 +247,9 @@
         .feature {
             text-align: center;
             padding: 12px 8px;
-            background: rgba(231, 76, 60, 0.05);
+            background: rgba(231, 76, 60, 0.1);
             border-radius: 8px;
+            border: 1px solid rgba(231, 76, 60, 0.2);
         }
         
         .feature-icon {
@@ -269,34 +261,22 @@
             font-size: 0.85rem;
             font-weight: 500;
             margin-bottom: 0;
+            color: var(--text-color);
         }
         
         .feature p {
-            display: none; /* Скрываем описание на мобильных */
+            display: none;
         }
         
         @media (min-width: 480px) {
             .feature p {
                 display: block;
                 font-size: 0.8rem;
-                color: var(--tg-theme-hint-color);
+                color: var(--hint-color);
                 margin-top: 4px;
             }
         }
         
-        /* Telegram Web App специфичные стили */
-        .tg-info {
-            background: rgba(52, 152, 219, 0.1);
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        /* Убираем лишние отступы для Telegram Web App */
         @media (max-width: 480px) {
             .container {
                 padding: 12px;
@@ -307,35 +287,11 @@
             }
             
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
             
             .section-title {
                 font-size: 1rem;
-            }
-        }
-        
-        /* Темная тема (если включена в Telegram) */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --tg-theme-bg-color: #1a1a1a;
-                --tg-theme-text-color: #ffffff;
-                --white: #2a2a2a;
-                --border-color: #3a3a3a;
-            }
-            
-            .card {
-                background: #2a2a2a;
-            }
-            
-            input, select {
-                background: #1a1a1a;
-                border-color: #3a3a3a;
-                color: #ffffff;
-            }
-            
-            .feature {
-                background: rgba(231, 76, 60, 0.1);
             }
         }
     </style>
@@ -367,7 +323,6 @@
         </div>
         
         <div class="card">
-            
             <form id="deliveryForm">
                 <div class="form-section">
                     <h2 class="section-title">
@@ -473,31 +428,19 @@
         // Инициализация Telegram Web App
         const tg = window.Telegram.WebApp;
         tg.ready();
-        tg.expand(); // Разворачиваем приложение на весь экран
+        tg.expand();
         
         // Получаем данные пользователя
         let telegramUserId = null;
         let telegramUsername = null;
         
-        // Проверяем, откуда пришел пользователь
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-            // Данные из Telegram Web App
             telegramUserId = tg.initDataUnsafe.user.id;
             telegramUsername = tg.initDataUnsafe.user.username || `user_${tg.initDataUnsafe.user.id}`;
         } else {
-            // Данные из URL параметров (для тестирования)
             const urlParams = new URLSearchParams(window.location.search);
             telegramUserId = urlParams.get('telegram_id') || 'test_user';
             telegramUsername = urlParams.get('username') || 'test_username';
-        }
-        
-        // Применяем тему Telegram
-        if (tg.themeParams) {
-            document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color || '#ffffff');
-            document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color || '#000000');
-            document.documentElement.style.setProperty('--tg-theme-hint-color', tg.themeParams.hint_color || '#999999');
-            document.documentElement.style.setProperty('--tg-theme-button-color', tg.themeParams.button_color || '#E74C3C');
-            document.documentElement.style.setProperty('--tg-theme-button-text-color', tg.themeParams.button_text_color || '#ffffff');
         }
         
         // Обработка формы
@@ -507,7 +450,6 @@
             const calculateBtn = document.getElementById('calculateBtn');
             const successMessage = document.getElementById('successMessage');
             
-            // Функция валидации
             function validateForm() {
                 let isValid = true;
                 const fields = [
@@ -528,7 +470,7 @@
                     if (!field.validator(value)) {
                         errorElement.textContent = field.message;
                         errorElement.style.display = 'block';
-                        element.style.borderColor = '#dc3545';
+                        element.style.borderColor = '#ff6b6b';
                         isValid = false;
                     } else {
                         errorElement.style.display = 'none';
@@ -539,12 +481,10 @@
                 return isValid;
             }
             
-            // Обработчик отправки формы
             form.addEventListener('submit', async function(event) {
                 event.preventDefault();
                 
                 if (!validateForm()) {
-                    // Вибрация при ошибке (если поддерживается)
                     if (tg && tg.HapticFeedback) {
                         tg.HapticFeedback.notificationOccurred('error');
                     }
@@ -552,18 +492,15 @@
                 }
                 
                 try {
-                    // Вибрация при начале расчета
                     if (tg && tg.HapticFeedback) {
                         tg.HapticFeedback.impactOccurred('medium');
                     }
                     
-                    // Показываем индикатор загрузки
                     loadingElement.style.display = 'block';
                     calculateBtn.disabled = true;
                     calculateBtn.innerHTML = '<span>⏳</span><span>Выполняем расчет...</span>';
                     successMessage.style.display = 'none';
                     
-                    // Получаем данные формы
                     const formData = {
                         category: encodeURIComponent(document.getElementById('category').value),
                         weight: encodeURIComponent(parseFloat(document.getElementById('weight').value)),
@@ -576,13 +513,11 @@
                         username: telegramUsername
                     };
                     
-                    // Формируем URL запроса
                     const queryString = Object.keys(formData)
                         .map(key => `${key}=${formData[key]}`)
                         .join('&');
                     const url = `/calculate?${queryString}`;
                     
-                    // Отправляем запрос
                     const response = await fetch(url, {
                         method: 'GET',
                         headers: {
@@ -594,47 +529,13 @@
                         throw new Error(`Ошибка HTTP: ${response.status}`);
                     }
                     
-                    // Проверяем, является ли ответ перенаправлением
                     if (response.redirected) {
-                        // Показываем сообщение об успехе
                         successMessage.style.display = 'block';
                         
-                        // Подготавливаем данные для отправки в бот
-                        const resultUrl = new URL(response.url);
-                        const resultsParam = resultUrl.searchParams.get('results');
-                        // if (resultsParam) {
-                        //     const results = JSON.parse(decodeURIComponent(resultsParam));
-                            
-                        //     // Подготавливаем данные для бота
-                        //     const dataForBot = {
-                        //         category: results.generalInformation.category,
-                        //         totalWeight: results.generalInformation.weight,
-                        //         density: results.generalInformation.density,
-                        //         productCost: results.generalInformation.productCost,
-                        //         insuranceRate: results.generalInformation.insuranceRate,
-                        //         insuranceAmount: results.generalInformation.insuranceAmount,
-                        //         volume: results.generalInformation.volume,
-                        //         boxCount: results.generalInformation.boxCount,
-                        //         bagTotalFast: results.bag.totalFast,
-                        //         bagTotalRegular: results.bag.totalRegular,
-                        //         cornersTotalFast: results.corners.totalFast,
-                        //         cornersTotalRegular: results.corners.totalRegular,
-                        //         frameTotalFast: results.frame.totalFast,
-                        //         frameTotalRegular: results.frame.totalRegular
-                        //     };
-                            
-                        //     // Отправляем данные в Telegram бот
-                        //     if (tg && tg.sendData) {
-                        //         tg.sendData(JSON.stringify(dataForBot));
-                        //     }
-                        // }
-                        
-                        // Вибрация успеха
                         if (tg && tg.HapticFeedback) {
                             tg.HapticFeedback.notificationOccurred('success');
                         }
                         
-                        // Перенаправляем на страницу результатов
                         setTimeout(() => {
                             window.location.href = response.url;
                         }, 1500);
@@ -651,17 +552,14 @@
                 } catch (error) {
                     console.error('Ошибка:', error);
                     
-                    // Вибрация ошибки
                     if (tg && tg.HapticFeedback) {
                         tg.HapticFeedback.notificationOccurred('error');
                     }
                     
-                    // Показываем ошибку
                     if (tg && tg.showAlert) {
                         try {
                             tg.showAlert(`Произошла ошибка: ${error.message}`);
                         } catch (e) {
-                            // Если showAlert не работает, используем обычный alert
                             alert(`Произошла ошибка: ${error.message}`);
                         }
                     } else {
@@ -683,23 +581,18 @@
                         this.style.borderColor = 'var(--border-color)';
                     }
                 });
-                
-                element.addEventListener('blur', function() {
-                    validateForm();
-                });
             });
             
-            // Обработка кнопки "Назад" в Telegram
+            // Telegram кнопки
             if (tg && tg.BackButton) {
                 tg.BackButton.show();
                 tg.BackButton.onClick(() => {
-                    if (confirm('Вы уверены, что хотите выйти? Несохраненные данные будут потеряны.')) {
+                    if (confirm('Вы уверены, что хотите выйти?')) {
                         tg.close();
                     }
                 });
             }
             
-            // Настройка главной кнопки Telegram (альтернатива submit)
             if (tg && tg.MainButton) {
                 tg.MainButton.text = "Рассчитать стоимость";
                 tg.MainButton.color = "#E74C3C";
