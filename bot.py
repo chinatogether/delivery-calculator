@@ -76,12 +76,12 @@ def get_main_reply_keyboard():
             ],
             [
                 KeyboardButton(text="📂 Мои заявки"),
-                KeyboardButton(text="💬 Связаться с менеджером")
-            ],
-            [
-                KeyboardButton(text="📱 Дополнительно"),
                 KeyboardButton(text="❓ Помощь")
-            ]
+            ],
+            # [
+            #     KeyboardButton(text="📱 Дополнительно"),
+            #     KeyboardButton(text="💬 Связаться с менеджером")
+            # ]
         ],
         resize_keyboard=True,
         one_time_keyboard=False,
@@ -380,7 +380,7 @@ async def handle_help(message, user_id):
         "1️⃣ Нажмите «🚚 Заказать доставку»\n"
         "2️⃣ Заполните заявку\n"
         "3️⃣ Менеджер свяжется с вами\n\n"
-        "<b>📞 Поддержка:</b> @manager_username"
+        # "<b>📞 Поддержка:</b> @manager_username"
     )
     await message.reply(help_text, parse_mode="HTML")
     save_user_action(user_id, "view_help")

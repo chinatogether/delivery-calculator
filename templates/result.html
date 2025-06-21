@@ -309,17 +309,17 @@
                     {% if results.generalInformation.category == 'Обувь' %}
                         <span class="info-label">Доставка оригинала на 1 кг</span>
                     {% else %}
-                        <span class="info-label">Доставка быстрая на 1 кг</span>
+                        <span class="info-label">Быстрое авто на 1 кг</span>
                     {% endif %}
-                    <span class="fast-price">$/кг{{ "%.2f"|format(results.generalInformation.fast_car_cost_per_kg) }}</span>
+                    <span class="fast-price">{{ "%.2f"|format(results.generalInformation.fast_car_cost_per_kg) }} $/кг</span>
                 </div>
                 <div class="info-item">
                     {% if results.generalInformation.category == 'Обувь' %}
                         <span class="info-label">Доставка реплики на 1 кг</span>
                     {% else %}
-                        <span class="info-label">Доставка обычная на 1 кг</span>
+                        <span class="info-label">Обычное авто на 1 кг</span>
                     {% endif %}
-                    <span class="regular-price">$/кг{{ "%.2f"|format(results.generalInformation.regular_car_cost_per_kg) }}</span>
+                    <span class="regular-price">{{ "%.2f"|format(results.generalInformation.regular_car_cost_per_kg) }} $/кг</span>
                 </div>
             </div>
         </div>

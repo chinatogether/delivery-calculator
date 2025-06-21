@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тарифы доставки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #E74C3C;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тарифы доставки China Together</h1>
+
+    {% for category, rows in data.items() %}
+        <h2>{{ category }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Плотность</th>
+                    <th>Быстрая доставка ($/кг)</th>
+                    <th>Обычная доставка ($/кг)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                    <tr>
+                        <td>{{ row.density_range }}</td>
+                        <td>{{ "%.2f"|format(row.fast) }}</td>
+                        <td>{{ "%.2f"|format(row.regular) }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+
+    <div class="footer">
+        © China Together — ваш надёжный партнёр по доставке из Китая
+    </div>
+</body>
+</html>
