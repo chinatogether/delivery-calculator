@@ -242,8 +242,8 @@
         }
 
         .checkbox-wrapper input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             margin: 0;
             cursor: pointer;
             position: relative;
@@ -252,9 +252,12 @@
             -moz-appearance: none;
             background: var(--white);
             border: 2px solid var(--border-color);
-            border-radius: 4px;
+            border-radius: 6px;
             transition: all 0.2s ease;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .checkbox-wrapper input[type="checkbox"]:checked {
@@ -262,15 +265,13 @@
             border-color: var(--success-color);
         }
 
-        .checkbox-wrapper input[type="checkbox"]:checked::after {
+        .checkbox-wrapper input[type="checkbox"]:checked::before {
             content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             color: white;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
+            line-height: 1;
+            display: block;
         }
 
         .checkbox-wrapper input[type="checkbox"]:focus {
@@ -448,7 +449,7 @@
                 </div>
 
                 <!-- Кнопка отправки -->
-                <button type="submit" class="btn" id="submitRequestBtn">
+                <button type="submit" class="btn" id="submitRequestBtn" style="background: var(--primary-color);">
                     <span>📤</span>
                     <span>Отправить заявку</span>
                 </button>
@@ -723,4 +724,4 @@
         updateCheckboxStyle();
     </script>
 </body>
-</html>
+</html>	
