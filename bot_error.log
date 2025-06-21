@@ -913,3 +913,19 @@ INFO:aiogram.event:Update id=450949974 is handled. Duration 166 ms by bot id=770
 INFO:aiogram.event:Update id=450949975 is handled. Duration 303 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949976 is handled. Duration 112 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949977 is handled. Duration 134 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450949979 is handled. Duration 252 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949980 is handled. Duration 230 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949978 is handled. Duration 279 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450949981 is handled. Duration 568 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949982 is handled. Duration 247 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949983 is handled. Duration 260 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949984 is handled. Duration 109 ms by bot id=7709869722
