@@ -3978,3 +3978,60 @@ jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was loo
 2025-06-21 14:25:27,948 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 14:25:27] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
 2025-06-21 14:31:04,699 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 14:31:04] "[33mGET /wp-login.php HTTP/1.1[0m" 404 -
 2025-06-21 14:38:40,320 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 14:38:40] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.8,%20"regular_car_cost_per_kg":%202.4,%20"weight":%20200.0,%20"density":%20166.67,%20"productCost":%2036.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%200.36,%20"volume":%201.2,%20"boxCount":%2010},%20"bag":%20{"packedWeight":%20203.5,%20"packagingCost":%2021.0,%20"unloadCost":%2028.0,%20"insurance":%200.36,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20569.8,%20"deliveryCostRegular":%20488.4,%20"totalFast":%20619.16,%20"totalRegular":%20537.76},%20"corners":%20{"packedWeight":%20210.5,%20"packagingCost":%2056.0,%20"unloadCost":%2028.0,%20"insurance":%200.36,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20589.4,%20"deliveryCostRegular":%20505.2,%20"totalFast":%20673.76,%20"totalRegular":%20589.56},%20"frame":%20{"packedWeight":%20233.0,%20"packagingCost":%2040.0,%20"unloadCost":%2032.0,%20"insurance":%200.36,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20652.4,%20"deliveryCostRegular":%20559.2,%20"totalFast":%20724.76,%20"totalRegular":%20631.56}}&calculation_id=78&telegram_id=test_user HTTP/1.1" 200 -
+2025-06-21 14:43:04,680 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 14:43:04] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-21 14:45:22,042 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 14:45:22] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-21 14:45:56,935 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 14:45:56] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-21 14:46:16,370 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 14:46:16] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-21 14:49:24,053 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 14:49:24] "[31m[1mPROPFIND / HTTP/1.1[0m" 405 -
+2025-06-21 15:02:50,201 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:02:50,229 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:02:50,229 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:02:50,245 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-21 15:02:50,245 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-21 15:02:51,304 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:02:51,315 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:02:51,315 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:02:51,820 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:02:51,832 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:02:51,832 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:02:52,268 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:02:52,279 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:02:52,279 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:02:52,769 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:02:52,780 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:02:52,780 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:02:53,283 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:02:53,295 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:02:53,295 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:07:04,883 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 15:07:04] "GET / HTTP/1.1" 200 -
+2025-06-21 15:08:56,090 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 15:08:56] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-21 15:09:36,871 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 15:09:36] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-21 15:09:51,947 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:09:51,960 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:09:51,960 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:09:51,975 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-21 15:09:51,977 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-21 15:09:53,311 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:09:53,327 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:09:53,327 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:09:53,800 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:09:53,811 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:09:53,811 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:09:54,276 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:09:54,291 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:09:54,291 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:09:54,829 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:09:54,846 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:09:54,846 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:09:55,369 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-21 15:09:55,386 - __main__ - INFO - База данных успешно инициализирована
+2025-06-21 15:09:55,386 - __main__ - INFO - ✅ База данных готова
+2025-06-21 15:10:51,547 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 15:10:51] "GET /?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-21 15:10:51,913 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 15:10:51] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-21 15:11:03,437 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 15:11:03] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -

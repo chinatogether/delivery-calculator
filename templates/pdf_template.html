@@ -33,16 +33,13 @@
         }
         
         .logo {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
             border-radius: 50%;
-            margin: 0 auto 10px auto;
-            border: 2px solid #E74C3C;
-            display: block;
-            background-color: #E74C3C;
-            background-image: url('https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20(2).jpg');
-            background-size: cover;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 3px solid rgba(231, 76, 60, 0.3);
         }
         
         h1 {
@@ -212,7 +209,7 @@
         
         <!-- Титульная страница -->
         <div class="header">
-            <div class="logo"></div>
+             <img src="https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20(2).jpg" alt="China Together" class="logo">
             <h1>China Together</h1>
             <p class="subtitle">Актуальные тарифы доставки из Китая</p>
             
@@ -228,7 +225,11 @@
             
             <div class="category-page">
                 <div class="category-header">
+                    {% if category == 'Обычные товары' %}
+                    <h2>Обычный товар/Хоз товары/Сумки/Коврики/Шапки</h2>
+                     {% else %}
                     <h2>{{ category }}</h2>
+                    {% endif %}
                 </div>
                 
                 <table>
@@ -241,9 +242,9 @@
                     </thead>
                     <tbody>
                         {% for row in rows %}
-                            <tr {% if row.fast_delivery_cost >= 3.5 %}class="density-high"{% elif row.fast_delivery_cost >= 2.5 %}class="density-medium"{% else %}class="density-low"{% endif %}>
+                            <tr {% if row.fast_delivery_cost >= 3.5 %}class="density-medium"{% elif row.fast_delivery_cost >= 2.5 %}class="density-medium"{% else %}class="density-medium"{% endif %}>
                                 <td style="text-align: left; font-weight: bold;">{{ row.density_range }}</td>
-                                <td class="{% if row.fast_delivery_cost >= 3.5 %}price-highlight{% endif %}">${{ "%.2f"|format(row.fast_delivery_cost) }}</td>
+                                <td>${{ "%.2f"|format(row.fast_delivery_cost) }}</td>
                                 <td>${{ "%.2f"|format(row.regular_delivery_cost) }}</td>
                             </tr>
                         {% endfor %}
@@ -253,7 +254,11 @@
                 <div class="additional-info">
                     <h3>📋 Важная информация по доставке:</h3>
                     <ol>
-                        <li><strong>Сроки доставки:</strong> Быстрое авто (12-15 дней), Обычное авто (18-25 дней)</li>
+                         {% if category == 'Обувь' %}
+                                <li><strong>Сроки доставки:</strong> Быстрое авто (12-15 дней)</li>
+                                {% else %}
+                                <li><strong>Сроки доставки:</strong> Быстрое авто (12-15 дней), Обычное авто (15-20 дней)</li>
+                                {% endif %}
                         <li><strong>Страхование товара:</strong>
                             <ul style="margin: 3px 0; padding-left: 15px;">
                                 <li>до 20$/kg — 1% от стоимости</li>

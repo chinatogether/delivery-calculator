@@ -80,12 +80,13 @@ def get_main_reply_keyboard():
             ],
             [
                 KeyboardButton(text="📂 Мои заявки"),
-                KeyboardButton(text="💬 Связаться с менеджером")
+                KeyboardButton(text="📋 Актуальные тарифы")
             ],
-            [
-                KeyboardButton(text="📋 Актуальные тарифы"),
-                KeyboardButton(text="📱 Дополнительно")
-            ],
+            # [
+            #     ,
+            #     KeyboardButton(text="💬 Связаться с менеджером"),
+            #     KeyboardButton(text="📱 Дополнительно")
+            # ],
             [
                 KeyboardButton(text="❓ Помощь")
             ]
@@ -191,7 +192,7 @@ async def send_tariffs_pdf(message: types.Message, user_id: int):
                 "• Цены на упаковку (мешок, картон, дерево)\n"
                 "• Тарифы быстрой и обычной доставки\n"
                 "• Стоимость дополнительных услуг\n\n"
-                "❓ <b>Есть вопросы?</b> Обращайтесь к менеджеру: @manager_username\n\n"
+                # "❓ <b>Есть вопросы?</b> Обращайтесь к менеджеру: @manager_username\n\n"
                 f"📅 Дата: {datetime.now().strftime('%d.%m.%Y')}"
             ),
             parse_mode="HTML"
@@ -445,13 +446,13 @@ async def handle_contact_manager(message, user_id):
     manager_text = (
         "👨‍💼 <b>Связь с менеджером</b>\n\n"
         "Наши специалисты готовы помочь вам:\n\n"
-        "🎯 <b>Главный менеджер:</b> @manager_username\n"
-        "💬 <b>Общий чат поддержки:</b> @china_together_support\n"
-        "📧 <b>Email:</b> manager@china-together.com\n\n"
+        # "🎯 <b>Главный менеджер:</b> @manager_username\n"
+        # "💬 <b>Общий чат поддержки:</b> @china_together_support\n"
+        # "📧 <b>Email:</b> manager@china-together.com\n\n"
         "🕐 <b>Рабочее время:</b>\n"
         "ПН–ПТ с 10:00 до 18:00 (МСК)\n"
         "🇨🇳 В Китае: 15:00 до 23:00\n\n"
-        "⚡ <b>Для быстрой связи напишите:</b> @manager_username"
+        # "⚡ <b>Для быстрой связи напишите:</b> @manager_username"
     )
     await message.reply(manager_text, parse_mode="HTML")
     save_user_action(user_id, "manager_contact_viewed")
@@ -469,7 +470,7 @@ async def handle_help(message, user_id):
         "3️⃣ Менеджер свяжется с вами\n\n"
         "<b>📋 Актуальные тарифы:</b>\n"
         "Получите PDF с полным прайс-листом\n\n"
-        "<b>📞 Поддержка:</b> @manager_username"
+        # "<b>📞 Поддержка:</b> @manager_username"
     )
     await message.reply(help_text, parse_mode="HTML")
     save_user_action(user_id, "view_help")
@@ -478,12 +479,12 @@ async def handle_support(message, user_id):
     support_text = (
         "📞 <b>Поддержка China Together</b>\n\n"
         "Наши менеджеры готовы помочь вам:\n\n"
-        "📞 <b>Менеджер:</b> @manager_username\n"
-        "💬 <b>Группа поддержки:</b> @china_together_support\n"
-        "📧 <b>Email:</b> support@china-together.com\n\n"
+        # "📞 <b>Менеджер:</b> @manager_username\n"
+        # "💬 <b>Группа поддержки:</b> @china_together_support\n"
+        # "📧 <b>Email:</b> support@china-together.com\n\n"
         "🕐 <b>Время работы:</b>\n"
         "ПН–ПТ с 10:00 до 18:00 (МСК)\n\n"
-        "⚡ <b>Быстрая связь:</b> напишите @manager_username"
+        # "⚡ <b>Быстрая связь:</b> напишите @manager_username"
     )
     await message.reply(support_text, parse_mode="HTML")
     save_user_action(user_id, "support_contacted")

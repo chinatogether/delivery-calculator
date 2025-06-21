@@ -929,3 +929,552 @@ INFO:aiogram.event:Update id=450949981 is handled. Duration 568 ms by bot id=770
 INFO:aiogram.event:Update id=450949982 is handled. Duration 247 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949983 is handled. Duration 260 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949984 is handled. Duration 109 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+  File "/home/chinatogether/xlsx-web/bot.py", line 167
+    "❌ <b>Файл с тарифами не найден</b>\n\n"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950003 is handled. Duration 734 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950004 is handled. Duration 186 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950005 is handled. Duration 109 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950006 is handled. Duration 155 ms by bot id=7709869722
