@@ -306,12 +306,20 @@
                     <span class="info-value">{{ results.generalInformation.boxCount }} шт.</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">Доставка быстрая на 1 кг</span>
-                    <span class="fast-price">${{ "%.2f"|format(results.generalInformation.fast_car_cost_per_kg) }}</span>
+                    {% if results.generalInformation.category == 'Обувь' %}
+                        <span class="info-label">Доставка оригинала на 1 кг</span>
+                    {% else %}
+                        <span class="info-label">Доставка быстрая на 1 кг</span>
+                    {% endif %}
+                    <span class="fast-price">$/кг{{ "%.2f"|format(results.generalInformation.fast_car_cost_per_kg) }}</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">Доставка обычная на 1 кг</span>
-                        <span class="regular-price">${{ "%.2f"|format(results.generalInformation.regular_car_cost_per_kg) }}</span>
+                    {% if results.generalInformation.category == 'Обувь' %}
+                        <span class="info-label">Доставка реплики на 1 кг</span>
+                    {% else %}
+                        <span class="info-label">Доставка обычная на 1 кг</span>
+                    {% endif %}
+                    <span class="regular-price">$/кг{{ "%.2f"|format(results.generalInformation.regular_car_cost_per_kg) }}</span>
                 </div>
             </div>
         </div>
@@ -327,8 +335,16 @@
                     <thead>
                         <tr>
                             <th>Упаковка</th>
+                            {% if results.generalInformation.category == 'Обувь' %}
+                            <th>Доставка оригинала</th>
+                            {% else %}
                             <th>Быстрая доставка</th>
+                            {% endif %}
+                            {% if results.generalInformation.category == 'Обувь' %}
+                            <th>Доставка реплики</th>
+                            {% else %}
                             <th>Обычная доставка</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -381,11 +397,19 @@
                                 <span class="info-value">{{ results.bag.insuranceRate }} (${{ "%.2f"|format(results.bag.insurance) }})</span>
                             </div>
                             <div class="info-item">
+                                 {% if results.generalInformation.category == 'Обувь' %}
+                                <span class="info-label">Доставка оригинала</span>
+                                {% else %}
                                 <span class="info-label">Доставка быстрая</span>
+                                {% endif %}
                                 <span class="fast-price">${{ "%.2f"|format(results.bag.deliveryCostFast) }}</span>
                             </div>
                             <div class="info-item">
+                                 {% if results.generalInformation.category == 'Обувь' %}
+                                <span class="info-label">Доставка реплики</span>
+                                {% else %}
                                 <span class="info-label">Доставка обычная</span>
+                                {% endif %}
                                 <span class="regular-price">${{ "%.2f"|format(results.bag.deliveryCostRegular) }}</span>
                             </div>
                         </div>
@@ -412,11 +436,19 @@
                                 <span class="info-value">{{ results.corners.insuranceRate }} (${{ "%.2f"|format(results.corners.insurance) }})</span>
                             </div>
                             <div class="info-item">
+                                 {% if results.generalInformation.category == 'Обувь' %}
+                                <span class="info-label">Доставка оригинала</span>
+                                {% else %}
                                 <span class="info-label">Доставка быстрая</span>
+                                {% endif %}
                                 <span class="fast-price">${{ "%.2f"|format(results.corners.deliveryCostFast) }}</span>
                             </div>
                             <div class="info-item">
+                                 {% if results.generalInformation.category == 'Обувь' %}
+                                <span class="info-label">Доставка реплики</span>
+                                {% else %}
                                 <span class="info-label">Доставка обычная</span>
+                                {% endif %}
                                 <span class="regular-price">${{ "%.2f"|format(results.corners.deliveryCostRegular) }}</span>
                             </div>
                         </div>
@@ -443,8 +475,20 @@
                                 <span class="info-value">{{ results.frame.insuranceRate }} (${{ "%.2f"|format(results.frame.insurance) }})</span>
                             </div>
                             <div class="info-item">
+                                 {% if results.generalInformation.category == 'Обувь' %}
+                                <span class="info-label">Доставка оригинала</span>
+                                {% else %}
                                 <span class="info-label">Доставка быстрая</span>
+                                {% endif %}
                                 <span class="fast-price">${{ "%.2f"|format(results.frame.deliveryCostFast) }}</span>
+                            </div>
+                            <div class="info-item">
+                                 {% if results.generalInformation.category == 'Обувь' %}
+                                <span class="info-label">Доставка реплики</span>
+                                {% else %}
+                                <span class="info-label">Доставка обычная</span>
+                                {% endif %}
+                                <span class="regular-price">${{ "%.2f"|format(results.frame.deliveryCostRegular) }}</span>
                             </div>
                         </div>
                     </div>
