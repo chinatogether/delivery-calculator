@@ -400,9 +400,9 @@ def calculate():
 
         # Тарифы по весу
         cursor.execute("""
-            SELECT min_weight, max_weight, coefficient_bag, bag, bag_packing_cost, bag_unloading_cost,
-                   coefficient_corner, cardboard_corners, corner_packing_cost, corner_unloading_cost,
-                   coefficient_frame, wooden_frame, frame_packing_cost, frame_unloading_cost
+            SELECT min_weight, max_weight, coefficient_bag,  bag_packing_cost, bag_unloading_cost,
+                   coefficient_corner,  corner_packing_cost, corner_unloading_cost,
+                   coefficient_frame,frame_packing_cost, frame_unloading_cost
             FROM delivery_test.weight
             WHERE min_weight <= %s AND max_weight > %s
         """, (total_weight, total_weight))
@@ -413,9 +413,9 @@ def calculate():
             conn.close()
             return jsonify({"error": f"Вес {total_weight} кг вне диапазона тарифов"}), 400
 
-        (min_weight, max_weight, packing_factor_bag, _, packaging_cost_bag, unload_cost_bag,
-         additional_weight_corners, _, packaging_cost_corners, unload_cost_corners,
-         additional_weight_frame, _, packaging_cost_frame, unload_cost_frame) = [safe_decimal(value) for value in result_row_weight]
+        (min_weight, max_weight, packing_factor_bag,  packaging_cost_bag, unload_cost_bag,
+         additional_weight_corners,  packaging_cost_corners, unload_cost_corners,
+         additional_weight_frame,  packaging_cost_frame, unload_cost_frame) = [safe_decimal(value) for value in result_row_weight]
 
         # Тарифы по плотности
         cursor.execute("""

@@ -855,3 +855,23 @@ INFO:aiogram.event:Update id=450949930 is handled. Duration 184 ms by bot id=770
 INFO:aiogram.event:Update id=450949931 is handled. Duration 175 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949932 is handled. Duration 197 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450949933 is handled. Duration 228 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949934 is handled. Duration 212 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949935 is handled. Duration 108 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949936 is handled. Duration 226 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949937 is handled. Duration 203 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949938 is handled. Duration 183 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949939 is handled. Duration 233 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949940 is handled. Duration 156 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949941 is handled. Duration 100 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949942 is handled. Duration 248 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949943 is handled. Duration 200 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450949944 is handled. Duration 9363 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949945 is handled. Duration 8653 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450949946 is handled. Duration 206 ms by bot id=7709869722
