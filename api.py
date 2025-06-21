@@ -462,6 +462,8 @@ def calculate():
         results = {
             "generalInformation": {
                 "category": category,
+                "fast_car_cost_per_kg":float(fast_car_cost_per_kg.quantize(Decimal('0.01'))),
+                "regular_car_cost_per_kg":float(regular_car_cost_per_kg.quantize(Decimal('0.01'))),
                 "weight": float(total_weight.quantize(Decimal('0.01'))),
                 "density": float(density.quantize(Decimal('0.01'))),
                 "productCost": float(cost),

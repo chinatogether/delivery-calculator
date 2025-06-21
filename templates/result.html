@@ -212,6 +212,7 @@
 
         .btn {
             padding: 16px;
+            background: var(--primary-color);
             border: none;
             border-radius: 8px;
             font-size: 16px;
@@ -304,6 +305,14 @@
                     <span class="info-label">Коробок</span>
                     <span class="info-value">{{ results.generalInformation.boxCount }} шт.</span>
                 </div>
+                <div class="info-item">
+                    <span class="info-label">Доставка быстрая на 1 кг</span>
+                    <span class="fast-price">${{ "%.2f"|format(results.generalInformation.fast_car_cost_per_kg) }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Доставка обычная на 1 кг</span>
+                        <span class="regular-price">${{ "%.2f"|format(results.generalInformation.regular_car_cost_per_kg) }}</span>
+                </div>
             </div>
         </div>
 
@@ -373,11 +382,11 @@
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Доставка быстрая</span>
-                                <span class="info-value">${{ "%.2f"|format(results.bag.deliveryCostFast) }}</span>
+                                <span class="fast-price">${{ "%.2f"|format(results.bag.deliveryCostFast) }}</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Доставка обычная</span>
-                                <span class="info-value">${{ "%.2f"|format(results.bag.deliveryCostRegular) }}</span>
+                                <span class="regular-price">${{ "%.2f"|format(results.bag.deliveryCostRegular) }}</span>
                             </div>
                         </div>
                     </div>
@@ -404,11 +413,11 @@
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Доставка быстрая</span>
-                                <span class="info-value">${{ "%.2f"|format(results.corners.deliveryCostFast) }}</span>
+                                <span class="fast-price">${{ "%.2f"|format(results.corners.deliveryCostFast) }}</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Доставка обычная</span>
-                                <span class="info-value">${{ "%.2f"|format(results.corners.deliveryCostRegular) }}</span>
+                                <span class="regular-price">${{ "%.2f"|format(results.corners.deliveryCostRegular) }}</span>
                             </div>
                         </div>
                     </div>
@@ -435,11 +444,7 @@
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Доставка быстрая</span>
-                                <span class="info-value">${{ "%.2f"|format(results.frame.deliveryCostFast) }}</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Доставка обычная</span>
-                                <span class="info-value">${{ "%.2f"|format(results.frame.deliveryCostRegular) }}</span>
+                                <span class="fast-price">${{ "%.2f"|format(results.frame.deliveryCostFast) }}</span>
                             </div>
                         </div>
                     </div>
