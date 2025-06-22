@@ -62,6 +62,8 @@ PDF_OPTIONS = {
     'enable-local-file-access': None,
     'print-media-type': None,
     'disable-smart-shrinking': None,
+    'zoom': '1.2',  # Увеличивает масштаб для лучшей читаемости
+    'dpi': '300',
     'quiet': '',  # Подавляем вывод wkhtmltopdf
 }
 

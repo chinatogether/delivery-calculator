@@ -1478,3 +1478,55 @@ INFO:aiogram.event:Update id=450950003 is handled. Duration 734 ms by bot id=770
 INFO:aiogram.event:Update id=450950004 is handled. Duration 186 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450950005 is handled. Duration 109 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450950006 is handled. Duration 155 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950007 is handled. Duration 472 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950008 is handled. Duration 111 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950009 is handled. Duration 605 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950010 is handled. Duration 763 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950011 is handled. Duration 619 ms by bot id=7709869722
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950012 is handled. Duration 497 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950013 is handled. Duration 561 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950014 is handled. Duration 178 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950015 is handled. Duration 374 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950016 is not handled. Duration 0 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950017 is handled. Duration 503 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950018 is handled. Duration 573 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950019 is handled. Duration 879 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950020 is handled. Duration 186 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950021 is handled. Duration 283 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950022 is handled. Duration 184 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950023 is handled. Duration 230 ms by bot id=7709869722
+INFO:__main__:Пользователь 138138847 скачал тарифы
+INFO:aiogram.event:Update id=450950024 is handled. Duration 624 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950025 is handled. Duration 248 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950026 is handled. Duration 216 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950027 is handled. Duration 171 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950028 is handled. Duration 94 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950029 is handled. Duration 195 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950030 is handled. Duration 181 ms by bot id=7709869722
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
