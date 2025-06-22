@@ -16,6 +16,10 @@
             --dark-card: #2a2a2a;
             --border-color: #444444;
             --hint-color: #999999;
+            /* Фиксированные темные цвета для полей ввода */
+            --input-bg: #1a1a1a;
+            --input-border: #3a3a3a;
+            --input-text: #ffffff;
         }
 
         * {
@@ -124,17 +128,18 @@
             font-size: 0.9rem;
         }
 
+        /* Всегда темные поля ввода */
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 1.5px solid var(--border-color);
+            border: 1.5px solid var(--input-border);
             border-radius: 8px;
             font-size: 16px;
             transition: all 0.2s ease;
-            background: var(--white);
-            color: var(--text-color);
+            background: var(--input-bg) !important;
+            color: var(--input-text) !important;
             -webkit-appearance: none;
         }
 
@@ -144,6 +149,19 @@
             outline: none;
             border-color: var(--success-color);
             box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+        }
+
+        /* Стили для placeholder */
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #888888 !important;
+            opacity: 1;
+        }
+
+        /* Стили для select options */
+        .form-group select option {
+            background: var(--input-bg) !important;
+            color: var(--input-text) !important;
         }
 
         .error-message {
@@ -250,8 +268,8 @@
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            background: var(--white);
-            border: 2px solid var(--border-color);
+            background: var(--input-bg) !important;
+            border: 2px solid var(--input-border) !important;
             border-radius: 6px;
             transition: all 0.2s ease;
             flex-shrink: 0;
@@ -261,8 +279,8 @@
         }
 
         .checkbox-wrapper input[type="checkbox"]:checked {
-            background: var(--success-color);
-            border-color: var(--success-color);
+            background: var(--success-color) !important;
+            border-color: var(--success-color) !important;
         }
 
         .checkbox-wrapper input[type="checkbox"]:checked::before {
@@ -297,7 +315,7 @@
             color: #c0392b;
         }
 
-        /* Темная тема */
+        /* Убираем все медиа-запросы для полей ввода, так как они теперь всегда темные */
         @media (prefers-color-scheme: dark) {
             :root {
                 --text-color: #ffffff;
@@ -307,19 +325,6 @@
 
             .card, .form-section, .info-section {
                 background: #2a2a2a;
-            }
-
-            .form-group input,
-            .form-group select,
-            .form-group textarea {
-                background: #1a1a1a;
-                border-color: #3a3a3a;
-                color: #ffffff;
-            }
-
-            .checkbox-wrapper input[type="checkbox"] {
-                background: #1a1a1a;
-                border-color: #3a3a3a;
             }
         }
 
@@ -724,4 +729,4 @@
         updateCheckboxStyle();
     </script>
 </body>
-</html>	
+</html>
