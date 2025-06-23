@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -16,10 +17,6 @@
             --dark-card: #2a2a2a;
             --border-color: #444444;
             --hint-color: #999999;
-            /* Фиксированные темные цвета для полей ввода */
-            --input-bg: #1a1a1a;
-            --input-border: #3a3a3a;
-            --input-text: #ffffff;
         }
 
         * {
@@ -85,7 +82,7 @@
 
         .info-section {
             background: rgba(52, 152, 219, 0.1);
-            border: 2px solid rgba(52, 152, 219, 0.2);
+            border: 2px solid #444444;
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
@@ -103,13 +100,13 @@
 
         .form-section {
             background: rgba(39, 174, 96, 0.1);
-            border: 2px solid rgba(39, 174, 96, 0.2);
+            border: 2px solid #444444;
             border-radius: 12px;
             padding: 20px;
         }
 
         .section-title {
-            color: var(--success-color);
+            color: var(--primary-color);
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 16px;
@@ -128,18 +125,17 @@
             font-size: 0.9rem;
         }
 
-        /* Всегда темные поля ввода */
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 1.5px solid var(--input-border);
+            border: 1.5px solid var(--border-color);
             border-radius: 8px;
             font-size: 16px;
             transition: all 0.2s ease;
-            background: var(--input-bg) !important;
-            color: var(--input-text) !important;
+            background: var(--white);
+            color: var(--text-color);
             -webkit-appearance: none;
         }
 
@@ -151,17 +147,15 @@
             box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
         }
 
-        /* Стили для placeholder */
         .form-group input::placeholder,
         .form-group textarea::placeholder {
             color: #888888 !important;
             opacity: 1;
         }
 
-        /* Стили для select options */
         .form-group select option {
-            background: var(--input-bg) !important;
-            color: var(--input-text) !important;
+            background: var(--white) !important;
+            color: var(--text-color) !important;
         }
 
         .error-message {
@@ -173,9 +167,19 @@
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
         }
 
         .required {
@@ -235,7 +239,6 @@
             border: 1px solid rgba(39, 174, 96, 0.3);
         }
 
-        /* Исправленные стили для checkbox */
         .checkbox-wrapper {
             display: flex;
             align-items: flex-start;
@@ -268,8 +271,8 @@
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            background: var(--input-bg) !important;
-            border: 2px solid var(--input-border) !important;
+            background: var(--white);
+            border: 2px solid var(--border-color);
             border-radius: 6px;
             transition: all 0.2s ease;
             flex-shrink: 0;
@@ -279,8 +282,8 @@
         }
 
         .checkbox-wrapper input[type="checkbox"]:checked {
-            background: var(--success-color) !important;
-            border-color: var(--success-color) !important;
+            background: var(--success-color);
+            border-color: var(--success-color);
         }
 
         .checkbox-wrapper input[type="checkbox"]:checked::before {
@@ -315,7 +318,6 @@
             color: #c0392b;
         }
 
-        /* Убираем все медиа-запросы для полей ввода, так как они теперь всегда темные */
         @media (prefers-color-scheme: dark) {
             :root {
                 --text-color: #ffffff;
@@ -323,18 +325,20 @@
                 --border-color: #3a3a3a;
             }
 
-            .card, .form-section, .info-section {
+            .card,
+            .form-section,
+            .info-section {
                 background: #2a2a2a;
             }
         }
 
-        /* Мобильная оптимизация */
         @media (max-width: 480px) {
             .container {
                 padding: 12px;
             }
 
-            .card, .form-section {
+            .card,
+            .form-section {
                 padding: 16px;
             }
 
@@ -352,14 +356,15 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
-            <img src="https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20(2).jpg" alt="China Together" class="logo">
+            <img src="https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20(2).jpg"
+                alt="China Together" class="logo">
             <h1>📋 Заказать доставку</h1>
             <p class="subtitle">Оформите заявку на выкуп и доставку товара</p>
         </div>
-
         <!-- Информационная секция -->
         <div class="info-section">
             <div class="info-title">
@@ -367,46 +372,43 @@
                 <span>Важная информация</span>
             </div>
             <div>
-                <p>Чтобы оформить заказ, рассчитать доставку или просто задать вопросы менеджеру, нужно оставить заявку. Менеджер свяжется с вами в рабочее время.</p>
+                <p>Чтобы оформить заказ, рассчитать доставку или просто задать вопросы менеджеру, нужно оставить заявку.
+                    Менеджер свяжется с вами в рабочее время.</p>
                 <div style="margin-top: 12px; font-weight: 500;">
                     📅 <strong>График работы:</strong> ПН–ПТ с 10:00 до 18:00 по московскому времени<br>
                     🇨🇳 Время в Китае — на 5 часов больше, чем в Москве
                 </div>
             </div>
         </div>
-
         <!-- Форма заявки -->
         <div class="form-section">
             <div class="section-title">📋 Заявка на выкуп и доставку товара</div>
-            
             <form id="purchaseRequestForm">
                 <!-- Telegram контакт -->
                 <div class="form-group">
                     <label for="telegramContact">
                         Ссылка на ваш личный телеграм <span class="required">*</span>
                     </label>
-                    <input type="text" id="telegramContact" name="telegramContact" required 
-                           placeholder="@nickname или https://t.me/nickname">
+                    <input type="text" id="telegramContact" name="telegramContact" required
+                        placeholder="@nickname или https://t.me/nickname">
                     <div class="help-text">
                         В формате: "https://t.me/nickname" или "@nickname"<br>
                         Если у вас его нет, добавьте. Это необходимо для дальнейшей коммуникации.
                     </div>
                     <div id="telegramContactError" class="error-message"></div>
                 </div>
-
                 <!-- Ссылка на поставщика -->
                 <div class="form-group">
                     <label for="supplierLink">
                         Ссылка на поставщика на 1688
                     </label>
-                    <textarea id="supplierLink" name="supplierLink" 
-                              placeholder="Вставьте ссылку на товар или поставщика. Если поставщика нет, мы поможем вам его найти."
-                              style="min-height: 80px; resize: vertical;"></textarea>
+                    <textarea id="supplierLink" name="supplierLink"
+                        placeholder="Вставьте ссылку на товар или поставщика. Если поставщика нет, мы поможем вам его найти."
+                        style="min-height: 80px; resize: vertical;"></textarea>
                     <div class="help-text">
                         Если поставщика нет, мы поможем вам его найти.
                     </div>
                 </div>
-
                 <!-- Сумма заказа -->
                 <div class="form-group">
                     <label for="orderAmount">
@@ -426,76 +428,71 @@
                     </div>
                     <div id="orderAmountError" class="error-message"></div>
                 </div>
-
                 <!-- Промокод -->
                 <div class="form-group">
                     <label for="promoCode">Промокод</label>
-                    <input type="text" id="promoCode" name="promoCode" 
-                           placeholder="Введите промокод, если есть">
+                    <input type="text" id="promoCode" name="promoCode" placeholder="Введите промокод, если есть">
                 </div>
-
                 <!-- Дополнительные комментарии -->
                 <div class="form-group">
                     <label for="additionalNotes">Дополнительные комментарии</label>
-                    <textarea id="additionalNotes" name="additionalNotes" 
-                              placeholder="Расскажите подробнее о вашем заказе, особых требованиях или задайте вопросы..."
-                              style="min-height: 100px; resize: vertical;"></textarea>
+                    <textarea id="additionalNotes" name="additionalNotes"
+                        placeholder="Расскажите подробнее о вашем заказе, особых требованиях или задайте вопросы..."
+                        style="min-height: 100px; resize: vertical;"></textarea>
                 </div>
-
+                <!-- Согласие с условиями -->
                 <!-- Согласие с условиями -->
                 <div class="form-group">
                     <div class="checkbox-wrapper" id="termsWrapper">
                         <input type="checkbox" id="termsAccepted" name="termsAccepted" required>
                         <div class="checkbox-text">
-                            Отправляя заявку, Вы соглашаетесь с нашими <a href="https://docs.google.com/document/d/1_T89jCHqaMsaHhlV1fz8guHp99bNYu4fzNXj_g7G2_M/edit?tab=t.0" target="_blank">условиями и правилами работы</a> <span class="required">*</span>
+                            Отправляя заявку, Вы соглашаетесь с нашими <a
+                                href="https://docs.google.com/document/d/1_T89jCHqaMsaHhlV1fz8guHp99bNYu4fzNXj_g7G2_M/edit?tab=t.0"
+                                target="_blank">условиями и правилами работы</a> <span class="required">*</span>
                         </div>
                     </div>
                     <div id="termsError" class="error-message"></div>
                 </div>
-
-                <!-- Кнопка отправки -->
-                <button type="submit" class="btn" id="submitRequestBtn" style="background: var(--primary-color);">
-                    <span>📤</span>
-                    <span>Отправить заявку</span>
-                </button>
-            </form>
-            
-            <div id="successMessage" class="success-message">
-                ✅ Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время.
-            </div>
-            
-            <div style="margin-top: 16px; padding: 12px; background: rgba(39, 174, 96, 0.05); border-radius: 8px; font-size: 0.85rem; color: var(--hint-color); text-align: center;">
-                🙏 Спасибо за доверие!
-            </div>
         </div>
-
-        <!-- Кнопка назад -->
-        <div class="card">
-            <a href="/" class="btn btn-secondary">
-                <span>🔙</span>
-                <span>Вернуться на главную</span>
-            </a>
-        </div>
+        <div id="termsError" class="error-message"></div>
     </div>
-
+    <!-- Кнопка отправки -->
+    <button type="submit" class="btn" id="submitRequestBtn" style="background: var(--primary-color);">
+        <span>📤</span>
+        <span>Отправить заявку</span>
+    </button>
+    </form>
+    <div id="successMessage" class="success-message">
+        ✅ Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время.
+    </div>
+    <div
+        style="margin-top: 16px; padding: 12px; background: rgba(39, 174, 96, 0.05); border-radius: 8px; font-size: 0.85rem; color: var(--hint-color); text-align: center;">
+        🙏 Спасибо за доверие!
+    </div>
+    </div>
+    <!-- Кнопка назад -->
+    <div class="card">
+        <a href="/" class="btn btn-secondary">
+            <span>🔙</span>
+            <span>Вернуться на главную</span>
+        </a>
+    </div>
+    </div>
     <script>
         // Инициализация Telegram Web App
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
-
         // Применяем тему Telegram
         if (tg.themeParams) {
             document.documentElement.style.setProperty('--text-color', tg.themeParams.text_color || '#ffffff');
             document.documentElement.style.setProperty('--white', tg.themeParams.bg_color || '#2a2a2a');
             document.documentElement.style.setProperty('--border-color', tg.themeParams.hint_color || '#444444');
         }
-
         // Получаем данные пользователя
         let telegramUserId = null;
         let telegramUsername = null;
         let calculationId = null;
-
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             telegramUserId = tg.initDataUnsafe.user.id;
             telegramUsername = tg.initDataUnsafe.user.username || `user_${tg.initDataUnsafe.user.id}`;
@@ -505,24 +502,20 @@
             telegramUsername = urlParams.get('username') || 'test_username';
             calculationId = urlParams.get('calculation_id');
         }
-
         // Предзаполняем Telegram контакт, если известен username
         if (telegramUsername && telegramUsername !== 'test_username') {
             document.getElementById('telegramContact').value = `@${telegramUsername}`;
         }
-
         // Обработка checkbox - исправленная версия
         const termsCheckbox = document.getElementById('termsAccepted');
         const termsWrapper = document.getElementById('termsWrapper');
-
         // Обработчик клика по всему wrapper
-        termsWrapper.addEventListener('click', function(e) {
+        termsWrapper.addEventListener('click', function (e) {
             // Проверяем, что клик не по ссылке
             if (e.target.tagName !== 'A') {
                 e.preventDefault();
                 termsCheckbox.checked = !termsCheckbox.checked;
                 updateCheckboxStyle();
-                
                 // Убираем ошибку при проставлении галочки
                 if (termsCheckbox.checked) {
                     const errorElement = document.getElementById('termsError');
@@ -532,12 +525,10 @@
                 }
             }
         });
-
         // Обработчик изменения состояния checkbox
-        termsCheckbox.addEventListener('change', function() {
+        termsCheckbox.addEventListener('change', function () {
             updateCheckboxStyle();
         });
-
         // Функция обновления стиля checkbox
         function updateCheckboxStyle() {
             if (termsCheckbox.checked) {
@@ -546,7 +537,6 @@
                 termsWrapper.classList.remove('checked');
             }
         }
-
         // Функция валидации формы
         function validateForm() {
             let isValid = true;
@@ -567,12 +557,10 @@
                     message: 'Необходимо согласиться с условиями'
                 }
             ];
-            
             fields.forEach(field => {
                 const element = document.getElementById(field.id);
                 const errorElement = document.getElementById(`${field.id}Error`);
                 const value = field.id === 'termsAccepted' ? null : element.value.trim();
-                
                 if (!field.validator(value)) {
                     if (errorElement) {
                         errorElement.textContent = field.message;
@@ -591,32 +579,25 @@
                     }
                 }
             });
-            
             return isValid;
         }
-
         // Обработчик формы
-        document.getElementById('purchaseRequestForm').addEventListener('submit', async function(event) {
+        document.getElementById('purchaseRequestForm').addEventListener('submit', async function (event) {
             event.preventDefault();
-            
             if (!validateForm()) {
                 if (tg && tg.HapticFeedback) {
                     tg.HapticFeedback.notificationOccurred('error');
                 }
                 return;
             }
-            
             try {
                 if (tg && tg.HapticFeedback) {
                     tg.HapticFeedback.impactOccurred('medium');
                 }
-                
                 const submitBtn = document.getElementById('submitRequestBtn');
                 const successMessage = document.getElementById('successMessage');
-                
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<span>⏳</span><span>Отправляем заявку...</span>';
-                
                 const formData = {
                     telegram_id: telegramUserId,
                     calculation_id: calculationId,
@@ -628,7 +609,6 @@
                     additional_notes: document.getElementById('additionalNotes').value.trim(),
                     terms_accepted: document.getElementById('termsAccepted').checked
                 };
-                
                 const response = await fetch('/submit_purchase_request', {
                     method: 'POST',
                     headers: {
@@ -636,14 +616,11 @@
                     },
                     body: JSON.stringify(formData)
                 });
-                
                 const result = await response.json();
-                
                 if (result.success) {
                     if (tg && tg.HapticFeedback) {
                         tg.HapticFeedback.notificationOccurred('success');
                     }
-                    
                     // Отправляем данные в Telegram
                     if (tg && tg.sendData) {
                         tg.sendData(JSON.stringify({
@@ -654,48 +631,38 @@
                             telegram_contact: formData.telegram_contact
                         }));
                     }
-                    
                     // Показываем успешное сообщение
                     successMessage.style.display = 'block';
                     successMessage.scrollIntoView({ behavior: 'smooth' });
-                    
                     // Меняем кнопку
                     submitBtn.innerHTML = '<span>✅</span><span>Заявка отправлена</span>';
                     submitBtn.style.background = 'var(--secondary-color)';
-                    
                     // Очищаем форму
                     document.getElementById('purchaseRequestForm').reset();
                     updateCheckboxStyle(); // Обновляем стиль checkbox после сброса
-                    
                     // Показываем уведомление в Telegram
                     if (tg && tg.showAlert) {
                         tg.showAlert('✅ ' + result.message);
                     }
-                    
                 } else {
                     throw new Error(result.error || 'Неизвестная ошибка');
                 }
-                
             } catch (error) {
                 console.error('Ошибка при отправке заявки:', error);
-                
                 if (tg && tg.HapticFeedback) {
                     tg.HapticFeedback.notificationOccurred('error');
                 }
-                
                 if (tg && tg.showAlert) {
                     tg.showAlert('❌ Ошибка при отправке заявки: ' + error.message);
                 }
-                
                 const submitBtn = document.getElementById('submitRequestBtn');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<span>📤</span><span>Отправить заявку</span>';
             }
         });
-
         // Динамическая валидация полей
         document.querySelectorAll('input, select, textarea').forEach(element => {
-            element.addEventListener('input', function() {
+            element.addEventListener('input', function () {
                 const errorElement = document.getElementById(`${this.id}Error`);
                 if (errorElement && errorElement.style.display === 'block') {
                     errorElement.style.display = 'none';
@@ -705,7 +672,6 @@
                 }
             });
         });
-
         // Настройка кнопки "Назад"
         if (tg && tg.BackButton) {
             tg.BackButton.show();
@@ -713,20 +679,35 @@
                 window.history.back();
             });
         }
-
         // Настройка главной кнопки
         if (tg && tg.MainButton) {
             tg.MainButton.text = "Отправить заявку";
             tg.MainButton.color = "#27ae60";
             tg.MainButton.show();
-
             tg.MainButton.onClick(() => {
                 document.getElementById('purchaseRequestForm').dispatchEvent(new Event('submit'));
             });
         }
-
         // Инициализация стиля checkbox при загрузке
         updateCheckboxStyle();
+        <!-- Политика конфиденциальности -->
+        <div id="privacy-policy" style="margin-top: 40px; padding: 20px; background: var(--dark-card); border-radius: 12px;">
+            <h2 style="color: var(--text-color); margin-bottom: 16px;">Политика конфиденциальности</h2>
+            <p>Я, субъект персональных данных, в соответствии с Федеральным законом от 27 июля 2006 года № 152 «О персональных данных» предоставляю согласие на обработку персональных данных, указанных мной в форме на сайте в сети «Интернет», владельцем которого является Оператор.</p>
+
+            <p>Под персональными данными субъекта персональных данных понимается нижеуказанная общая информация: ФИО, адрес электронной почты и номер телефона.</p>
+
+            <p>Принимая настоящее Соглашение, я выражаю свою заинтересованность и полное согласие, что обработка персональных данных может включать в себя следующие действия: сбор, систематизацию, накопление, хранение, уточнение (обновление, изменение), использование, передачу (предоставление, доступ), блокирование, удаление, уничтожение, осуществляемых как с использованием средств автоматизации (автоматизированная обработка), так и без использования таких средств (неавтоматизированная обработка).</p>
+
+            <p>Я понимаю и соглашаюсь с тем, что предоставленная информация, является полной, точной и достоверной; при предоставлении информации не нарушается действующее законодательство Российской Федерации, законные права и интересы третьих лиц; вся предоставленная информация заполнена мною в отношении себя лично; информация не относится к государственной, банковской и/или коммерческой тайне, информация не относится к информации о расовой и/или национальной принадлежности, политических взглядах, религиозных или философских убеждениях, не относится к информации о состоянии здоровья и интимной жизни.</p>
+
+            <p>Я понимаю и соглашаюсь с тем, что Оператор не проверяет достоверность персональных данных, предоставляемых мной, и не имеет возможности оценивать мою дееспособность и исходит из того, что я предоставляю достоверные персональные данные и поддерживаю такие данные в актуальном состоянии.</p>
+
+            <p>Согласие действует по достижении целей обработки или в случае утраты необходимости в достижении этих целей, если иное не предусмотрено федеральным законом.</p>
+
+            <p>Согласие может быть отозвано мною в любое время на основании моего письменного заявления.</p>
+        </div>
     </script>
 </body>
+
 </html>
