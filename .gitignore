@@ -1,1 +1,6 @@
 .env
+.gitignore
+bot.log
+bot_error.log
+delivery_calculator.log
+requirements.txt
