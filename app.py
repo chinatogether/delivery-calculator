@@ -7,6 +7,7 @@ from psycopg2.extras import RealDictCursor
 import time
 import glob
 from pdf_generator import generate_tariffs_pdf, get_latest_pdf_info
+from dotenv import load_dotenv
 
 app = Flask(__name__, template_folder='templates')
 # Получаем директорию, где находится app.py
@@ -414,7 +415,7 @@ UNIFIED_STYLE = '''
     }
 </style>
 '''
-
+load_dotenv()
 # Конфигурация базы данных
 DB_CONFIG = {
             'dbname': os.getenv('DB_NAME', 'delivery_db'),
