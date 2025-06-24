@@ -1,61 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect
-import psycopg2
-from decimal import Decimal, getcontext, InvalidOperation
-from urllib.parse import unquote, quote
-from flask_cors import CORS
-import logging
-import json
-from datetime import datetime, timedelta
-import os
-from functools import wraps
-from dotenv import load_dotenv
-import re
-
-# Настройка точности для Decimal
-getcontext().prec = 6
-
-# Создание приложения Flask
-app = Flask(__name__, static_folder='static', template_folder='templates')
-CORS(app, origins=["https://telegram.org", "*"])
-
-# Настройка логирования
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('delivery_calculator.log'),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger(__name__)
-
-load_dotenv()
-# Конфигурация базы данных
-DB_CONFIG = {
-    'dbname': os.getenv('DB_NAME', 'delivery_db'),
-    'user': os.getenv('DB_USER'), 
-    'password': os.getenv('DB_PASSWORD'),
-    'host': os.getenv('DB_HOST'),
-    'port': os.getenv('DB_PORT', '5432'),
-    'connect_timeout': int(os.getenv('DB_TIMEOUT', '10'))
-}
-
-def connect_to_db():
-    """Подключение к базе данных"""
-    try:
-        return psycopg2.connect(**DB_CONFIG)
-    except Exception as e:
-        logger.error(f"Ошибка подключения к базе данных: {str(e)}")
-        raise
-
-def safe_decimal(value, default=Decimal('0')):
-    """Безопасное преобразование в Decimal"""
-    try:
-        if value is None:
-            return default
-        return Decimal(str(value).replace(',', '.'))
-    except (InvalidOperation, ValueError, TypeError):
-        logger.warning(f"Ошибка при преобразовании значения '{value}' в Decimal")
+logger.warning(f"Ошибка при преобразовании значения '{value}' в Decimal")
         return default
 
 def handle_db_errors(func):
@@ -102,6 +45,7 @@ def init_database():
                 height DECIMAL(10,2),
                 cost DECIMAL(10,2),
                 quantity INTEGER,
+                source VARCHAR(255) DEFAULT 'telegram',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """)
@@ -126,11 +70,12 @@ def init_database():
                 corners_total_regular DECIMAL(10,2),
                 frame_total_fast DECIMAL(10,2),
                 frame_total_regular DECIMAL(10,2),
+                source VARCHAR(255) DEFAULT 'telegram',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """)
         
-        # Таблица заявок на выкуп и доставку
+        # Таблица заявок на выкуп
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS delivery_test.purchase_requests (
                 id SERIAL PRIMARY KEY,
@@ -145,8 +90,24 @@ def init_database():
                 terms_accepted BOOLEAN DEFAULT FALSE,
                 status VARCHAR(50) DEFAULT 'new',
                 manager_notes TEXT,
+                source VARCHAR(255) DEFAULT 'telegram',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        
+        # Таблица контактных форм с сайта
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS delivery_test.contact_requests (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                phone VARCHAR(100),
+                subject VARCHAR(255),
+                message TEXT NOT NULL,
+                source VARCHAR(255) DEFAULT 'website',
+                status VARCHAR(50) DEFAULT 'new',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """)
         
@@ -157,6 +118,7 @@ def init_database():
                 telegram_user_id VARCHAR(255),
                 action VARCHAR(255),
                 details JSON,
+                source VARCHAR(255) DEFAULT 'telegram',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """)
@@ -201,15 +163,36 @@ def save_telegram_user(telegram_id, username, first_name=None, last_name=None):
         conn.close()
 
 @handle_db_errors
-def save_user_action(telegram_id, action, details=None):
+def save_contact_request(name, email, phone, subject, message, source='website'):
+    """Сохранение заявки с сайта"""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            INSERT INTO delivery_test.contact_requests 
+            (name, email, phone, subject, message, source, created_at)
+            VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+            RETURNING id
+        """, (name, email, phone, subject, message, source))
+        
+        request_id = cursor.fetchone()[0]
+        conn.commit()
+        return request_id
+        
+    finally:
+        cursor.close()
+        conn.close()
+
+@handle_db_errors
+def save_user_action(telegram_id, action, details=None, source='telegram'):
     """Сохранение действия пользователя"""
     conn = connect_to_db()
     cursor = conn.cursor()
     try:
         cursor.execute("""
-            INSERT INTO delivery_test.user_actions (telegram_user_id, action, details, created_at)
-            VALUES (%s, %s, %s, CURRENT_TIMESTAMP)
-        """, (str(telegram_id), action, json.dumps(details) if details else None))
+            INSERT INTO delivery_test.user_actions (telegram_user_id, action, details, source, created_at)
+            VALUES (%s, %s, %s, %s, CURRENT_TIMESTAMP)
+        """, (str(telegram_id), action, json.dumps(details) if details else None, source))
         
         conn.commit()
         
@@ -218,18 +201,18 @@ def save_user_action(telegram_id, action, details=None):
         conn.close()
 
 @handle_db_errors
-def save_user_input_to_db(category, weight, length, width, height, cost, quantity, telegram_user_id=None):
+def save_user_input_to_db(category, weight, length, width, height, cost, quantity, telegram_user_id=None, source='telegram'):
     """Сохранение входных данных пользователя"""
     conn = connect_to_db()
     cursor = conn.cursor()
     try:
         cursor.execute("""
             INSERT INTO delivery_test.user_inputs (
-                category, weight, length, width, height, cost, quantity, telegram_user_id, created_at
+                category, weight, length, width, height, cost, quantity, telegram_user_id, source, created_at
             )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
             RETURNING id
-        """, (category, weight, length, width, height, cost, quantity, telegram_user_id))
+        """, (category, weight, length, width, height, cost, quantity, telegram_user_id, source))
         
         input_id = cursor.fetchone()[0]
         conn.commit()
@@ -243,7 +226,7 @@ def save_user_input_to_db(category, weight, length, width, height, cost, quantit
 def save_user_calculation(telegram_user_id, category, total_weight, density, product_cost, 
                          insurance_rate, insurance_amount, volume, box_count, bag_total_fast, 
                          bag_total_regular, corners_total_fast, corners_total_regular, 
-                         frame_total_fast, frame_total_regular, input_id=None):
+                         frame_total_fast, frame_total_regular, input_id=None, source='telegram'):
     """Сохранение результатов расчета"""
     conn = connect_to_db()
     cursor = conn.cursor()
@@ -253,15 +236,15 @@ def save_user_calculation(telegram_user_id, category, total_weight, density, pro
                 telegram_user_id, category, total_weight, density, product_cost, insurance_rate,
                 insurance_amount, volume, box_count, bag_total_fast, bag_total_regular,
                 corners_total_fast, corners_total_regular, frame_total_fast, frame_total_regular,
-                user_input_id, created_at
+                user_input_id, source, created_at
             )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
             RETURNING id
         """, (
             telegram_user_id, category, total_weight, density, product_cost, insurance_rate,
             insurance_amount, volume, box_count, bag_total_fast, bag_total_regular,
             corners_total_fast, corners_total_regular, frame_total_fast, frame_total_regular,
-            input_id
+            input_id, source
         ))
         
         calculation_id = cursor.fetchone()[0]
@@ -272,58 +255,36 @@ def save_user_calculation(telegram_user_id, category, total_weight, density, pro
         cursor.close()
         conn.close()
 
-@handle_db_errors
-def save_purchase_request(telegram_user_id, email, telegram_contact, supplier_link, order_amount, 
-                         promo_code, additional_notes, terms_accepted, calculation_id=None):
-    """Сохранение заявки на выкуп"""
-    conn = connect_to_db()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("""
-            INSERT INTO delivery_test.purchase_requests (
-                telegram_user_id, calculation_id, email, telegram_contact, supplier_link,
-                order_amount, promo_code, additional_notes, terms_accepted, created_at, updated_at
-            )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-            RETURNING id
-        """, (
-            telegram_user_id, calculation_id, email, telegram_contact, supplier_link,
-            order_amount, promo_code, additional_notes, terms_accepted
-        ))
-        
-        request_id = cursor.fetchone()[0]
-        conn.commit()
-        return request_id
-        
-    finally:
-        cursor.close()
-        conn.close()
-
 # МАРШРУТЫ
 
 @app.route('/')
-def index():
-    """Главная страница"""
+def homepage():
+    """Главная страница сайта"""
+    return render_template('homepage.html')
+
+@app.route('/telegram/')
+def telegram_index():
+    """Страница калькулятора для Telegram"""
     telegram_id = request.args.get('telegram_id')
     username = request.args.get('username')
     
     if telegram_id:
-        save_user_action(telegram_id, 'page_opened', {'page': 'index'})
+        save_user_action(telegram_id, 'telegram_calculator_opened', {'page': 'calculator'}, 'telegram')
     
     return render_template('index.html')
 
-@app.route('/order')
-def order_page():
-    """Страница заказа доставки"""
+@app.route('/telegram/order')
+def telegram_order():
+    """Страница заказа для Telegram"""
     telegram_id = request.args.get('telegram_id')
     username = request.args.get('username')
     calculation_id = request.args.get('calculation_id')
     
     if telegram_id:
-        save_user_action(telegram_id, 'page_opened', {
+        save_user_action(telegram_id, 'telegram_order_opened', {
             'page': 'order', 
             'calculation_id': calculation_id
-        })
+        }, 'telegram')
     
     return render_template('order.html')
 
@@ -333,6 +294,7 @@ def result():
     results_param = request.args.get('results', None)
     telegram_id = request.args.get('telegram_id')
     calculation_id = request.args.get('calculation_id')
+    source = request.args.get('source', 'telegram')
     
     try:
         results = json.loads(unquote(results_param)) if results_param else {}
@@ -341,7 +303,7 @@ def result():
             save_user_action(telegram_id, 'view_results', {
                 'has_results': bool(results),
                 'calculation_id': calculation_id
-            })
+            }, source)
         
         if not results or not all(key in results for key in ["generalInformation", "bag", "corners", "frame"]):
             return render_template('result.html', error="Некорректные данные для отображения.")
@@ -352,9 +314,138 @@ def result():
         logger.error(f"Ошибка на странице результатов: {str(e)}")
         return render_template('result.html', error="Произошла ошибка при обработке данных.")
 
+@app.route('/api/calculate', methods=['POST'])
+def api_calculate():
+    """API эндпоинт для расчета с сайта"""
+    try:
+        data = request.get_json()
+        
+        # Извлекаем параметры
+        category = data.get('category', '').strip()
+        weight_per_box = safe_decimal(data.get('weight', 0))
+        length = safe_decimal(data.get('length', 0))
+        width = safe_decimal(data.get('width', 0))
+        height = safe_decimal(data.get('height', 0))
+        cost = safe_decimal(data.get('cost', 0))
+        quantity = int(data.get('quantity', 1))
+        source = data.get('source', 'website')
+
+        # Валидация
+        if not all([category, weight_per_box > 0, length > 0, width > 0, height > 0, cost > 0, quantity > 0]):
+            return jsonify({"error": "Не все параметры указаны корректно"}), 400
+
+        # Выполняем расчеты (используем ту же логику)
+        results = perform_delivery_calculation(category, weight_per_box, length, width, height, cost, quantity, source=source)
+        
+        if results is None:
+            return jsonify({"error": "Ошибка при выполнении расчета"}), 500
+
+        return jsonify({
+            "success": True,
+            "message": "Расчет выполнен успешно",
+            "results": results
+        })
+
+    except Exception as e:
+        logger.error(f"Ошибка в API расчета: {str(e)}")
+        return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
+
+@app.route('/api/contact', methods=['POST'])
+def api_contact():
+    """API эндпоинт для контактной формы"""
+    try:
+        data = request.get_json()
+        
+        name = data.get('name', '').strip()
+        email = data.get('email', '').strip()
+        phone = data.get('phone', '').strip()
+        subject = data.get('subject', '').strip()
+        message = data.get('message', '').strip()
+        source = data.get('source', 'website')
+
+        # Валидация
+        if not all([name, email, message]):
+            return jsonify({"error": "Не все обязательные поля заполнены"}), 400
+
+        # Валидация email
+        email_regex = r'^[^\s@]+@[^\s@]+\.[^\s@]+from flask import Flask, render_template, request, jsonify, redirect, send_from_directory
+import psycopg2
+from decimal import Decimal, getcontext, InvalidOperation
+from urllib.parse import unquote, quote
+from flask_cors import CORS
+import logging
+import json
+from datetime import datetime, timedelta
+import os
+from functools import wraps
+import re
+
+# Настройка точности для Decimal
+getcontext().prec = 6
+
+# Создание приложения Flask
+app = Flask(__name__, static_folder='static', template_folder='templates')
+CORS(app, origins=["https://telegram.org", "*"])
+
+# Настройка логирования
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('delivery_calculator.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
+
+# Конфигурация базы данных
+DB_CONFIG = {
+    "dbname": "delivery_db",
+    "user": "chinatogether",
+    "password": "O99ri1@",
+    "host": "localhost",
+    "port": "5432",
+    "connect_timeout": 10
+}
+
+def connect_to_db():
+    """Подключение к базе данных"""
+    try:
+        return psycopg2.connect(**DB_CONFIG)
+    except Exception as e:
+        logger.error(f"Ошибка подключения к базе данных: {str(e)}")
+        raise
+
+def safe_decimal(value, default=Decimal('0')):
+    """Безопасное преобразование в Decimal"""
+    try:
+        if value is None:
+            return default
+        return Decimal(str(value).replace(',', '.'))
+    except (InvalidOperation, ValueError, TypeError):
+        
+        if not re.match(email_regex, email):
+            return jsonify({"error": "Некорректный email адрес"}), 400
+
+        # Сохраняем заявку
+        request_id = save_contact_request(name, email, phone, subject, message, source)
+        
+        if request_id:
+            return jsonify({
+                "success": True,
+                "request_id": request_id,
+                "message": "Сообщение успешно отправлено! Мы ответим в течение 24 часов."
+            })
+        else:
+            return jsonify({"error": "Ошибка при отправке сообщения"}), 500
+            
+    except Exception as e:
+        logger.error(f"Ошибка при обработке контактной формы: {str(e)}")
+        return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
+
 @app.route('/calculate', methods=['GET', 'POST'])
 def calculate():
-    """Основной расчет доставки"""
+    """Основной расчет доставки (для Telegram)"""
     try:
         # Получаем данные
         if request.method == 'POST':
@@ -377,9 +468,35 @@ def calculate():
         if not all([category, weight_per_box > 0, length > 0, width > 0, height > 0, cost > 0, quantity > 0]):
             return jsonify({"error": "Не все параметры указаны корректно"}), 400
 
-        # Сохраняем пользователя
+        # Выполняем расчеты
+        results = perform_delivery_calculation(
+            category, weight_per_box, length, width, height, cost, quantity, 
+            telegram_id=telegram_id, username=username, source='telegram'
+        )
+        
+        if results is None:
+            return jsonify({"error": "Ошибка при выполнении расчета"}), 500
+
+        # Возвращаем результат
+        if request.method == 'POST':
+            return jsonify(results)
+        else:
+            results_url = f"/result?results={quote(json.dumps(results))}&calculation_id={results.get('calculation_id')}"
+            if telegram_id:
+                results_url += f"&telegram_id={telegram_id}&source=telegram"
+            return redirect(results_url)
+
+    except Exception as e:
+        logger.error(f"Ошибка в calculate: {str(e)}")
+        return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
+
+def perform_delivery_calculation(category, weight_per_box, length, width, height, cost, quantity, 
+                                telegram_id=None, username=None, source='telegram'):
+    """Основная логика расчета доставки"""
+    try:
+        # Сохраняем пользователя (только для Telegram)
         telegram_user_id = None
-        if telegram_id and telegram_id != 'test_user':
+        if telegram_id and telegram_id != 'test_user' and source == 'telegram':
             telegram_user_id = save_telegram_user(telegram_id, username)
 
         # Выполняем расчеты
@@ -402,9 +519,9 @@ def calculate():
 
         # Тарифы по весу
         cursor.execute("""
-            SELECT min_weight, max_weight, coefficient_bag,  bag_packing_cost, bag_unloading_cost,
-                   coefficient_corner,  corner_packing_cost, corner_unloading_cost,
-                   coefficient_frame,frame_packing_cost, frame_unloading_cost
+            SELECT min_weight, max_weight, coefficient_bag, bag_packing_cost, bag_unloading_cost,
+                   coefficient_corner, corner_packing_cost, corner_unloading_cost,
+                   coefficient_frame, frame_packing_cost, frame_unloading_cost
             FROM delivery_test.weight
             WHERE min_weight <= %s AND max_weight > %s
         """, (total_weight, total_weight))
@@ -413,11 +530,12 @@ def calculate():
         if not result_row_weight:
             cursor.close()
             conn.close()
-            return jsonify({"error": f"Вес {total_weight} кг вне диапазона тарифов"}), 400
+            logger.error(f"Вес {total_weight} кг вне диапазона тарифов")
+            return None
 
-        (min_weight, max_weight, packing_factor_bag,  packaging_cost_bag, unload_cost_bag,
-         additional_weight_corners,  packaging_cost_corners, unload_cost_corners,
-         additional_weight_frame,  packaging_cost_frame, unload_cost_frame) = [safe_decimal(value) for value in result_row_weight]
+        (min_weight, max_weight, packing_factor_bag, packaging_cost_bag, unload_cost_bag,
+         additional_weight_corners, packaging_cost_corners, unload_cost_corners,
+         additional_weight_frame, packaging_cost_frame, unload_cost_frame) = [safe_decimal(value) for value in result_row_weight]
 
         # Тарифы по плотности
         cursor.execute("""
@@ -430,7 +548,8 @@ def calculate():
         if not result_row_density:
             cursor.close()
             conn.close()
-            return jsonify({"error": f"Плотность {density} кг/м³ вне диапазона для '{category}'"}), 400
+            logger.error(f"Плотность {density} кг/м³ вне диапазона для '{category}'")
+            return None
 
         (category_db, min_density, max_density, fast_car_cost_per_kg, regular_car_cost_per_kg) = [
             safe_decimal(value) if isinstance(value, (int, float)) else value for value in result_row_density]
@@ -464,8 +583,8 @@ def calculate():
         results = {
             "generalInformation": {
                 "category": category,
-                "fast_car_cost_per_kg":float(fast_car_cost_per_kg.quantize(Decimal('0.01'))),
-                "regular_car_cost_per_kg":float(regular_car_cost_per_kg.quantize(Decimal('0.01'))),
+                "fast_car_cost_per_kg": float(fast_car_cost_per_kg.quantize(Decimal('0.01'))),
+                "regular_car_cost_per_kg": float(regular_car_cost_per_kg.quantize(Decimal('0.01'))),
                 "weight": float(total_weight.quantize(Decimal('0.01'))),
                 "density": float(density.quantize(Decimal('0.01'))),
                 "productCost": float(cost),
@@ -513,7 +632,7 @@ def calculate():
         input_id = save_user_input_to_db(
             category=category, weight=float(weight_per_box), length=float(length),
             width=float(width), height=float(height), cost=float(cost),
-            quantity=quantity, telegram_user_id=telegram_user_id
+            quantity=quantity, telegram_user_id=telegram_user_id, source=source
         )
 
         calculation_id = save_user_calculation(
@@ -531,7 +650,7 @@ def calculate():
             corners_total_regular=float(results["corners"]["totalRegular"]),
             frame_total_fast=float(results["frame"]["totalFast"]),
             frame_total_regular=float(results["frame"]["totalRegular"]),
-            input_id=input_id
+            input_id=input_id, source=source
         )
 
         # Сохраняем действие
@@ -539,25 +658,22 @@ def calculate():
             save_user_action(telegram_id, 'calculation_completed', {
                 'calculation_id': calculation_id,
                 'category': category,
-                'total_weight': float(total_weight)
-            })
+                'total_weight': float(total_weight),
+                'source': source
+            }, source)
 
-        # Возвращаем результат
-        if request.method == 'POST':
-            return jsonify(results)
-        else:
-            results_url = f"/result?results={quote(json.dumps(results))}&calculation_id={calculation_id}"
-            if telegram_id:
-                results_url += f"&telegram_id={telegram_id}"
-            return redirect(results_url)
+        # Добавляем ID расчета к результатам
+        results['calculation_id'] = calculation_id
+
+        return results
 
     except Exception as e:
-        logger.error(f"Ошибка в calculate: {str(e)}")
-        return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
+        logger.error(f"Ошибка в perform_delivery_calculation: {str(e)}")
+        return None
 
 @app.route('/submit_purchase_request', methods=['POST'])
 def submit_purchase_request():
-    """Создание заявки на выкуп и доставку"""
+    """Создание заявки на выкуп и доставку (для Telegram)"""
     try:
         data = request.get_json()
         telegram_id = data.get('telegram_id')
@@ -594,11 +710,9 @@ def submit_purchase_request():
         conn.close()
         
         if not user_result:
-            logger.info(f"Пользователь с telegram_id={telegram_id} не найден, создаем...")
-            telegram_user_id = save_telegram_user(telegram_id, telegram_username)
-        else:
+            return jsonify({"error": "Пользователь не найден"}), 404
         
-            telegram_user_id = user_result[0]
+        telegram_user_id = user_result[0]
         
         # Сохраняем заявку
         request_id = save_purchase_request(
@@ -610,7 +724,8 @@ def submit_purchase_request():
             order_amount=order_amount,
             promo_code=promo_code,
             additional_notes=additional_notes,
-            terms_accepted=terms_accepted
+            terms_accepted=terms_accepted,
+            source='telegram'
         )
         
         if request_id:
@@ -620,7 +735,7 @@ def submit_purchase_request():
                 'calculation_id': calculation_id,
                 'email': email,
                 'order_amount': order_amount
-            })
+            }, 'telegram')
             
             return jsonify({
                 "success": True,
@@ -633,6 +748,33 @@ def submit_purchase_request():
     except Exception as e:
         logger.error(f"Ошибка при создании заявки: {str(e)}")
         return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
+
+@handle_db_errors
+def save_purchase_request(telegram_user_id, email, telegram_contact, supplier_link, order_amount, 
+                         promo_code, additional_notes, terms_accepted, calculation_id=None, source='telegram'):
+    """Сохранение заявки на выкуп"""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            INSERT INTO delivery_test.purchase_requests (
+                telegram_user_id, calculation_id, email, telegram_contact, supplier_link,
+                order_amount, promo_code, additional_notes, terms_accepted, source, created_at, updated_at
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+            RETURNING id
+        """, (
+            telegram_user_id, calculation_id, email, telegram_contact, supplier_link,
+            order_amount, promo_code, additional_notes, terms_accepted, source
+        ))
+        
+        request_id = cursor.fetchone()[0]
+        conn.commit()
+        return request_id
+        
+    finally:
+        cursor.close()
+        conn.close()
 
 @app.route('/health')
 def health_check():
@@ -648,7 +790,7 @@ def health_check():
             "status": "healthy",
             "timestamp": datetime.now().isoformat(),
             "database": "connected",
-            "version": "2.1"
+            "version": "2.2"
         })
     except Exception as e:
         return jsonify({
@@ -656,6 +798,19 @@ def health_check():
             "timestamp": datetime.now().isoformat(),
             "error": str(e)
         }), 500
+
+# Статические файлы
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(app.static_folder, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory(app.static_folder, 'robots.txt', mimetype='text/plain')
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(app.static_folder, 'sitemap.xml', mimetype='application/xml')
 
 @app.errorhandler(404)
 def not_found_error(error):
@@ -697,4 +852,58 @@ if __name__ == '__main__':
         port=8061,
         debug=os.getenv('FLASK_DEBUG', 'False').lower() == 'true',
         threaded=True
-    )
+    )from flask import Flask, render_template, request, jsonify, redirect, send_from_directory
+import psycopg2
+from decimal import Decimal, getcontext, InvalidOperation
+from urllib.parse import unquote, quote
+from flask_cors import CORS
+import logging
+import json
+from datetime import datetime, timedelta
+import os
+from functools import wraps
+import re
+
+# Настройка точности для Decimal
+getcontext().prec = 6
+
+# Создание приложения Flask
+app = Flask(__name__, static_folder='static', template_folder='templates')
+CORS(app, origins=["https://telegram.org", "*"])
+
+# Настройка логирования
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('delivery_calculator.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
+
+# Конфигурация базы данных
+DB_CONFIG = {
+    "dbname": "delivery_db",
+    "user": "chinatogether",
+    "password": "O99ri1@",
+    "host": "localhost",
+    "port": "5432",
+    "connect_timeout": 10
+}
+
+def connect_to_db():
+    """Подключение к базе данных"""
+    try:
+        return psycopg2.connect(**DB_CONFIG)
+    except Exception as e:
+        logger.error(f"Ошибка подключения к базе данных: {str(e)}")
+        raise
+
+def safe_decimal(value, default=Decimal('0')):
+    """Безопасное преобразование в Decimal"""
+    try:
+        if value is None:
+            return default
+        return Decimal(str(value).replace(',', '.'))
+    except (InvalidOperation, ValueError, TypeError):

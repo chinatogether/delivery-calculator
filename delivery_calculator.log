@@ -8613,3 +8613,214 @@ jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was loo
  * Running on http://127.0.0.1:8061
  * Running on http://10.128.0.11:8061
 2025-06-24 19:26:55,608 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 19:39:56,664 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:39:56] "GET /?XDEBUG_SESSION_START=phpstorm HTTP/1.1" 200 -
+2025-06-24 19:41:39,476 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:41:39] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 19:41:59,594 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:41:59] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 19:43:56,464 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:43:56] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 19:44:14,359 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:44:14] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 19:45:54,106 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:45:54] "GET /order?telegram_id=138138847&username=dukudrin HTTP/1.1" 200 -
+2025-06-24 19:46:28,586 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:46:28] "GET /?telegram_id=138138847&username=dukudrin HTTP/1.1" 200 -
+2025-06-24 19:46:37,152 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:46:37] "GET /order?telegram_id=138138847&username=dukudrin HTTP/1.1" 200 -
+2025-06-24 19:54:05,891 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:54:05] "[33mGET /api HTTP/1.1[0m" 404 -
+2025-06-24 19:54:06,453 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:54:06] "[33mGET /containers/json HTTP/1.1[0m" 404 -
+2025-06-24 19:54:06,753 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:54:06] "GET / HTTP/1.1" 200 -
+2025-06-24 19:54:07,054 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:54:07] "[33mGET /.env.bak HTTP/1.1[0m" 404 -
+2025-06-24 19:54:07,354 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:54:07] "[33mGET /.env HTTP/1.1[0m" 404 -
+2025-06-24 19:54:07,655 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:54:07] "[33mGET /stats HTTP/1.1[0m" 404 -
+2025-06-24 19:54:07,955 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:54:07] "[33mGET /openapi/v2 HTTP/1.1[0m" 404 -
+2025-06-24 19:54:08,255 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:54:08] "[33mGET /version HTTP/1.1[0m" 404 -
+2025-06-24 19:57:59,805 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:57:59] "GET / HTTP/1.1" 200 -
+2025-06-24 19:58:10,503 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:58:10] "GET /order?telegram_id=138138847&username=dukudrin HTTP/1.1" 200 -
+2025-06-24 19:59:09,487 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:59:09] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 19:59:34,374 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:59:34] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:00:31,426 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:00:31] "[33mGET /rest/menu/latest/admin HTTP/1.1[0m" 404 -
+2025-06-24 20:00:32,120 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:00:32] "[33mGET /rest/api/2/dashboard?maxResults=100 HTTP/1.1[0m" 404 -
+2025-06-24 20:00:32,792 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:00:32] "[33mGET /rest/config/1.0/directory HTTP/1.1[0m" 404 -
+2025-06-24 20:00:33,424 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:00:33] "[33mGET /rest/api/2/projectCategory?maxResults=1000 HTTP/1.1[0m" 404 -
+2025-06-24 20:00:34,050 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:00:34] "[33mGET /rest/api/2/project?maxResults=100 HTTP/1.1[0m" 404 -
+2025-06-24 20:00:34,708 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:00:34] "[33mGET /rest/api/2/resolution HTTP/1.1[0m" 404 -
+2025-06-24 20:00:35,371 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:00:35] "[33mGET /rest/api/2/screens HTTP/1.1[0m" 404 -
+2025-06-24 20:00:36,012 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:00:36] "[33mGET /secure/popups/UserPickerBrowser.jspa HTTP/1.1[0m" 404 -
+2025-06-24 20:01:22,782 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:01:22] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:01:55,999 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:01:55] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:05:03,967 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:05:03] "[33mGET /.env HTTP/1.1[0m" 404 -
+2025-06-24 20:05:04,231 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:05:04] "[33mGET /twilio.env HTTP/1.1[0m" 404 -
+2025-06-24 20:05:04,408 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:05:04] "[33mGET /aws.env HTTP/1.1[0m" 404 -
+2025-06-24 20:05:09,061 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:05:09] "GET /order?telegram_id=138138847&username=dukudrin HTTP/1.1" 200 -
+2025-06-24 20:06:06,242 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:06:06] "GET /order?telegram_id=138138847&username=dukudrin HTTP/1.1" 200 -
+2025-06-24 20:06:09,525 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:06:09] "GET /order?telegram_id=138138847&username=dukudrin HTTP/1.1" 200 -
+2025-06-24 20:06:32,024 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:06:32] "[33mPOST /submit_purchase_request HTTP/1.1[0m" 404 -
+2025-06-24 20:06:52,455 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:06:52] "[33mPOST /submit_purchase_request HTTP/1.1[0m" 404 -
+2025-06-24 20:06:55,510 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:06:55] "[33mPOST /submit_purchase_request HTTP/1.1[0m" 404 -
+2025-06-24 20:07:24,461 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:07:24] "[33mPOST /submit_purchase_request HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,024 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /_profiler/phpinfo HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,080 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /_profiler/phpinfo.php HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,136 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /phpinfo HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,191 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /phpinfo.php HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,246 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /info HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,305 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /info.php HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,368 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /.env HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,427 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /app/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,483 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /.env.bak HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,540 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /.env.example HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,595 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /.env.local HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,650 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /.env.old HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,706 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /.env.prod HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,767 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /.env.production.local HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,826 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /.env.stage HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,883 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /admin/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:11:42,947 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:42] "[33mGET /api/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:11:43,004 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:43] "[33mGET /apps/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:11:43,180 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:11:43] "[33mGET /.git/config HTTP/1.1[0m" 404 -
+2025-06-24 20:13:05,380 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:13:05] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0434\\u0435\\u0436\\u0434\\u0430",%20"fast_car_cost_per_kg":%203.4,%20"regular_car_cost_per_kg":%203.0,%20"weight":%2020.0,%20"density":%20166.67,%20"productCost":%2030.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%200.3,%20"volume":%200.12,%20"boxCount":%201},%20"bag":%20{"packedWeight":%2020.5,%20"packagingCost":%203.0,%20"unloadCost":%204.0,%20"insurance":%200.3,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2069.7,%20"deliveryCostRegular":%2061.5,%20"totalFast":%2077.0,%20"totalRegular":%2068.8},%20"corners":%20{"packedWeight":%2021.5,%20"packagingCost":%208.0,%20"unloadCost":%204.0,%20"insurance":%200.3,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2073.1,%20"deliveryCostRegular":%2064.5,%20"totalFast":%2085.4,%20"totalRegular":%2076.8},%20"frame":%20{"packedWeight":%2026.0,%20"packagingCost":%2015.0,%20"unloadCost":%204.0,%20"insurance":%200.3,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2088.4,%20"deliveryCostRegular":%2078.0,%20"totalFast":%20107.7,%20"totalRegular":%2097.3}}&calculation_id=111&telegram_id=test_user HTTP/1.1" 200 -
+2025-06-24 20:13:07,119 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:13:07] "GET / HTTP/1.1" 200 -
+2025-06-24 20:13:10,576 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:13:10] "GET /order?calculation_id=88 HTTP/1.1" 200 -
+2025-06-24 20:13:25,183 - __main__ - ERROR - Ошибка при создании заявки: invalid input syntax for type bigint: "test_user"
+LINE 1: ... delivery_test.telegram_users WHERE telegram_id = 'test_user...
+                                                             ^
+
+2025-06-24 20:13:25,184 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:13:25] "[35m[1mPOST /submit_purchase_request HTTP/1.1[0m" 500 -
+2025-06-24 20:13:36,556 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:13:36] "GET /order?calculation_id=88 HTTP/1.1" 200 -
+2025-06-24 20:13:59,657 - __main__ - ERROR - Ошибка при создании заявки: invalid input syntax for type bigint: "test_user"
+LINE 1: ... delivery_test.telegram_users WHERE telegram_id = 'test_user...
+                                                             ^
+
+2025-06-24 20:13:59,658 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:13:59] "[35m[1mPOST /submit_purchase_request HTTP/1.1[0m" 500 -
+2025-06-24 20:15:11,671 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:15:11] "GET / HTTP/1.1" 200 -
+2025-06-24 20:15:12,246 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:15:12] "GET /order?calculation_id=88 HTTP/1.1" 200 -
+2025-06-24 20:15:29,620 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:15:29] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:15:48,218 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:15:48] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:15:53,209 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:15:53] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-24 20:16:16,260 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:16:16] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:16:25,215 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:16:25] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-24 20:16:41,475 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:16:41] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-24 20:16:50,038 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:16:50] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:17:00,195 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:17:00] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-24 20:18:00,033 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:18:00] "GET /order?calculation_id=88 HTTP/1.1" 200 -
+2025-06-24 20:18:08,515 - __main__ - ERROR - Ошибка при создании заявки: invalid input syntax for type bigint: "test_user"
+LINE 1: ... delivery_test.telegram_users WHERE telegram_id = 'test_user...
+                                                             ^
+
+2025-06-24 20:18:08,516 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:18:08] "[35m[1mPOST /submit_purchase_request HTTP/1.1[0m" 500 -
+2025-06-24 20:18:43,374 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:18:43] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:19:29,624 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:19:29] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:19:57,874 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:19:57] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:21:22,494 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:21:22] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:33:56,980 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 20:33:56,992 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 20:33:56,992 - __main__ - INFO - ✅ База данных готова
+2025-06-24 20:33:57,004 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 20:33:57,004 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 20:36:20,532 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 20:36:20,581 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 20:36:20,582 - __main__ - INFO - ✅ База данных готова
+2025-06-24 20:36:20,601 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 20:36:20,602 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 20:36:26,505 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:36:26] "GET /?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:36:35,884 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:36:35] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:38:04,676 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:38:04] "[33mGET /wp-login.php HTTP/1.1[0m" 404 -
+2025-06-24 20:38:09,365 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:38:09] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:39:29,186 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:39:29] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:40:14,626 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:14] "[33mGET /cobbler_web HTTP/1.1[0m" 404 -
+2025-06-24 20:40:20,796 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:20] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:40:43,619 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:43] "[33mGET /.env HTTP/1.1[0m" 404 -
+2025-06-24 20:40:44,933 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:44] "[33mGET /twilio.env HTTP/1.1[0m" 404 -
+2025-06-24 20:40:45,259 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:45] "[33mGET /aws.env HTTP/1.1[0m" 404 -
+2025-06-24 20:40:46,148 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:46] "[33mGET /conf.env HTTP/1.1[0m" 404 -
+2025-06-24 20:40:46,765 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:46] "[33mGET /ses.env HTTP/1.1[0m" 404 -
+2025-06-24 20:40:48,563 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:48] "[33mGET /dev/.env~ HTTP/1.1[0m" 404 -
+2025-06-24 20:40:50,317 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:50] "[33mGET /lara/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:40:51,452 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:51] "[33mGET /dev/.env0 HTTP/1.1[0m" 404 -
+2025-06-24 20:40:52,357 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:52] "[33mGET /node/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:40:53,057 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:53] "[33mGET /jest/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:40:53,772 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:53] "[33mGET /helm/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:40:54,358 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:54] "[33mGET /debug.env HTTP/1.1[0m" 404 -
+2025-06-24 20:40:54,988 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:54] "[33mGET /next/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:40:56,175 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:56] "[33mGET /env.local HTTP/1.1[0m" 404 -
+2025-06-24 20:40:57,229 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:40:57] "[33mGET /envs/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:01,803 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:01] "[33mGET /email.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:02,582 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:02] "[33mGET /env_2.txt HTTP/1.1[0m" 404 -
+2025-06-24 20:41:03,404 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:03] "[33mGET /front.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:03,991 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:03] "[33mGET /nest/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:04,485 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:04] "[33mGET /brevo.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:05,503 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:05] "[33mGET /api/.env0 HTTP/1.1[0m" 404 -
+2025-06-24 20:41:06,314 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:06] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:41:06,382 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:06] "[33mGET /.env_user HTTP/1.1[0m" 404 -
+2025-06-24 20:41:07,420 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:07] "[33mGET /BACK/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:07,938 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:07] "[33mGET /.prod-env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:09,300 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:09] "[33mGET /admin.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:10,601 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:10] "[33mGET /app/.env~ HTTP/1.1[0m" 404 -
+2025-06-24 20:41:11,503 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:11] "[33mGET /User/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:13,005 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:13] "[33mGET /cloud.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:13,991 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:13] "[33mGET /api/.env~ HTTP/1.1[0m" 404 -
+2025-06-24 20:41:15,505 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:15] "[33mGET /cicd/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:16,407 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:16] "[33mGET /Lara/.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:17,932 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:17] "[33mGET /build.env HTTP/1.1[0m" 404 -
+2025-06-24 20:41:18,923 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:18] "[33mGET /.env-ssrf HTTP/1.1[0m" 404 -
+2025-06-24 20:41:19,895 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:19] "[33mGET /.env-smtp HTTP/1.1[0m" 404 -
+2025-06-24 20:41:21,127 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:21] "[33mGET /.env_path HTTP/1.1[0m" 404 -
+2025-06-24 20:41:25,630 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:25] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:41:55,496 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:41:55] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 20:44:08,739 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:08] "GET / HTTP/1.1" 200 -
+2025-06-24 20:44:09,096 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:09] "[33mGET /wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:09,275 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:09] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-24 20:44:09,454 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:09] "GET / HTTP/1.1" 200 -
+2025-06-24 20:44:09,633 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:09] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:09,812 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:09] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:09,991 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:09] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:10,170 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:10] "[33mGET /website/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:10,349 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:10] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:10,528 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:10] "[33mGET /news/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:10,707 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:10] "[33mGET /2018/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:10,886 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:10] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:11,066 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:11] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:11,245 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:11] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:11,424 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:11] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:11,603 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:11] "[33mGET /media/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:11,782 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:11] "[33mGET /wp2/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:11,961 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:11] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:12,140 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:12] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:12,319 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:12] "[33mGET /sito/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 20:44:28,627 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:28] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:44:51,839 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:44:51] "GET / HTTP/1.1" 200 -
+2025-06-24 20:45:14,223 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:45:14] "GET /order?calculation_id=88 HTTP/1.1" 200 -
+2025-06-24 20:45:20,911 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:45:20] "GET /order?calculation_id=88 HTTP/1.1" 200 -
+2025-06-24 20:45:21,532 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:45:21] "GET /order?calculation_id=88 HTTP/1.1" 200 -
+2025-06-24 20:45:21,685 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:45:21] "GET /order?calculation_id=88 HTTP/1.1" 200 -
+2025-06-24 20:45:21,835 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:45:21] "GET /order?calculation_id=88 HTTP/1.1" 200 -
+2025-06-24 20:45:28,294 - __main__ - ERROR - Ошибка при создании заявки: invalid input syntax for type bigint: "test_user"
+LINE 1: ... delivery_test.telegram_users WHERE telegram_id = 'test_user...
+                                                             ^
+
+2025-06-24 20:45:28,295 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 20:45:28] "[35m[1mPOST /submit_purchase_request HTTP/1.1[0m" 500 -
+2025-06-24 20:46:50,742 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:46:50] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:51:25,440 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:51:25] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:52:06,230 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 20:52:06,246 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 20:52:06,246 - __main__ - INFO - ✅ База данных готова
+2025-06-24 20:52:06,257 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 20:52:06,257 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 20:52:21,466 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:52:21] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:52:30,228 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:52:30] "GET /order?telegramContact=@emilienches&supplierLink=&orderAmount=Другое&promoCode=&additionalNotes=&termsAccepted=on HTTP/1.1" 200 -
+2025-06-24 20:52:30,272 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:52:30] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-24 20:52:45,508 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:52:45] "GET /order?telegramContact=@emilienches&supplierLink=&orderAmount=5000-10000+юаней&promoCode=&additionalNotes=&termsAccepted=on HTTP/1.1" 200 -
+2025-06-24 20:52:45,542 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:52:45] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-24 20:54:23,111 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 20:54:23,121 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 20:54:23,122 - __main__ - INFO - ✅ База данных готова
+2025-06-24 20:54:23,129 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 20:54:23,129 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 20:54:30,782 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:54:30] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 20:54:36,846 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 20:54:36] "POST /submit_purchase_request HTTP/1.1" 200 -

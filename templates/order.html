@@ -640,6 +640,12 @@
             }
         });
 
+        // Обработчик клика по чекбоксу
+        termsCheckbox.addEventListener('click', function (e) {
+            e.stopPropagation(); // Чтобы не срабатывало событие на wrapper
+            updateCheckboxStyle();
+        });
+
         // Обработчик изменения состояния checkbox
         termsCheckbox.addEventListener('change', function () {
             updateCheckboxStyle();
