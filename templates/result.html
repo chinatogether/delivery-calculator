@@ -16,14 +16,6 @@
             --dark-card: #2a2a2a;
             --border-color: #444444;
             --hint-color: #999999;
-        }secondary-color: #3498db;
-            --success-color: #27ae60;
-            --text-color: #333;
-            --white: #ffffff;
-            --border-color: #e9ecef;
-            --tg-theme-bg-color: var(--white);
-            --tg-theme-text-color: var(--text-color);
-            --tg-theme-hint-color: #999;
         }
 
         * {
@@ -33,13 +25,14 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: var(--tg-theme-text-color);
-            background: linear-gradient(135deg, #323033 0%, #323033 100%);
+            color: var(--text-color);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
             min-height: 100vh;
             padding: 0;
             margin: 0;
+            overflow-x: hidden;
         }
 
         .container {
@@ -53,27 +46,27 @@
             text-align: center;
             margin-bottom: 24px;
             padding-top: 8px;
-            color: white;
         }
 
         h1 {
-            color: white;
-            font-size: 1.8rem;
+            color: var(--text-color);
+            font-size: 2.2rem;
             margin-bottom: 8px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .subtitle {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.95rem;
+            color: var(--hint-color);
+            font-size: 1.1rem;
         }
 
         .card {
-            background: var(--white);
+            background: var(--dark-card);
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             padding: 20px;
             margin-bottom: 16px;
+            border: 1px solid var(--border-color);
         }
 
         .card h2 {
@@ -103,7 +96,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 8px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .info-item:last-child {
@@ -111,7 +104,7 @@
         }
 
         .info-label {
-            color: var(--tg-theme-hint-color);
+            color: var(--hint-color);
             font-size: 0.9rem;
         }
 
@@ -119,6 +112,7 @@
             font-weight: 500;
             font-size: 0.95rem;
             text-align: right;
+            color: var(--text-color);
         }
 
         .comparison-table {
@@ -137,11 +131,13 @@
             padding: 12px 8px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
         }
 
         .comparison-table th {
-            background: rgba(231, 76, 60, 0.05);
+            background: rgba(231, 76, 60, 0.1);
             font-weight: 600;
+            color: var(--primary-color);
         }
 
         .comparison-table td:nth-child(2),
@@ -172,6 +168,11 @@
             font-size: 1rem;
             width: 100%;
             text-align: left;
+            transition: color 0.2s ease;
+        }
+
+        .details-toggle:hover {
+            color: #c0392b;
         }
 
         .details-content {
@@ -186,8 +187,9 @@
         .package-details {
             margin-bottom: 20px;
             padding: 16px;
-            background: rgba(52, 152, 219, 0.05);
+            background: rgba(52, 152, 219, 0.1);
             border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
 
         .package-title {
@@ -206,11 +208,12 @@
 
         @media (min-width: 480px) {
             .action-buttons {
-                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-columns: 1fr 1fr;
             }
         }
 
         .btn {
+            width: 100%;
             padding: 16px;
             background: var(--primary-color);
             border: none;
@@ -227,15 +230,13 @@
             color: white;
         }
 
-        .btn-success,
-        .btn-secondary,
-        .btn-primary {
-            background: var(--primary-color);
-        }
-
         .btn:hover:not(:disabled) {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
         }
 
         .error {
@@ -245,6 +246,12 @@
             border-radius: 8px;
             text-align: center;
             margin: 20px 0;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .error a {
+            color: var(--primary-color);
+            text-decoration: underline;
         }
 
         @media (max-width: 480px) {
@@ -257,7 +264,7 @@
             }
 
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
             .action-buttons {
@@ -511,7 +518,7 @@
         {% else %}
         <div class="error">
             <p>❌ Данные для отображения отсутствуют.</p>
-            <p>Пожалуйста, выполните расчет на <a href="/" style="color: var(--primary-color);">главной странице</a>.</p>
+            <p>Пожалуйста, выполните расчет на <a href="/">главной странице</a>.</p>
         </div>
         {% endif %}
     </div>
@@ -522,12 +529,7 @@
         tg.ready();
         tg.expand();
 
-        // Применяем тему Telegram
-        if (tg.themeParams) {
-            document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color || '#ffffff');
-            document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color || '#000000');
-            document.documentElement.style.setProperty('--tg-theme-hint-color', tg.themeParams.hint_color || '#999999');
-        }
+        // Убираем привязку к темам Telegram - используем фиксированные цвета
 
         // Функция переключения детальной информации
         function toggleDetails() {

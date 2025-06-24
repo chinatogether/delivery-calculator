@@ -13,6 +13,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 from jinja2 import Template
 import pdfkit
+from collections import OrderedDict
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
@@ -113,14 +114,14 @@ class PDFGenerator:
             return False
     
     def get_density_data_for_pdf(self):
-        """Получает данные из таблицы density для формирования PDF"""
+        """Получает данные из таблицы density для формирования PDF с упорядоченными категориями"""
         conn = self.connect_to_db()
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         
         try:
             cursor.execute("""
                 SELECT category, min_density, max_density, density_range,
-                       fast_delivery_cost, regular_delivery_cost
+                    fast_delivery_cost, regular_delivery_cost
                 FROM delivery_test.density
                 ORDER BY category, min_density DESC
             """)
@@ -131,17 +132,38 @@ class PDFGenerator:
                 logger.warning("Нет данных в таблице density")
                 return {}
             
+                    # Определяем желаемый порядок категорий
+            category_order = [
+                'Обычные товары',
+                'Одежда', 
+                'Обувь'
+            ]
+            
             # Группируем данные по категориям
-            categories_data = {}
+            temp_categories_data = {}
             for row in rows:
                 category = row['category']
+                if category not in temp_categories_data:
+                    temp_categories_data[category] = []
+                temp_categories_data[category].append(row)
+            
+             # Создаем упорядоченный словарь согласно category_order
+            from collections import OrderedDict
+            categories_data = OrderedDict()
+            
+            # Сначала добавляем категории в заданном порядке
+            for category in category_order:
+                if category in temp_categories_data:
+                    categories_data[category] = temp_categories_data[category]
+            
+            # Затем добавляем все остальные категории, которые не были в списке
+            for category, data in temp_categories_data.items():
                 if category not in categories_data:
-                    categories_data[category] = []
-                categories_data[category].append(row)
+                    categories_data[category] = data
             
-            logger.info(f"Получено данных для {len(categories_data)} категорий")
-            return categories_data
-            
+                logger.info(f"Получено данных для {len(categories_data)} категорий в заданном порядке")
+                return categories_data
+        
         except Exception as e:
             logger.error(f"Ошибка получения данных для PDF: {str(e)}")
             return {}
@@ -321,12 +343,12 @@ class PDFGenerator:
 def create_pdf_generator():
     """Фабричная функция для создания генератора PDF"""
     db_config = {
-        'dbname': "delivery_db",
-        'user': "chinatogether", 
-        'password': "O99ri1@",
-        'host': "localhost",
-        'port': "5432",
-        'connect_timeout': 10
+        'dbname': os.getenv('DB_NAME', 'delivery_db'),
+        'user': os.getenv('DB_USER', 'postgres'), 
+        'password': os.getenv('DB_PASSWORD'),
+        'host': os.getenv('DB_HOST', 'localhost'),
+        'port': os.getenv('DB_PORT', '5432'),
+        'connect_timeout': int(os.getenv('DB_TIMEOUT', '10'))
     }
     
     return PDFGenerator(db_config)

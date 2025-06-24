@@ -6,7 +6,7 @@
     <style>
         @page {
             size: A4;
-            margin: 15mm;
+            margin: 4mm;
         }
         
         body {
@@ -19,25 +19,25 @@
             line-height: 1.4;
         }
         
-        .container {
+        /* .container {
             width: 100%;
             margin: 0;
             padding: 0;
-        }
+        } */
         
         .header {
             text-align: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
             border-bottom: 2px solid #E74C3C;
         }
         
         .logo {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             object-fit: cover;
             border-radius: 50%;
-            margin-bottom: 16px;
+            margin-bottom: 0px;
             border: 3px solid #E74C3C; /* Яркий красный цвет без прозрачности */
             box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4); /* Чуть теплее, чем раньше */
             background-color: #fff; /* Белый фон для лучшей видимости */
@@ -45,21 +45,21 @@
         
         h1 {
             color: #E74C3C;
-            font-size: 2.2rem;
-            margin-bottom: 8px;
+            font-size: 2.1rem;
+            margin-bottom: 0px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
         .subtitle {
             color: #666;
-            font-size: 14px;
+            font-size: 10px;
             margin: 0;
         }
         
         h2 {
             color: #ffffff;
-            margin: 30px 0 15px 0;
-            font-size: 18px;
+            margin: 8px 0 6px 0;
+            font-size: 14px;
             font-weight: bold;
             border-bottom: 1px solid #E74C3C;
             padding-bottom: 5px;
@@ -69,14 +69,14 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
             border: 1px solid #ddd;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         th, td {
             border: 1px solid #ddd;
-            padding: 8px 10px;
+            padding: 8px 8px;
             text-align: center;
             vertical-align: middle;
         }
@@ -85,13 +85,13 @@
             background-color: #f8f9fa;
             font-weight: bold;
             color: #2c3e50;
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
         td {
-            font-size: 11px;
+            font-size: 10px;
         }
         
         tr:nth-child(even) {
@@ -103,12 +103,12 @@
         }
         
         .additional-info {
-            margin-top: 15px;
-            font-size: 12px;
+            margin-top: 8px;
+            font-size: 10px;
             line-height: 1.4;
             color: #555;
             background-color: #f8f9fa;
-            padding: 16px;
+            padding: 12px;
             border-radius: 6px;
             border-left: 4px solid #E74C3C;
         }
@@ -154,14 +154,14 @@
             text-align: right;
             font-size: 9px;
             color: #999;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
         
         .stats-info {
             text-align: center;
             font-size: 12px;
             color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             background-color: #e8f4fd;
             padding: 8px;
             border-radius: 4px;
@@ -190,7 +190,7 @@
             color: white;
             padding: 10px;
             border-radius: 5px;
-            margin-bottom: 15px;
+            margin-bottom: 6px;
             text-align: center;
 
             /* НОВОЕ: добавляем рамку */
@@ -202,7 +202,7 @@
             margin: 0;
             border: none;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
         }
         /* Дополнительно для мобильных */
         @media (max-width: 768px) {
@@ -236,10 +236,10 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- <div class="container">
         <div class="generated-date">
             Сформирован: {{ generation_date }}
-        </div>
+        </div> -->
         
         <!-- Титульная страница -->
         <div class="header">
@@ -304,13 +304,15 @@
                 <div class="additional-info">
                     <h3>📋 Важная информация по доставке:</h3>
                     <ol>
-                         {% if category == 'Обувь' %}
+                            {% if category == 'Обувь' %}
                                 <li><strong>Сроки доставки:</strong> Быстрое авто (12-15 дней)</li>
-                                {% else %}
-                                <li><strong>Сроки доставки:</strong> Быстрое авто (12-15 дней), Обычное авто (15-20 дней)</li>
-                                {% endif %}
+                            {% elif category == 'Обычные товары' %}
+                                <li><strong>Сроки доставки:</strong> Быстрое авто (13-16 дней), Обычное авто (17-25 дней)</li>    
+                            {% else %}
+                                <li><strong>Сроки доставки:</strong> Быстрое авто (15-18 дней), Обычное авто (20-25 дней)</li>
+                            {% endif %}
                         <li><strong>Страхование товара:</strong>
-                            <ul style="margin: 3px 0; padding-left: 15px;">
+                            <ul style="margin: 2px 0; padding-left: 15px;">
                                 <li>до 20$/kg — 1% от стоимости</li>
                                 <li>20-30$/kg — 2% от стоимости</li>
                                 <li>30-40$/kg — 3% от стоимости</li>
@@ -318,7 +320,7 @@
                             </ul>
                         </li>
                         <li><strong>Стоимость упаковки:</strong>
-                            <ul style="margin: 3px 0; padding-left: 15px;">
+                            <ul style="margin: 2px 0; padding-left: 15px;">
                                 <li>Мешок + скотч: 3$/место</li>
                                 <li>Уголки из картона + скотч: 8$/место</li>
                                 <li>Деревянный каркас + скотч: 15$/место</li>
@@ -331,7 +333,7 @@
                 </div>
                 
                 {% if not loop.last %}
-                    <div style="margin-top: 20px; text-align: center; font-size: 10px; color: #999;">
+                    <div style="margin-top: 2px; text-align: center; font-size: 8px; color: #999;">
                         Страница {{ loop.index }} из {{ loop.length }}
                     </div>
                 {% endif %}
