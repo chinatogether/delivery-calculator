@@ -7769,3 +7769,7 @@ INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/chin
 INFO:__main__:📋 Команды бота установлены!
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950562 is handled. Duration 340 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950563 is handled. Duration 141 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950564 is handled. Duration 184 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950565 is handled. Duration 143 ms by bot id=7709869722
