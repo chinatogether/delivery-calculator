@@ -6748,3 +6748,95 @@ jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was loo
 2025-06-24 12:13:09,205 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:13:09] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
 2025-06-24 12:14:18,532 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:14:18] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
 2025-06-24 12:14:23,438 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:14:23] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:21:05,446 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:21:05] "[33mGET /login.html HTTP/1.1[0m" 404 -
+2025-06-24 12:31:14,163 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:31:14] "[31m[1mPROPFIND / HTTP/1.1[0m" 405 -
+2025-06-24 12:31:42,453 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:31:42] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:32:27,965 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:32:27] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:33:59,827 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:33:59] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:34:24,155 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:34:24] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:47:22,802 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:47:22,852 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:47:22,852 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:47:23,254 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:47:23,265 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:47:23,265 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:47:23,748 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:47:23,758 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:47:23,758 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:47:24,250 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:47:24,260 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:47:24,261 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:47:24,751 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:47:24,762 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:47:24,762 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:48:19,021 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:48:19] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 12:48:29,588 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:48:29] "GET /?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 12:48:36,962 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:48:36] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 12:48:56,736 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:48:56] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 12:49:25,263 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:49:25] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:50:57,533 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:50:57] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:51:42,195 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:51:42,205 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:51:42,205 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:51:42,762 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:51:42,772 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:51:42,772 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:51:43,261 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:51:43,271 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:51:43,272 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:51:43,749 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:51:43,760 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:51:43,760 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:51:44,258 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:51:44,269 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:51:44,269 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:51:51,025 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:51:51] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 12:52:04,190 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:52:04] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:52:04,205 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:52:04] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:55:09,163 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:55:09,173 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:55:09,173 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:55:09,588 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:55:09,601 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:55:09,601 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:55:10,087 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:55:10,101 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:55:10,101 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:55:10,533 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:55:10,547 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:55:10,547 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:55:11,000 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:55:11,011 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:55:11,011 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:55:16,382 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:55:16] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 12:55:34,956 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:55:34] "GET /?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 12:55:47,692 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:55:47] "[32mGET /calculate?category=Одежда&weight=10&length=30&width=50&height=40&cost=20&quantity=1&telegram_id=148440745&username=emilienches HTTP/1.1[0m" 302 -
+2025-06-24 12:55:47,739 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:55:47] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0434\\u0435\\u0436\\u0434\\u0430",%20"fast_car_cost_per_kg":%203.4,%20"regular_car_cost_per_kg":%203.0,%20"weight":%2010.0,%20"density":%20166.67,%20"productCost":%2020.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%200.2,%20"volume":%200.06,%20"boxCount":%201},%20"bag":%20{"packedWeight":%2010.3,%20"packagingCost":%203.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2035.02,%20"deliveryCostRegular":%2030.9,%20"totalFast":%2042.22,%20"totalRegular":%2038.1},%20"corners":%20{"packedWeight":%2011.0,%20"packagingCost":%208.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2037.4,%20"deliveryCostRegular":%2033.0,%20"totalFast":%2049.6,%20"totalRegular":%2045.2},%20"frame":%20{"packedWeight":%2014.0,%20"packagingCost":%2015.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2047.6,%20"deliveryCostRegular":%2042.0,%20"totalFast":%2066.8,%20"totalRegular":%2061.2}}&calculation_id=106&telegram_id=148440745 HTTP/1.1" 200 -
+2025-06-24 12:55:49,308 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:55:49] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0434\\u0435\\u0436\\u0434\\u0430",%20"fast_car_cost_per_kg":%203.4,%20"regular_car_cost_per_kg":%203.0,%20"weight":%2010.0,%20"density":%20166.67,%20"productCost":%2020.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%200.2,%20"volume":%200.06,%20"boxCount":%201},%20"bag":%20{"packedWeight":%2010.3,%20"packagingCost":%203.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2035.02,%20"deliveryCostRegular":%2030.9,%20"totalFast":%2042.22,%20"totalRegular":%2038.1},%20"corners":%20{"packedWeight":%2011.0,%20"packagingCost":%208.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2037.4,%20"deliveryCostRegular":%2033.0,%20"totalFast":%2049.6,%20"totalRegular":%2045.2},%20"frame":%20{"packedWeight":%2014.0,%20"packagingCost":%2015.0,%20"unloadCost":%204.0,%20"insurance":%200.2,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2047.6,%20"deliveryCostRegular":%2042.0,%20"totalFast":%2066.8,%20"totalRegular":%2061.2}}&calculation_id=106&telegram_id=148440745 HTTP/1.1" 200 -
+2025-06-24 12:55:53,612 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:55:53] "GET /order?calculation_id=106 HTTP/1.1" 200 -
+2025-06-24 12:57:04,900 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:57:04,911 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:57:04,911 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:57:04,916 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 12:57:04,916 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 12:57:05,586 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:57:05,597 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:57:05,597 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:57:06,005 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:57:06,017 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:57:06,018 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:57:06,507 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:57:06,520 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:57:06,521 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:57:07,007 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:57:07,017 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:57:07,017 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:57:07,509 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 12:57:07,520 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 12:57:07,520 - __main__ - INFO - ✅ База данных готова
+2025-06-24 12:57:22,344 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:57:22] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 12:57:28,588 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:57:28] "GET / HTTP/1.1" 200 -
+2025-06-24 12:57:34,132 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:57:34] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -

@@ -13,8 +13,8 @@
             --secondary-color: #3498db;
             --success-color: #27ae60;
             --text-color: #ffffff;
-            --white: #444444;
-            --dark-card: #444444;
+            --white: #333333;
+            --dark-card: #2a2a2a;
             --border-color: #444444;
             --hint-color: #999999;
         }
@@ -50,8 +50,8 @@
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
             border-radius: 50%;
             margin-bottom: 16px;
@@ -61,14 +61,14 @@
 
         h1 {
             color: var(--text-color);
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .subtitle {
             color: var(--hint-color);
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         .card {
@@ -82,7 +82,7 @@
 
         .info-section {
             background: rgba(52, 152, 219, 0.1);
-            border: 2px solid #444444;
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
@@ -100,17 +100,21 @@
 
         .form-section {
             background: rgba(39, 174, 96, 0.1);
-            border: 2px solid #444444;
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 20px;
         }
 
         .section-title {
             color: var(--primary-color);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 16px;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .form-group {
@@ -129,24 +133,24 @@
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 1.5px solid var(--border-color);
+            border: 1.5px solid #444444;
             border-radius: 8px;
             font-size: 16px;
             transition: all 0.2s ease;
-            background: var(--white);
-            color: var(--text-color);
+            background: #333333;
+            color: #ffffff;
             -webkit-appearance: none;
         }
 
         .form-group select {
             width: 100%;
             padding: 12px;
-            border: 1.5px solid var(--border-color);
+            border: 1.5px solid #444444;
             border-radius: 8px;
             font-size: 16px;
             transition: all 0.2s ease;
-            background: var(--white);
-            color: var(--text-color);
+            background: #333333;
+            color: #ffffff;
             -webkit-appearance: none;
         }
 
@@ -154,7 +158,8 @@
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-color: #E74C3C;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
         }
 
         .form-group input::placeholder,
@@ -164,8 +169,8 @@
         }
 
         .form-group select option {
-            background: var(--white) !important;
-            color: var(--text-color) !important;
+            background: #333333 !important;
+            color: #ffffff !important;
         }
 
         .error-message {
@@ -177,19 +182,9 @@
         }
 
         @keyframes shake {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-5px);
-            }
-
-            75% {
-                transform: translateX(5px);
-            }
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         .required {
@@ -218,6 +213,7 @@
             text-decoration: none;
             background: var(--primary-color);
             color: white;
+            margin-top: 20px;
         }
 
         .btn:hover:not(:disabled) {
@@ -257,7 +253,7 @@
             padding: 16px;
             background: rgba(231, 76, 60, 0.05);
             border-radius: 12px;
-            border: 2px solid rgba(231, 76, 60, 0.2);
+            border: 1px solid rgba(231, 76, 60, 0.2);
             transition: all 0.3s ease;
             position: relative;
         }
@@ -281,8 +277,8 @@
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            background: var(--white);
-            border: 2px solid var(--border-color);
+            background: #333333;
+            border: 2px solid #444444;
             border-radius: 6px;
             transition: all 0.2s ease;
             flex-shrink: 0;
@@ -292,8 +288,8 @@
         }
 
         .checkbox-wrapper input[type="checkbox"]:checked {
-            background: var(--success-color);
-            border-color: var(--success-color);
+            background: #27ae60;
+            border-color: #27ae60;
         }
 
         .checkbox-wrapper input[type="checkbox"]:checked::before {
@@ -328,17 +324,84 @@
             color: #c0392b;
         }
 
+        /* Модальное окно для политики конфиденциальности */
+        .privacy-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            overflow-y: auto;
+        }
+
+        .privacy-modal-content {
+            background-color: var(--dark-card);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid var(--border-color);
+        }
+
+        .privacy-modal h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .privacy-modal p {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .privacy-close {
+            color: var(--hint-color);
+            float: right;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+
+        .privacy-close:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 480px) {
+            .privacy-modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 20px;
+            }
+            
+            .privacy-modal h3 {
+                font-size: 1.1rem;
+            }
+        }
+
         @media (prefers-color-scheme: dark) {
             :root {
                 --text-color: #ffffff;
-                --white: #2a2a2a;
+                --white: #333333;
                 --border-color: #444444;
             }
 
             .card,
             .form-section,
             .info-section {
-                background: #2a2a2a;
+                background: var(--dark-card);
             }
         }
 
@@ -353,7 +416,7 @@
             }
 
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
             .form-group input[type="number"] {
@@ -362,6 +425,10 @@
 
             .checkbox-wrapper {
                 padding: 12px;
+            }
+
+            .section-title {
+                font-size: 1rem;
             }
         }
     </style>
@@ -372,9 +439,10 @@
         <div class="header">
             <img src="https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20(2).jpg"
                 alt="China Together" class="logo">
-            <h1>📋 Заказать доставку</h1>
+            <h1>China Together</h1>
             <p class="subtitle">Оформите заявку на выкуп и доставку товара</p>
         </div>
+        
         <!-- Информационная секция -->
         <div class="info-section">
             <div class="info-title">
@@ -390,9 +458,13 @@
                 </div>
             </div>
         </div>
+        
         <!-- Форма заявки -->
         <div class="form-section">
-            <div class="section-title">📋 Заявка на выкуп и доставку товара</div>
+            <div class="section-title">
+                <span>📋</span>
+                <span>Заявка на выкуп и доставку товара</span>
+            </div>
             <form id="purchaseRequestForm">
                 <!-- Telegram контакт -->
                 <div class="form-group">
@@ -407,6 +479,7 @@
                     </div>
                     <div id="telegramContactError" class="error-message"></div>
                 </div>
+                
                 <!-- Ссылка на поставщика -->
                 <div class="form-group">
                     <label for="supplierLink">
@@ -419,6 +492,7 @@
                         Если поставщика нет, мы поможем вам его найти.
                     </div>
                 </div>
+                
                 <!-- Сумма заказа -->
                 <div class="form-group">
                     <label for="orderAmount">
@@ -438,11 +512,13 @@
                     </div>
                     <div id="orderAmountError" class="error-message"></div>
                 </div>
+                
                 <!-- Промокод -->
                 <div class="form-group">
                     <label for="promoCode">Промокод</label>
                     <input type="text" id="promoCode" name="promoCode" placeholder="Введите промокод, если есть">
                 </div>
+                
                 <!-- Дополнительные комментарии -->
                 <div class="form-group">
                     <label for="additionalNotes">Дополнительные комментарии</label>
@@ -450,7 +526,7 @@
                         placeholder="Расскажите подробнее о вашем заказе, особых требованиях или задайте вопросы..."
                         style="min-height: 100px; resize: vertical;"></textarea>
                 </div>
-                <!-- Согласие с условиями -->
+                
                 <!-- Согласие с условиями -->
                 <div class="form-group">
                     <div class="checkbox-wrapper" id="termsWrapper">
@@ -458,35 +534,60 @@
                         <div class="checkbox-text">
                             Отправляя заявку, Вы соглашаетесь с нашими <a
                                 href="https://docs.google.com/document/d/1_T89jCHqaMsaHhlV1fz8guHp99bNYu4fzNXj_g7G2_M/edit?tab=t.0"
-                                target="_blank">условиями и правилами работы</a> <span class="required">*</span>
+                                target="_blank">условиями и правилами работы</a> и обработкой <a
+                                href="#" onclick="showPrivacyModal(); return false;" 
+                                style="color: var(--primary-color); text-decoration: underline;">персональных данных</a> <span class="required">*</span>
                         </div>
                     </div>
                     <div id="termsError" class="error-message"></div>
                 </div>
+                
+                <!-- Кнопка отправки -->
+                <button type="submit" class="btn" id="submitRequestBtn">
+                    <span>📤</span>
+                    <span>Отправить заявку</span>
+                </button>
+            </form>
+            
+            <div id="successMessage" class="success-message">
+                ✅ Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время.
+            </div>
+            
+            <div
+                style="margin-top: 16px; padding: 12px; background: rgba(39, 174, 96, 0.05); border-radius: 8px; font-size: 0.85rem; color: var(--hint-color); text-align: center;">
+                🙏 Спасибо за доверие!
+            </div>
         </div>
-        <div id="termsError" class="error-message"></div>
+        
+        <!-- Кнопка назад -->
+        <div class="card">
+            <a href="/" class="btn btn-secondary">
+                <span>🔙</span>
+                <span>Вернуться на главную</span>
+            </a>
+        </div>
     </div>
-    <!-- Кнопка отправки -->
-    <button type="submit" class="btn" id="submitRequestBtn" style="background: var(--primary-color);">
-        <span>📤</span>
-        <span>Отправить заявку</span>
-    </button>
-    </form>
-    <div id="successMessage" class="success-message">
-        ✅ Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время.
-    </div>
-    <div
-        style="margin-top: 16px; padding: 12px; background: rgba(39, 174, 96, 0.05); border-radius: 8px; font-size: 0.85rem; color: var(--hint-color); text-align: center;">
-        🙏 Спасибо за доверие!
-    </div>
-    </div>
-    <!-- Кнопка назад -->
-    <div class="card">
-        <a href="/" class="btn btn-secondary">
-            <span>🔙</span>
-            <span>Вернуться на главную</span>
-        </a>
-    </div>
+
+    <!-- Модальное окно для политики конфиденциальности -->
+    <div id="privacyModal" class="privacy-modal">
+        <div class="privacy-modal-content">
+            <span class="privacy-close" onclick="closePrivacyModal()">&times;</span>
+            <h3>Согласие на обработку персональных данных</h3>
+            
+            <p>Я, субъект персональных данных, в соответствии с Федеральным законом от 27 июля 2006 года № 152 «О персональных данных» предоставляю согласие на обработку персональных данных, указанных мной в форме на сайте в сети «Интернет», владельцем которого является Оператор.</p>
+
+            <p>Под персональными данными субъекта персональных данных понимается нижеуказанная общая информация: ФИО, адрес электронной почты и номер телефона.</p>
+
+            <p>Принимая настоящее Соглашение, я выражаю свою заинтересованность и полное согласие, что обработка персональных данных может включать в себя следующие действия: сбор, систематизацию, накопление, хранение, уточнение (обновление, изменение), использование, передачу (предоставление, доступ), блокирование, удаление, уничтожение, осуществляемых как с использованием средств автоматизации (автоматизированная обработка), так и без использования таких средств (неавтоматизированная обработка).</p>
+
+            <p>Я понимаю и соглашаюсь с тем, что предоставленная информация, является полной, точной и достоверной; при предоставлении информации не нарушается действующее законодательство Российской Федерации, законные права и интересы третьих лиц; вся предоставленная информация заполнена мною в отношении себя лично; информация не относится к государственной, банковской и/или коммерческой тайне, информация не относится к информации о расовой и/или национальной принадлежности, политических взглядах, религиозных или философских убеждениях, не относится к информации о состоянии здоровья и интимной жизни.</p>
+
+            <p>Я понимаю и соглашаюсь с тем, что Оператор не проверяет достоверность персональных данных, предоставляемых мной, и не имеет возможности оценивать мою дееспособность и исходит из того, что я предоставляю достоверные персональные данные и поддерживаю такие данные в актуальном состоянии.</p>
+
+            <p>Согласие действует по достижении целей обработки или в случае утраты необходимости в достижении этих целей, если иное не предусмотрено федеральным законом.</p>
+
+            <p>Согласие может быть отозвано мною в любое время на основании моего письменного заявления.</p>
+        </div>
     </div>
 
     <script>
@@ -495,12 +596,7 @@
         tg.ready();
         tg.expand();
 
-        // Применяем тему Telegram
-        if (tg.themeParams) {
-            document.documentElement.style.setProperty('--text-color', tg.themeParams.text_color || '#ffffff');
-            document.documentElement.style.setProperty('--white', tg.themeParams.bg_color || '#2a2a2a');
-            document.documentElement.style.setProperty('--border-color', tg.themeParams.hint_color || '#444444');
-        }
+        // Убираем привязку к темам Telegram - используем фиксированные цвета
 
         // Получаем данные пользователя
         let telegramUserId = null;
@@ -598,7 +694,7 @@
                         errorElement.style.display = 'none';
                     }
                     if (field.id !== 'termsAccepted') {
-                        element.style.borderColor = 'var(--border-color)';
+                        element.style.borderColor = '#444444';
                     }
                 }
             });
@@ -711,7 +807,7 @@
                 if (errorElement && errorElement.style.display === 'block') {
                     errorElement.style.display = 'none';
                     if (this.type !== 'checkbox') {
-                        this.style.borderColor = 'var(--border-color)';
+                        this.style.borderColor = '#444444';
                     }
                 }
             });
@@ -724,6 +820,7 @@
                 window.history.back();
             });
         }
+        
         // Настройка главной кнопки
         if (tg && tg.MainButton) {
             tg.MainButton.text = "Отправить заявку";
@@ -736,6 +833,32 @@
 
         // Инициализация стиля checkbox при загрузке
         updateCheckboxStyle();
+
+        // Функции для модального окна политики конфиденциальности
+        function showPrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Предотвращаем прокрутку фона
+        }
+
+        function closePrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Восстанавливаем прокрутку
+        }
+
+        // Закрытие модального окна при клике вне его области
+        window.onclick = function(event) {
+            const modal = document.getElementById('privacyModal');
+            if (event.target === modal) {
+                closePrivacyModal();
+            }
+        }
+
+        // Закрытие по клавише Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closePrivacyModal();
+            }
+        });
     </script>
 </body>
 
