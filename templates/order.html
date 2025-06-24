@@ -13,8 +13,8 @@
             --secondary-color: #3498db;
             --success-color: #27ae60;
             --text-color: #ffffff;
-            --white: #333333;
-            --dark-card: #2a2a2a;
+            --white: #444444;
+            --dark-card: #444444;
             --border-color: #444444;
             --hint-color: #999999;
         }
@@ -126,8 +126,19 @@
         }
 
         .form-group input,
-        .form-group select,
         .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            background: var(--white);
+            color: var(--text-color);
+            -webkit-appearance: none;
+        }
+
+        .form-group select {
             width: 100%;
             padding: 12px;
             border: 1.5px solid var(--border-color);
@@ -143,13 +154,12 @@
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--success-color);
-            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+            border-color: var(--primary-color);
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: #888888 !important;
+            color: #6c6c6c !important;
             opacity: 1;
         }
 
@@ -322,7 +332,7 @@
             :root {
                 --text-color: #ffffff;
                 --white: #2a2a2a;
-                --border-color: #3a3a3a;
+                --border-color: #444444;
             }
 
             .card,
@@ -478,21 +488,25 @@
         </a>
     </div>
     </div>
+
     <script>
         // Инициализация Telegram Web App
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
+
         // Применяем тему Telegram
         if (tg.themeParams) {
             document.documentElement.style.setProperty('--text-color', tg.themeParams.text_color || '#ffffff');
             document.documentElement.style.setProperty('--white', tg.themeParams.bg_color || '#2a2a2a');
             document.documentElement.style.setProperty('--border-color', tg.themeParams.hint_color || '#444444');
         }
+
         // Получаем данные пользователя
         let telegramUserId = null;
         let telegramUsername = null;
         let calculationId = null;
+
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             telegramUserId = tg.initDataUnsafe.user.id;
             telegramUsername = tg.initDataUnsafe.user.username || `user_${tg.initDataUnsafe.user.id}`;
@@ -502,13 +516,16 @@
             telegramUsername = urlParams.get('username') || 'test_username';
             calculationId = urlParams.get('calculation_id');
         }
+
         // Предзаполняем Telegram контакт, если известен username
         if (telegramUsername && telegramUsername !== 'test_username') {
             document.getElementById('telegramContact').value = `@${telegramUsername}`;
         }
+
         // Обработка checkbox - исправленная версия
         const termsCheckbox = document.getElementById('termsAccepted');
         const termsWrapper = document.getElementById('termsWrapper');
+
         // Обработчик клика по всему wrapper
         termsWrapper.addEventListener('click', function (e) {
             // Проверяем, что клик не по ссылке
@@ -516,6 +533,7 @@
                 e.preventDefault();
                 termsCheckbox.checked = !termsCheckbox.checked;
                 updateCheckboxStyle();
+
                 // Убираем ошибку при проставлении галочки
                 if (termsCheckbox.checked) {
                     const errorElement = document.getElementById('termsError');
@@ -525,10 +543,12 @@
                 }
             }
         });
+
         // Обработчик изменения состояния checkbox
         termsCheckbox.addEventListener('change', function () {
             updateCheckboxStyle();
         });
+
         // Функция обновления стиля checkbox
         function updateCheckboxStyle() {
             if (termsCheckbox.checked) {
@@ -537,6 +557,7 @@
                 termsWrapper.classList.remove('checked');
             }
         }
+
         // Функция валидации формы
         function validateForm() {
             let isValid = true;
@@ -557,10 +578,12 @@
                     message: 'Необходимо согласиться с условиями'
                 }
             ];
+
             fields.forEach(field => {
                 const element = document.getElementById(field.id);
                 const errorElement = document.getElementById(`${field.id}Error`);
                 const value = field.id === 'termsAccepted' ? null : element.value.trim();
+
                 if (!field.validator(value)) {
                     if (errorElement) {
                         errorElement.textContent = field.message;
@@ -579,25 +602,32 @@
                     }
                 }
             });
+
             return isValid;
         }
+
         // Обработчик формы
         document.getElementById('purchaseRequestForm').addEventListener('submit', async function (event) {
             event.preventDefault();
+
             if (!validateForm()) {
                 if (tg && tg.HapticFeedback) {
                     tg.HapticFeedback.notificationOccurred('error');
                 }
                 return;
             }
+
             try {
                 if (tg && tg.HapticFeedback) {
                     tg.HapticFeedback.impactOccurred('medium');
                 }
+
                 const submitBtn = document.getElementById('submitRequestBtn');
                 const successMessage = document.getElementById('successMessage');
+
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<span>⏳</span><span>Отправляем заявку...</span>';
+
                 const formData = {
                     telegram_id: telegramUserId,
                     calculation_id: calculationId,
@@ -609,6 +639,7 @@
                     additional_notes: document.getElementById('additionalNotes').value.trim(),
                     terms_accepted: document.getElementById('termsAccepted').checked
                 };
+
                 const response = await fetch('/submit_purchase_request', {
                     method: 'POST',
                     headers: {
@@ -616,11 +647,14 @@
                     },
                     body: JSON.stringify(formData)
                 });
+
                 const result = await response.json();
+
                 if (result.success) {
                     if (tg && tg.HapticFeedback) {
                         tg.HapticFeedback.notificationOccurred('success');
                     }
+
                     // Отправляем данные в Telegram
                     if (tg && tg.sendData) {
                         tg.sendData(JSON.stringify({
@@ -631,35 +665,45 @@
                             telegram_contact: formData.telegram_contact
                         }));
                     }
+
                     // Показываем успешное сообщение
                     successMessage.style.display = 'block';
                     successMessage.scrollIntoView({ behavior: 'smooth' });
+
                     // Меняем кнопку
                     submitBtn.innerHTML = '<span>✅</span><span>Заявка отправлена</span>';
                     submitBtn.style.background = 'var(--secondary-color)';
+
                     // Очищаем форму
                     document.getElementById('purchaseRequestForm').reset();
                     updateCheckboxStyle(); // Обновляем стиль checkbox после сброса
+
                     // Показываем уведомление в Telegram
                     if (tg && tg.showAlert) {
                         tg.showAlert('✅ ' + result.message);
                     }
+
                 } else {
                     throw new Error(result.error || 'Неизвестная ошибка');
                 }
+
             } catch (error) {
                 console.error('Ошибка при отправке заявки:', error);
+
                 if (tg && tg.HapticFeedback) {
                     tg.HapticFeedback.notificationOccurred('error');
                 }
+
                 if (tg && tg.showAlert) {
                     tg.showAlert('❌ Ошибка при отправке заявки: ' + error.message);
                 }
+
                 const submitBtn = document.getElementById('submitRequestBtn');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<span>📤</span><span>Отправить заявку</span>';
             }
         });
+
         // Динамическая валидация полей
         document.querySelectorAll('input, select, textarea').forEach(element => {
             element.addEventListener('input', function () {
@@ -672,6 +716,7 @@
                 }
             });
         });
+
         // Настройка кнопки "Назад"
         if (tg && tg.BackButton) {
             tg.BackButton.show();
@@ -682,31 +727,15 @@
         // Настройка главной кнопки
         if (tg && tg.MainButton) {
             tg.MainButton.text = "Отправить заявку";
-            tg.MainButton.color = "#27ae60";
+            tg.MainButton.color = "#E74C3C";
             tg.MainButton.show();
             tg.MainButton.onClick(() => {
                 document.getElementById('purchaseRequestForm').dispatchEvent(new Event('submit'));
             });
         }
+
         // Инициализация стиля checkbox при загрузке
         updateCheckboxStyle();
-        <!-- Политика конфиденциальности -->
-        <div id="privacy-policy" style="margin-top: 40px; padding: 20px; background: var(--dark-card); border-radius: 12px;">
-            <h2 style="color: var(--text-color); margin-bottom: 16px;">Политика конфиденциальности</h2>
-            <p>Я, субъект персональных данных, в соответствии с Федеральным законом от 27 июля 2006 года № 152 «О персональных данных» предоставляю согласие на обработку персональных данных, указанных мной в форме на сайте в сети «Интернет», владельцем которого является Оператор.</p>
-
-            <p>Под персональными данными субъекта персональных данных понимается нижеуказанная общая информация: ФИО, адрес электронной почты и номер телефона.</p>
-
-            <p>Принимая настоящее Соглашение, я выражаю свою заинтересованность и полное согласие, что обработка персональных данных может включать в себя следующие действия: сбор, систематизацию, накопление, хранение, уточнение (обновление, изменение), использование, передачу (предоставление, доступ), блокирование, удаление, уничтожение, осуществляемых как с использованием средств автоматизации (автоматизированная обработка), так и без использования таких средств (неавтоматизированная обработка).</p>
-
-            <p>Я понимаю и соглашаюсь с тем, что предоставленная информация, является полной, точной и достоверной; при предоставлении информации не нарушается действующее законодательство Российской Федерации, законные права и интересы третьих лиц; вся предоставленная информация заполнена мною в отношении себя лично; информация не относится к государственной, банковской и/или коммерческой тайне, информация не относится к информации о расовой и/или национальной принадлежности, политических взглядах, религиозных или философских убеждениях, не относится к информации о состоянии здоровья и интимной жизни.</p>
-
-            <p>Я понимаю и соглашаюсь с тем, что Оператор не проверяет достоверность персональных данных, предоставляемых мной, и не имеет возможности оценивать мою дееспособность и исходит из того, что я предоставляю достоверные персональные данные и поддерживаю такие данные в актуальном состоянии.</p>
-
-            <p>Согласие действует по достижении целей обработки или в случае утраты необходимости в достижении этих целей, если иное не предусмотрено федеральным законом.</p>
-
-            <p>Согласие может быть отозвано мною в любое время на основании моего письменного заявления.</p>
-        </div>
     </script>
 </body>
 

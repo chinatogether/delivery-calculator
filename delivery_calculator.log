@@ -5942,3 +5942,809 @@ jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was loo
 2025-06-23 18:05:25,946 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:05:25] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
 2025-06-23 18:05:26,078 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:05:26] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
 2025-06-23 18:05:30,885 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:05:30] "GET / HTTP/1.1" 200 -
+2025-06-23 18:12:15,742 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:12:15] "[33mGET /robots.txt HTTP/1.1[0m" 404 -
+2025-06-23 18:12:16,315 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:12:16] "[33mGET /robots.txt HTTP/1.1[0m" 404 -
+2025-06-23 18:12:16,734 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:12:16] "GET / HTTP/1.1" 200 -
+2025-06-23 18:15:49,069 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:49] "GET / HTTP/1.1" 200 -
+2025-06-23 18:15:49,441 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:49] "[33mGET /wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:49,620 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:49] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-23 18:15:49,800 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:49] "GET / HTTP/1.1" 200 -
+2025-06-23 18:15:49,979 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:49] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:50,158 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:50] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:50,337 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:50] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:50,516 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:50] "[33mGET /website/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:50,696 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:50] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:50,875 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:50] "[33mGET /news/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:51,054 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:51] "[33mGET /2018/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:51,234 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:51] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:51,413 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:51] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:51,613 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:51] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:51,793 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:51] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:51,973 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:51] "[33mGET /media/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:52,177 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:52] "[33mGET /wp2/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:52,379 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:52] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:52,559 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:52] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:15:52,739 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:15:52] "[33mGET /sito/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 18:16:08,661 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:16:08] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:17:10,463 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:17:10] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:17:59,263 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:17:59] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:18:03,966 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:18:03] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:21:38,699 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:21:38] "GET /?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 18:21:44,047 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:21:44] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 18:22:14,556 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:22:14] "GET /order?telegramContact=emilienches&supplierLink=&orderAmount=3000-5000+юаней&promoCode=&additionalNotes=&termsAccepted=on HTTP/1.1" 200 -
+2025-06-23 18:22:26,586 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:22:26] "GET /order?telegramContact=Emilienches&supplierLink=&orderAmount=50000%2B+юаней&promoCode=&additionalNotes=&termsAccepted=on HTTP/1.1" 200 -
+2025-06-23 18:33:17,103 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:33:17] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:33:51,370 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:33:51] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:35:33,722 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:35:33] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:35:52,971 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:35:52] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:38:48,453 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:38:48] "GET / HTTP/1.1" 200 -
+2025-06-23 18:38:49,114 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:38:49] "GET / HTTP/1.1" 200 -
+2025-06-23 18:42:22,035 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:42:22] "GET / HTTP/1.1" 200 -
+2025-06-23 18:44:26,342 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:44:26] "GET / HTTP/1.1" 200 -
+2025-06-23 18:49:17,076 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:49:17] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:50:12,111 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:50:12] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:51:36,393 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:51:36] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:51:48,741 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:51:48] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 18:52:03,604 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:52:03] "GET /order?telegramContact=emilienchea&supplierLink=&orderAmount=5000-10000+юаней&promoCode=&additionalNotes=&termsAccepted=on HTTP/1.1" 200 -
+2025-06-23 18:52:13,336 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 18:52:13,347 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 18:52:13,347 - __main__ - INFO - ✅ База данных готова
+2025-06-23 18:52:13,352 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-23 18:52:13,352 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-23 18:52:22,292 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:52:22] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 18:52:35,101 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:52:35] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 18:52:53,264 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:52:53] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-23 18:59:18,360 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 18:59:18,371 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 18:59:18,372 - __main__ - INFO - ✅ База данных готова
+2025-06-23 18:59:18,375 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-23 18:59:18,376 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-23 18:59:21,597 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:59:21] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 18:59:36,192 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:59:36] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 18:59:48,666 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 18:59:48] "[33mGET /wp-login.php HTTP/1.1[0m" 404 -
+2025-06-23 19:00:21,482 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:00:21] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:00:29,335 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:00:29] "[33mGET /Orion/Login.aspx HTTP/1.1[0m" 404 -
+2025-06-23 19:02:47,130 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:02:47] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:02:47,317 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:02:47] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 19:07:06,898 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:07:06] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:08:05,477 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:08:05] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:08:59,631 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:08:59] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:09:33,575 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:09:33] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:14:42,555 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:14:42,567 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:14:42,568 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:14:42,573 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-23 19:14:42,573 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-23 19:14:42,580 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:14:42,593 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:14:42,593 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:14:43,031 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:14:43,044 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:14:43,045 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:14:43,529 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:14:43,541 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:14:43,541 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:14:44,024 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:14:44,036 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:14:44,036 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:14:44,512 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:14:44,524 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:14:44,524 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:18:23,566 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:18:23] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:18:23,940 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:18:23] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 19:21:30,761 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:21:30] "[33mGET /auth.html HTTP/1.1[0m" 404 -
+2025-06-23 19:26:18,982 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:26:18] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:27:00,804 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:27:00] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:27:24,473 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:27:24] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:27:24,816 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:27:24] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 19:27:28,495 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:27:28] "GET /?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:27:28,625 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:27:28] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 19:27:30,811 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:27:30] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:27:30,946 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:27:30] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 19:27:49,066 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:27:49] "GET /?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:28:01,739 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:28:01] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:28:06,841 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:28:06] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:28:08,998 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:28:08] "GET /?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:28:13,149 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:28:13] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:28:15,729 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:28:15] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:30:43,289 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:30:43] "GET /?XDEBUG_SESSION_START=phpstorm HTTP/1.1" 200 -
+2025-06-23 19:35:49,027 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:49] "GET / HTTP/1.1" 200 -
+2025-06-23 19:35:49,382 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:49] "[33mGET /wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:49,561 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:49] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-23 19:35:49,740 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:49] "GET / HTTP/1.1" 200 -
+2025-06-23 19:35:49,920 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:49] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:50,099 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:50] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:50,278 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:50] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:50,456 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:50] "[33mGET /website/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:50,635 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:50] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:50,815 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:50] "[33mGET /news/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:50,993 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:50] "[33mGET /2020/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:51,172 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:51] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:51,351 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:51] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:51,530 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:51] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:51,708 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:51] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:51,887 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:51] "[33mGET /wp2/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:52,066 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:52] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:52,245 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:52] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:35:52,424 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:35:52] "[33mGET /sito/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:36:08,953 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:36:08] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:36:09,341 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:36:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 19:36:45,958 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:36:45,977 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:36:45,977 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:36:46,003 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-23 19:36:46,003 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-23 19:36:46,127 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:36:46,142 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:36:46,142 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:36:46,627 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:36:46,658 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:36:46,659 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:36:47,235 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:36:47,258 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:36:47,258 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:36:47,763 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:36:47,774 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:36:47,775 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:36:48,264 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:36:48,277 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:36:48,278 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:37:42,929 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:37:42] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:37:52,475 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:37:52] "GET / HTTP/1.1" 200 -
+2025-06-23 19:38:38,552 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:38] "GET / HTTP/1.1" 200 -
+2025-06-23 19:38:38,939 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:38] "[33mGET /wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:39,125 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:39] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-23 19:38:39,311 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:39] "GET / HTTP/1.1" 200 -
+2025-06-23 19:38:39,498 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:39] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:39,685 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:39] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:39,888 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:39] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:40,074 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:40] "[33mGET /website/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:40,260 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:40] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:40,447 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:40] "[33mGET /news/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:40,633 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:40] "[33mGET /2020/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:40,819 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:40] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:41,005 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:41] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:41,192 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:41] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:41,378 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:41] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:41,565 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:41] "[33mGET /wp2/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:41,751 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:41] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:41,937 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:41] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:38:42,123 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:38:42] "[33mGET /sito/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 19:39:40,685 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:39:40,697 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:39:40,697 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:39:41,274 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:39:41,287 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:39:41,287 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:39:41,788 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:39:41,801 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:39:41,801 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:39:42,255 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:39:42,265 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:39:42,266 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:39:42,757 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:39:42,771 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:39:42,771 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:39:47,580 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:39:47] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:39:58,964 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:39:58] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:40:22,773 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:40:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 19:42:35,068 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:42:35] "[33mGET /cgi-bin/welcome HTTP/1.1[0m" 404 -
+2025-06-23 19:46:20,256 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:46:20] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:46:49,691 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:46:49] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:47:04,031 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:47:04] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:47:52,947 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:47:52] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 19:51:35,351 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:51:35,361 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:51:35,361 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:51:35,725 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:51:35,735 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:51:35,735 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:51:36,248 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:51:36,258 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:51:36,258 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:51:36,756 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:51:36,768 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:51:36,768 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:51:37,335 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-23 19:51:37,349 - __main__ - INFO - База данных успешно инициализирована
+2025-06-23 19:51:37,349 - __main__ - INFO - ✅ База данных готова
+2025-06-23 19:51:53,203 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:51:53] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:52:03,416 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:52:03] "GET /?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 19:52:10,976 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 19:52:10] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-23 20:06:37,488 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:06:37] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:07:08,808 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:07:08] "[31m[1mPROPFIND / HTTP/1.1[0m" 405 -
+2025-06-23 20:07:51,380 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:07:51] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:08:09,317 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:08:09] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:08:36,826 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:08:36] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:15:50,007 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:15:50] "[33mGET /error HTTP/1.1[0m" 404 -
+2025-06-23 20:22:10,404 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:10] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:22:13,034 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:13] "GET / HTTP/1.1" 200 -
+2025-06-23 20:22:13,388 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:13] "[33mGET /wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:13,566 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:13] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-23 20:22:13,744 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:13] "GET / HTTP/1.1" 200 -
+2025-06-23 20:22:13,922 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:13] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:14,111 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:14] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:14,290 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:14] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:14,468 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:14] "[33mGET /website/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:14,646 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:14] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:14,823 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:14] "[33mGET /news/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:15,002 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:15] "[33mGET /2018/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:15,180 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:15] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:15,358 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:15] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:15,549 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:15] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:15,727 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:15] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:15,905 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:15] "[33mGET /media/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:16,083 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:16] "[33mGET /wp2/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:16,261 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:16] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:16,439 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:16] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:22:16,628 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:22:16] "[33mGET /sito/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 20:23:44,070 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:23:44] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:23:49,235 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:23:49] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:25:12,727 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:25:12] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:40:42,458 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:40:42] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:40:53,714 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:40:53] "GET / HTTP/1.1" 200 -
+2025-06-23 20:41:36,283 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:41:36] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:42:38,621 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:42:38] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:43:02,631 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:43:02] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:43:36,878 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:43:36] "GET / HTTP/1.1" 200 -
+2025-06-23 20:56:28,687 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:56:28] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 20:57:02,653 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:57:02] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:59:36,639 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:59:36] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 20:59:56,162 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 20:59:56] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:00:31,418 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:00:31] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:12:55,456 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:12:55] "[33mGET /restore.php HTTP/1.1[0m" 404 -
+2025-06-23 21:15:59,803 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:15:59] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:16:49,356 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:16:49] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:17:08,970 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:17:08] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:17:58,572 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:17:58] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:20:24,194 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:20:24] "[33mGET /phpmyadmin HTTP/1.1[0m" 404 -
+2025-06-23 21:20:24,195 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:20:24] "GET / HTTP/1.1" 200 -
+2025-06-23 21:23:48,367 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:23:48] "[33mGET /%23/login HTTP/1.1[0m" 404 -
+2025-06-23 21:23:49,025 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:23:49] "GET / HTTP/1.1" 200 -
+2025-06-23 21:31:43,807 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:31:43] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:33:39,355 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:33:39] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:33:43,998 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:33:43] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:33:48,646 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:33:48] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:38:40,018 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:40] "[33mGET /wp-includes/ID3/license.txt HTTP/1.1[0m" 404 -
+2025-06-23 21:38:40,224 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:40] "[33mGET /feed/ HTTP/1.1[0m" 404 -
+2025-06-23 21:38:40,429 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:40] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-23 21:38:40,634 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:40] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:38:40,839 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:40] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:38:41,044 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:41] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:38:41,248 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:41] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:38:41,454 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:41] "[33mGET /2020/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:38:41,659 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:41] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:38:41,864 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:41] "[33mGET /2021/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:38:42,069 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:42] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:38:42,274 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:42] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:38:42,479 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:42] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:38:42,684 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:42] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:38:42,908 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:38:42] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:30,963 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:30] "GET / HTTP/1.1" 200 -
+2025-06-23 21:39:31,349 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:31] "[33mGET /wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:31,542 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:31] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-23 21:39:31,736 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:31] "GET / HTTP/1.1" 200 -
+2025-06-23 21:39:31,929 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:31] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:32,123 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:32] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:32,339 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:32] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:32,532 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:32] "[33mGET /website/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:32,726 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:32] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:32,920 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:32] "[33mGET /news/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:33,114 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:33] "[33mGET /2018/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:33,307 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:33] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:33,526 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:33] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:33,719 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:33] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:33,913 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:33] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:34,107 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:34] "[33mGET /media/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:34,301 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:34] "[33mGET /wp2/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:34,495 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:34] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:34,689 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:34] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:39:34,883 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:39:34] "[33mGET /sito/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 21:44:32,029 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:44:32] "GET / HTTP/1.1" 200 -
+2025-06-23 21:44:39,207 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:44:39] "[33mGET /admin/config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:49:48,993 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:49:48] "GET / HTTP/1.1" 200 -
+2025-06-23 21:49:50,203 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:49:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 21:53:04,559 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:53:04] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:54:42,645 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:54:42] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:55:21,219 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:55:21] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 21:57:13,216 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 21:57:13] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:00:24,985 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:00:24] "GET / HTTP/1.1" 200 -
+2025-06-23 22:00:48,907 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:00:48] "GET / HTTP/1.1" 200 -
+2025-06-23 22:01:46,087 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:01:46] "GET / HTTP/1.1" 200 -
+2025-06-23 22:01:55,775 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:01:55] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 22:02:06,503 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:02:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 22:02:26,364 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:02:26] "[33mGET /sitemap.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:04:23,713 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:04:23] "[33mGET /actuator/gateway/routes HTTP/1.1[0m" 404 -
+2025-06-23 22:04:52,800 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:04:52] "GET / HTTP/1.1" 200 -
+2025-06-23 22:08:17,275 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:08:17] "[33mGET /actuator HTTP/1.1[0m" 404 -
+2025-06-23 22:08:17,939 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:08:17] "[33mGET /api/actuator HTTP/1.1[0m" 404 -
+2025-06-23 22:09:08,321 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:09:08] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:09:42,769 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:09:42] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:10:42,456 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:10:42] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:11:21,867 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:11:21] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:15:29,947 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:29] "GET / HTTP/1.1" 200 -
+2025-06-23 22:15:30,332 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:30] "[33mGET /wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:30,525 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:30] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-23 22:15:30,719 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:30] "GET / HTTP/1.1" 200 -
+2025-06-23 22:15:30,912 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:30] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:31,106 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:31] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:31,299 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:31] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:31,511 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:31] "[33mGET /website/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:31,704 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:31] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:31,898 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:31] "[33mGET /news/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:32,091 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:32] "[33mGET /2018/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:32,284 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:32] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:32,478 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:32] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:32,682 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:32] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:32,875 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:32] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:33,070 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:33] "[33mGET /media/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:33,263 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:33] "[33mGET /wp2/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:33,456 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:33] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:33,650 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:33] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:15:33,848 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:15:33] "[33mGET /sito/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:23:14,206 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:23:14] "GET / HTTP/1.1" 200 -
+2025-06-23 22:23:14,591 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:23:14] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 22:23:16,206 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:23:16] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-23 22:25:09,788 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:09] "GET / HTTP/1.1" 200 -
+2025-06-23 22:25:10,144 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:10] "[33mGET /wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:10,323 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:10] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-23 22:25:10,502 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:10] "GET / HTTP/1.1" 200 -
+2025-06-23 22:25:10,680 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:10] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:10,859 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:10] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:11,039 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:11] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:11,240 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:11] "[33mGET /website/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:11,419 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:11] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:11,598 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:11] "[33mGET /news/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:11,803 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:11] "[33mGET /2020/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:11,982 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:11] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:12,161 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:12] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:12,340 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:12] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:12,519 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:12] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:12,698 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:12] "[33mGET /wp2/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:12,876 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:12] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:13,055 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:13] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:25:13,234 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:25:13] "[33mGET /sito/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:27:33,162 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:27:33] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:28:25,858 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:28:25] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:29:03,735 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:29:03] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:31:23,090 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:31:23] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:32:56,302 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:56] "GET / HTTP/1.1" 200 -
+2025-06-23 22:32:56,657 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:56] "[33mGET /wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:56,835 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:56] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-23 22:32:57,013 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:57] "GET / HTTP/1.1" 200 -
+2025-06-23 22:32:57,192 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:57] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:57,370 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:57] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:57,549 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:57] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:57,727 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:57] "[33mGET /website/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:57,905 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:57] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:58,083 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:58] "[33mGET /news/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:58,262 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:58] "[33mGET /2020/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:58,440 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:58] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:58,619 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:58] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:58,797 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:58] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:58,975 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:58] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:59,154 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:59] "[33mGET /wp2/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:59,332 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:59] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:59,510 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:59] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:32:59,688 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:32:59] "[33mGET /sito/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-23 22:44:10,408 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:44:10] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:44:35,189 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:44:35] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:46:49,390 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:46:49] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 22:48:11,851 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 22:48:11] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:05:27,665 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:05:27] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:05:55,043 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:05:55] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:06:55,591 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:06:55] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:07:30,622 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:07:30] "[31m[1mPROPFIND / HTTP/1.1[0m" 405 -
+2025-06-23 23:08:15,128 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:08:15] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:20:29,884 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:20:29] "[33mGET /.git/config HTTP/1.1[0m" 404 -
+2025-06-23 23:23:03,642 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:23:03] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:24:36,786 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:24:36] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:25:22,816 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:25:22] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:25:41,028 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:25:41] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:27:37,748 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:27:37] "[33mGET /_profiler/phpinfo HTTP/1.1[0m" 404 -
+2025-06-23 23:33:19,604 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:33:19] "[33mGET /.git/config HTTP/1.1[0m" 404 -
+2025-06-23 23:39:10,148 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:39:10] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:40:19,297 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:40:19] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:41:09,048 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:41:09] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:42:53,812 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:42:53] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:50:20,572 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:50:20] "[33mGET /admin/assets/css/jquery-ui.css HTTP/1.1[0m" 404 -
+2025-06-23 23:54:48,508 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:54:48] "[33mGET /.env HTTP/1.1[0m" 404 -
+2025-06-23 23:56:11,492 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:56:11] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-23 23:56:39,715 - werkzeug - INFO - 127.0.0.1 - - [23/Jun/2025 23:56:39] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:11:41,796 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:11:41] "GET /?telegram_id=6124927567&username=ana_stasiyag HTTP/1.1" 200 -
+2025-06-24 00:12:12,703 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:12:12] "GET /?telegram_id=6124927567&username=ana_stasiyag HTTP/1.1" 200 -
+2025-06-24 00:12:54,924 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:12:54] "[32mGET /calculate?category=Обычные%20товары&weight=25&length=70&width=28&height=45&cost=5295&quantity=5&telegram_id=6124927567&username=ana_stasiyag HTTP/1.1[0m" 302 -
+2025-06-24 00:12:55,471 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:12:55] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%205295.0,%20"insuranceRate":%20"2%25",%20"insuranceAmount":%20105.9,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20434.15,%20"totalRegular":%20383.15},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20470.65,%20"totalRegular":%20417.65},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20493.2,%20"totalRegular":%20432.8}}&calculation_id=93&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 00:12:57,456 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:12:57] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%205295.0,%20"insuranceRate":%20"2%25",%20"insuranceAmount":%20105.9,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20434.15,%20"totalRegular":%20383.15},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20470.65,%20"totalRegular":%20417.65},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20493.2,%20"totalRegular":%20432.8}}&calculation_id=93&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 00:13:46,283 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:13:46] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:14:10,818 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:14:10] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:14:21,008 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:14:21] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:16:57,774 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:16:57] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:31:17,952 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:31:17] "[33mGET /media/system/js/core.js HTTP/1.1[0m" 404 -
+2025-06-24 00:31:18,961 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:31:18] "[33mGET /wp-includes/js/jquery/jquery.js HTTP/1.1[0m" 404 -
+2025-06-24 00:32:38,690 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:32:38] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:33:29,903 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:33:29] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:34:13,508 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:34:13] "GET / HTTP/1.1" 200 -
+2025-06-24 00:35:07,658 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:35:07] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:36:18,136 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:36:18] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:46:52,565 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:46:52] "[33mGET /_profiler/phpinfo HTTP/1.1[0m" 404 -
+2025-06-24 00:52:13,911 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:52:13] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:52:24,019 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:52:24] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:54:07,898 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:54:07] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:54:22,299 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:54:22] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:55:54,284 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:55:54] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:58:36,070 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:58:36] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:58:55,887 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:58:55] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 00:59:10,526 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 00:59:10] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:00:35,110 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:00:35] "[33mGET /.env HTTP/1.1[0m" 404 -
+2025-06-24 01:00:35,971 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:00:35] "[33mGET /.git/config HTTP/1.1[0m" 404 -
+2025-06-24 01:15:14,269 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:15:14] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:15:19,097 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:15:19] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:16:01,893 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:16:01] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:16:21,161 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:16:21] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:19:39,638 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:19:39] "GET / HTTP/1.1" 200 -
+2025-06-24 01:33:16,152 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:33:16] "GET / HTTP/1.1" 200 -
+2025-06-24 01:36:10,262 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:36:10] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:37:58,573 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:37:58] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:38:03,554 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:38:03] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:38:23,726 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:38:23] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:39:34,849 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:39:34] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:52:28,995 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:52:28] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:52:58,537 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:52:58] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:53:03,621 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:53:03] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:53:42,169 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:53:42] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 01:58:25,603 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 01:58:25] "[31m[1mPROPFIND / HTTP/1.1[0m" 405 -
+2025-06-24 02:10:54,538 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:10:54] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:10:59,630 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:10:59] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:13:05,814 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:13:05] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:14:20,767 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:14:20] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:28:33,879 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:28:33] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:30:17,442 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:30:17] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:31:31,935 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:31:31] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:32:04,139 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:32:04] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:35:13,067 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:35:13] "[33mGET /admin/config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:44:16,110 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:44:16] "GET / HTTP/1.1" 200 -
+2025-06-24 02:48:33,354 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:48:33] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:48:38,224 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:48:38] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:50:06,474 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:50:06] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:51:59,273 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:51:59] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 02:53:59,068 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 02:53:59] "GET / HTTP/1.1" 200 -
+2025-06-24 03:06:54,981 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:06:54] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:06:59,781 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:06:59] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:08:03,146 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:08:03] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:11:13,649 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:11:13] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:24:41,959 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:24:41] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:25:47,520 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:25:47] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:27:09,929 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:27:09] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:27:54,251 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:27:54] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:42:36,327 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:42:36] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:44:34,117 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:44:34] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:44:58,936 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:44:58] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:46:12,572 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:46:12] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 03:48:17,295 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:17] "[33mGET /swagger-ui.html HTTP/1.1[0m" 404 -
+2025-06-24 03:48:17,972 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:17] "[33mGET /swagger/ui/index HTTP/1.1[0m" 404 -
+2025-06-24 03:48:18,654 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:18] "[33mGET /swagger/index.html HTTP/1.1[0m" 404 -
+2025-06-24 03:48:19,336 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:19] "[33mGET /swagger/swagger-ui.html HTTP/1.1[0m" 404 -
+2025-06-24 03:48:20,017 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:20] "[33mGET /api-docs/swagger.json HTTP/1.1[0m" 404 -
+2025-06-24 03:48:20,688 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:20] "[33mGET /api-docs/swagger.yaml HTTP/1.1[0m" 404 -
+2025-06-24 03:48:21,376 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:21] "[33mGET /swagger.json HTTP/1.1[0m" 404 -
+2025-06-24 03:48:22,036 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:22] "[33mGET /swagger.yaml HTTP/1.1[0m" 404 -
+2025-06-24 03:48:22,715 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:22] "[33mGET /swagger/v1/swagger.json HTTP/1.1[0m" 404 -
+2025-06-24 03:48:23,376 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:23] "[33mGET /swagger/v1/swagger.yaml HTTP/1.1[0m" 404 -
+2025-06-24 03:48:24,044 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:24] "[33mGET /api/index.html HTTP/1.1[0m" 404 -
+2025-06-24 03:48:24,696 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:24] "[33mGET /api/docs/ HTTP/1.1[0m" 404 -
+2025-06-24 03:48:25,361 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:25] "[33mGET /api_docs HTTP/1.1[0m" 404 -
+2025-06-24 03:48:26,037 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:26] "[33mGET /api/swagger-ui.html HTTP/1.1[0m" 404 -
+2025-06-24 03:48:26,691 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:48:26] "[33mGET /v2/api-docs HTTP/1.1[0m" 404 -
+2025-06-24 03:55:09,994 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 03:55:09] "GET / HTTP/1.1" 200 -
+2025-06-24 04:01:08,392 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /_profiler/phpinfo HTTP/1.1[0m" 404 -
+2025-06-24 04:01:08,446 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /_profiler/phpinfo.php HTTP/1.1[0m" 404 -
+2025-06-24 04:01:08,501 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /phpinfo HTTP/1.1[0m" 404 -
+2025-06-24 04:01:08,555 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /phpinfo.php HTTP/1.1[0m" 404 -
+2025-06-24 04:01:08,610 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /info HTTP/1.1[0m" 404 -
+2025-06-24 04:01:08,665 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /info.php HTTP/1.1[0m" 404 -
+2025-06-24 04:01:08,719 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /.env HTTP/1.1[0m" 404 -
+2025-06-24 04:01:08,773 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /app/.env HTTP/1.1[0m" 404 -
+2025-06-24 04:01:08,828 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /.env.bak HTTP/1.1[0m" 404 -
+2025-06-24 04:01:08,882 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /.env.example HTTP/1.1[0m" 404 -
+2025-06-24 04:01:08,937 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /.env.local HTTP/1.1[0m" 404 -
+2025-06-24 04:01:08,991 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:08] "[33mGET /.env.old HTTP/1.1[0m" 404 -
+2025-06-24 04:01:09,046 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:09] "[33mGET /.env.prod HTTP/1.1[0m" 404 -
+2025-06-24 04:01:09,101 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:09] "[33mGET /.env.production.local HTTP/1.1[0m" 404 -
+2025-06-24 04:01:09,155 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:09] "[33mGET /.env.stage HTTP/1.1[0m" 404 -
+2025-06-24 04:01:09,210 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:09] "[33mGET /admin/.env HTTP/1.1[0m" 404 -
+2025-06-24 04:01:09,265 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:09] "[33mGET /api/.env HTTP/1.1[0m" 404 -
+2025-06-24 04:01:09,319 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:09] "[33mGET /apps/.env HTTP/1.1[0m" 404 -
+2025-06-24 04:01:09,382 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:01:09] "[33mGET /.git/config HTTP/1.1[0m" 404 -
+2025-06-24 04:03:49,243 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:03:49] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:05:18,930 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:05:18] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:06:11,653 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:06:11] "GET / HTTP/1.1" 200 -
+2025-06-24 04:06:27,500 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:06:27] "GET / HTTP/1.1" 200 -
+2025-06-24 04:06:39,620 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:06:39] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:06:50,420 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:06:50] "GET / HTTP/1.1" 200 -
+2025-06-24 04:07:34,647 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:07:34] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:09:35,844 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:09:35] "GET / HTTP/1.1" 200 -
+2025-06-24 04:12:24,989 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:12:24] "[31m[1mPROPFIND / HTTP/1.1[0m" 405 -
+2025-06-24 04:18:26,887 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:18:26] "[33mGET /sa/login.jsp HTTP/1.1[0m" 404 -
+2025-06-24 04:22:49,502 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:22:49] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:24:45,151 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:24:45] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:25:14,439 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:25:14] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:25:38,151 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:25:38] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:40:11,899 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:40:11] "GET / HTTP/1.1" 200 -
+2025-06-24 04:40:45,703 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:40:45] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:41:16,736 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:41:16] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:41:47,317 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:41:47] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:44:26,724 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:44:26] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 04:44:46,033 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:44:46] "[33mGET /admin/configs.php HTTP/1.1[0m" 404 -
+2025-06-24 04:52:08,940 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:52:08] "[33mGET /login.html HTTP/1.1[0m" 404 -
+2025-06-24 04:59:32,120 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 04:59:32] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 05:01:15,896 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:01:15] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 05:02:14,876 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:02:14] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 05:02:29,266 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:02:29] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 05:24:01,129 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:24:01] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 05:26:38,732 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:26:38] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 05:26:43,549 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:26:43] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 05:27:49,593 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:27:49] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 05:38:55,205 - werkzeug - INFO - 147.185.132.53 - - [24/Jun/2025 05:38:55] "GET / HTTP/1.1" 200 -
+2025-06-24 05:40:27,844 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:40:27] "GET / HTTP/1.1" 200 -
+2025-06-24 05:45:49,580 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:45:49] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 05:45:54,503 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:45:54] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 05:45:55,143 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:45:55] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 05:46:04,486 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:46:04] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 05:46:43,979 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 05:46:43] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:03:47,337 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:03:47] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:05:07,812 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:05:07] "GET / HTTP/1.1" 200 -
+2025-06-24 06:05:08,506 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:05:08] "GET /?s=afrogThinkphpDebugTest HTTP/1.1" 200 -
+2025-06-24 06:05:51,328 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:05:51] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:07:41,616 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:07:41] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:07:51,282 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:07:51] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:09:28,970 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:09:28] "GET / HTTP/1.1" 200 -
+2025-06-24 06:09:29,486 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:09:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 06:09:29,901 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:09:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 06:24:18,541 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:24:18] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:26:03,906 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:26:03] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:26:08,893 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:26:08] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:26:54,677 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:26:54] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:28:14,199 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:28:14] "[33mGET /index.php?m=1 HTTP/1.1[0m" 404 -
+2025-06-24 06:42:40,988 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:42:40] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:42:55,699 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:42:55] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:44:40,714 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:44:40] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:45:44,914 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:45:44] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 06:50:03,388 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:50:03] "GET /?telegram_id=6124927567&username=ana_stasiyag HTTP/1.1" 200 -
+2025-06-24 06:50:28,499 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:50:28] "[33mGET /login/loginIndex.action HTTP/1.1[0m" 404 -
+2025-06-24 06:50:40,488 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:50:40] "[32mGET /calculate?category=Обычные%20товары&weight=25&length=70&width=45&height=28&cost=5295&quantity=5&telegram_id=6124927567&username=ana_stasiyag HTTP/1.1[0m" 302 -
+2025-06-24 06:50:40,908 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:50:40] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%205295.0,%20"insuranceRate":%20"2%25",%20"insuranceAmount":%20105.9,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20434.15,%20"totalRegular":%20383.15},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20470.65,%20"totalRegular":%20417.65},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20493.2,%20"totalRegular":%20432.8}}&calculation_id=94&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 06:50:42,943 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:50:42] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%205295.0,%20"insuranceRate":%20"2%25",%20"insuranceAmount":%20105.9,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20434.15,%20"totalRegular":%20383.15},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20470.65,%20"totalRegular":%20417.65},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20493.2,%20"totalRegular":%20432.8}}&calculation_id=94&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 06:50:59,158 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:50:59] "GET / HTTP/1.1" 200 -
+2025-06-24 06:52:51,974 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 06:52:51] "[31m[1mPROPFIND / HTTP/1.1[0m" 405 -
+2025-06-24 07:00:19,579 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:00:19] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:01:08,883 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:01:08] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:02:48,335 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:02:48] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:03:49,932 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:03:49] "GET /?telegram_id=6124927567&username=ana_stasiyag HTTP/1.1" 200 -
+2025-06-24 07:03:52,241 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:03:52] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:04:15,979 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:04:15] "[32mGET /calculate?category=Одежда&weight=25&length=70&width=28&height=44&cost=5295&quantity=5&telegram_id=6124927567&username=ana_stasiyag HTTP/1.1[0m" 302 -
+2025-06-24 07:04:16,407 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:04:16] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0434\\u0435\\u0436\\u0434\\u0430",%20"fast_car_cost_per_kg":%202.9,%20"regular_car_cost_per_kg":%202.5,%20"weight":%20125.0,%20"density":%20289.89,%20"productCost":%205295.0,%20"insuranceRate":%20"2%25",%20"insuranceAmount":%20105.9,%20"volume":%200.43,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20369.75,%20"deliveryCostRegular":%20318.75,%20"totalFast":%20510.65,%20"totalRegular":%20459.65},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20384.25,%20"deliveryCostRegular":%20331.25,%20"totalFast":%20550.15,%20"totalRegular":%20497.15},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20437.9,%20"deliveryCostRegular":%20377.5,%20"totalFast":%20583.8,%20"totalRegular":%20523.4}}&calculation_id=95&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:04:18,368 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:04:18] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0434\\u0435\\u0436\\u0434\\u0430",%20"fast_car_cost_per_kg":%202.9,%20"regular_car_cost_per_kg":%202.5,%20"weight":%20125.0,%20"density":%20289.89,%20"productCost":%205295.0,%20"insuranceRate":%20"2%25",%20"insuranceAmount":%20105.9,%20"volume":%200.43,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20369.75,%20"deliveryCostRegular":%20318.75,%20"totalFast":%20510.65,%20"totalRegular":%20459.65},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20384.25,%20"deliveryCostRegular":%20331.25,%20"totalFast":%20550.15,%20"totalRegular":%20497.15},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%20105.9,%20"insuranceRate":%20"2%25",%20"deliveryCostFast":%20437.9,%20"deliveryCostRegular":%20377.5,%20"totalFast":%20583.8,%20"totalRegular":%20523.4}}&calculation_id=95&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:04:29,908 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:04:29] "GET /?telegram_id=6124927567&username=ana_stasiyag HTTP/1.1" 200 -
+2025-06-24 07:05:49,471 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:05:49] "[32mGET /calculate?category=Обычные%20товары&weight=25&length=70&width=28&height=45&cost=734&quantity=5&telegram_id=6124927567&username=ana_stasiyag HTTP/1.1[0m" 302 -
+2025-06-24 07:05:49,494 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:05:49] "[32mGET /calculate?category=Обычные%20товары&weight=25&length=70&width=28&height=45&cost=734&quantity=5&telegram_id=6124927567&username=ana_stasiyag HTTP/1.1[0m" 302 -
+2025-06-24 07:05:49,913 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:05:49] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%20734.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.34,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20335.59,%20"totalRegular":%20284.59},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20372.09,%20"totalRegular":%20319.09},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20394.64,%20"totalRegular":%20334.24}}&calculation_id=96&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:05:50,000 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:05:50] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%20734.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.34,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20335.59,%20"totalRegular":%20284.59},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20372.09,%20"totalRegular":%20319.09},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20394.64,%20"totalRegular":%20334.24}}&calculation_id=97&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:05:50,820 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:05:50] "[32mGET /calculate?category=Обычные%20товары&weight=25&length=70&width=28&height=45&cost=734&quantity=5&telegram_id=6124927567&username=ana_stasiyag HTTP/1.1[0m" 302 -
+2025-06-24 07:05:51,268 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:05:51] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%20734.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.34,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20335.59,%20"totalRegular":%20284.59},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20372.09,%20"totalRegular":%20319.09},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20394.64,%20"totalRegular":%20334.24}}&calculation_id=98&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:05:51,860 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:05:51] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%20734.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.34,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20335.59,%20"totalRegular":%20284.59},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20372.09,%20"totalRegular":%20319.09},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20394.64,%20"totalRegular":%20334.24}}&calculation_id=96&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:05:52,098 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:05:52] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%20734.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.34,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20335.59,%20"totalRegular":%20284.59},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20372.09,%20"totalRegular":%20319.09},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20394.64,%20"totalRegular":%20334.24}}&calculation_id=97&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:06:51,147 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:06:51] "GET / HTTP/1.1" 200 -
+2025-06-24 07:08:10,209 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:08:10] "GET /?telegram_id=6124927567&username=ana_stasiyag HTTP/1.1" 200 -
+2025-06-24 07:08:44,614 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:08:44] "[32mGET /calculate?category=Обычные%20товары&weight=25&length=70&width=28&height=45&cost=734&quantity=5&telegram_id=6124927567&username=ana_stasiyag HTTP/1.1[0m" 302 -
+2025-06-24 07:08:45,054 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:08:45] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%20734.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.34,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20335.59,%20"totalRegular":%20284.59},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20372.09,%20"totalRegular":%20319.09},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20394.64,%20"totalRegular":%20334.24}}&calculation_id=99&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:08:47,008 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:08:47] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%20734.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.34,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20335.59,%20"totalRegular":%20284.59},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20372.09,%20"totalRegular":%20319.09},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20394.64,%20"totalRegular":%20334.24}}&calculation_id=99&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:09:02,834 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:09:02] "GET / HTTP/1.1" 200 -
+2025-06-24 07:09:20,531 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:09:20] "GET /?telegram_id=6124927567&username=ana_stasiyag HTTP/1.1" 200 -
+2025-06-24 07:09:43,759 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:09:43] "[32mGET /calculate?category=Обычные%20товары&weight=15&length=70&width=28&height=45&cost=734&quantity=5&telegram_id=6124927567&username=ana_stasiyag HTTP/1.1[0m" 302 -
+2025-06-24 07:09:44,169 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:09:44] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.7,%20"regular_car_cost_per_kg":%202.3,%20"weight":%2075.0,%20"density":%20170.07,%20"productCost":%20734.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.34,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%2076.5,%20"packagingCost":%209.0,%20"unloadCost":%2012.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20206.55,%20"deliveryCostRegular":%20175.95,%20"totalFast":%20234.89,%20"totalRegular":%20204.29},%20"corners":%20{"packedWeight":%2079.5,%20"packagingCost":%2024.0,%20"unloadCost":%2012.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20214.65,%20"deliveryCostRegular":%20182.85,%20"totalFast":%20257.99,%20"totalRegular":%20226.19},%20"frame":%20{"packedWeight":%2092.0,%20"packagingCost":%2024.0,%20"unloadCost":%2012.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20248.4,%20"deliveryCostRegular":%20211.6,%20"totalFast":%20291.74,%20"totalRegular":%20254.94}}&calculation_id=100&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:09:46,095 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:09:46] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.7,%20"regular_car_cost_per_kg":%202.3,%20"weight":%2075.0,%20"density":%20170.07,%20"productCost":%20734.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.34,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%2076.5,%20"packagingCost":%209.0,%20"unloadCost":%2012.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20206.55,%20"deliveryCostRegular":%20175.95,%20"totalFast":%20234.89,%20"totalRegular":%20204.29},%20"corners":%20{"packedWeight":%2079.5,%20"packagingCost":%2024.0,%20"unloadCost":%2012.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20214.65,%20"deliveryCostRegular":%20182.85,%20"totalFast":%20257.99,%20"totalRegular":%20226.19},%20"frame":%20{"packedWeight":%2092.0,%20"packagingCost":%2024.0,%20"unloadCost":%2012.0,%20"insurance":%207.34,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20248.4,%20"deliveryCostRegular":%20211.6,%20"totalFast":%20291.74,%20"totalRegular":%20254.94}}&calculation_id=100&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:09:51,959 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:09:51] "GET /?telegram_id=6124927567&username=ana_stasiyag HTTP/1.1" 200 -
+2025-06-24 07:10:23,699 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:10:23] "[32mGET /calculate?category=Обычные%20товары&weight=25&length=70&width=28&height=45&cost=737&quantity=5&telegram_id=6124927567&username=ana_stasiyag HTTP/1.1[0m" 302 -
+2025-06-24 07:10:24,310 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:10:24] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%20737.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.37,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%207.37,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20335.62,%20"totalRegular":%20284.62},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%207.37,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20372.12,%20"totalRegular":%20319.12},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%207.37,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20394.67,%20"totalRegular":%20334.27}}&calculation_id=101&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:10:26,192 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:10:26] "[33mGET /robots.txt HTTP/1.1[0m" 404 -
+2025-06-24 07:10:26,240 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:10:26] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%20737.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.37,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%207.37,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20335.62,%20"totalRegular":%20284.62},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%207.37,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20372.12,%20"totalRegular":%20319.12},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%207.37,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20394.67,%20"totalRegular":%20334.27}}&calculation_id=101&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:10:39,008 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:10:39] "GET / HTTP/1.1" 200 -
+2025-06-24 07:12:58,582 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:12:58] "[33mGET /client/login/index HTTP/1.1[0m" 404 -
+2025-06-24 07:16:17,856 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:16:17] "GET /order?telegram_id=6124927567&username=ana_stasiyag HTTP/1.1" 200 -
+2025-06-24 07:19:24,268 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:24] "[33mGET /wp-includes/ID3/license.txt HTTP/1.1[0m" 404 -
+2025-06-24 07:19:24,551 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:24] "[33mGET /feed/ HTTP/1.1[0m" 404 -
+2025-06-24 07:19:24,835 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:24] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-24 07:19:25,118 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:25] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:19:25,402 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:25] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:19:25,685 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:25] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:19:25,969 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:25] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:19:26,252 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:26] "[33mGET /2020/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:19:26,536 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:26] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:19:26,820 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:26] "[33mGET /2021/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:19:27,103 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:27] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:19:27,406 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:27] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:19:27,690 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:27] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:19:27,973 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:27] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:19:28,256 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:19:28] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 07:20:00,490 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:20:00] "GET /?telegram_id=873615258&username=bataloviaroslav HTTP/1.1" 200 -
+2025-06-24 07:20:22,396 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:20:22] "[32mGET /calculate?category=Обычные%20товары&weight=20&length=30&width=40&height=50&cost=100&quantity=1&telegram_id=873615258&username=bataloviaroslav HTTP/1.1[0m" 302 -
+2025-06-24 07:20:22,819 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:20:22] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.2,%20"regular_car_cost_per_kg":%201.8,%20"weight":%2020.0,%20"density":%20333.33,%20"productCost":%20100.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%201.0,%20"volume":%200.06,%20"boxCount":%201},%20"bag":%20{"packedWeight":%2020.5,%20"packagingCost":%203.0,%20"unloadCost":%204.0,%20"insurance":%201.0,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2045.1,%20"deliveryCostRegular":%2036.9,%20"totalFast":%2053.1,%20"totalRegular":%2044.9},%20"corners":%20{"packedWeight":%2021.5,%20"packagingCost":%208.0,%20"unloadCost":%204.0,%20"insurance":%201.0,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2047.3,%20"deliveryCostRegular":%2038.7,%20"totalFast":%2060.3,%20"totalRegular":%2051.7},%20"frame":%20{"packedWeight":%2026.0,%20"packagingCost":%2015.0,%20"unloadCost":%204.0,%20"insurance":%201.0,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2057.2,%20"deliveryCostRegular":%2046.8,%20"totalFast":%2077.2,%20"totalRegular":%2066.8}}&calculation_id=102&telegram_id=873615258 HTTP/1.1" 200 -
+2025-06-24 07:20:25,213 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:20:25] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.2,%20"regular_car_cost_per_kg":%201.8,%20"weight":%2020.0,%20"density":%20333.33,%20"productCost":%20100.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%201.0,%20"volume":%200.06,%20"boxCount":%201},%20"bag":%20{"packedWeight":%2020.5,%20"packagingCost":%203.0,%20"unloadCost":%204.0,%20"insurance":%201.0,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2045.1,%20"deliveryCostRegular":%2036.9,%20"totalFast":%2053.1,%20"totalRegular":%2044.9},%20"corners":%20{"packedWeight":%2021.5,%20"packagingCost":%208.0,%20"unloadCost":%204.0,%20"insurance":%201.0,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2047.3,%20"deliveryCostRegular":%2038.7,%20"totalFast":%2060.3,%20"totalRegular":%2051.7},%20"frame":%20{"packedWeight":%2026.0,%20"packagingCost":%2015.0,%20"unloadCost":%204.0,%20"insurance":%201.0,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2057.2,%20"deliveryCostRegular":%2046.8,%20"totalFast":%2077.2,%20"totalRegular":%2066.8}}&calculation_id=102&telegram_id=873615258 HTTP/1.1" 200 -
+2025-06-24 07:22:20,316 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:22:20] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:22:58,327 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:22:58] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:23:59,343 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:23:59] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:24:23,080 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:24:23] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:36:50,849 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:36:50] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:37:06,146 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:37:06] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:37:09,743 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:37:09] "[33mGET /odiwyrudacsy HTTP/1.1[0m" 404 -
+2025-06-24 07:37:59,381 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:37:59] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:39:56,984 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:39:56] "GET / HTTP/1.1" 200 -
+2025-06-24 07:40:32,242 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:40:32] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:43:47,679 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:43:47] "GET /?telegram_id=873615258&username=bataloviaroslav HTTP/1.1" 200 -
+2025-06-24 07:45:01,951 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:45:01] "[32mGET /calculate?category=Одежда&weight=230&length=95&width=91&height=91&cost=1657&quantity=1&telegram_id=873615258&username=bataloviaroslav HTTP/1.1[0m" 302 -
+2025-06-24 07:45:02,585 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:45:02] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0434\\u0435\\u0436\\u0434\\u0430",%20"fast_car_cost_per_kg":%202.9,%20"regular_car_cost_per_kg":%202.5,%20"weight":%20230.0,%20"density":%20292.36,%20"productCost":%201657.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%2016.57,%20"volume":%200.79,%20"boxCount":%201},%20"bag":%20{"packedWeight":%20234.0,%20"packagingCost":%2024.0,%20"unloadCost":%2032.0,%20"insurance":%2016.57,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20678.6,%20"deliveryCostRegular":%20585.0,%20"totalFast":%20751.17,%20"totalRegular":%20657.57},%20"corners":%20{"packedWeight":%20242.0,%20"packagingCost":%2064.0,%20"unloadCost":%2032.0,%20"insurance":%2016.57,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20701.8,%20"deliveryCostRegular":%20605.0,%20"totalFast":%20814.37,%20"totalRegular":%20717.57},%20"frame":%20{"packedWeight":%20265.0,%20"packagingCost":%2040.0,%20"unloadCost":%2032.0,%20"insurance":%2016.57,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20768.5,%20"deliveryCostRegular":%20662.5,%20"totalFast":%20857.07,%20"totalRegular":%20751.07}}&calculation_id=103&telegram_id=873615258 HTTP/1.1" 200 -
+2025-06-24 07:45:04,757 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:45:04] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0434\\u0435\\u0436\\u0434\\u0430",%20"fast_car_cost_per_kg":%202.9,%20"regular_car_cost_per_kg":%202.5,%20"weight":%20230.0,%20"density":%20292.36,%20"productCost":%201657.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%2016.57,%20"volume":%200.79,%20"boxCount":%201},%20"bag":%20{"packedWeight":%20234.0,%20"packagingCost":%2024.0,%20"unloadCost":%2032.0,%20"insurance":%2016.57,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20678.6,%20"deliveryCostRegular":%20585.0,%20"totalFast":%20751.17,%20"totalRegular":%20657.57},%20"corners":%20{"packedWeight":%20242.0,%20"packagingCost":%2064.0,%20"unloadCost":%2032.0,%20"insurance":%2016.57,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20701.8,%20"deliveryCostRegular":%20605.0,%20"totalFast":%20814.37,%20"totalRegular":%20717.57},%20"frame":%20{"packedWeight":%20265.0,%20"packagingCost":%2040.0,%20"unloadCost":%2032.0,%20"insurance":%2016.57,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20768.5,%20"deliveryCostRegular":%20662.5,%20"totalFast":%20857.07,%20"totalRegular":%20751.07}}&calculation_id=103&telegram_id=873615258 HTTP/1.1" 200 -
+2025-06-24 07:46:18,677 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:46:18] "GET /?telegram_id=6124927567&username=ana_stasiyag HTTP/1.1" 200 -
+2025-06-24 07:46:58,528 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:46:58] "[32mGET /calculate?category=Обычные%20товары&weight=25&length=70&width=28&height=45&cost=739&quantity=5&telegram_id=6124927567&username=ana_stasiyag HTTP/1.1[0m" 302 -
+2025-06-24 07:46:58,987 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:46:58] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%20739.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.39,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%207.39,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20335.64,%20"totalRegular":%20284.64},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%207.39,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20372.14,%20"totalRegular":%20319.14},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%207.39,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20394.69,%20"totalRegular":%20334.29}}&calculation_id=104&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:47:01,045 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:47:01] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.3,%20"regular_car_cost_per_kg":%201.9,%20"weight":%20125.0,%20"density":%20283.45,%20"productCost":%20739.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%207.39,%20"volume":%200.44,%20"boxCount":%205},%20"bag":%20{"packedWeight":%20127.5,%20"packagingCost":%2015.0,%20"unloadCost":%2020.0,%20"insurance":%207.39,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20293.25,%20"deliveryCostRegular":%20242.25,%20"totalFast":%20335.64,%20"totalRegular":%20284.64},%20"corners":%20{"packedWeight":%20132.5,%20"packagingCost":%2040.0,%20"unloadCost":%2020.0,%20"insurance":%207.39,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20304.75,%20"deliveryCostRegular":%20251.75,%20"totalFast":%20372.14,%20"totalRegular":%20319.14},%20"frame":%20{"packedWeight":%20151.0,%20"packagingCost":%2024.0,%20"unloadCost":%2016.0,%20"insurance":%207.39,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20347.3,%20"deliveryCostRegular":%20286.9,%20"totalFast":%20394.69,%20"totalRegular":%20334.29}}&calculation_id=104&telegram_id=6124927567 HTTP/1.1" 200 -
+2025-06-24 07:48:35,221 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:48:35] "GET / HTTP/1.1" 200 -
+2025-06-24 07:54:22,257 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:54:22] "GET / HTTP/1.1" 200 -
+2025-06-24 07:55:31,388 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:55:31] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:55:49,819 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:55:49] "[32mGET /calculate?category=Обычные%20товары&weight=75&length=80&width=70&height=64&cost=571&quantity=1&telegram_id=873615258&username=bataloviaroslav HTTP/1.1[0m" 302 -
+2025-06-24 07:55:50,435 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:55:50] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.4,%20"regular_car_cost_per_kg":%202.0,%20"weight":%2075.0,%20"density":%20209.26,%20"productCost":%20571.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%205.71,%20"volume":%200.36,%20"boxCount":%201},%20"bag":%20{"packedWeight":%2076.5,%20"packagingCost":%209.0,%20"unloadCost":%2012.0,%20"insurance":%205.71,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20183.6,%20"deliveryCostRegular":%20153.0,%20"totalFast":%20210.31,%20"totalRegular":%20179.71},%20"corners":%20{"packedWeight":%2079.5,%20"packagingCost":%2024.0,%20"unloadCost":%2012.0,%20"insurance":%205.71,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20190.8,%20"deliveryCostRegular":%20159.0,%20"totalFast":%20232.51,%20"totalRegular":%20200.71},%20"frame":%20{"packedWeight":%2092.0,%20"packagingCost":%2024.0,%20"unloadCost":%2012.0,%20"insurance":%205.71,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20220.8,%20"deliveryCostRegular":%20184.0,%20"totalFast":%20262.51,%20"totalRegular":%20225.71}}&calculation_id=105&telegram_id=873615258 HTTP/1.1" 200 -
+2025-06-24 07:55:52,584 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:55:52] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0431\\u044b\\u0447\\u043d\\u044b\\u0435%20\\u0442\\u043e\\u0432\\u0430\\u0440\\u044b",%20"fast_car_cost_per_kg":%202.4,%20"regular_car_cost_per_kg":%202.0,%20"weight":%2075.0,%20"density":%20209.26,%20"productCost":%20571.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%205.71,%20"volume":%200.36,%20"boxCount":%201},%20"bag":%20{"packedWeight":%2076.5,%20"packagingCost":%209.0,%20"unloadCost":%2012.0,%20"insurance":%205.71,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20183.6,%20"deliveryCostRegular":%20153.0,%20"totalFast":%20210.31,%20"totalRegular":%20179.71},%20"corners":%20{"packedWeight":%2079.5,%20"packagingCost":%2024.0,%20"unloadCost":%2012.0,%20"insurance":%205.71,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20190.8,%20"deliveryCostRegular":%20159.0,%20"totalFast":%20232.51,%20"totalRegular":%20200.71},%20"frame":%20{"packedWeight":%2092.0,%20"packagingCost":%2024.0,%20"unloadCost":%2012.0,%20"insurance":%205.71,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%20220.8,%20"deliveryCostRegular":%20184.0,%20"totalFast":%20262.51,%20"totalRegular":%20225.71}}&calculation_id=105&telegram_id=873615258 HTTP/1.1" 200 -
+2025-06-24 07:56:09,045 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:56:09] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 07:56:30,873 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 07:56:30] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:00:06,043 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:00:06] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:00:20,760 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:00:20] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:00:22,068 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:00:22] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:12:22,157 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:12:22] "GET / HTTP/1.1" 200 -
+2025-06-24 08:12:22,521 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:12:22] "GET / HTTP/1.1" 200 -
+2025-06-24 08:15:34,466 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:15:34] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:16:28,590 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:16:28] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:16:53,644 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:16:53] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:17:37,422 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:17:37] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:36:23,238 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:36:23] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:38:33,500 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:38:33] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:40:27,932 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:40:27] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:40:43,127 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:40:43] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:44:19,717 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:44:19] "GET / HTTP/1.1" 200 -
+2025-06-24 08:54:58,375 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:54:58] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:55:53,001 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:55:53] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:55:57,602 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:55:57] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:56:37,409 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:56:37] "[33mGET /robots.txt HTTP/1.1[0m" 404 -
+2025-06-24 08:56:46,447 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:56:46] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 08:56:50,959 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 08:56:50] "GET / HTTP/1.1" 200 -
+2025-06-24 08:57:00,842 - werkzeug - INFO - 167.94.138.124 - - [24/Jun/2025 08:57:00] "GET / HTTP/1.1" 200 -
+2025-06-24 08:57:18,295 - werkzeug - INFO - 167.94.138.124 - - [24/Jun/2025 08:57:18] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 08:57:23,108 - werkzeug - ERROR - 167.94.138.124 - - [24/Jun/2025 08:57:23] code 505, message Invalid HTTP version (2.0)
+2025-06-24 08:57:23,108 - werkzeug - INFO - 167.94.138.124 - - [24/Jun/2025 08:57:23] "[35m[1mPRI * HTTP/2.0[0m" 505 -
+2025-06-24 08:57:47,918 - werkzeug - INFO - 167.94.138.124 - - [24/Jun/2025 08:57:47] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 08:57:53,208 - werkzeug - ERROR - 167.94.138.124 - - [24/Jun/2025 08:57:53] code 505, message Invalid HTTP version (2.0)
+2025-06-24 08:57:53,208 - werkzeug - INFO - 167.94.138.124 - - [24/Jun/2025 08:57:53] "[35m[1mPRI * HTTP/2.0[0m" 505 -
+2025-06-24 08:58:07,446 - werkzeug - ERROR - 167.94.138.124 - - [24/Jun/2025 08:58:07] code 400, message Bad request version ('À\x14À')
+2025-06-24 08:58:07,446 - werkzeug - INFO - 167.94.138.124 - - [24/Jun/2025 08:58:07] "[31m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x031·\x0bS¾_5ñ\x1cÙkÓY¦\x92\x13&\x0evTQú\x11Ò\x1eÙ[\x90ÑJ'\x90 \x08\x14\x9ds+>ÿ~\x1b\x82Ô¥~q\x04\x1ef:ÐÏ/ÌóîU\x03\x99w\x0e\x0f\x9dV\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À[0m" 400 -
+2025-06-24 08:58:20,581 - werkzeug - INFO - 167.94.138.124 - - [24/Jun/2025 08:58:20] "[33mGET /.well-known/security.txt HTTP/1.1[0m" 404 -
+2025-06-24 09:17:48,837 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:17:48] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 09:17:48,898 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:17:48] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 09:19:11,186 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:19:11] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 09:21:51,093 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:21:51] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 09:38:04,374 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:38:04] "[31m[1mPROPFIND / HTTP/1.1[0m" 405 -
+2025-06-24 09:40:22,200 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:40:22] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 09:42:44,405 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:42:44] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 09:42:46,578 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:42:46] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 09:42:58,506 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:42:58] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 09:43:18,453 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:43:18] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 09:58:13,823 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:58:13] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 09:58:33,869 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:58:33] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 09:59:08,228 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:59:08] "[33mGET /media/system/js/core.js HTTP/1.1[0m" 404 -
+2025-06-24 09:59:08,667 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 09:59:08] "[33mGET /wp-includes/js/jquery/jquery.js HTTP/1.1[0m" 404 -
+2025-06-24 10:01:08,460 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:01:08] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:01:23,414 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:01:23] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:17:13,217 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:17:13] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:20:05,834 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:20:05] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:20:41,272 - werkzeug - ERROR - 66.132.153.63 - - [24/Jun/2025 10:20:41] code 400, message Bad request version ('À\x14À')
+2025-06-24 10:20:41,272 - werkzeug - INFO - 66.132.153.63 - - [24/Jun/2025 10:20:41] "[31m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03\x18E%g\x8d\x89\x18=Q8Â\x06ÏT m\x8e1Ð\x92{\x02-\x8ak3%\x1c\x1eÐ¼o \x09é\x12KiöÑR\x8a\x0cºs¯¦Ðõ}G×µ\x16Æ\x14\x98Wo8\x9f³âÍ[\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À[0m" 400 -
+2025-06-24 10:20:44,539 - werkzeug - INFO - 66.132.153.63 - - [24/Jun/2025 10:20:44] "GET / HTTP/1.1" 200 -
+2025-06-24 10:20:47,796 - werkzeug - INFO - 66.132.153.63 - - [24/Jun/2025 10:20:47] "GET / HTTP/1.1" 200 -
+2025-06-24 10:20:48,182 - werkzeug - INFO - 66.132.153.63 - - [24/Jun/2025 10:20:48] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 10:20:48,438 - werkzeug - ERROR - 66.132.153.63 - - [24/Jun/2025 10:20:48] code 505, message Invalid HTTP version (2.0)
+2025-06-24 10:20:48,438 - werkzeug - INFO - 66.132.153.63 - - [24/Jun/2025 10:20:48] "[35m[1mPRI * HTTP/2.0[0m" 505 -
+2025-06-24 10:20:51,698 - werkzeug - INFO - 66.132.153.63 - - [24/Jun/2025 10:20:51] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 10:20:51,956 - werkzeug - ERROR - 66.132.153.63 - - [24/Jun/2025 10:20:51] code 505, message Invalid HTTP version (2.0)
+2025-06-24 10:20:51,957 - werkzeug - INFO - 66.132.153.63 - - [24/Jun/2025 10:20:51] "[35m[1mPRI * HTTP/2.0[0m" 505 -
+2025-06-24 10:20:55,215 - werkzeug - ERROR - 66.132.153.63 - - [24/Jun/2025 10:20:55] code 400, message Bad request version ('À\x14À')
+2025-06-24 10:20:55,215 - werkzeug - INFO - 66.132.153.63 - - [24/Jun/2025 10:20:55] "[31m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03b=mGF·Á>¾\x9dæÔwþ´Åm\x89\x99ß%9Á\x91t1PH\x93\x8f \x91 Û^F#òC\x03ùûtÞhË;»jÞ\x01ü53ÍyÜG\x8cæ\x96}»6\x7f\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À[0m" 400 -
+2025-06-24 10:20:55,471 - werkzeug - INFO - 66.132.153.63 - - [24/Jun/2025 10:20:55] "[33mGET /wiki HTTP/1.1[0m" 404 -
+2025-06-24 10:20:57,144 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:20:57] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:21:06,287 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:21:06] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:21:25,827 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:21:25] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:36:37,608 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:36:37] "GET / HTTP/1.1" 200 -
+2025-06-24 10:36:56,129 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:36:56] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:38:03,929 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:38:03] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:39:34,093 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:39:34] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:40:14,142 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:40:14] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:48:55,890 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:48:55] "[33mGET /manager/html HTTP/1.1[0m" 404 -
+2025-06-24 10:48:56,600 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:48:56] "[33mGET /host-manager/html HTTP/1.1[0m" 404 -
+2025-06-24 10:48:57,264 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:48:57] "[33mGET /..;/manager/html HTTP/1.1[0m" 404 -
+2025-06-24 10:48:57,948 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:48:57] "[33mGET /..;/..;/manager/html;/ HTTP/1.1[0m" 404 -
+2025-06-24 10:48:58,609 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:48:58] "[33mGET /..;/host-manager/html HTTP/1.1[0m" 404 -
+2025-06-24 10:48:59,290 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:48:59] "[33mGET /..;/..;/host-manager/html;/ HTTP/1.1[0m" 404 -
+2025-06-24 10:48:59,947 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:48:59] "[33mGET /kkxdkuipbz/..;/manager/html HTTP/1.1[0m" 404 -
+2025-06-24 10:49:00,628 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:49:00] "[33mGET /kkxdkuipbz/..;/host-manager/html HTTP/1.1[0m" 404 -
+2025-06-24 10:55:37,553 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:55:37] "[33mGET /restore.php HTTP/1.1[0m" 404 -
+2025-06-24 10:56:33,007 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:56:33] "GET / HTTP/1.1" 200 -
+2025-06-24 10:56:33,457 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:56:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 10:57:45,179 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:57:45] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:58:26,175 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:58:26] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:58:31,692 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:58:31] "GET / HTTP/1.1" 200 -
+2025-06-24 10:58:33,337 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:58:33] "GET / HTTP/1.1" 200 -
+2025-06-24 10:59:01,572 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:59:01] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:59:37,521 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:59:37] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:59:47,174 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:59:47] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 10:59:52,785 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 10:59:52] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:13:39,603 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:13:39] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:14:09,578 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:14:09] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:16:34,447 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:16:34] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:16:34,736 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:16:34] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:24:58,020 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:24:58] "[33mGET /noAuth/login.html HTTP/1.1[0m" 404 -
+2025-06-24 11:33:27,080 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:33:27] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:35:07,737 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:35:07] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:36:15,259 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:36:15] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:36:37,929 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:36:37] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:37:29,331 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:37:29] "[33mGET /developmentserver/metadatauploader HTTP/1.1[0m" 404 -
+2025-06-24 11:38:06,909 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:38:06] "[33mGET /.env HTTP/1.1[0m" 404 -
+2025-06-24 11:38:07,889 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:38:07] "[31m[1mPOST / HTTP/1.1[0m" 405 -
+2025-06-24 11:43:00,606 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:43:00] "GET / HTTP/1.1" 200 -
+2025-06-24 11:48:05,779 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:48:05] "[33mGET /webui/ HTTP/1.1[0m" 404 -
+2025-06-24 11:48:18,112 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:48:18] "[33mPOST /sdk HTTP/1.1[0m" 404 -
+2025-06-24 11:51:14,688 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:51:14] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 11:52:27,164 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:52:27] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:52:50,171 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:52:50] "GET / HTTP/1.1" 200 -
+2025-06-24 11:53:47,835 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:53:47] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:54:45,228 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:54:45] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 11:56:08,196 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 11:56:08] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:00:36,116 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:00:36] "GET / HTTP/1.1" 200 -
+2025-06-24 12:01:38,224 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:01:38] "[33mGET /geoserver/web/ HTTP/1.1[0m" 404 -
+2025-06-24 12:04:31,224 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:04:31] "[33mGET /.git/config HTTP/1.1[0m" 404 -
+2025-06-24 12:07:38,982 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:07:38] "GET / HTTP/1.1" 200 -
+2025-06-24 12:07:51,617 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:07:51] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 12:08:10,107 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:10] "GET / HTTP/1.1" 200 -
+2025-06-24 12:08:10,479 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:10] "[33mGET /wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:10,657 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:10] "[33mGET /xmlrpc.php?rsd HTTP/1.1[0m" 404 -
+2025-06-24 12:08:10,836 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:10] "GET / HTTP/1.1" 200 -
+2025-06-24 12:08:11,015 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:11] "[33mGET /blog/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:11,193 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:11] "[33mGET /web/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:11,371 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:11] "[33mGET /wordpress/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:11,549 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:11] "[33mGET /website/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:11,727 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:11] "[33mGET /wp/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:11,905 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:11] "[33mGET /news/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:12,083 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:12] "[33mGET /2020/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:12,275 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:12] "[33mGET /2019/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:12,454 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:12] "[33mGET /shop/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:12,632 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:12] "[33mGET /wp1/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:12,810 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:12] "[33mGET /test/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:12,989 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:12] "[33mGET /wp2/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:13,167 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:13] "[33mGET /site/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:13,345 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:13] "[33mGET /cms/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:08:13,541 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:08:13] "[33mGET /sito/wp-includes/wlwmanifest.xml HTTP/1.1[0m" 404 -
+2025-06-24 12:09:01,470 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:09:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 12:09:28,455 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:09:28] "[33mGET /robots.txt HTTP/1.1[0m" 404 -
+2025-06-24 12:12:24,273 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:12:24] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:13:09,205 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:13:09] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:14:18,532 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:14:18] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 12:14:23,438 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 12:14:23] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
