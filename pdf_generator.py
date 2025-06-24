@@ -344,7 +344,7 @@ def create_pdf_generator():
     """Фабричная функция для создания генератора PDF"""
     db_config = {
         'dbname': os.getenv('DB_NAME', 'delivery_db'),
-        'user': os.getenv('DB_USER', 'postgres'), 
+        'user': os.getenv('DB_USER'), 
         'password': os.getenv('DB_PASSWORD'),
         'host': os.getenv('DB_HOST', 'localhost'),
         'port': os.getenv('DB_PORT', '5432'),

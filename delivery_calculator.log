@@ -8366,3 +8366,241 @@ jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was loo
 2025-06-24 18:42:02,780 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 18:42:02] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
 2025-06-24 18:42:07,328 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 18:42:07] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
 2025-06-24 18:43:59,867 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 18:43:59] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 18:58:08,731 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 18:58:08,740 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:08,740 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:08,750 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 18:58:08,750 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 18:58:09,031 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 18:58:09,091 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:09,091 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:09,564 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 18:58:09,580 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:09,580 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:10,046 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 18:58:10,053 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:10,053 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:10,505 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 18:58:10,512 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:10,514 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:11,021 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 18:58:11,028 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:11,030 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:58:53,542 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 18:58:53] "GET / HTTP/1.1" 200 -
+2025-06-24 18:59:03,089 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:59:03,089 - __main__ - ERROR - Ошибка в calculate: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:59:03,090 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 18:59:03] "[35m[1mGET /calculate?category=Одежда&weight=10&length=30&width=40&height=50&cost=20&quantity=1&telegram_id=test_user&username=test_username HTTP/1.1[0m" 500 -
+2025-06-24 18:59:06,570 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:59:06,571 - __main__ - ERROR - Ошибка в calculate: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:59:06,571 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 18:59:06] "[35m[1mGET /calculate?category=Одежда&weight=10&length=30&width=40&height=50&cost=20&quantity=1&telegram_id=test_user&username=test_username HTTP/1.1[0m" 500 -
+2025-06-24 18:59:14,942 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:59:14,942 - __main__ - ERROR - Ошибка в calculate: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:59:14,942 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 18:59:14] "[35m[1mGET /calculate?category=Обычные%20товары&weight=10&length=30&width=40&height=50&cost=20&quantity=1&telegram_id=test_user&username=test_username HTTP/1.1[0m" 500 -
+2025-06-24 18:59:18,154 - werkzeug - INFO - 178.66.159.13 - - [24/Jun/2025 18:59:18] "GET / HTTP/1.1" 200 -
+2025-06-24 18:59:21,115 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:59:21,115 - __main__ - ERROR - Ошибка в calculate: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 18:59:21,116 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 18:59:21] "[35m[1mGET /calculate?category=Обычные%20товары&weight=10&length=30&width=40&height=50&cost=20&quantity=1&telegram_id=test_user&username=test_username HTTP/1.1[0m" 500 -
+2025-06-24 19:02:17,678 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:02:17] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 19:02:34,552 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:02:34,552 - __main__ - ERROR - Ошибка в функции save_user_action: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:02:34,558 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:02:34] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 19:02:34,767 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:02:34] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 19:02:42,318 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:02:42,318 - __main__ - ERROR - Ошибка при создании заявки: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:02:42,319 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:02:42] "[35m[1mPOST /submit_purchase_request HTTP/1.1[0m" 500 -
+2025-06-24 19:03:41,556 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:03:41] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 19:03:46,785 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:03:46] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 19:03:55,702 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:03:55,711 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:03:55,716 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:55,716 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:55,722 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:55,723 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:55,726 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 19:03:55,727 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 19:03:56,501 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:03:56,511 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:56,511 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:57,167 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:03:57,176 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:57,176 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:57,508 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:03:57,517 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:57,517 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:58,017 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:03:58,026 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:58,026 - __main__ - ERROR - ❌ Ошибка инициализации БД: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:58,839 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:58,839 - __main__ - ERROR - Ошибка в функции save_user_action: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:03:58,846 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:03:58] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 19:03:58,969 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:03:58] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 19:04:04,331 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:04:04,331 - __main__ - ERROR - Ошибка при создании заявки: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:04:04,332 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:04:04] "[35m[1mPOST /submit_purchase_request HTTP/1.1[0m" 500 -
+2025-06-24 19:04:06,399 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:04:06] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 19:04:12,718 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:04:12,718 - __main__ - ERROR - Ошибка при создании заявки: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:04:12,718 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:04:12] "[35m[1mPOST /submit_purchase_request HTTP/1.1[0m" 500 -
+2025-06-24 19:04:14,347 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:04:14,347 - __main__ - ERROR - Ошибка при создании заявки: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:04:14,348 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:04:14] "[35m[1mPOST /submit_purchase_request HTTP/1.1[0m" 500 -
+2025-06-24 19:05:31,499 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:05:31,499 - __main__ - ERROR - Ошибка в calculate: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:05:31,499 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:05:31] "[35m[1mGET /calculate?category=Обычные%20товары&weight=10&length=30&width=40&height=50&cost=20&quantity=1&telegram_id=test_user&username=test_username HTTP/1.1[0m" 500 -
+2025-06-24 19:05:40,129 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:05:40] "GET / HTTP/1.1" 200 -
+2025-06-24 19:05:50,995 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:05:50,995 - __main__ - ERROR - Ошибка в calculate: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:05:50,996 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:05:50] "[35m[1mGET /calculate?category=Обувь&weight=20&length=40&width=50&height=60&cost=30&quantity=1&telegram_id=test_user&username=test_username HTTP/1.1[0m" 500 -
+2025-06-24 19:09:22,759 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:09:22,759 - __main__ - ERROR - Ошибка в calculate: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:09:22,760 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:09:22] "[35m[1mGET /calculate?category=Обувь&weight=20&length=40&width=50&height=60&cost=30&quantity=1&telegram_id=test_user&username=test_username HTTP/1.1[0m" 500 -
+2025-06-24 19:09:24,901 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:09:24,901 - __main__ - ERROR - Ошибка в calculate: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:09:24,902 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:09:24] "[35m[1mGET /calculate?category=Обувь&weight=20&length=40&width=50&height=60&cost=30&quantity=1&telegram_id=test_user&username=test_username HTTP/1.1[0m" 500 -
+2025-06-24 19:09:27,145 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:09:27] "GET / HTTP/1.1" 200 -
+2025-06-24 19:09:33,656 - __main__ - ERROR - Ошибка подключения к базе данных: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:09:33,656 - __main__ - ERROR - Ошибка в calculate: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-06-24 19:09:33,656 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:09:33] "[35m[1mGET /calculate?category=Одежда&weight=20&length=40&width=50&height=60&cost=30&quantity=1&telegram_id=test_user&username=test_username HTTP/1.1[0m" 500 -
+2025-06-24 19:14:05,893 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:14:05] "[33mGET /restore.php HTTP/1.1[0m" 404 -
+2025-06-24 19:14:57,873 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:14:57,883 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 19:14:57,883 - __main__ - INFO - ✅ База данных готова
+2025-06-24 19:15:58,711 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:15:58,721 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 19:15:58,721 - __main__ - INFO - ✅ База данных готова
+2025-06-24 19:16:18,595 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:16:18,608 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 19:16:18,608 - __main__ - INFO - ✅ База данных готова
+2025-06-24 19:16:18,613 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 19:16:18,613 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 19:16:25,470 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:16:25,483 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 19:16:25,483 - __main__ - INFO - ✅ База данных готова
+2025-06-24 19:16:41,762 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:16:41,773 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 19:16:41,773 - __main__ - INFO - ✅ База данных готова
+2025-06-24 19:16:41,778 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 19:16:41,778 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 19:16:59,112 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:16:59,122 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 19:16:59,122 - __main__ - INFO - ✅ База данных готова
+2025-06-24 19:17:12,519 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:17:12,528 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 19:17:12,528 - __main__ - INFO - ✅ База данных готова
+2025-06-24 19:17:31,295 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:17:31,305 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 19:17:31,305 - __main__ - INFO - ✅ База данных готова
+2025-06-24 19:17:31,311 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 19:17:31,311 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 19:17:47,009 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:17:47,019 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 19:17:47,019 - __main__ - INFO - ✅ База данных готова
+2025-06-24 19:17:47,025 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 19:17:47,025 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 19:19:05,272 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:19:05,284 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 19:19:05,284 - __main__ - INFO - ✅ База данных готова
+2025-06-24 19:19:05,290 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 19:19:05,290 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 19:19:36,317 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:19:36] "GET / HTTP/1.1" 200 -
+2025-06-24 19:19:37,680 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:19:37] "GET / HTTP/1.1" 200 -
+2025-06-24 19:19:38,496 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:19:38] "GET / HTTP/1.1" 200 -
+2025-06-24 19:19:39,045 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:19:39] "GET / HTTP/1.1" 200 -
+2025-06-24 19:19:39,319 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:19:39] "GET / HTTP/1.1" 200 -
+2025-06-24 19:19:39,457 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:19:39] "GET / HTTP/1.1" 200 -
+2025-06-24 19:19:39,603 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:19:39] "GET / HTTP/1.1" 200 -
+2025-06-24 19:19:39,748 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:19:39] "GET / HTTP/1.1" 200 -
+2025-06-24 19:19:39,929 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:19:39] "GET / HTTP/1.1" 200 -
+2025-06-24 19:21:33,297 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:21:33] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 19:21:47,343 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:21:47] "GET / HTTP/1.1" 200 -
+2025-06-24 19:21:54,922 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:21:54] "[32mGET /calculate?category=Одежда&weight=20&length=40&width=50&height=60&cost=30&quantity=1&telegram_id=test_user&username=test_username HTTP/1.1[0m" 302 -
+2025-06-24 19:21:54,994 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:21:54] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0434\\u0435\\u0436\\u0434\\u0430",%20"fast_car_cost_per_kg":%203.4,%20"regular_car_cost_per_kg":%203.0,%20"weight":%2020.0,%20"density":%20166.67,%20"productCost":%2030.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%200.3,%20"volume":%200.12,%20"boxCount":%201},%20"bag":%20{"packedWeight":%2020.5,%20"packagingCost":%203.0,%20"unloadCost":%204.0,%20"insurance":%200.3,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2069.7,%20"deliveryCostRegular":%2061.5,%20"totalFast":%2077.0,%20"totalRegular":%2068.8},%20"corners":%20{"packedWeight":%2021.5,%20"packagingCost":%208.0,%20"unloadCost":%204.0,%20"insurance":%200.3,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2073.1,%20"deliveryCostRegular":%2064.5,%20"totalFast":%2085.4,%20"totalRegular":%2076.8},%20"frame":%20{"packedWeight":%2026.0,%20"packagingCost":%2015.0,%20"unloadCost":%204.0,%20"insurance":%200.3,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2088.4,%20"deliveryCostRegular":%2078.0,%20"totalFast":%20107.7,%20"totalRegular":%2097.3}}&calculation_id=111&telegram_id=test_user HTTP/1.1" 200 -
+2025-06-24 19:21:56,546 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:21:56] "GET /result?results={"generalInformation":%20{"category":%20"\\u041e\\u0434\\u0435\\u0436\\u0434\\u0430",%20"fast_car_cost_per_kg":%203.4,%20"regular_car_cost_per_kg":%203.0,%20"weight":%2020.0,%20"density":%20166.67,%20"productCost":%2030.0,%20"insuranceRate":%20"1%25",%20"insuranceAmount":%200.3,%20"volume":%200.12,%20"boxCount":%201},%20"bag":%20{"packedWeight":%2020.5,%20"packagingCost":%203.0,%20"unloadCost":%204.0,%20"insurance":%200.3,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2069.7,%20"deliveryCostRegular":%2061.5,%20"totalFast":%2077.0,%20"totalRegular":%2068.8},%20"corners":%20{"packedWeight":%2021.5,%20"packagingCost":%208.0,%20"unloadCost":%204.0,%20"insurance":%200.3,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2073.1,%20"deliveryCostRegular":%2064.5,%20"totalFast":%2085.4,%20"totalRegular":%2076.8},%20"frame":%20{"packedWeight":%2026.0,%20"packagingCost":%2015.0,%20"unloadCost":%204.0,%20"insurance":%200.3,%20"insuranceRate":%20"1%25",%20"deliveryCostFast":%2088.4,%20"deliveryCostRegular":%2078.0,%20"totalFast":%20107.7,%20"totalRegular":%2097.3}}&calculation_id=111&telegram_id=test_user HTTP/1.1" 200 -
+2025-06-24 19:22:12,837 - __main__ - INFO - === Запуск China Together Delivery Calculator ===
+2025-06-24 19:22:12,859 - __main__ - INFO - База данных успешно инициализирована
+2025-06-24 19:22:12,860 - __main__ - INFO - ✅ База данных готова
+2025-06-24 19:22:12,872 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-24 19:22:12,873 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-24 19:22:18,510 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:22:18] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-24 19:22:18,711 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:22:18] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-24 19:22:24,144 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:22:24] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-24 19:22:52,837 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:22:52] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-24 19:22:57,556 - werkzeug - INFO - 127.0.0.1 - - [24/Jun/2025 19:22:57] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -

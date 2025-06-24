@@ -8,6 +8,7 @@ import json
 from datetime import datetime, timedelta
 import os
 from functools import wraps
+from dotenv import load_dotenv
 import re
 
 # Настройка точности для Decimal
@@ -28,14 +29,15 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+load_dotenv()
 # Конфигурация базы данных
 DB_CONFIG = {
-    "dbname": "delivery_db",
-    "user": "chinatogether",
-    "password": "O99ri1@",
-    "host": "localhost",
-    "port": "5432",
-    "connect_timeout": 10
+    'dbname': os.getenv('DB_NAME', 'delivery_db'),
+    'user': os.getenv('DB_USER'), 
+    'password': os.getenv('DB_PASSWORD'),
+    'host': os.getenv('DB_HOST'),
+    'port': os.getenv('DB_PORT', '5432'),
+    'connect_timeout': int(os.getenv('DB_TIMEOUT', '10'))
 }
 
 def connect_to_db():

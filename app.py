@@ -415,16 +415,19 @@ UNIFIED_STYLE = '''
 </style>
 '''
 
+# Конфигурация базы данных
+DB_CONFIG = {
+            'dbname': os.getenv('DB_NAME', 'delivery_db'),
+            'user': os.getenv('DB_USER'), 
+            'password': os.getenv('DB_PASSWORD'),
+            'host': os.getenv('DB_HOST', 'localhost'),
+            'port': os.getenv('DB_PORT', '5432'),
+            'connect_timeout': int(os.getenv('DB_TIMEOUT', '10'))
+}
+
 # Подключение к базе данных
 def connect_to_db():
-    return psycopg2.connect(
-        dbname="delivery_db",
-        user="chinatogether",
-        password="O99ri1@",
-        host="localhost",
-        port="5432",
-        connect_timeout=10
-    )
+    return psycopg2.connect(**DB_CONFIG)
 
 # Удаление старых файлов
 def remove_old_files():
