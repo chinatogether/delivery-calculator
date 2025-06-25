@@ -250,7 +250,7 @@ def get_faq_inline_keyboard():
 # Создание inline-клавиатуры для веб-приложений
 def get_webapp_inline_keyboard(user_id, username, action="calculate"):
     if action == "calculate":
-        web_app_url = f"{WEB_APP_URL}/?telegram_id={user_id}&username={username}"
+        web_app_url = f"{WEB_APP_URL}/calculate?telegram_id={user_id}&username={username}"
         button_text = "📊 Открыть калькулятор"
     else:  # order
         web_app_url = f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}"

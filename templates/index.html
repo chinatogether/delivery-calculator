@@ -108,6 +108,10 @@
             margin-bottom: 0;
         }
         
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
         label {
             display: block;
             margin-bottom: 6px;
@@ -132,6 +136,47 @@
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 16px 0;
+            padding: 12px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+        
+        .checkbox-container label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 0.9rem;
+            user-select: none;
+        }
+        
+        .volume-section, .dimensions-section {
+            transition: all 0.3s ease;
+        }
+        
+        .dimensions-section {
+            display: none;
+        }
+        
+        .dimensions-section.active {
+            display: block;
+        }
+        
+        .volume-section.hidden {
+            display: none;
         }
         
         @media (max-width: 480px) {
@@ -342,33 +387,16 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="quantity">Количество коробок:</label>
+                            <label for="totalWeight">Общий вес груза (кг):</label>
                             <div class="input-group">
-                                <input type="number" id="quantity" name="quantity" min="1" required placeholder="1" value="1">
-                                <span class="input-icon">📦</span>
-                            </div>
-                            <div id="quantityError" class="error-message">Введите количество</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <span>⚖️</span>
-                        <span>Характеристики коробки</span>
-                    </h2>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="weight">Вес (кг):</label>
-                            <div class="input-group">
-                                <input type="number" id="weight" name="weight" min="0.1" step="0.01" required placeholder="5.5">
+                                <input type="number" id="totalWeight" name="totalWeight" min="0.1" step="0.01" required placeholder="5.5">
                                 <span class="input-icon">⚖️</span>
                             </div>
-                            <div id="weightError" class="error-message">Введите вес</div>
+                            <div id="totalWeightError" class="error-message">Введите общий вес</div>
                         </div>
-                        
+
                         <div class="form-group">
-                            <label for="cost">Стоимость ($):</label>
+                            <label for="cost">Стоимость товара ($):</label>
                             <div class="input-group">
                                 <input type="number" id="cost" name="cost" min="0.01" step="0.01" required placeholder="100">
                                 <span class="input-icon">💰</span>
@@ -378,27 +406,58 @@
                     </div>
                 </div>
                 
-                <div class="form-section">
+                <div class="form-section volume-section" id="volumeSection">
                     <h2 class="section-title">
-                        <span>📏</span>
-                        <span>Размеры коробки (см)</span>
+                        <span>📐</span>
+                        <span>Объем груза</span>
+                    </h2>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="volume">Объем (м³):</label>
+                            <div class="input-group">
+                                <input type="number" id="volume" name="volume" min="0.001" step="0.001" required placeholder="0.009">
+                                <span class="input-icon">📏</span>
+                            </div>
+                            <div id="volumeError" class="error-message">Введите объем</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="useBoxDimensions" name="useBoxDimensions">
+                    <label for="useBoxDimensions">Не знаете объем? Введите параметры коробок</label>
+                </div>
+
+                <div class="form-section dimensions-section" id="dimensionsSection">
+                    <h2 class="section-title">
+                        <span>📦</span>
+                        <span>Параметры коробок</span>
                     </h2>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="length">Длина:</label>
-                            <input type="number" id="length" name="length" min="1" step="0.1" required placeholder="30">
+                            <label for="quantity">Количество коробок:</label>
+                            <div class="input-group">
+                                <input type="number" id="quantity" name="quantity" min="1" placeholder="1" value="1">
+                                <span class="input-icon">📦</span>
+                            </div>
+                            <div id="quantityError" class="error-message">Введите количество</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="length">Длина (см):</label>
+                            <input type="number" id="length" name="length" min="1" step="0.1" placeholder="30">
                             <div id="lengthError" class="error-message">Введите длину</div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="width">Ширина:</label>
-                            <input type="number" id="width" name="width" min="1" step="0.1" required placeholder="20">
+                            <label for="width">Ширина (см):</label>
+                            <input type="number" id="width" name="width" min="1" step="0.1" placeholder="20">
                             <div id="widthError" class="error-message">Введите ширину</div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="height">Высота:</label>
-                            <input type="number" id="height" name="height" min="1" step="0.1" required placeholder="15">
+                            <label for="height">Высота (см):</label>
+                            <input type="number" id="height" name="height" min="1" step="0.1" placeholder="15">
                             <div id="heightError" class="error-message">Введите высоту</div>
                         </div>
                     </div>
@@ -441,24 +500,66 @@
             telegramUsername = urlParams.get('username') || 'test_username';
         }
         
-        // Обработка формы
+        // Обработка переключения между вводом объема и размеров коробок
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('deliveryForm');
             const loadingElement = document.getElementById('loading');
             const calculateBtn = document.getElementById('calculateBtn');
             const successMessage = document.getElementById('successMessage');
+            const useBoxDimensions = document.getElementById('useBoxDimensions');
+            const volumeSection = document.getElementById('volumeSection');
+            const dimensionsSection = document.getElementById('dimensionsSection');
+            const volumeInput = document.getElementById('volume');
+            
+            // Переключение между режимами ввода
+            useBoxDimensions.addEventListener('change', function() {
+                if (this.checked) {
+                    volumeSection.classList.add('hidden');
+                    dimensionsSection.classList.add('active');
+                    volumeInput.required = false;
+                    
+                    // Делаем поля размеров обязательными
+                    document.getElementById('quantity').required = true;
+                    document.getElementById('length').required = true;
+                    document.getElementById('width').required = true;
+                    document.getElementById('height').required = true;
+                } else {
+                    volumeSection.classList.remove('hidden');
+                    dimensionsSection.classList.remove('active');
+                    volumeInput.required = true;
+                    
+                    // Убираем обязательность полей размеров
+                    document.getElementById('quantity').required = false;
+                    document.getElementById('length').required = false;
+                    document.getElementById('width').required = false;
+                    document.getElementById('height').required = false;
+                }
+            });
             
             function validateForm() {
                 let isValid = true;
+                const useBoxDimensions = document.getElementById('useBoxDimensions').checked;
+                
+                // Основные поля
                 const fields = [
                     { id: 'category', validator: (val) => val !== '', message: 'Выберите категорию' },
-                    { id: 'weight', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.1, message: 'Минимум 0.1 кг' },
-                    { id: 'length', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' },
-                    { id: 'width', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' },
-                    { id: 'height', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' },
-                    { id: 'cost', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.01, message: 'Минимум $0.01' },
-                    { id: 'quantity', validator: (val) => !isNaN(val) && parseInt(val) >= 1, message: 'Минимум 1' }
+                    { id: 'totalWeight', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.1, message: 'Минимум 0.1 кг' },
+                    { id: 'cost', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.01, message: 'Минимум $0.01' }
                 ];
+                
+                // Добавляем валидацию в зависимости от режима
+                if (useBoxDimensions) {
+                    fields.push(
+                        { id: 'quantity', validator: (val) => !isNaN(val) && parseInt(val) >= 1, message: 'Минимум 1' },
+                        { id: 'length', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' },
+                        { id: 'width', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' },
+                        { id: 'height', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' }
+                    );
+                } else {
+                    fields.push(
+                        { id: 'volume', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.001, message: 'Минимум 0.001 м³' }
+                    );
+                }
                 
                 fields.forEach(field => {
                     const element = document.getElementById(field.id);
@@ -499,22 +600,32 @@
                     calculateBtn.innerHTML = '<span>⏳</span><span>Выполняем расчет...</span>';
                     successMessage.style.display = 'none';
                     
+                    const useBoxDimensions = document.getElementById('useBoxDimensions').checked;
+                    
                     const formData = {
                         category: encodeURIComponent(document.getElementById('category').value),
-                        weight: encodeURIComponent(parseFloat(document.getElementById('weight').value)),
-                        length: encodeURIComponent(parseFloat(document.getElementById('length').value)),
-                        width: encodeURIComponent(parseFloat(document.getElementById('width').value)),
-                        height: encodeURIComponent(parseFloat(document.getElementById('height').value)),
+                        totalWeight: encodeURIComponent(parseFloat(document.getElementById('totalWeight').value)),
                         cost: encodeURIComponent(parseFloat(document.getElementById('cost').value)),
-                        quantity: encodeURIComponent(parseInt(document.getElementById('quantity').value)),
+                        useBoxDimensions: useBoxDimensions,
                         telegram_id: telegramUserId,
                         username: telegramUsername
                     };
                     
+                    if (useBoxDimensions) {
+                        // Отправляем параметры коробок
+                        formData.quantity = encodeURIComponent(parseInt(document.getElementById('quantity').value));
+                        formData.length = encodeURIComponent(parseFloat(document.getElementById('length').value));
+                        formData.width = encodeURIComponent(parseFloat(document.getElementById('width').value));
+                        formData.height = encodeURIComponent(parseFloat(document.getElementById('height').value));
+                    } else {
+                        // Отправляем объем
+                        formData.volume = encodeURIComponent(parseFloat(document.getElementById('volume').value));
+                    }
+                    
                     const queryString = Object.keys(formData)
                         .map(key => `${key}=${formData[key]}`)
                         .join('&');
-                    const url = `/calculate?${queryString}`;
+                    const url = `/calculate-old?${queryString}`;
                     
                     const response = await fetch(url, {
                         method: 'GET',

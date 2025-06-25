@@ -29,9 +29,9 @@
             --warning-color: #F39C12;
             --text-color: #2C3E50;
             --text-light: #7F8C8D;
-            --bg-color: #FFFFFF;
-            --bg-secondary: #F8F9FA;
-            --border-color: #E9ECEF;
+            --bg-color: #F8F9FA;
+            --bg-secondary: #E9ECEF;
+            --border-color: #DEE2E6;
             --shadow: 0 2px 20px rgba(0,0,0,0.1);
             --shadow-hover: 0 4px 30px rgba(0,0,0,0.15);
             --gradient: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
@@ -328,7 +328,7 @@
         /* Calculator Section */
         .calculator {
             padding: 80px 0;
-            background: white;
+            background: var(--bg-color);
         }
         
         .calculator-container {
@@ -377,7 +377,7 @@
         }
         
         .calculator-form {
-            background: var(--bg-secondary);
+            background: white;
             padding: 40px;
             border-radius: 12px;
             box-shadow: var(--shadow);
@@ -423,6 +423,47 @@
         
         .required {
             color: var(--primary-color);
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 16px 0;
+            padding: 12px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+        
+        .checkbox-container label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 0.9rem;
+            user-select: none;
+        }
+        
+        .volume-section, .dimensions-section {
+            transition: all 0.3s ease;
+        }
+        
+        .dimensions-section {
+            display: none;
+        }
+        
+        .dimensions-section.active {
+            display: block;
+        }
+        
+        .volume-section.hidden {
+            display: none;
         }
         
         /* Services Section */
@@ -471,7 +512,7 @@
         /* Pricing Section */
         .pricing {
             padding: 80px 0;
-            background: white;
+            background: var(--bg-color);
         }
         
         .pricing-table {
@@ -562,7 +603,7 @@
         /* Contact Section */
         .contact {
             padding: 80px 0;
-            background: white;
+            background: var(--bg-color);
         }
         
         .contact-grid {
@@ -882,8 +923,8 @@
                 <p class="fade-in">Профессиональная доставка товаров из Китая</p>
                 <p class="fade-in">Выкуп с 1688, Taobao, Tmall • Быстро, надежно, выгодно</p>
                 <div class="hero-buttons fade-in">
-                    <a href="#calculator" class="btn btn-primary">
-                        📊 Рассчитать стоимость
+                    <a href="#contact" class="btn btn-primary">
+                        📝 Оставить заявку на доставку
                     </a>
                     <a href="#services" class="btn btn-secondary">
                         🔍 Узнать больше
@@ -951,11 +992,7 @@
                         <ul class="calculator-features">
                             <li>
                                 <div class="check">✓</div>
-                                <span>2 режима доставки: быстрая и экономичная</span>
-                            </li>
-                            <li>
-                                <div class="check">✓</div>
-                                <span>Автоматический расчет страховки</span>
+                                <span>3 варианта упаковки: мешок, уголки, каркас</span>
                             </li>
                             <li>
                                 <div class="check">✓</div>
@@ -978,33 +1015,51 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="quantity">Количество коробок <span class="required">*</span></label>
-                                    <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+                                    <label for="totalWeight">Общий вес груза (кг) <span class="required">*</span></label>
+                                    <input type="number" id="totalWeight" name="totalWeight" min="0.1" step="0.01" placeholder="5.5" required>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="weight">Вес одной коробки (кг) <span class="required">*</span></label>
-                                    <input type="number" id="weight" name="weight" min="0.1" step="0.01" placeholder="5.5" required>
-                                </div>
-                                
+
                                 <div class="form-group">
                                     <label for="cost">Стоимость товара ($) <span class="required">*</span></label>
                                     <input type="number" id="cost" name="cost" min="0.01" step="0.01" placeholder="100" required>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="length">Длина (см) <span class="required">*</span></label>
-                                    <input type="number" id="length" name="length" min="1" step="0.1" placeholder="30" required>
+                            </div>
+                            
+                            <div class="volume-section" id="volumeSection">
+                                <div class="form-grid">
+                                    <div class="form-group full-width">
+                                        <label for="volume">Объем груза (м³) <span class="required">*</span></label>
+                                        <input type="number" id="volume" name="volume" min="0.001" step="0.001" placeholder="0.009" required>
+                                    </div>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="width">Ширина (см) <span class="required">*</span></label>
-                                    <input type="number" id="width" name="width" min="1" step="0.1" placeholder="20" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="height">Высота (см) <span class="required">*</span></label>
-                                    <input type="number" id="height" name="height" min="1" step="0.1" placeholder="15" required>
+                            </div>
+
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="useBoxDimensions" name="useBoxDimensions">
+                                <label for="useBoxDimensions">Не знаете объем? Введите параметры коробок</label>
+                            </div>
+
+                            <div class="dimensions-section" id="dimensionsSection">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="quantity">Количество коробок <span class="required">*</span></label>
+                                        <input type="number" id="quantity" name="quantity" min="1" placeholder="1" value="1">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="length">Длина (см) <span class="required">*</span></label>
+                                        <input type="number" id="length" name="length" min="1" step="0.1" placeholder="30">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="width">Ширина (см) <span class="required">*</span></label>
+                                        <input type="number" id="width" name="width" min="1" step="0.1" placeholder="20">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="height">Высота (см) <span class="required">*</span></label>
+                                        <input type="number" id="height" name="height" min="1" step="0.1" placeholder="15">
+                                    </div>
                                 </div>
                             </div>
                             
@@ -1581,8 +1636,11 @@
         });
     </script>
 </body>
-</html>
-                                <span>3 варианта упаковки: мешок, уголки, каркас</span>
+</html><span>2 режима доставки: быстрая и экономичная</span>
+                            </li>
+                            <li>
+                                <div class="check">✓</div>
+                                <span>Автоматический расчет страховки</span>
                             </li>
                             <li>
                                 <div class="check">✓</div>

@@ -90,18 +90,20 @@ def init_database():
             )
         """)
         
-        # Таблица входных данных
+        # Обновленная таблица входных данных
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS delivery_test.user_inputs (
                 id SERIAL PRIMARY KEY,
                 telegram_user_id INTEGER REFERENCES delivery_test.telegram_users(id),
                 category VARCHAR(255),
-                weight DECIMAL(10,2),
+                total_weight DECIMAL(10,2),
+                cost DECIMAL(10,2),
+                volume DECIMAL(10,4),
+                use_box_dimensions BOOLEAN DEFAULT FALSE,
+                quantity INTEGER,
                 length DECIMAL(10,2),
                 width DECIMAL(10,2),
                 height DECIMAL(10,2),
-                cost DECIMAL(10,2),
-                quantity INTEGER,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """)
@@ -218,18 +220,21 @@ def save_user_action(telegram_id, action, details=None):
         conn.close()
 
 @handle_db_errors
-def save_user_input_to_db(category, weight, length, width, height, cost, quantity, telegram_user_id=None):
+def save_user_input_to_db(category, total_weight, cost, volume=None, use_box_dimensions=False, 
+                         quantity=None, length=None, width=None, height=None, telegram_user_id=None):
     """Сохранение входных данных пользователя"""
     conn = connect_to_db()
     cursor = conn.cursor()
     try:
         cursor.execute("""
             INSERT INTO delivery_test.user_inputs (
-                category, weight, length, width, height, cost, quantity, telegram_user_id, created_at
+                category, total_weight, cost, volume, use_box_dimensions, 
+                quantity, length, width, height, telegram_user_id, created_at
             )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
             RETURNING id
-        """, (category, weight, length, width, height, cost, quantity, telegram_user_id))
+        """, (category, total_weight, cost, volume, use_box_dimensions, 
+              quantity, length, width, height, telegram_user_id))
         
         input_id = cursor.fetchone()[0]
         conn.commit()
@@ -302,13 +307,18 @@ def save_purchase_request(telegram_user_id, email, telegram_contact, supplier_li
 # МАРШРУТЫ
 
 @app.route('/')
+def homepage():
+    """Главная страница сайта"""
+    return render_template('homepage.html')
+
+@app.route('/calculate')
 def index():
-    """Главная страница"""
+    """Страница калькулятора для Telegram бота"""
     telegram_id = request.args.get('telegram_id')
     username = request.args.get('username')
     
     if telegram_id:
-        save_user_action(telegram_id, 'page_opened', {'page': 'index'})
+        save_user_action(telegram_id, 'page_opened', {'page': 'calculator'})
     
     return render_template('index.html')
 
@@ -352,7 +362,165 @@ def result():
         logger.error(f"Ошибка на странице результатов: {str(e)}")
         return render_template('result.html', error="Произошла ошибка при обработке данных.")
 
-@app.route('/calculate', methods=['GET', 'POST'])
+@app.route('/api/calculate', methods=['POST'])
+def api_calculate():
+    """API для расчета доставки с главной страницы"""
+    try:
+        data = request.get_json()
+        
+        # Извлекаем параметры (используем старый формат - вес одной коробки)
+        category = data.get('category', '').strip()
+        quantity = int(data.get('quantity', 1))
+        weight_per_box = safe_decimal(data.get('weight', 0))
+        cost = safe_decimal(data.get('cost', 0))
+        length = safe_decimal(data.get('length', 0))
+        width = safe_decimal(data.get('width', 0))
+        height = safe_decimal(data.get('height', 0))
+        source = data.get('source', 'website')
+        
+        # Валидация
+        if not all([category, weight_per_box > 0, length > 0, width > 0, height > 0, cost > 0, quantity > 0]):
+            return jsonify({"error": "Не все параметры указаны корректно"}), 400
+        
+        # Рассчитываем общие параметры
+        total_weight = weight_per_box * quantity
+        volume_per_box = (length / Decimal(100)) * (width / Decimal(100)) * (height / Decimal(100))
+        total_volume = volume_per_box * quantity
+        density = total_weight / total_volume if total_volume > 0 else Decimal('0')
+        
+        # Определяем процент страхования
+        cost_per_kg = cost / total_weight if total_weight > 0 else Decimal('0')
+        insurance_rate = Decimal('0.01') if cost_per_kg < 20 else Decimal('0.02')
+        insurance = cost * insurance_rate
+        
+        # Получаем тарифы из БД (такая же логика как в основном calculate)
+        conn = connect_to_db()
+        cursor = conn.cursor()
+
+        # Тарифы по весу
+        cursor.execute("""
+            SELECT min_weight, max_weight, coefficient_bag, bag_packing_cost, bag_unloading_cost,
+                   coefficient_corner, corner_packing_cost, corner_unloading_cost,
+                   coefficient_frame, frame_packing_cost, frame_unloading_cost
+            FROM delivery_test.weight
+            WHERE min_weight <= %s AND max_weight > %s
+        """, (total_weight, total_weight))
+        
+        result_row_weight = cursor.fetchone()
+        if not result_row_weight:
+            cursor.close()
+            conn.close()
+            return jsonify({"error": f"Вес {total_weight} кг вне диапазона тарифов"}), 400
+
+        (min_weight, max_weight, packing_factor_bag, packaging_cost_bag, unload_cost_bag,
+         additional_weight_corners, packaging_cost_corners, unload_cost_corners,
+         additional_weight_frame, packaging_cost_frame, unload_cost_frame) = [safe_decimal(value) for value in result_row_weight]
+
+        # Тарифы по плотности
+        cursor.execute("""
+            SELECT category, min_density, max_density, fast_delivery_cost, regular_delivery_cost
+            FROM delivery_test.density 
+            WHERE category = %s AND min_density <= %s AND max_density > %s
+        """, (category, density, density))
+        
+        result_row_density = cursor.fetchone()
+        if not result_row_density:
+            cursor.close()
+            conn.close()
+            return jsonify({"error": f"Плотность {density} кг/м³ вне диапазона для '{category}'"}), 400
+
+        (category_db, min_density, max_density, fast_car_cost_per_kg, regular_car_cost_per_kg) = [
+            safe_decimal(value) if isinstance(value, (int, float)) else value for value in result_row_density]
+
+        cursor.close()
+        conn.close()
+        
+        # Расчеты стоимости (такая же логика как в основном calculate)
+        packed_weight_bag = packing_factor_bag + total_weight
+        packed_weight_corners = additional_weight_corners + total_weight
+        packed_weight_frame = additional_weight_frame + total_weight
+
+        # Расчет страховки для каждого типа
+        cost_per_bag = cost / packed_weight_bag if packed_weight_bag > 0 else Decimal('0')
+        cost_per_corners = cost / packed_weight_corners if packed_weight_corners > 0 else Decimal('0')
+        cost_per_frame = cost / packed_weight_frame if packed_weight_frame > 0 else Decimal('0')
+
+        insurance_bag = cost * (Decimal('0.01') if cost_per_bag < 20 else Decimal('0.02'))
+        insurance_corners = cost * (Decimal('0.01') if cost_per_corners < 20 else Decimal('0.02'))
+        insurance_frame = cost * (Decimal('0.01') if cost_per_frame < 20 else Decimal('0.02'))
+
+        # Расчет доставки
+        delivery_cost_fast_bag = (fast_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
+        delivery_cost_regular_bag = (regular_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
+        delivery_cost_fast_corners = (fast_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
+        delivery_cost_regular_corners = (regular_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
+        delivery_cost_fast_frame = (fast_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
+        delivery_cost_regular_frame = (regular_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
+
+        # Сохраняем данные (как старый формат - с использованием размеров коробок)
+        input_id = save_user_input_to_db(
+            category=category,
+            total_weight=float(total_weight),
+            cost=float(cost),
+            volume=None,  # Будет рассчитан триггером
+            use_box_dimensions=True,
+            quantity=quantity,
+            length=float(length),
+            width=float(width),
+            height=float(height),
+            telegram_user_id=None  # Это запрос с сайта, не из Telegram
+        )
+
+        # Формируем ответ
+        return jsonify({
+            "success": True,
+            "total_cost_bag_fast": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_fast_bag).quantize(Decimal('0.01'))),
+            "total_cost_bag_regular": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_regular_bag).quantize(Decimal('0.01'))),
+            "total_cost_corners_fast": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_fast_corners).quantize(Decimal('0.01'))),
+            "total_cost_corners_regular": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_regular_corners).quantize(Decimal('0.01'))),
+            "total_cost_frame_fast": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_fast_frame).quantize(Decimal('0.01'))),
+            "total_cost_frame_regular": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_regular_frame).quantize(Decimal('0.01'))),
+            "total_weight": float(total_weight.quantize(Decimal('0.01'))),
+            "total_volume": float(total_volume.quantize(Decimal('0.01'))),
+            "density": float(density.quantize(Decimal('0.01'))),
+            "insurance_rate": f"{insurance_rate * Decimal('100'):.0f}%"
+        })
+        
+    except Exception as e:
+        logger.error(f"Ошибка в api_calculate: {str(e)}")
+        return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
+
+@app.route('/api/contact', methods=['POST'])
+def api_contact():
+    """API для отправки сообщений с главной страницы"""
+    try:
+        data = request.get_json()
+        
+        name = data.get('name', '').strip()
+        email = data.get('email', '').strip()
+        phone = data.get('phone', '').strip()
+        subject = data.get('subject', '').strip()
+        message = data.get('message', '').strip()
+        source = data.get('source', 'website')
+        
+        # Валидация
+        if not all([name, email, message]):
+            return jsonify({"error": "Не все обязательные поля заполнены"}), 400
+        
+        # Здесь можно добавить отправку на email, в Telegram или сохранение в БД
+        # Пока просто логируем
+        logger.info(f"Новое сообщение с сайта от {name} ({email}): {subject} - {message}")
+        
+        return jsonify({
+            "success": True,
+            "message": "Сообщение отправлено! Мы ответим в течение 24 часов."
+        })
+        
+    except Exception as e:
+        logger.error(f"Ошибка в api_contact: {str(e)}")
+        return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
+
+@app.route('/calculate-old', methods=['GET', 'POST'])
 def calculate():
     """Основной расчет доставки"""
     try:
@@ -364,17 +532,41 @@ def calculate():
         
         # Извлекаем параметры
         category = unquote(str(data.get('category', ''))).strip()
-        weight_per_box = safe_decimal(data.get('weight', 0))
-        length = safe_decimal(data.get('length', 0))
-        width = safe_decimal(data.get('width', 0))
-        height = safe_decimal(data.get('height', 0))
+        total_weight = safe_decimal(data.get('totalWeight', 0))
         cost = safe_decimal(data.get('cost', 0))
-        quantity = int(data.get('quantity', 1))
+        use_box_dimensions = data.get('useBoxDimensions', 'false').lower() == 'true'
         telegram_id = data.get('telegram_id')
         username = data.get('username')
 
-        # Валидация
-        if not all([category, weight_per_box > 0, length > 0, width > 0, height > 0, cost > 0, quantity > 0]):
+        # Обработка объема в зависимости от режима
+        if use_box_dimensions:
+            # Рассчитываем объем из размеров коробок
+            quantity = int(data.get('quantity', 1))
+            length = safe_decimal(data.get('length', 0))
+            width = safe_decimal(data.get('width', 0))
+            height = safe_decimal(data.get('height', 0))
+            
+            # Валидация размеров
+            if not all([quantity > 0, length > 0, width > 0, height > 0]):
+                return jsonify({"error": "Все размеры коробок должны быть больше 0"}), 400
+            
+            # Рассчитываем объем одной коробки в м³
+            volume_per_box = (length / Decimal(100)) * (width / Decimal(100)) * (height / Decimal(100))
+            total_volume = volume_per_box * quantity
+            
+            # Для режима коробок сохраняем volume как NULL (будет рассчитан триггером)
+            volume_to_save = None
+        else:
+            # Используем заданный объем
+            total_volume = safe_decimal(data.get('volume', 0))
+            quantity = 1  # Для совместимости
+            length = width = height = None
+            
+            # Для режима прямого ввода объема сохраняем введенное значение
+            volume_to_save = float(total_volume)
+
+        # Валидация основных параметров
+        if not all([category, total_weight > 0, cost > 0, total_volume > 0]):
             return jsonify({"error": "Не все параметры указаны корректно"}), 400
 
         # Сохраняем пользователя
@@ -382,11 +574,8 @@ def calculate():
         if telegram_id and telegram_id != 'test_user':
             telegram_user_id = save_telegram_user(telegram_id, username)
 
-        # Выполняем расчеты
-        volume_per_box = (length / Decimal(100)) * (width / Decimal(100)) * (height / Decimal(100))
-        total_volume = volume_per_box * quantity
-        density = weight_per_box / volume_per_box if volume_per_box > 0 else Decimal('0')
-        total_weight = weight_per_box * quantity
+        # Рассчитываем плотность на основе общего веса и общего объема
+        density = total_weight / total_volume if total_volume > 0 else Decimal('0')
 
         # Определяем процент страхования
         cost_per_kg = cost / total_weight if total_weight > 0 else Decimal('0')
@@ -402,9 +591,9 @@ def calculate():
 
         # Тарифы по весу
         cursor.execute("""
-            SELECT min_weight, max_weight, coefficient_bag,  bag_packing_cost, bag_unloading_cost,
-                   coefficient_corner,  corner_packing_cost, corner_unloading_cost,
-                   coefficient_frame,frame_packing_cost, frame_unloading_cost
+            SELECT min_weight, max_weight, coefficient_bag, bag_packing_cost, bag_unloading_cost,
+                   coefficient_corner, corner_packing_cost, corner_unloading_cost,
+                   coefficient_frame, frame_packing_cost, frame_unloading_cost
             FROM delivery_test.weight
             WHERE min_weight <= %s AND max_weight > %s
         """, (total_weight, total_weight))
@@ -415,9 +604,9 @@ def calculate():
             conn.close()
             return jsonify({"error": f"Вес {total_weight} кг вне диапазона тарифов"}), 400
 
-        (min_weight, max_weight, packing_factor_bag,  packaging_cost_bag, unload_cost_bag,
-         additional_weight_corners,  packaging_cost_corners, unload_cost_corners,
-         additional_weight_frame,  packaging_cost_frame, unload_cost_frame) = [safe_decimal(value) for value in result_row_weight]
+        (min_weight, max_weight, packing_factor_bag, packaging_cost_bag, unload_cost_bag,
+         additional_weight_corners, packaging_cost_corners, unload_cost_corners,
+         additional_weight_frame, packaging_cost_frame, unload_cost_frame) = [safe_decimal(value) for value in result_row_weight]
 
         # Тарифы по плотности
         cursor.execute("""
@@ -464,15 +653,15 @@ def calculate():
         results = {
             "generalInformation": {
                 "category": category,
-                "fast_car_cost_per_kg":float(fast_car_cost_per_kg.quantize(Decimal('0.01'))),
-                "regular_car_cost_per_kg":float(regular_car_cost_per_kg.quantize(Decimal('0.01'))),
+                "fast_car_cost_per_kg": float(fast_car_cost_per_kg.quantize(Decimal('0.01'))),
+                "regular_car_cost_per_kg": float(regular_car_cost_per_kg.quantize(Decimal('0.01'))),
                 "weight": float(total_weight.quantize(Decimal('0.01'))),
                 "density": float(density.quantize(Decimal('0.01'))),
                 "productCost": float(cost),
                 "insuranceRate": f"{insurance_rate * Decimal('100'):.0f}%",
                 "insuranceAmount": float(insurance.quantize(Decimal('0.01'))),
                 "volume": float(total_volume.quantize(Decimal('0.01'))),
-                "boxCount": quantity
+                "boxCount": quantity if use_box_dimensions else 1
             },
             "bag": {
                 "packedWeight": float(packed_weight_bag.quantize(Decimal('0.01'))),
@@ -511,20 +700,28 @@ def calculate():
 
         # Сохраняем данные в БД
         input_id = save_user_input_to_db(
-            category=category, weight=float(weight_per_box), length=float(length),
-            width=float(width), height=float(height), cost=float(cost),
-            quantity=quantity, telegram_user_id=telegram_user_id
+            category=category,
+            total_weight=float(total_weight),
+            cost=float(cost),
+            volume=volume_to_save,  # None для режима коробок, float для режима объема
+            use_box_dimensions=use_box_dimensions,
+            quantity=quantity if use_box_dimensions else None,
+            length=float(length) if length is not None else None,
+            width=float(width) if width is not None else None,
+            height=float(height) if height is not None else None,
+            telegram_user_id=telegram_user_id
         )
 
         calculation_id = save_user_calculation(
-            telegram_user_id=telegram_user_id, category=category,
+            telegram_user_id=telegram_user_id,
+            category=category,
             total_weight=float(total_weight.quantize(Decimal('0.01'))),
             density=float(density.quantize(Decimal('0.01'))),
             product_cost=float(cost),
             insurance_rate=float(insurance_rate * Decimal('100')),
             insurance_amount=float(insurance.quantize(Decimal('0.01'))),
             volume=float(total_volume.quantize(Decimal('0.01'))),
-            box_count=quantity,
+            box_count=quantity if use_box_dimensions else 1,
             bag_total_fast=float(results["bag"]["totalFast"]),
             bag_total_regular=float(results["bag"]["totalRegular"]),
             corners_total_fast=float(results["corners"]["totalFast"]),
@@ -539,7 +736,8 @@ def calculate():
             save_user_action(telegram_id, 'calculation_completed', {
                 'calculation_id': calculation_id,
                 'category': category,
-                'total_weight': float(total_weight)
+                'total_weight': float(total_weight),
+                'use_box_dimensions': use_box_dimensions
             })
 
         # Возвращаем результат

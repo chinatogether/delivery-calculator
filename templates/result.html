@@ -306,12 +306,14 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">Объем</span>
-                    <span class="info-value">{{ "%.2f"|format(results.generalInformation.volume) }} м³</span>
+                    <span class="info-value">{{ "%.4f"|format(results.generalInformation.volume) }} м³</span>
                 </div>
+                {% if results.generalInformation.boxCount > 1 %}
                 <div class="info-item">
-                    <span class="info-label">Коробок</span>
+                    <span class="info-label">Количество коробок</span>
                     <span class="info-value">{{ results.generalInformation.boxCount }} шт.</span>
                 </div>
+                {% endif %}
                 <div class="info-item">
                     {% if results.generalInformation.category == 'Обувь' %}
                         <span class="info-label">Доставка оригинала на 1 кг</span>
@@ -509,7 +511,7 @@
                 <span>🚚</span>
                 <span>Заказать доставку</span>
             </a>
-            <a href="/" class="btn">
+            <a href="/calculate" class="btn">
                 <span>🔄</span>
                 <span>Новый расчет</span>
             </a>
@@ -528,8 +530,6 @@
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
-
-        // Убираем привязку к темам Telegram - используем фиксированные цвета
 
         // Функция переключения детальной информации
         function toggleDetails() {
@@ -572,7 +572,7 @@
         if (tg && tg.BackButton) {
             tg.BackButton.show();
             tg.BackButton.onClick(() => {
-                window.location.href = '/';
+                window.location.href = '/calculate';
             });
         }
 
