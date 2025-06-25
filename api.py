@@ -570,6 +570,17 @@ def submit_purchase_request():
         additional_notes = data.get('additional_notes', '').strip()
         terms_accepted = data.get('terms_accepted', False)
         
+        # Извлекаем username из данных или создаем из telegram_contact
+        username = data.get('username', '').strip()
+        if not username and telegram_contact:
+            # Если username не передан, пытаемся извлечь из telegram_contact
+            if telegram_contact.startswith('@'):
+                username = telegram_contact[1:]  # убираем @
+            elif 'https://t.me/' in telegram_contact:
+                username = telegram_contact.split('/')[-1]  # берем последнюю часть URL
+            else:
+                username = f"user_{telegram_id}"  # fallback
+        
         # Валидация
         if not all([telegram_id, telegram_contact]):
             return jsonify({"error": "Не все обязательные поля заполнены"}), 400
@@ -585,7 +596,7 @@ def submit_purchase_request():
         if not (telegram_contact.startswith('@') or telegram_contact.startswith('https://t.me/')):
             return jsonify({"error": "Telegram контакт должен начинаться с @ или https://t.me/"}), 400
         
-        # Получаем telegram_user_id
+        # Получаем или создаем пользователя
         conn = connect_to_db()
         cursor = conn.cursor()
         cursor.execute("SELECT id FROM delivery_test.telegram_users WHERE telegram_id = %s", (str(telegram_id),))
@@ -594,11 +605,23 @@ def submit_purchase_request():
         conn.close()
         
         if not user_result:
-            logger.info(f"Пользователь с telegram_id={telegram_id} не найден, создаем...")
-            telegram_user_id = save_telegram_user(telegram_id, telegram_username)
+            logger.info(f"Пользователь с telegram_id={telegram_id} не найден, создаем нового пользователя...")
+            # Создаем нового пользователя
+            telegram_user_id = save_telegram_user(
+                telegram_id=telegram_id, 
+                username=username,
+                first_name=None,  # Не знаем имя, оставляем пустым
+                last_name=None    # Не знаем фамилию, оставляем пустым
+            )
+            
+            if not telegram_user_id:
+                logger.error(f"Не удалось создать пользователя с telegram_id={telegram_id}")
+                return jsonify({"error": "Ошибка при создании пользователя"}), 500
+            
+            logger.info(f"Создан новый пользователь с ID={telegram_user_id}")
         else:
-        
             telegram_user_id = user_result[0]
+            logger.info(f"Найден существующий пользователь с ID={telegram_user_id}")
         
         # Сохраняем заявку
         request_id = save_purchase_request(
@@ -619,8 +642,12 @@ def submit_purchase_request():
                 'request_id': request_id,
                 'calculation_id': calculation_id,
                 'email': email,
-                'order_amount': order_amount
+                'order_amount': order_amount,
+                'telegram_contact': telegram_contact,
+                'is_new_user': not bool(user_result)
             })
+            
+            logger.info(f"Заявка успешно создана с ID={request_id} для пользователя {telegram_user_id}")
             
             return jsonify({
                 "success": True,
@@ -628,6 +655,7 @@ def submit_purchase_request():
                 "message": "Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время."
             })
         else:
+            logger.error("Не удалось создать заявку - save_purchase_request вернул None")
             return jsonify({"error": "Ошибка при создании заявки"}), 500
             
     except Exception as e:
