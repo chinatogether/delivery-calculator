@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -819,13 +820,16 @@
             });
         });
 
-        // Настройка кнопки "Назад"
+
+        // Telegram кнопки
         if (tg && tg.BackButton) {
             tg.BackButton.show();
             tg.BackButton.onClick(() => {
-                window.history.back();
+                if (confirm('Вы уверены, что хотите выйти?')) {
+                    tg.close();
+                }
             });
-        }
+        }    
         
         // Настройка главной кнопки
         if (tg && tg.MainButton) {
