@@ -1,0 +1,785 @@
+{% extends "base.html" %}
+
+{% block title %}Управление пользователями - China Together{% endblock %}
+{% block page_title %}Управление пользователями{% endblock %}
+
+{% block extra_css %}
+<style>
+    .user-card {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border-left: 4px solid var(--primary-color);
+        transition: all 0.3s ease;
+    }
+
+    .user-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .user-avatar {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .user-info {
+        flex: 1;
+    }
+
+    .user-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--gray-800);
+        margin-bottom: 5px;
+    }
+
+    .user-contact {
+        color: var(--gray-500);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .user-stat {
+        text-align: center;
+        padding: 15px;
+        background: var(--gray-100);
+        border-radius: 8px;
+    }
+
+    .user-stat-number {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin-bottom: 5px;
+    }
+
+    .user-stat-label {
+        font-size: 0.8rem;
+        color: var(--gray-500);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .user-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+    }
+
+    .search-panel {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: end;
+    }
+
+    .activity-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+    .activity-online { background: var(--success-color); }
+    .activity-recent { background: var(--warning-color); }
+    .activity-offline { background: var(--gray-400); }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal.show {
+        display: flex;
+    }
+
+    .modal-content {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 30px;
+        max-width: 800px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .calculation-form {
+        background: var(--gray-100);
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .export-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--success-color), var(--primary-color));
+        color: var(--white);
+        border: none;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 8px 15px rgba(56, 161, 105, 0.3);
+        transition: all 0.3s ease;
+        z-index: 100;
+    }
+
+    .export-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 20px rgba(56, 161, 105, 0.4);
+    }
+
+    @media (max-width: 768px) {
+        .user-header {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .user-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .user-actions {
+            justify-content: center;
+        }
+
+        .search-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Quick Stats -->
+<div class="stats-grid">
+    <div class="stat-card primary">
+        <div class="stat-icon" style="color: var(--primary-color);">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-number">{{ users|length }}</div>
+        <div class="stat-label">Всего пользователей</div>
+    </div>
+    
+    <div class="stat-card success">
+        <div class="stat-icon" style="color: var(--success-color);">
+            <i class="fas fa-user-check"></i>
+        </div>
+        <div class="stat-number">{{ users|selectattr('last_activity')|list|length }}</div>
+        <div class="stat-label">Активных пользователей</div>
+    </div>
+    
+    <div class="stat-card warning">
+        <div class="stat-icon" style="color: var(--warning-color);">
+            <i class="fas fa-calculator"></i>
+        </div>
+        <div class="stat-number">{{ users|sum(attribute='calculations_count') }}</div>
+        <div class="stat-label">Всего расчетов</div>
+    </div>
+    
+    <div class="stat-card info">
+        <div class="stat-icon" style="color: var(--accent-color);">
+            <i class="fas fa-clipboard-list"></i>
+        </div>
+        <div class="stat-number">{{ users|sum(attribute='orders_count') }}</div>
+        <div class="stat-label">Всего заявок</div>
+    </div>
+</div>
+
+<!-- Search Panel -->
+<div class="search-panel">
+    <h3 style="margin-bottom: 20px; color: var(--gray-800); display: flex; align-items: center; gap: 10px;">
+        <i class="fas fa-search"></i>
+        Поиск пользователей
+    </h3>
+    
+    <div class="search-grid">
+        <div>
+            <input type="text" id="searchInput" class="form-control" placeholder="Поиск по имени, email, телефону, компании..." onkeyup="filterUsers()">
+        </div>
+        <div style="display: flex; gap: 15px;">
+            <select id="sortSelect" class="form-control" onchange="sortUsers()" style="width: 200px;">
+                <option value="name">По имени</option>
+                <option value="activity">По активности</option>
+                <option value="calculations">По расчетам</option>
+                <option value="orders">По заявкам</option>
+                <option value="created">По дате регистрации</option>
+            </select>
+            <button class="btn btn-primary" onclick="showBulkActions()">
+                <i class="fas fa-tasks"></i>
+                Групповые действия
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Users List -->
+<div id="usersList">
+    {% for user in users %}
+    <div class="user-card" data-user-id="{{ user.id }}" data-search-text="{{ (user.username or '') + ' ' + (user.first_name or '') + ' ' + (user.last_name or '') + ' ' + (user.email or '') + ' ' + (user.phone or '') + ' ' + (user.company or '') }}">
+        <div class="user-header">
+            <div class="user-avatar">
+                {{ (user.first_name or user.username or 'U')[0].upper() }}
+            </div>
+            <div class="user-info">
+                <div class="user-name">
+                    {% set activity_days = ((now() - user.last_activity).days) if user.last_activity else 999 %}
+                    <span class="activity-indicator {% if activity_days <= 1 %}activity-online{% elif activity_days <= 7 %}activity-recent{% else %}activity-offline{% endif %}"></span>
+                    {{ user.full_name or (user.first_name + ' ' + (user.last_name or '')) or user.username or 'Неизвестно' }}
+                </div>
+                <div class="user-contact">
+                    {% if user.email %}
+                    <span><i class="fas fa-envelope"></i> {{ user.email }}</span>
+                    {% endif %}
+                    {% if user.phone %}
+                    <span><i class="fas fa-phone"></i> {{ user.phone }}</span>
+                    {% endif %}
+                    {% if user.company %}
+                    <span><i class="fas fa-building"></i> {{ user.company }}</span>
+                    {% endif %}
+                    {% if user.username %}
+                    <span><i class="fab fa-telegram"></i> @{{ user.username }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div style="text-align: right; color: var(--gray-500); font-size: 0.8rem;">
+                <div>ID: {{ user.telegram_id }}</div>
+                {% if user.last_activity %}
+                <div>{{ user.last_activity.strftime('%d.%m.%Y') }}</div>
+                {% else %}
+                <div>Не активен</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="user-stats">
+            <div class="user-stat">
+                <div class="user-stat-number">{{ user.calculations_count }}</div>
+                <div class="user-stat-label">Расчеты</div>
+            </div>
+            <div class="user-stat">
+                <div class="user-stat-number">{{ user.orders_count }}</div>
+                <div class="user-stat-label">Заявки</div>
+            </div>
+            <div class="user-stat">
+                <div class="user-stat-number">
+                    {% if user.last_activity %}
+                        {% set days_ago = (now() - user.last_activity).days %}
+                        {% if days_ago == 0 %}Сегодня
+                        {% elif days_ago == 1 %}Вчера
+                        {% else %}{{ days_ago }} дн.{% endif %}
+                    {% else %}Никогда{% endif %}
+                </div>
+                <div class="user-stat-label">Активность</div>
+            </div>
+            <div class="user-stat">
+                <div class="user-stat-number">{{ user.created_at.strftime('%d.%m.%y') if user.created_at else '-' }}</div>
+                <div class="user-stat-label">Регистрация</div>
+            </div>
+        </div>
+
+        <div class="user-actions">
+            <button class="btn btn-primary" onclick="viewUserDetails({{ user.id }})">
+                <i class="fas fa-eye"></i>
+                Подробнее
+            </button>
+            <button class="btn btn-success" onclick="createCalculation({{ user.id }}, '{{ user.username or user.first_name or 'user' }}')">
+                <i class="fas fa-calculator"></i>
+                Новый расчет
+            </button>
+            <button class="btn btn-warning" onclick="editUser({{ user.id }})">
+                <i class="fas fa-edit"></i>
+                Редактировать
+            </button>
+            <button class="btn btn-secondary" onclick="generateInvoice({{ user.id }})">
+                <i class="fas fa-file-invoice"></i>
+                Счет-фактура
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if not users %}
+<div style="text-align: center; padding: 60px; color: var(--gray-500);">
+    <i class="fas fa-users" style="font-size: 4rem; margin-bottom: 20px; opacity: 0.3;"></i>
+    <h3 style="margin-bottom: 10px;">Пользователи не найдены</h3>
+    <p>В системе пока нет зарегистрированных пользователей</p>
+</div>
+{% endif %}
+
+<!-- Export Button -->
+<button class="export-button" onclick="exportUsers()" title="Экспорт в Excel">
+    <i class="fas fa-download"></i>
+</button>
+
+<!-- User Details Modal -->
+<div class="modal" id="userDetailsModal">
+    <div class="modal-content">
+        <h3 style="margin-bottom: 20px; color: var(--gray-800);">
+            <i class="fas fa-user"></i>
+            Детали пользователя
+        </h3>
+        <div id="userDetailsContent">
+            <!-- Контент будет загружен динамически -->
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+            <button class="btn btn-secondary" onclick="closeUserDetailsModal()">
+                Закрыть
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Calculation Modal -->
+<div class="modal" id="calculationModal">
+    <div class="modal-content">
+        <h3 style="margin-bottom: 20px; color: var(--gray-800);">
+            <i class="fas fa-calculator"></i>
+            Создать расчет доставки
+        </h3>
+        
+        <form id="calculationForm" class="calculation-form">
+            <input type="hidden" id="calcUserId" value="">
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Категория товара</label>
+                    <select name="category" class="form-control" required>
+                        <option value="">Выберите категорию</option>
+                        <option value="обычные">Обычные товары</option>
+                        <option value="одежда">Одежда</option>
+                        <option value="обувь">Обувь</option>
+                        <option value="текстиль">Текстиль</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Стоимость товара (юани)</label>
+                    <input type="number" name="cost" class="form-control" step="0.01" min="0" required>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <input type="checkbox" id="useBoxDimensions" onchange="toggleCalculationMode()">
+                    <span>Использовать размеры коробок</span>
+                </label>
+            </div>
+            
+            <!-- Режим прямого ввода -->
+            <div id="directMode">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Общий вес (кг)</label>
+                        <input type="number" name="totalWeight" class="form-control" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Объем (м³)</label>
+                        <input type="number" name="volume" class="form-control" step="0.001" min="0">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Режим коробок -->
+            <div id="boxMode" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Количество коробок</label>
+                        <input type="number" name="quantity" class="form-control" min="1" value="1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Вес одной коробки (кг)</label>
+                        <input type="number" name="weightPerBox" class="form-control" step="0.01" min="0">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Длина (см)</label>
+                        <input type="number" name="length" class="form-control" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Ширина (см)</label>
+                        <input type="number" name="width" class="form-control" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Высота (см)</label>
+                        <input type="number" name="height" class="form-control" min="0">
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 20px;">
+                <button type="button" class="btn btn-secondary" onclick="closeCalculationModal()">
+                    Отмена
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-calculator"></i>
+                    Рассчитать
+                </button>
+            </div>
+        </form>
+        
+        <div id="calculationResults" style="display: none; margin-top: 20px;">
+            <!-- Результаты расчета будут отображены здесь -->
+        </div>
+    </div>
+</div>
+
+<!-- Edit User Modal -->
+<div class="modal" id="editUserModal">
+    <div class="modal-content">
+        <h3 style="margin-bottom: 20px; color: var(--gray-800);">
+            <i class="fas fa-edit"></i>
+            Редактировать пользователя
+        </h3>
+        
+        <form id="editUserForm">
+            <input type="hidden" id="editUserId" value="">
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Полное имя</label>
+                    <input type="text" name="full_name" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Компания</label>
+                    <input type="text" name="company" class="form-control">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Телефон</label>
+                    <input type="tel" name="phone" class="form-control">
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 20px;">
+                <button type="button" class="btn btn-secondary" onclick="closeEditUserModal()">
+                    Отмена
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    Сохранить
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    let allUsers = Array.from(document.querySelectorAll('.user-card'));
+
+    function filterUsers() {
+        const searchText = document.getElementById('searchInput').value.toLowerCase();
+        
+        allUsers.forEach(userCard => {
+            const searchContent = userCard.getAttribute('data-search-text').toLowerCase();
+            if (searchContent.includes(searchText)) {
+                userCard.style.display = 'block';
+            } else {
+                userCard.style.display = 'none';
+            }
+        });
+    }
+
+    function sortUsers() {
+        const sortBy = document.getElementById('sortSelect').value;
+        const container = document.getElementById('usersList');
+        
+        allUsers.sort((a, b) => {
+            switch (sortBy) {
+                case 'name':
+                    return a.querySelector('.user-name').textContent.localeCompare(b.querySelector('.user-name').textContent);
+                case 'activity':
+                    // Сортировка по цвету индикатора активности
+                    const aActivity = a.querySelector('.activity-indicator').className;
+                    const bActivity = b.querySelector('.activity-indicator').className;
+                    return aActivity.localeCompare(bActivity);
+                case 'calculations':
+                    const aCalc = parseInt(a.querySelector('.user-stat-number').textContent);
+                    const bCalc = parseInt(b.querySelector('.user-stat-number').textContent);
+                    return bCalc - aCalc;
+                case 'orders':
+                    const aOrders = parseInt(a.querySelectorAll('.user-stat-number')[1].textContent);
+                    const bOrders = parseInt(b.querySelectorAll('.user-stat-number')[1].textContent);
+                    return bOrders - aOrders;
+                default:
+                    return 0;
+            }
+        });
+        
+        // Перестраиваем DOM
+        allUsers.forEach(userCard => {
+            container.appendChild(userCard);
+        });
+    }
+
+    function viewUserDetails(userId) {
+        document.getElementById('userDetailsContent').innerHTML = '<div style="text-align: center; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> Загрузка...</div>';
+        document.getElementById('userDetailsModal').classList.add('show');
+        
+        // Здесь загружаем детальную информацию о пользователе
+        setTimeout(() => {
+            document.getElementById('userDetailsContent').innerHTML = `
+                <div style="text-align: center; padding: 20px; color: var(--gray-500);">
+                    <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                    <p>Детальная информация о пользователе будет реализована</p>
+                </div>
+            `;
+        }, 1000);
+    }
+
+    function createCalculation(userId, username) {
+        document.getElementById('calcUserId').value = userId;
+        document.getElementById('calculationModal').classList.add('show');
+        document.getElementById('calculationResults').style.display = 'none';
+        document.getElementById('calculationForm').reset();
+    }
+
+    function editUser(userId) {
+        document.getElementById('editUserId').value = userId;
+        document.getElementById('editUserModal').classList.add('show');
+        
+        // Здесь можно загрузить текущие данные пользователя
+    }
+
+    function generateInvoice(userId) {
+        alert('Функция генерации счет-фактуры будет реализована');
+    }
+
+    function exportUsers() {
+        window.location.href = '/api/export/users';
+    }
+
+    function showBulkActions() {
+        alert('Функция групповых действий будет реализована');
+    }
+
+    function toggleCalculationMode() {
+        const useBoxDimensions = document.getElementById('useBoxDimensions').checked;
+        const directMode = document.getElementById('directMode');
+        const boxMode = document.getElementById('boxMode');
+        
+        if (useBoxDimensions) {
+            directMode.style.display = 'none';
+            boxMode.style.display = 'block';
+            
+            // Очищаем поля прямого режима
+            directMode.querySelectorAll('input').forEach(input => {
+                input.removeAttribute('required');
+                input.value = '';
+            });
+            
+            // Делаем обязательными поля режима коробок
+            boxMode.querySelectorAll('input[name="quantity"], input[name="weightPerBox"], input[name="length"], input[name="width"], input[name="height"]').forEach(input => {
+                input.setAttribute('required', 'required');
+            });
+        } else {
+            directMode.style.display = 'block';
+            boxMode.style.display = 'none';
+            
+            // Очищаем поля режима коробок
+            boxMode.querySelectorAll('input').forEach(input => {
+                input.removeAttribute('required');
+                input.value = '';
+            });
+            
+            // Делаем обязательными поля прямого режима
+            directMode.querySelectorAll('input').forEach(input => {
+                input.setAttribute('required', 'required');
+            });
+        }
+    }
+
+    // Обработка формы расчета
+    document.getElementById('calculationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+        
+        // Добавляем специальные поля
+        data.useBoxDimensions = document.getElementById('useBoxDimensions').checked;
+        data.telegram_id = 'manager_calculation';
+        data.username = 'manager';
+        
+        // Показываем индикатор загрузки
+        document.getElementById('calculationResults').innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary-color);"></i>
+                <p style="margin-top: 10px;">Выполняется расчет...</p>
+            </div>
+        `;
+        document.getElementById('calculationResults').style.display = 'block';
+        
+        fetch('/calculate-old', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.error) {
+                throw new Error(result.error);
+            }
+            
+            // Отображаем результаты
+            displayCalculationResults(result);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('calculationResults').innerHTML = `
+                <div style="text-align: center; padding: 20px; color: var(--danger-color);">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                    <p>Ошибка расчета: ${error.message}</p>
+                </div>
+            `;
+        });
+    });
+
+    function displayCalculationResults(results) {
+        const resultsHtml = `
+            <div style="background: var(--white); padding: 20px; border-radius: 8px; border: 1px solid var(--gray-200);">
+                <h4 style="margin-bottom: 15px; color: var(--gray-800);">Результаты расчета</h4>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    <div style="background: var(--gray-100); padding: 15px; border-radius: 8px;">
+                        <strong>Общая информация:</strong><br>
+                        Вес: ${results.generalInformation.weight} кг<br>
+                        Плотность: ${results.generalInformation.density} кг/м³<br>
+                        Стоимость: ${results.generalInformation.productCostUSD}
+                    </div>
+                    
+                    <div style="background: var(--gray-100); padding: 15px; border-radius: 8px;">
+                        <strong>Мешок:</strong><br>
+                        Быстро: ${results.bag.totalFast}<br>
+                        Обычно: ${results.bag.totalRegular}
+                    </div>
+                    
+                    <div style="background: var(--gray-100); padding: 15px; border-radius: 8px;">
+                        <strong>Уголки:</strong><br>
+                        Быстро: ${results.corners.totalFast}<br>
+                        Обычно: ${results.corners.totalRegular}
+                    </div>
+                    
+                    <div style="background: var(--gray-100); padding: 15px; border-radius: 8px;">
+                        <strong>Каркас:</strong><br>
+                        Быстро: ${results.frame.totalFast}<br>
+                        Обычно: ${results.frame.totalRegular}
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button class="btn btn-success" onclick="createInvoiceFromCalculation()">
+                        <i class="fas fa-file-invoice"></i>
+                        Создать счет-фактуру
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('calculationResults').innerHTML = resultsHtml;
+    }
+
+    function createInvoiceFromCalculation() {
+        alert('Функция создания счет-фактуры из расчета будет реализована');
+    }
+
+    // Функции закрытия модальных окон
+    function closeUserDetailsModal() {
+        document.getElementById('userDetailsModal').classList.remove('show');
+    }
+
+    function closeCalculationModal() {
+        document.getElementById('calculationModal').classList.remove('show');
+    }
+
+    function closeEditUserModal() {
+        document.getElementById('editUserModal').classList.remove('show');
+    }
+
+    // Закрытие модальных окон по клику вне их
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal')) {
+            e.target.classList.remove('show');
+        }
+    });
+
+    // Инициализация режима расчета при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleCalculationMode();
+    });
+</script>
+{% endblock %}

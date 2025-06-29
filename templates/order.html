@@ -1,0 +1,647 @@
+{% extends "base.html" %}
+
+{% block title %}Управление заявками - China Together{% endblock %}
+{% block page_title %}Управление заявками{% endblock %}
+
+{% block extra_css %}
+<style>
+    .filters-panel {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .filters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .status-badge {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .status-new { background: rgba(49, 130, 206, 0.1); color: #2c5aa0; }
+    .status-in_progress { background: rgba(214, 158, 46, 0.1); color: #b7791f; }
+    .status-calculated { background: rgba(128, 90, 213, 0.1); color: #553c9a; }
+    .status-in_transit { background: rgba(56, 161, 105, 0.1); color: #276749; }
+    .status-delivered { background: rgba(56, 161, 105, 0.2); color: #22543d; }
+    .status-cancelled { background: rgba(229, 62, 62, 0.1); color: #c53030; }
+
+    .order-row {
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .order-row:hover {
+        background: rgba(26, 54, 93, 0.05) !important;
+        transform: translateX(3px);
+    }
+
+    .order-details {
+        display: none;
+        background: var(--gray-100);
+        padding: 20px;
+    }
+
+    .order-details.show {
+        display: block;
+    }
+
+    .detail-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .detail-item {
+        background: var(--white);
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 3px solid var(--primary-color);
+    }
+
+    .detail-label {
+        font-size: 0.8rem;
+        color: var(--gray-500);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 5px;
+    }
+
+    .detail-value {
+        font-weight: 500;
+        color: var(--gray-800);
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal.show {
+        display: flex;
+    }
+
+    .modal-content {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 30px;
+        max-width: 500px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .select-status {
+        width: 100%;
+        padding: 10px 15px;
+        border: 2px solid var(--gray-300);
+        border-radius: 8px;
+        font-size: 0.9rem;
+        background: var(--white);
+    }
+
+    .export-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--success-color), var(--primary-color));
+        color: var(--white);
+        border: none;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 8px 15px rgba(56, 161, 105, 0.3);
+        transition: all 0.3s ease;
+        z-index: 100;
+    }
+
+    .export-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 20px rgba(56, 161, 105, 0.4);
+    }
+
+    @media (max-width: 768px) {
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .filters-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Quick Stats -->
+<div class="stats-grid">
+    <div class="stat-card primary">
+        <div class="stat-icon" style="color: var(--primary-color);">
+            <i class="fas fa-clipboard-list"></i>
+        </div>
+        <div class="stat-number">{{ orders|length }}</div>
+        <div class="stat-label">Всего заявок</div>
+    </div>
+    
+    <div class="stat-card warning">
+        <div class="stat-icon" style="color: var(--warning-color);">
+            <i class="fas fa-clock"></i>
+        </div>
+        <div class="stat-number">{{ orders|selectattr('status', 'equalto', 'new')|list|length }}</div>
+        <div class="stat-label">Новые заявки</div>
+    </div>
+    
+    <div class="stat-card info">
+        <div class="stat-icon" style="color: var(--accent-color);">
+            <i class="fas fa-cogs"></i>
+        </div>
+        <div class="stat-number">{{ orders|selectattr('status', 'equalto', 'in_progress')|list|length }}</div>
+        <div class="stat-label">В работе</div>
+    </div>
+    
+    <div class="stat-card success">
+        <div class="stat-icon" style="color: var(--success-color);">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-number">{{ orders|selectattr('status', 'equalto', 'delivered')|list|length }}</div>
+        <div class="stat-label">Доставлено</div>
+    </div>
+</div>
+
+<!-- Filters Panel -->
+<div class="filters-panel">
+    <h3 style="margin-bottom: 20px; color: var(--gray-800); display: flex; align-items: center; gap: 10px;">
+        <i class="fas fa-filter"></i>
+        Фильтры
+    </h3>
+    
+    <form method="GET" id="filtersForm">
+        <div class="filters-grid">
+            <div class="form-group">
+                <label class="form-label">Статус</label>
+                <select name="status" class="form-control">
+                    <option value="">Все статусы</option>
+                    <option value="new" {{ 'selected' if filters.status == 'new' }}>Новый</option>
+                    <option value="in_progress" {{ 'selected' if filters.status == 'in_progress' }}>В работе</option>
+                    <option value="calculated" {{ 'selected' if filters.status == 'calculated' }}>Рассчитана доставка</option>
+                    <option value="in_transit" {{ 'selected' if filters.status == 'in_transit' }}>В пути</option>
+                    <option value="delivered" {{ 'selected' if filters.status == 'delivered' }}>Доставлено</option>
+                    <option value="cancelled" {{ 'selected' if filters.status == 'cancelled' }}>Отменено</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Менеджер</label>
+                <select name="manager" class="form-control">
+                    <option value="">Все менеджеры</option>
+                    {% for manager in managers %}
+                    <option value="{{ manager }}" {{ 'selected' if filters.manager_email == manager }}>{{ manager }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Дата от</label>
+                <input type="date" name="date_from" class="form-control" value="{{ filters.date_from or '' }}">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Дата до</label>
+                <input type="date" name="date_to" class="form-control" value="{{ filters.date_to or '' }}">
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 15px; margin-top: 15px;">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+                Применить фильтры
+            </button>
+            <a href="{{ url_for('orders_page') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i>
+                Сбросить
+            </a>
+            <button type="button" class="btn btn-success" onclick="showNewOrderModal()">
+                <i class="fas fa-plus"></i>
+                Новая заявка
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Orders Table -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="fas fa-list"></i>
+            Список заявок ({{ orders|length }})
+        </h3>
+    </div>
+    <div class="card-body" style="padding: 0;">
+        {% if orders %}
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Дата</th>
+                        <th>Клиент</th>
+                        <th>Сумма заказа</th>
+                        <th>Статус</th>
+                        <th>Менеджер</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr class="order-row" onclick="toggleOrderDetails({{ order.id }})">
+                        <td>
+                            <strong style="color: var(--primary-color);">#{{ order.id }}</strong>
+                        </td>
+                        <td>
+                            <div>{{ order.created_at.strftime('%d.%m.%Y') if order.created_at else '-' }}</div>
+                            <small style="color: var(--gray-500);">{{ order.created_at.strftime('%H:%M') if order.created_at else '' }}</small>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="width: 32px; height: 32px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;">
+                                    {{ (order.first_name or order.username or order.telegram_contact or 'U')[0].upper() }}
+                                </div>
+                                <div>
+                                    <div style="font-weight: 500;">{{ order.first_name or order.username or 'Неизвестно' }}</div>
+                                    <small style="color: var(--gray-500);">{{ order.telegram_contact or order.email or '-' }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>{{ order.order_amount or 'Не указано' }}</strong>
+                            {% if order.product_cost_usd %}
+                            <br><small style="color: var(--gray-500);">${{ "%.2f"|format(order.product_cost_usd) }}</small>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="status-badge status-{{ order.status or 'new' }}">
+                                {% if order.status == 'new' %}Новый
+                                {% elif order.status == 'in_progress' %}В работе
+                                {% elif order.status == 'calculated' %}Рассчитана доставка
+                                {% elif order.status == 'in_transit' %}В пути
+                                {% elif order.status == 'delivered' %}Доставлено
+                                {% elif order.status == 'cancelled' %}Отменено
+                                {% else %}Новый{% endif %}
+                            </span>
+                        </td>
+                        <td>
+                            {% if order.manager_email %}
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <div style="width: 24px; height: 24px; background: var(--success-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">
+                                        {{ order.manager_email[0].upper() }}
+                                    </div>
+                                    <span style="font-size: 0.9rem;">{{ order.manager_email.split('@')[0] }}</span>
+                                </div>
+                            {% else %}
+                                <span style="color: var(--gray-500); font-style: italic;">Не назначен</span>
+                            {% endif %}
+                        </td>
+                        <td onclick="event.stopPropagation();">
+                            <div class="action-buttons">
+                                <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;" onclick="editOrderStatus({{ order.id }}, '{{ order.status or 'new' }}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                {% if not order.manager_email or order.manager_email == session.user_email %}
+                                <button class="btn btn-success" style="padding: 5px 10px; font-size: 0.8rem;" onclick="takeOrder({{ order.id }})">
+                                    <i class="fas fa-hand-paper"></i>
+                                </button>
+                                {% endif %}
+                                <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.8rem;" onclick="viewOrderHistory({{ order.id }})">
+                                    <i class="fas fa-history"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="order-details" id="details-{{ order.id }}">
+                        <td colspan="7">
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">Email</div>
+                                    <div class="detail-value">{{ order.email or '-' }}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Telegram</div>
+                                    <div class="detail-value">{{ order.telegram_contact or '-' }}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Компания</div>
+                                    <div class="detail-value">{{ order.company or 'Не указано' }}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Промокод</div>
+                                    <div class="detail-value">{{ order.promo_code or 'Не указан' }}</div>
+                                </div>
+                                {% if order.supplier_link %}
+                                <div class="detail-item" style="grid-column: 1 / -1;">
+                                    <div class="detail-label">Ссылка на товар</div>
+                                    <div class="detail-value">
+                                        <a href="{{ order.supplier_link }}" target="_blank" style="color: var(--primary-color); text-decoration: none;">
+                                            {{ order.supplier_link[:100] }}{% if order.supplier_link|length > 100 %}...{% endif %}
+                                            <i class="fas fa-external-link-alt" style="margin-left: 5px; font-size: 0.8rem;"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if order.additional_notes %}
+                                <div class="detail-item" style="grid-column: 1 / -1;">
+                                    <div class="detail-label">Дополнительные заметки</div>
+                                    <div class="detail-value">{{ order.additional_notes }}</div>
+                                </div>
+                                {% endif %}
+                                {% if order.category %}
+                                <div class="detail-item">
+                                    <div class="detail-label">Категория товара</div>
+                                    <div class="detail-value">{{ order.category }}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Вес</div>
+                                    <div class="detail-value">{{ "%.2f"|format(order.total_weight) }} кг</div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div style="text-align: center; padding: 60px; color: var(--gray-500);">
+            <i class="fas fa-inbox" style="font-size: 4rem; margin-bottom: 20px; opacity: 0.3;"></i>
+            <h3 style="margin-bottom: 10px;">Заявки не найдены</h3>
+            <p>Попробуйте изменить фильтры или создайте новую заявку</p>
+            <button class="btn btn-primary" style="margin-top: 20px;" onclick="showNewOrderModal()">
+                <i class="fas fa-plus"></i>
+                Создать заявку
+            </button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Export Button -->
+<button class="export-button" onclick="exportOrders()" title="Экспорт в Excel">
+    <i class="fas fa-download"></i>
+</button>
+
+<!-- Status Change Modal -->
+<div class="modal" id="statusModal">
+    <div class="modal-content">
+        <h3 style="margin-bottom: 20px; color: var(--gray-800);">
+            <i class="fas fa-edit"></i>
+            Изменить статус заявки
+        </h3>
+        
+        <form id="statusForm">
+            <input type="hidden" id="orderId" value="">
+            
+            <div class="form-group">
+                <label class="form-label">Новый статус</label>
+                <select id="newStatus" class="select-status">
+                    <option value="new">Новый</option>
+                    <option value="in_progress">В работе</option>
+                    <option value="calculated">Рассчитана доставка</option>
+                    <option value="in_transit">В пути</option>
+                    <option value="delivered">Доставлено</option>
+                    <option value="cancelled">Отменено</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Комментарий (необязательно)</label>
+                <textarea id="statusNotes" class="form-control" rows="3" placeholder="Введите комментарий к изменению статуса..."></textarea>
+            </div>
+            
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 20px;">
+                <button type="button" class="btn btn-secondary" onclick="closeStatusModal()">
+                    Отмена
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    Сохранить
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- New Order Modal -->
+<div class="modal" id="newOrderModal">
+    <div class="modal-content" style="max-width: 600px;">
+        <h3 style="margin-bottom: 20px; color: var(--gray-800);">
+            <i class="fas fa-plus"></i>
+            Создать новую заявку
+        </h3>
+        
+        <form id="newOrderForm">
+            <div class="detail-grid">
+                <div class="form-group">
+                    <label class="form-label">Email клиента</label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Telegram контакт</label>
+                    <input type="text" class="form-control" name="telegram_contact" placeholder="@username или https://t.me/username" required>
+                </div>
+                
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label class="form-label">Ссылка на товар</label>
+                    <input type="url" class="form-control" name="supplier_link" placeholder="https://...">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Сумма заказа</label>
+                    <input type="text" class="form-control" name="order_amount" placeholder="например: 5000-10000 юаней">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Промокод</label>
+                    <input type="text" class="form-control" name="promo_code">
+                </div>
+                
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label class="form-label">Дополнительные заметки</label>
+                    <textarea class="form-control" name="additional_notes" rows="3"></textarea>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 20px;">
+                <button type="button" class="btn btn-secondary" onclick="closeNewOrderModal()">
+                    Отмена
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    Создать заявку
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function toggleOrderDetails(orderId) {
+        const details = document.getElementById(`details-${orderId}`);
+        details.classList.toggle('show');
+    }
+
+    function editOrderStatus(orderId, currentStatus) {
+        document.getElementById('orderId').value = orderId;
+        document.getElementById('newStatus').value = currentStatus;
+        document.getElementById('statusNotes').value = '';
+        document.getElementById('statusModal').classList.add('show');
+    }
+
+    function closeStatusModal() {
+        document.getElementById('statusModal').classList.remove('show');
+    }
+
+    function showNewOrderModal() {
+        document.getElementById('newOrderModal').classList.add('show');
+    }
+
+    function closeNewOrderModal() {
+        document.getElementById('newOrderModal').classList.remove('show');
+    }
+
+    function takeOrder(orderId) {
+        if (confirm('Взять эту заявку в работу?')) {
+            updateOrderStatus(orderId, 'in_progress', 'Заявка взята в работу');
+        }
+    }
+
+    function viewOrderHistory(orderId) {
+        // Здесь можно реализовать просмотр истории изменений
+        alert('Функция просмотра истории будет реализована');
+    }
+
+    function exportOrders() {
+        window.location.href = '/api/export/orders';
+    }
+
+    // Обработка формы изменения статуса
+    document.getElementById('statusForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const orderId = document.getElementById('orderId').value;
+        const newStatus = document.getElementById('newStatus').value;
+        const notes = document.getElementById('statusNotes').value;
+        
+        updateOrderStatus(orderId, newStatus, notes);
+    });
+
+    // Обработка формы новой заявки
+    document.getElementById('newOrderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+        
+        // Добавляем обязательные поля
+        data.terms_accepted = true;
+        data.telegram_id = 'manager_created';
+        data.username = 'manager';
+        
+        fetch('/submit_purchase_request', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Заявка успешно создана!');
+                closeNewOrderModal();
+                location.reload();
+            } else {
+                alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Ошибка при создании заявки');
+        });
+    });
+
+    function updateOrderStatus(orderId, status, notes) {
+        fetch(`/api/orders/${orderId}/status`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                status: status,
+                notes: notes
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                closeStatusModal();
+                location.reload();
+            } else {
+                alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Ошибка при обновлении статуса');
+        });
+    }
+
+    // Закрытие модальных окон по клику вне их
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal')) {
+            e.target.classList.remove('show');
+        }
+    });
+
+    // Автообновление каждые 60 секунд
+    setInterval(() => {
+        // Проверяем, есть ли открытые модальные окна
+        const openModals = document.querySelectorAll('.modal.show');
+        if (openModals.length === 0) {
+            location.reload();
+        }
+    }, 60000);
+</script>
+{% endblock %}

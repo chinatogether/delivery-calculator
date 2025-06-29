@@ -1,0 +1,384 @@
+{% extends "base.html" %}
+
+{% block title %}Главная панель - China Together{% endblock %}
+{% block page_title %}Главная панель{% endblock %}
+
+{% block content %}
+<!-- Stats Grid -->
+<div class="stats-grid">
+    <div class="stat-card primary">
+        <div class="stat-icon" style="color: var(--primary-color);">
+            <i class="fas fa-calculator"></i>
+        </div>
+        <div class="stat-number">{{ analytics.total_calculations or 0 }}</div>
+        <div class="stat-label">Всего расчетов</div>
+    </div>
+    
+    <div class="stat-card success">
+        <div class="stat-icon" style="color: var(--success-color);">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="stat-number">{{ analytics.today_calculations or 0 }}</div>
+        <div class="stat-label">Расчетов сегодня</div>
+    </div>
+    
+    <div class="stat-card warning">
+        <div class="stat-icon" style="color: var(--warning-color);">
+            <i class="fas fa-weight-hanging"></i>
+        </div>
+        <div class="stat-number">{{ "%.1f"|format(analytics.avg_weight or 0) }} кг</div>
+        <div class="stat-label">Средний вес груза</div>
+    </div>
+    
+    <div class="stat-card info">
+        <div class="stat-icon" style="color: var(--accent-color);">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-number">{{ analytics.active_users or 0 }}</div>
+        <div class="stat-label">Активных пользователей</div>
+    </div>
+    
+    <div class="stat-card danger">
+        <div class="stat-icon" style="color: var(--danger-color);">
+            <i class="fas fa-box"></i>
+        </div>
+        <div class="stat-number">{{ analytics.popular_category or "Нет данных" }}</div>
+        <div class="stat-label">Популярная категория</div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="fas fa-bolt"></i>
+            Быстрые действия
+        </h3>
+    </div>
+    <div class="card-body">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+            <a href="{{ url_for('orders_page') }}" class="btn btn-primary">
+                <i class="fas fa-clipboard-list"></i>
+                Управление заявками
+            </a>
+            <a href="{{ url_for('users_page') }}" class="btn btn-success">
+                <i class="fas fa-users"></i>
+                Пользователи
+            </a>
+            <a href="#" class="btn btn-warning" onclick="openCalculator()">
+                <i class="fas fa-calculator"></i>
+                Новый расчет
+            </a>
+            {% if session.user_role == 'director' %}
+            <a href="{{ url_for('exchange_rate_page') }}" class="btn btn-secondary">
+                <i class="fas fa-exchange-alt"></i>
+                Курс валют
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Conversion Funnel -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="fas fa-filter"></i>
+            Воронка пользователей
+        </h3>
+    </div>
+    <div class="card-body">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px;">
+            <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border-radius: 12px; position: relative;">
+                <div style="font-size: 2rem; font-weight: bold; margin-bottom: 8px;">{{ funnel_data.visits or 0 }}</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">Посещений</div>
+            </div>
+            
+            <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, var(--accent-color), var(--primary-color)); color: white; border-radius: 12px; position: relative;">
+                <div style="font-size: 2rem; font-weight: bold; margin-bottom: 8px;">{{ funnel_data.started or 0 }}</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">Начали расчет</div>
+                <div style="font-size: 0.75rem; margin-top: 5px; background: rgba(255, 255, 255, 0.2); padding: 3px 8px; border-radius: 12px; display: inline-block;">
+                    {{ "%.1f"|format(funnel_data.conversion_started or 0) }}%
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, var(--success-color), var(--accent-color)); color: white; border-radius: 12px; position: relative;">
+                <div style="font-size: 2rem; font-weight: bold; margin-bottom: 8px;">{{ funnel_data.completed or 0 }}</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">Завершили расчет</div>
+                <div style="font-size: 0.75rem; margin-top: 5px; background: rgba(255, 255, 255, 0.2); padding: 3px 8px; border-radius: 12px; display: inline-block;">
+                    {{ "%.1f"|format(funnel_data.conversion_completed or 0) }}%
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, var(--warning-color), var(--success-color)); color: white; border-radius: 12px; position: relative;">
+                <div style="font-size: 2rem; font-weight: bold; margin-bottom: 8px;">{{ funnel_data.orders or 0 }}</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">Заявок создано</div>
+                <div style="font-size: 0.75rem; margin-top: 5px; background: rgba(255, 255, 255, 0.2); padding: 3px 8px; border-radius: 12px; display: inline-block;">
+                    {{ "%.1f"|format(funnel_data.conversion_orders or 0) }}%
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Section -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 30px; margin-bottom: 30px;">
+    <!-- Calculations by Day Chart -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-chart-line"></i>
+                Расчеты по дням (последние 30 дней)
+            </h3>
+        </div>
+        <div class="card-body">
+            <canvas id="calculationsByDayChart" style="max-height: 300px;"></canvas>
+        </div>
+    </div>
+
+    <!-- Orders by Status Chart -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-chart-pie"></i>
+                Заявки по статусам
+            </h3>
+        </div>
+        <div class="card-body">
+            <canvas id="ordersByStatusChart" style="max-height: 300px;"></canvas>
+        </div>
+    </div>
+</div>
+
+{% if session.user_role == 'director' %}
+<!-- Manager Performance (Director Only) -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="fas fa-user-tie"></i>
+            Производительность менеджеров
+        </h3>
+    </div>
+    <div class="card-body">
+        {% if manager_stats %}
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Менеджер</th>
+                        <th>Всего заявок</th>
+                        <th>Завершено</th>
+                        <th>Процент завершения</th>
+                        <th>Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for manager in manager_stats %}
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="width: 32px; height: 32px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;">
+                                    {{ manager.manager_email[0].upper() }}
+                                </div>
+                                {{ manager.manager_email }}
+                            </div>
+                        </td>
+                        <td>
+                            <span style="font-weight: 600;">{{ manager.orders_count }}</span>
+                        </td>
+                        <td>
+                            <span style="color: var(--success-color); font-weight: 600;">{{ manager.completed_count }}</span>
+                        </td>
+                        <td>
+                            {% set completion_rate = (manager.completed_count / manager.orders_count * 100) if manager.orders_count > 0 else 0 %}
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="flex: 1; background: var(--gray-200); height: 8px; border-radius: 4px; overflow: hidden;">
+                                    <div style="height: 100%; background: var(--success-color); width: {{ completion_rate }}%; transition: width 0.3s ease;"></div>
+                                </div>
+                                <span style="font-size: 0.9rem; font-weight: 600;">{{ "%.1f"|format(completion_rate) }}%</span>
+                            </div>
+                        </td>
+                        <td>
+                            {% if completion_rate >= 80 %}
+                                <span style="background: var(--success-color); color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem;">Отлично</span>
+                            {% elif completion_rate >= 60 %}
+                                <span style="background: var(--warning-color); color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem;">Хорошо</span>
+                            {% else %}
+                                <span style="background: var(--danger-color); color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem;">Требует внимания</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div style="text-align: center; padding: 40px; color: var(--gray-500);">
+            <i class="fas fa-chart-bar" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
+            <p>Пока нет данных о работе менеджеров</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Recent Activity -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="fas fa-clock"></i>
+            Последняя активность
+        </h3>
+    </div>
+    <div class="card-body">
+        <div id="recentActivity">
+            <div style="text-align: center; padding: 20px; color: var(--gray-500);">
+                <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem;"></i>
+                <p>Загрузка данных...</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // График расчетов по дням
+    const ctx1 = document.getElementById('calculationsByDayChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: [
+                {% for calc in calculations_by_day %}
+                    "{{ calc.date.strftime('%d.%m') }}",
+                {% endfor %}
+            ],
+            datasets: [{
+                label: 'Количество расчетов',
+                data: [
+                    {% for calc in calculations_by_day %}
+                        {{ calc.count }},
+                    {% endfor %}
+                ],
+                backgroundColor: 'rgba(26, 54, 93, 0.1)',
+                borderColor: 'rgba(26, 54, 93, 1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: 'rgba(26, 54, 93, 1)',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2,
+                pointRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(0,0,0,0.1)' },
+                    ticks: { color: '#4a5568' }
+                },
+                x: {
+                    grid: { color: 'rgba(0,0,0,0.1)' },
+                    ticks: { color: '#4a5568' }
+                }
+            }
+        }
+    });
+
+    // График заявок по статусам
+    const ctx2 = document.getElementById('ordersByStatusChart').getContext('2d');
+    const statusData = [
+        {% for status in orders_by_status %}
+            { label: "{{ status.status or 'Без статуса' }}", value: {{ status.count }} },
+        {% endfor %}
+    ];
+
+    new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: statusData.map(item => item.label),
+            datasets: [{
+                data: statusData.map(item => item.value),
+                backgroundColor: [
+                    'rgba(26, 54, 93, 0.8)',
+                    'rgba(44, 90, 160, 0.8)',
+                    'rgba(49, 130, 206, 0.8)',
+                    'rgba(56, 161, 105, 0.8)',
+                    'rgba(214, 158, 46, 0.8)',
+                    'rgba(229, 62, 62, 0.8)'
+                ],
+                borderWidth: 2,
+                borderColor: '#ffffff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        usePointStyle: true,
+                        color: '#4a5568'
+                    }
+                }
+            }
+        }
+    });
+
+    // Функция открытия калькулятора
+    function openCalculator() {
+        // Открываем калькулятор в новой вкладке
+        window.open('/calculate', '_blank');
+    }
+
+    // Загрузка последней активности
+    async function loadRecentActivity() {
+        try {
+            const response = await fetch('/api/recent-activity');
+            const data = await response.json();
+            
+            const activityHtml = data.activities.map(activity => `
+                <div style="padding: 15px; border-left: 3px solid var(--primary-color); margin-bottom: 10px; background: var(--gray-100); border-radius: 0 8px 8px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>${activity.description}</strong>
+                            <div style="color: var(--gray-500); font-size: 0.9rem; margin-top: 5px;">
+                                ${activity.manager || 'Система'} • ${activity.time}
+                            </div>
+                        </div>
+                        <i class="fas fa-${activity.icon}" style="color: var(--primary-color); font-size: 1.2rem;"></i>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('recentActivity').innerHTML = activityHtml || `
+                <div style="text-align: center; padding: 20px; color: var(--gray-500);">
+                    <i class="fas fa-inbox" style="font-size: 2rem; margin-bottom: 10px; opacity: 0.5;"></i>
+                    <p>Пока нет активности</p>
+                </div>
+            `;
+        } catch (error) {
+            document.getElementById('recentActivity').innerHTML = `
+                <div style="text-align: center; padding: 20px; color: var(--danger-color);">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 1.5rem; margin-bottom: 10px;"></i>
+                    <p>Ошибка загрузки данных</p>
+                </div>
+            `;
+        }
+    }
+
+    // Загружаем активность при загрузке страницы
+    document.addEventListener('DOMContentLoaded', loadRecentActivity);
+
+    // Автообновление каждые 30 секунд
+    setInterval(loadRecentActivity, 30000);
+</script>
+{% endblock %}
