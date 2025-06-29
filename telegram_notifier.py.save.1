@@ -10,8 +10,10 @@ from datetime import datetime, timedelta
 import pytz
 import psycopg2
 from decimal import Decimal
-import requests
 from functools import wraps
+import threading
+import queue
+import time
 
 # Настройка логирования
 logging.basicConfig(
@@ -68,8 +70,8 @@ class TelegramNotifier:
     
     def __init__(self):
         self.token = os.getenv('API_ZAYAVKI_TOKEN')
-        self.chat_id = os.getenv('TELEGRAM_NOTIFICATIONS_CHAT_ID')  # ID группы/канала
-        self.admin_chat_ids = os.getenv('TELEGRAM_ADMIN_CHAT_IDS', '').split(',')  # ID админов
+        self.chat_id = os.getenv('TELEGRAM_NOTIFICATIONS_CHAT_ID')
+        self.admin_chat_ids = os.getenv('TELEGRAM_ADMIN_CHAT_IDS', '').split(',')
         
         if not self.token:
             raise ValueError("API_ZAYAVKI_TOKEN не найден в переменных окружения")
@@ -78,10 +80,132 @@ class TelegramNotifier:
             logger.warning("TELEGRAM_NOTIFICATIONS_CHAT_ID не найден в .env")
         
         self.bot = Bot(token=self.token)
+        
+        # Создаем очередь для сообщений
+        self.message_queue = queue.Queue()
+        self.worker_thread = None
+        self.running = False
+        
+        # Запускаем worker thread
+        self.start_worker()
         logger.info(f"TelegramNotifier инициализирован. Chat ID: {self.chat_id}")
     
+    def start_worker(self):
+        """Запуск worker thread для отправки сообщений"""
+        if self.worker_thread is None or not self.worker_thread.is_alive():
+            self.running = True
+            self.worker_thread = threading.Thread(target=self._message_worker, daemon=True)
+            self.worker_thread.start()
+            logger.info("Message worker thread запущен")
+    
+    def _message_worker(self):
+        """Worker thread для обработки очереди сообщений"""
+        logger.info("Message worker начал работу")
+        
+        while self.running:
+            try:
+                # Получаем сообщение из очереди с таймаутом
+                try:
+                    message_data = self.message_queue.get(timeout=1.0)
+                except queue.Empty:
+                    continue
+                
+                # Создаем новый event loop для этого треда
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                
+                try:
+                    # Отправляем сообщение
+                    loop.run_until_complete(self._send_message_async(message_data))
+                except Exception as e:
+                    logger.error(f"Ошибка отправки сообщения: {e}")
+                finally:
+                    loop.close()
+                    self.message_queue.task_done()
+                    
+            except Exception as e:
+                logger.error(f"Ошибка в message worker: {e}")
+                time.sleep(1)
+        
+        logger.info("Message worker завершил работу")
+    
+    async def _send_message_async(self, message_data):
+        """Асинхронная отправка сообщения"""
+        try:
+            await self.bot.send_message(
+                chat_id=message_data['chat_id'],
+                text=message_data['text'],
+                parse_mode='HTML',
+                disable_web_page_preview=True
+            )
+            logger.info(f"Сообщение отправлено в чат {message_data['chat_id']}")
+            
+        except Exception as e:
+            logger.error(f"Ошибка отправки сообщения в {message_data['chat_id']}: {e}")
+    
+    def send_order_notification_sync(self, order_data):
+        """Синхронная отправка уведомления о заявке через очередь"""
+        try:
+            moscow_time = get_moscow_time()
+            
+            # Форматируем сообщение о новой заявке
+            message = (
+                f"🆕 <b>НОВАЯ ЗАЯВКА НА ВЫКУП</b>\n\n"
+                f"📅 <b>Дата:</b> {moscow_time.strftime('%d.%m.%Y %H:%M')} (МСК)\n"
+                f"🆔 <b>ID заявки:</b> #{order_data.get('request_id', 'N/A')}\n"
+                f"👤 <b>Пользователь:</b> {order_data.get('telegram_contact', 'N/A')}\n"
+                f"💰 <b>Сумма заказа:</b> {order_data.get('order_amount', 'Не указано')}\n"
+                f"📧 <b>Email:</b> {order_data.get('email', 'Не указан')}\n\n"
+            )
+            
+            # Добавляем ссылку на товар если есть
+            if order_data.get('supplier_link'):
+                message += f"🔗 <b>Ссылка на товар:</b>\n{order_data['supplier_link'][:100]}{'...' if len(order_data['supplier_link']) > 100 else ''}\n\n"
+            
+            # Добавляем промокод если есть
+            if order_data.get('promo_code'):
+                message += f"🎫 <b>Промокод:</b> {order_data['promo_code']}\n\n"
+            
+            # Добавляем комментарии если есть
+            if order_data.get('additional_notes'):
+                notes = order_data['additional_notes'][:200]
+                if len(order_data['additional_notes']) > 200:
+                    notes += "..."
+                message += f"💬 <b>Комментарии:</b>\n{notes}\n\n"
+            
+            # Добавляем информацию о расчете если есть
+            if order_data.get('calculation_id'):
+                message += f"📊 <b>Связанный расчет:</b> #{order_data['calculation_id']}\n\n"
+            
+            message += f"⏰ <b>Требует ответа в рабочее время</b>\n"
+            message += f"📞 <b>График:</b> ПН-ПТ 10:00-18:00 МСК"
+            
+            # Добавляем в очередь для отправки в группу
+            if self.chat_id:
+                self.message_queue.put({
+                    'chat_id': self.chat_id,
+                    'text': message
+                })
+                logger.info(f"Сообщение для группы {self.chat_id} добавлено в очередь")
+            
+            # Добавляем в очередь для отправки админам
+            for admin_id in self.admin_chat_ids:
+                if admin_id.strip():
+                    self.message_queue.put({
+                        'chat_id': admin_id.strip(),
+                        'text': message
+                    })
+                    logger.info(f"Сообщение для админа {admin_id.strip()} добавлено в очередь")
+            
+            logger.info(f"Уведомление о заявке #{order_data.get('request_id')} добавлено в очередь отправки")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Ошибка при подготовке уведомления о заявке: {e}")
+            return False
+    
     async def send_new_order_notification(self, order_data):
-        """Отправка уведомления о новой заявке"""
+        """Асинхронная отправка уведомления о новой заявке"""
         try:
             moscow_time = get_moscow_time()
             
@@ -145,7 +269,7 @@ class TelegramNotifier:
         except Exception as e:
             logger.error(f"Ошибка при отправке уведомления о заявке: {e}")
             return False
-    
+
     async def send_exchange_rate_update(self, rate_data):
         """Отправка уведомления об обновлении курса"""
         try:
@@ -255,28 +379,27 @@ async def send_rate_notification_async(rate_data):
 
 # Синхронные обертки для использования в Flask
 def send_order_notification(order_data):
-    """Синхронная отправка уведомления о заявке"""
+    """Синхронная отправка уведомления о заявке через очередь"""
     try:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        return loop.run_until_complete(send_order_notification_async(order_data))
+        notifier = get_notifier()
+        return notifier.send_order_notification_sync(order_data)
     except Exception as e:
         logger.error(f"Ошибка при синхронной отправке уведомления о заявке: {e}")
         return False
-    finally:
-        loop.close()
 
 def send_rate_notification(rate_data):
     """Синхронная отправка уведомления о курсе"""
     try:
+        # Для курса валют оставляем старый способ, так как он вызывается из async контекста
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        return loop.run_until_complete(send_rate_notification_async(rate_data))
+        try:
+            return loop.run_until_complete(send_rate_notification_async(rate_data))
+        finally:
+            loop.close()
     except Exception as e:
         logger.error(f"Ошибка при синхронной отправке уведомления о курсе: {e}")
         return False
-    finally:
-        loop.close()
 
 # Бот для управления курсом валют
 class ExchangeRateBot:
@@ -484,6 +607,7 @@ class ExchangeRateBot:
         try:
             # Устанавливаем команды бота
             commands = [
+                BotCommand(command="start", description="🚀 Запуск бота"),
                 BotCommand(command="rate", description="💱 Текущий курс CNY/USD"),
                 BotCommand(command="setrate", description="📝 Установить новый курс"),
                 BotCommand(command="history", description="📊 История изменений курса"),
