@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -142,19 +141,56 @@
         .checkbox-container {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             margin: 16px 0;
-            padding: 12px;
+            padding: 16px;
             background: rgba(231, 76, 60, 0.1);
             border-radius: 8px;
             border: 1px solid rgba(231, 76, 60, 0.2);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .checkbox-container:hover {
+            background: rgba(231, 76, 60, 0.15);
+        }
+        
+        .custom-checkbox {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--primary-color);
+            border-radius: 4px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+        
+        .custom-checkbox.checked {
+            background: var(--success-color);
+            border-color: var(--success-color);
+        }
+        
+        .custom-checkbox::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .custom-checkbox.checked::after {
+            opacity: 1;
         }
         
         .checkbox-container input[type="checkbox"] {
-            width: auto;
-            margin: 0;
-            cursor: pointer;
-            transform: scale(1.2);
+            display: none;
         }
         
         .checkbox-container label {
@@ -162,6 +198,7 @@
             cursor: pointer;
             font-size: 0.9rem;
             user-select: none;
+            flex: 1;
         }
         
         .volume-section, .dimensions-section {
@@ -178,6 +215,15 @@
         
         .volume-section.hidden {
             display: none;
+        }
+        
+        .weight-per-box-section {
+            display: none;
+            transition: all 0.3s ease;
+        }
+        
+        .weight-per-box-section.active {
+            display: block;
         }
         
         @media (max-width: 480px) {
@@ -386,47 +432,65 @@
                             </select>
                             <div id="categoryError" class="error-message">Выберите категорию</div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="totalWeight">Общий вес груза (кг):</label>
-                            <div class="input-group">
-                                <input type="number" id="totalWeight" name="totalWeight" min="0.1" step="0.01" required placeholder="5.5">
-                                <span class="input-icon">⚖️</span>
-                            </div>
-                            <div id="totalWeightError" class="error-message">Введите общий вес</div>
-                        </div>
 
                         <div class="form-group">
-                            <label for="cost">Стоимость товара ($):</label>
+                            <label for="cost">Стоимость товара (¥):</label>
                             <div class="input-group">
-                                <input type="number" id="cost" name="cost" min="0.01" step="0.01" required placeholder="100">
-                                <span class="input-icon">💰</span>
+                                <input type="number" id="cost" name="cost" min="0.01" step="0.01" required placeholder="700">
+                                <span class="input-icon">(¥)</span>
                             </div>
                             <div id="costError" class="error-message">Введите стоимость</div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="form-section volume-section" id="volumeSection">
+
                     <h2 class="section-title">
                         <span>📐</span>
-                        <span>Объем груза</span>
+                        <span>Параметры груза</span>
                     </h2>
+                <div class="form-section volume-section" id="volumeSection">
                     <div class="form-grid">
                         <div class="form-group full-width">
-                            <label for="volume">Объем (м³):</label>
+                            <label for="volume">📏Объем (м³):</label>
                             <div class="input-group">
                                 <input type="number" id="volume" name="volume" min="0.001" step="0.001" required placeholder="0.009">
-                                <span class="input-icon">📏</span>
+                                <span class="input-icon"></span>
                             </div>
                             <div id="volumeError" class="error-message">Введите объем</div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                            <label for="totalWeight">⚖️Вес груза (кг):</label>
+                            <div class="input-group">
+                                <input type="number" id="totalWeight" name="totalWeight" min="0.1" step="0.01" required placeholder="5.5">
+                                <span class="input-icon"></span>
+                            </div>
+                            <div id="totalWeightError" class="error-message">Введите общий вес</div>
+                    </div>
                 </div>
 
-                <div class="checkbox-container">
+                <div class="checkbox-container" onclick="toggleBoxDimensions()">
+                    <div class="custom-checkbox" id="customCheckbox"></div>
                     <input type="checkbox" id="useBoxDimensions" name="useBoxDimensions">
                     <label for="useBoxDimensions">Не знаете объем? Введите параметры коробок</label>
+                </div>
+
+                <div class="form-section weight-per-box-section" id="weightPerBoxSection">
+                    <h2 class="section-title">
+                        <span>⚖️</span>
+                        <span>Вес единицы товара (коробки)</span>
+                    </h2>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="weightPerBox">Вес одной единицы товара (коробки) (кг):</label>
+                            <div class="input-group">
+                                <input type="number" id="weightPerBox" name="weightPerBox" min="0.1" step="0.01" placeholder="2.5">
+                                <span class="input-icon"></span>
+                            </div>
+                            <div id="weightPerBoxError" class="error-message">Введите вес одной коробки</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-section dimensions-section" id="dimensionsSection">
@@ -436,10 +500,10 @@
                     </h2>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="quantity">Количество коробок:</label>
+                            <label for="quantity">Количество (шт):</label>
                             <div class="input-group">
                                 <input type="number" id="quantity" name="quantity" min="1" placeholder="1" value="1">
-                                <span class="input-icon">📦</span>
+                                <span class="input-icon"></span>
                             </div>
                             <div id="quantityError" class="error-message">Введите количество</div>
                         </div>
@@ -501,41 +565,81 @@
             telegramUsername = urlParams.get('username') || 'test_username';
         }
         
+        // Функция переключения чекбокса
+        function toggleBoxDimensions() {
+            const checkbox = document.getElementById('useBoxDimensions');
+            const customCheckbox = document.getElementById('customCheckbox');
+            const volumeSection = document.getElementById('volumeSection');
+            const dimensionsSection = document.getElementById('dimensionsSection');
+            const weightPerBoxSection = document.getElementById('weightPerBoxSection');
+            const volumeInput = document.getElementById('volume');
+            const totalWeightInput = document.getElementById('totalWeight');
+            const weightPerBoxInput = document.getElementById('weightPerBox');
+            const quantityInput = document.getElementById('quantity');
+            
+            // Переключаем состояние чекбокса
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                customCheckbox.classList.add('checked');
+                volumeSection.classList.add('hidden');
+                dimensionsSection.classList.add('active');
+                weightPerBoxSection.classList.add('active');
+                volumeInput.required = false;
+                totalWeightInput.required = false;
+                
+                // Делаем поля размеров обязательными
+                document.getElementById('quantity').required = true;
+                document.getElementById('length').required = true;
+                document.getElementById('width').required = true;
+                document.getElementById('height').required = true;
+                document.getElementById('weightPerBox').required = true;
+            } else {
+                customCheckbox.classList.remove('checked');
+                volumeSection.classList.remove('hidden');
+                dimensionsSection.classList.remove('active');
+                weightPerBoxSection.classList.remove('active');
+                volumeInput.required = true;
+                totalWeightInput.required = true;
+                
+                // Убираем обязательность полей размеров
+                document.getElementById('quantity').required = false;
+                document.getElementById('length').required = false;
+                document.getElementById('width').required = false;
+                document.getElementById('height').required = false;
+                document.getElementById('weightPerBox').required = false;
+            }
+            
+            // Вибрация при нажатии
+            if (tg && tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('light');
+            }
+        }
+        
+        // Автоматический расчет общего веса
+        function calculateTotalWeight() {
+            const useBoxDimensions = document.getElementById('useBoxDimensions').checked;
+            if (useBoxDimensions) {
+                const quantity = parseFloat(document.getElementById('quantity').value) || 0;
+                const weightPerBox = parseFloat(document.getElementById('weightPerBox').value) || 0;
+                const totalWeight = quantity * weightPerBox;
+                
+                if (totalWeight > 0) {
+                    document.getElementById('totalWeight').value = totalWeight.toFixed(2);
+                }
+            }
+        }
+        
         // Обработка переключения между вводом объема и размеров коробок
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('deliveryForm');
             const loadingElement = document.getElementById('loading');
             const calculateBtn = document.getElementById('calculateBtn');
             const successMessage = document.getElementById('successMessage');
-            const useBoxDimensions = document.getElementById('useBoxDimensions');
-            const volumeSection = document.getElementById('volumeSection');
-            const dimensionsSection = document.getElementById('dimensionsSection');
-            const volumeInput = document.getElementById('volume');
             
-            // Переключение между режимами ввода
-            useBoxDimensions.addEventListener('change', function() {
-                if (this.checked) {
-                    volumeSection.classList.add('hidden');
-                    dimensionsSection.classList.add('active');
-                    volumeInput.required = false;
-                    
-                    // Делаем поля размеров обязательными
-                    document.getElementById('quantity').required = true;
-                    document.getElementById('length').required = true;
-                    document.getElementById('width').required = true;
-                    document.getElementById('height').required = true;
-                } else {
-                    volumeSection.classList.remove('hidden');
-                    dimensionsSection.classList.remove('active');
-                    volumeInput.required = true;
-                    
-                    // Убираем обязательность полей размеров
-                    document.getElementById('quantity').required = false;
-                    document.getElementById('length').required = false;
-                    document.getElementById('width').required = false;
-                    document.getElementById('height').required = false;
-                }
-            });
+            // Добавляем слушатели для автоматического расчета веса
+            document.getElementById('quantity').addEventListener('input', calculateTotalWeight);
+            document.getElementById('weightPerBox').addEventListener('input', calculateTotalWeight);
             
             function validateForm() {
                 let isValid = true;
@@ -544,20 +648,21 @@
                 // Основные поля
                 const fields = [
                     { id: 'category', validator: (val) => val !== '', message: 'Выберите категорию' },
-                    { id: 'totalWeight', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.1, message: 'Минимум 0.1 кг' },
-                    { id: 'cost', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.01, message: 'Минимум $0.01' }
+                    { id: 'cost', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.01, message: 'Минимум ¥0.01' }
                 ];
                 
                 // Добавляем валидацию в зависимости от режима
                 if (useBoxDimensions) {
                     fields.push(
                         { id: 'quantity', validator: (val) => !isNaN(val) && parseInt(val) >= 1, message: 'Минимум 1' },
+                        { id: 'weightPerBox', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.1, message: 'Минимум 0.1 кг' },
                         { id: 'length', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' },
                         { id: 'width', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' },
                         { id: 'height', validator: (val) => !isNaN(val) && parseFloat(val) >= 1, message: 'Минимум 1 см' }
                     );
                 } else {
                     fields.push(
+                        { id: 'totalWeight', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.1, message: 'Минимум 0.1 кг' },
                         { id: 'volume', validator: (val) => !isNaN(val) && parseFloat(val) >= 0.001, message: 'Минимум 0.001 м³' }
                     );
                 }
@@ -605,7 +710,6 @@
                     
                     const formData = {
                         category: encodeURIComponent(document.getElementById('category').value),
-                        totalWeight: encodeURIComponent(parseFloat(document.getElementById('totalWeight').value)),
                         cost: encodeURIComponent(parseFloat(document.getElementById('cost').value)),
                         useBoxDimensions: useBoxDimensions,
                         telegram_id: telegramUserId,
@@ -613,13 +717,19 @@
                     };
                     
                     if (useBoxDimensions) {
-                        // Отправляем параметры коробок
-                        formData.quantity = encodeURIComponent(parseInt(document.getElementById('quantity').value));
+                        // Рассчитываем общий вес автоматически
+                        const quantity = parseInt(document.getElementById('quantity').value);
+                        const weightPerBox = parseFloat(document.getElementById('weightPerBox').value);
+                        const totalWeight = quantity * weightPerBox;
+                        
+                        formData.totalWeight = encodeURIComponent(totalWeight);
+                        formData.quantity = encodeURIComponent(quantity);
+                        formData.weightPerBox = encodeURIComponent(weightPerBox);
                         formData.length = encodeURIComponent(parseFloat(document.getElementById('length').value));
                         formData.width = encodeURIComponent(parseFloat(document.getElementById('width').value));
                         formData.height = encodeURIComponent(parseFloat(document.getElementById('height').value));
                     } else {
-                        // Отправляем объем
+                        formData.totalWeight = encodeURIComponent(parseFloat(document.getElementById('totalWeight').value));
                         formData.volume = encodeURIComponent(parseFloat(document.getElementById('volume').value));
                     }
                     

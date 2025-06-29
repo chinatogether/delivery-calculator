@@ -115,6 +115,20 @@
             color: var(--text-color);
         }
 
+        .currency-info {
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid var(--secondary-color);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .currency-info h3 {
+            color: var(--secondary-color);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
         .comparison-table {
             overflow-x: auto;
             margin-top: 20px;
@@ -287,6 +301,28 @@
                 <span>📋</span>
                 <span>Общая информация</span>
             </h2>
+            
+            <!-- Информация о валютах -->
+            {% if results.generalInformation.get('exchangeRate') %}
+            <div class="currency-info">
+                <h3>💱 Валютная информация</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Стоимость товара (¥)</span>
+                        <span class="info-value">¥{{ "%.2f"|format(results.generalInformation.productCostCNY) }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Стоимость товара ($)</span>
+                        <span class="info-value">${{ "%.2f"|format(results.generalInformation.productCostUSD) }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Курс CNY/USD</span>
+                        <span class="info-value">{{ "%.4f"|format(results.generalInformation.exchangeRate) }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
             <div class="info-grid">
                 <div class="info-item">
                     <span class="info-label">Категория</span>
@@ -296,13 +332,15 @@
                     <span class="info-label">Общий вес</span>
                     <span class="info-value">{{ "%.2f"|format(results.generalInformation.weight) }} кг</span>
                 </div>
+                {% if results.generalInformation.get('weightPerBox') %}
+                <div class="info-item">
+                    <span class="info-label">Вес одной коробки</span>
+                    <span class="info-value">{{ "%.2f"|format(results.generalInformation.weightPerBox) }} кг</span>
+                </div>
+                {% endif %}
                 <div class="info-item">
                     <span class="info-label">Плотность</span>
                     <span class="info-value">{{ "%.2f"|format(results.generalInformation.density) }} кг/м³</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Стоимость товара</span>
-                    <span class="info-value">${{ "%.2f"|format(results.generalInformation.productCost) }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Объем</span>

@@ -1,0 +1,44 @@
+[Unit]
+Description=China Together Delivery Orders Service
+Documentation=https://china-together.ru
+After=network.target postgresql.service
+Wants=postgresql.service
+Requires=network.target
+
+[Service]
+Type=simple
+User=chinatogether
+Group=chinatogether
+WorkingDirectory=/home/chinatogether/xlsx-web
+Environment=PATH=/home/chinatogether/xlsx-web/venv/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PYTHONPATH=/home/chinatogether/xlsx-web
+Environment=FLASK_ENV=production
+Environment=ORDERS_PORT=8062
+ExecStart=/home/chinatogether/xlsx-web/venv/bin/python /home/chinatogether/xlsx-web/order.py
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=mixed
+Restart=always
+RestartSec=10
+TimeoutStopSec=30
+
+# Безопасность
+NoNewPrivileges=yes
+ProtectHome=no
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+
+# Ресурсы
+LimitNOFILE=65536
+LimitNPROC=4096
+MemoryMax=1G
+CPUQuota=200%
+
+# Логирование
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=china-together-orders
+
+[Install]
+WantedBy=multi-user.target

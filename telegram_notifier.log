@@ -1,0 +1,265 @@
+2025-06-27 16:13:37,427 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-27 16:13:37,778 - __main__ - INFO - === Запуск China Together Delivery Calculator - Orders Module v2.3 ===
+2025-06-27 16:13:37,818 - __main__ - INFO - Таблицы для заявок успешно созданы/проверены
+2025-06-27 16:13:37,819 - __main__ - INFO - ✅ Таблицы заявок готовы
+2025-06-27 16:13:37,822 - __main__ - INFO - ✅ Маршруты заявок зарегистрированы
+2025-06-27 16:13:37,826 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8062
+ * Running on http://10.128.0.11:8062
+2025-06-27 16:13:37,826 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-27 16:13:40,096 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-27 16:13:40,097 - aiogram.dispatcher - INFO - Start polling
+2025-06-27 16:13:40,144 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-27 16:13:40,621 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-06-27 16:13:40,622 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-27 16:13:40,622 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-27 16:13:43,078 - __main__ - INFO - === Запуск China Together Delivery Calculator - Orders Module v2.3 ===
+2025-06-27 16:13:43,090 - __main__ - INFO - Таблицы для заявок успешно созданы/проверены
+2025-06-27 16:13:43,090 - __main__ - INFO - ✅ Таблицы заявок готовы
+2025-06-27 16:13:43,097 - __main__ - INFO - ✅ Маршруты заявок зарегистрированы
+2025-06-27 16:13:43,100 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8062
+ * Running on http://10.128.0.11:8062
+2025-06-27 16:13:43,100 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-27 16:13:43,145 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-27 16:13:43,299 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-27 16:13:43,299 - aiogram.dispatcher - INFO - Start polling
+2025-06-27 16:13:43,346 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-27 16:13:54,717 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> page_opened
+2025-06-27 16:13:54,727 - werkzeug - INFO - 127.0.0.1 - - [27/Jun/2025 16:13:54] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-27 16:14:03,375 - __main__ - INFO - Найден существующий пользователь с ID=100
+2025-06-27 16:14:03,421 - __main__ - INFO - Заявка на выкуп создана: ID=28, пользователь=100
+2025-06-27 16:14:03,448 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> purchase_request_submitted
+2025-06-27 16:14:03,448 - __main__ - INFO - Заявка успешно создана с ID=28 для пользователя 100
+2025-06-27 16:14:03,449 - telegram_notifier - WARNING - TELEGRAM_NOTIFICATIONS_CHAT_ID не найден в .env
+2025-06-27 16:14:03,450 - __main__ - INFO - Поток уведомления для заявки #28 запущен
+2025-06-27 16:14:03,451 - werkzeug - INFO - 127.0.0.1 - - [27/Jun/2025 16:14:03] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-27 16:14:03,483 - telegram_notifier - INFO - TelegramNotifier инициализирован. Chat ID: None
+2025-06-27 16:14:03,483 - __main__ - INFO - Уведомление о заявке #28 успешно отправлено в Telegram
+2025-06-27 16:14:40,607 - aiogram.event - INFO - Update id=33789553 is handled. Duration 242 ms by bot id=8024421344
+2025-06-27 16:14:44,960 - aiogram.event - INFO - Update id=33789554 is handled. Duration 82 ms by bot id=8024421344
+2025-06-27 16:14:48,627 - aiogram.event - INFO - Update id=33789555 is handled. Duration 139 ms by bot id=8024421344
+2025-06-27 16:14:51,029 - aiogram.event - INFO - Update id=33789556 is handled. Duration 69 ms by bot id=8024421344
+2025-06-27 16:14:52,623 - aiogram.event - INFO - Update id=33789557 is handled. Duration 91 ms by bot id=8024421344
+2025-06-28 12:59:44,376 - aiogram.event - INFO - Update id=33789558 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-28 13:19:32,095 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> page_opened
+2025-06-28 13:19:32,095 - werkzeug - INFO - 127.0.0.1 - - [28/Jun/2025 13:19:32] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-28 13:19:39,211 - __main__ - INFO - Найден существующий пользователь с ID=100
+2025-06-28 13:19:39,225 - __main__ - INFO - Заявка на выкуп создана: ID=29, пользователь=100
+2025-06-28 13:19:39,235 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> purchase_request_submitted
+2025-06-28 13:19:39,236 - __main__ - INFO - Заявка успешно создана с ID=29 для пользователя 100
+2025-06-28 13:19:39,236 - __main__ - INFO - Уведомление о заявке #29 успешно отправлено в Telegram
+2025-06-28 13:19:39,236 - __main__ - INFO - Поток уведомления для заявки #29 запущен
+2025-06-28 13:19:39,237 - werkzeug - INFO - 127.0.0.1 - - [28/Jun/2025 13:19:39] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-28 13:19:57,566 - aiogram.event - INFO - Update id=33789559 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-28 13:20:01,916 - aiogram.event - INFO - Update id=33789560 is handled. Duration 194 ms by bot id=8024421344
+2025-06-28 13:20:07,481 - aiogram.event - INFO - Update id=33789561 is handled. Duration 94 ms by bot id=8024421344
+2025-06-28 13:20:10,020 - aiogram.event - INFO - Update id=33789562 is handled. Duration 134 ms by bot id=8024421344
+2025-06-28 13:29:53,974 - aiogram.event - INFO - Update id=33789563 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-28 13:31:49,041 - werkzeug - INFO - 178.66.159.13 - - [28/Jun/2025 13:31:49] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-28 13:54:20,037 - __main__ - INFO - === Запуск China Together Delivery Calculator - Orders Module v2.3 ===
+2025-06-28 13:54:20,051 - __main__ - INFO - Таблицы для заявок успешно созданы/проверены
+2025-06-28 13:54:20,051 - __main__ - INFO - ✅ Таблицы заявок готовы
+2025-06-28 13:54:20,055 - __main__ - INFO - ✅ Маршруты заявок зарегистрированы
+2025-06-28 13:54:20,058 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8062
+ * Running on http://10.128.0.11:8062
+2025-06-28 13:54:20,058 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-28 13:55:15,626 - __main__ - INFO - === Запуск China Together Delivery Calculator - Orders Module v2.3 ===
+2025-06-28 13:55:15,683 - __main__ - INFO - Таблицы для заявок успешно созданы/проверены
+2025-06-28 13:55:15,683 - __main__ - INFO - ✅ Таблицы заявок готовы
+2025-06-28 13:55:15,689 - __main__ - INFO - ✅ Маршруты заявок зарегистрированы
+2025-06-28 13:55:15,694 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8062
+ * Running on http://10.128.0.11:8062
+2025-06-28 13:55:15,695 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-28 13:57:16,641 - aiogram.event - INFO - Update id=33789564 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-28 13:57:28,233 - aiogram.event - INFO - Update id=33789565 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-28 13:57:29,727 - aiogram.event - INFO - Update id=33789566 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-28 13:58:19,740 - __main__ - INFO - === Запуск China Together Delivery Calculator - Orders Module v2.3 ===
+2025-06-28 13:58:19,753 - __main__ - INFO - Таблицы для заявок успешно созданы/проверены
+2025-06-28 13:58:19,753 - __main__ - INFO - ✅ Таблицы заявок готовы
+2025-06-28 13:58:19,757 - __main__ - INFO - ✅ Маршруты заявок зарегистрированы
+2025-06-28 13:58:19,760 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8062
+ * Running on http://10.128.0.11:8062
+2025-06-28 13:58:19,761 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-28 14:01:43,537 - __main__ - INFO - === Запуск China Together Delivery Calculator - Orders Module v2.3 ===
+2025-06-28 14:01:43,550 - __main__ - INFO - Таблицы для заявок успешно созданы/проверены
+2025-06-28 14:01:43,550 - __main__ - INFO - ✅ Таблицы заявок готовы
+2025-06-28 14:01:43,555 - __main__ - INFO - ✅ Маршруты заявок зарегистрированы
+2025-06-28 14:01:43,559 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8062
+ * Running on http://10.128.0.11:8062
+2025-06-28 14:01:43,559 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-28 14:03:25,754 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-06-28 14:03:26,362 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-28 14:03:26,388 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-28 14:04:03,729 - __main__ - INFO - === Запуск China Together Delivery Calculator - Orders Module v2.3 ===
+2025-06-28 14:04:03,756 - __main__ - INFO - Таблицы для заявок успешно созданы/проверены
+2025-06-28 14:04:03,757 - __main__ - INFO - ✅ Таблицы заявок готовы
+2025-06-28 14:04:03,760 - __main__ - INFO - ✅ Маршруты заявок зарегистрированы
+2025-06-28 14:04:03,763 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8062
+ * Running on http://10.128.0.11:8062
+2025-06-28 14:04:03,763 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-28 14:05:05,323 - __main__ - INFO - === Запуск China Together Delivery Calculator - Orders Module v2.3 ===
+2025-06-28 14:05:05,333 - __main__ - INFO - Таблицы для заявок успешно созданы/проверены
+2025-06-28 14:05:05,334 - __main__ - INFO - ✅ Таблицы заявок готовы
+2025-06-28 14:05:05,337 - __main__ - INFO - ✅ Маршруты заявок зарегистрированы
+2025-06-28 14:05:05,340 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8062
+ * Running on http://10.128.0.11:8062
+2025-06-28 14:05:05,340 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-28 14:06:39,380 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-28 14:06:42,180 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-28 14:06:42,181 - aiogram.dispatcher - INFO - Start polling
+2025-06-28 14:06:42,229 - aiogram.dispatcher - INFO - Run polling for bot @bottikshprotikbot id=7672836165 - 'Bottelebot'
+2025-06-28 14:06:48,931 - aiogram.event - INFO - Update id=826051416 is handled. Duration 259 ms by bot id=7672836165
+2025-06-28 14:07:03,656 - aiogram.event - INFO - Update id=826051417 is handled. Duration 80 ms by bot id=7672836165
+2025-06-28 14:09:48,149 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-06-28 14:09:48,150 - aiogram.dispatcher - INFO - Polling stopped for bot @bottikshprotikbot id=7672836165 - 'Bottelebot'
+2025-06-28 14:09:48,150 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-29 06:51:02,905 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> page_opened
+2025-06-29 06:51:05,270 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 06:51:05] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-29 06:51:11,562 - __main__ - INFO - Найден существующий пользователь с ID=100
+2025-06-29 06:51:11,659 - __main__ - INFO - Заявка на выкуп создана: ID=30, пользователь=100
+2025-06-29 06:51:11,693 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> purchase_request_submitted
+2025-06-29 06:51:11,695 - __main__ - INFO - Заявка успешно создана с ID=30 для пользователя 100
+2025-06-29 06:51:11,789 - __main__ - INFO - Поток уведомления для заявки #30 запущен
+2025-06-29 06:51:11,866 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 06:51:11] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-29 06:51:12,381 - telegram_notifier - WARNING - TELEGRAM_NOTIFICATIONS_CHAT_ID не найден в .env
+2025-06-29 06:51:14,409 - telegram_notifier - INFO - TelegramNotifier инициализирован. Chat ID: None
+2025-06-29 06:51:14,462 - __main__ - INFO - Уведомление о заявке #30 успешно отправлено в Telegram
+2025-06-29 06:51:21,927 - __main__ - INFO - === Запуск China Together Delivery Calculator - Orders Module v2.3 ===
+2025-06-29 06:51:21,938 - __main__ - INFO - Таблицы для заявок успешно созданы/проверены
+2025-06-29 06:51:21,938 - __main__ - INFO - ✅ Таблицы заявок готовы
+2025-06-29 06:51:21,945 - __main__ - INFO - ✅ Маршруты заявок зарегистрированы
+2025-06-29 06:51:21,949 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8062
+ * Running on http://10.128.0.11:8062
+2025-06-29 06:51:21,949 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-29 06:52:14,851 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> page_opened
+2025-06-29 06:52:14,861 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 06:52:14] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-29 06:52:20,006 - __main__ - INFO - Найден существующий пользователь с ID=100
+2025-06-29 06:52:20,024 - __main__ - INFO - Заявка на выкуп создана: ID=31, пользователь=100
+2025-06-29 06:52:20,047 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> purchase_request_submitted
+2025-06-29 06:52:20,047 - __main__ - INFO - Заявка успешно создана с ID=31 для пользователя 100
+2025-06-29 06:52:20,049 - __main__ - INFO - Поток уведомления для заявки #31 запущен
+2025-06-29 06:52:20,049 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 06:52:20] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-29 06:52:20,079 - telegram_notifier - INFO - TelegramNotifier инициализирован. Chat ID: -1002768839240
+2025-06-29 06:52:20,311 - telegram_notifier - INFO - Уведомление о заявке #31 отправлено в канал
+2025-06-29 06:52:20,607 - telegram_notifier - WARNING - Не удалось отправить уведомление админу 138138847: Telegram server says - Bad Request: chat not found
+2025-06-29 06:52:20,796 - __main__ - INFO - Уведомление о заявке #31 успешно отправлено в Telegram
+2025-06-29 06:55:26,670 - __main__ - INFO - === Запуск China Together Delivery Calculator - Orders Module v2.3 ===
+2025-06-29 06:55:26,680 - __main__ - INFO - Таблицы для заявок успешно созданы/проверены
+2025-06-29 06:55:26,681 - __main__ - INFO - ✅ Таблицы заявок готовы
+2025-06-29 06:55:26,684 - __main__ - INFO - ✅ Маршруты заявок зарегистрированы
+2025-06-29 06:55:26,687 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8062
+ * Running on http://10.128.0.11:8062
+2025-06-29 06:55:26,687 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-29 06:55:30,215 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> page_opened
+2025-06-29 06:55:30,223 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 06:55:30] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-29 06:55:35,605 - __main__ - INFO - Найден существующий пользователь с ID=100
+2025-06-29 06:55:35,617 - __main__ - INFO - Заявка на выкуп создана: ID=32, пользователь=100
+2025-06-29 06:55:35,630 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> purchase_request_submitted
+2025-06-29 06:55:35,630 - __main__ - INFO - Заявка успешно создана с ID=32 для пользователя 100
+2025-06-29 06:55:35,632 - __main__ - INFO - Поток уведомления для заявки #32 запущен
+2025-06-29 06:55:35,633 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 06:55:35] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-29 06:55:35,666 - telegram_notifier - INFO - TelegramNotifier инициализирован. Chat ID: -1002768839240
+2025-06-29 06:55:35,877 - telegram_notifier - INFO - Уведомление о заявке #32 отправлено в канал
+2025-06-29 06:55:35,971 - telegram_notifier - WARNING - Не удалось отправить уведомление админу 138138847: Telegram server says - Bad Request: chat not found
+2025-06-29 06:55:36,051 - __main__ - INFO - Уведомление о заявке #32 успешно отправлено в Telegram
+2025-06-29 06:59:34,952 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-29 06:59:35,124 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-29 06:59:35,124 - aiogram.dispatcher - INFO - Start polling
+2025-06-29 06:59:35,177 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 06:59:35,264 - aiogram.event - INFO - Update id=33789568 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-29 06:59:35,264 - aiogram.event - INFO - Update id=33789569 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-29 06:59:35,265 - aiogram.event - INFO - Update id=33789570 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-29 06:59:35,265 - aiogram.event - INFO - Update id=33789571 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-29 06:59:35,266 - aiogram.event - INFO - Update id=33789572 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-29 06:59:35,266 - aiogram.event - INFO - Update id=33789573 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-29 06:59:35,266 - aiogram.event - INFO - Update id=33789574 is not handled. Duration 0 ms by bot id=8024421344
+2025-06-29 06:59:35,593 - aiogram.event - INFO - Update id=33789575 is handled. Duration 327 ms by bot id=8024421344
+2025-06-29 06:59:35,594 - aiogram.event - INFO - Update id=33789581 is handled. Duration 274 ms by bot id=8024421344
+2025-06-29 06:59:35,595 - aiogram.event - INFO - Update id=33789576 is handled. Duration 315 ms by bot id=8024421344
+2025-06-29 06:59:35,595 - aiogram.event - INFO - Update id=33789578 is handled. Duration 302 ms by bot id=8024421344
+2025-06-29 06:59:35,595 - aiogram.event - INFO - Update id=33789577 is handled. Duration 303 ms by bot id=8024421344
+2025-06-29 06:59:35,596 - aiogram.event - INFO - Update id=33789579 is handled. Duration 290 ms by bot id=8024421344
+2025-06-29 06:59:35,597 - aiogram.event - INFO - Update id=33789580 is handled. Duration 290 ms by bot id=8024421344
+2025-06-29 06:59:35,614 - aiogram.event - INFO - Update id=33789567 is handled. Duration 369 ms by bot id=8024421344
+2025-06-29 07:00:25,843 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-06-29 07:00:25,843 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 07:00:25,844 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-29 07:00:49,022 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-29 07:00:49,175 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-29 07:00:49,176 - aiogram.dispatcher - INFO - Start polling
+2025-06-29 07:00:49,224 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 07:00:59,105 - __main__ - ERROR - Ошибка в функции save_exchange_rate: column "notes" of relation "exchange_rates" does not exist
+LINE 2: ...ange_rates (currency_pair, rate, recorded_at, source, notes)
+                                                                 ^
+
+2025-06-29 07:00:59,358 - aiogram.event - INFO - Update id=33789582 is handled. Duration 271 ms by bot id=8024421344
+2025-06-29 07:01:15,880 - aiogram.event - INFO - Update id=33789583 is handled. Duration 174 ms by bot id=8024421344
+2025-06-29 07:01:23,095 - __main__ - ERROR - Ошибка в функции save_exchange_rate: column "notes" of relation "exchange_rates" does not exist
+LINE 2: ...ange_rates (currency_pair, rate, recorded_at, source, notes)
+                                                                 ^
+
+2025-06-29 07:01:23,168 - aiogram.event - INFO - Update id=33789584 is handled. Duration 81 ms by bot id=8024421344
+2025-06-29 07:07:40,479 - aiogram.event - INFO - Update id=33789585 is handled. Duration 179 ms by bot id=8024421344
+2025-06-29 07:07:44,775 - __main__ - ERROR - Ошибка в функции save_exchange_rate: permission denied for table exchange_rates
+
+2025-06-29 07:07:44,857 - aiogram.event - INFO - Update id=33789586 is handled. Duration 95 ms by bot id=8024421344
+2025-06-29 07:08:42,280 - __main__ - ERROR - Ошибка в функции save_exchange_rate: permission denied for table exchange_rates
+
+2025-06-29 07:08:42,446 - aiogram.event - INFO - Update id=33789587 is handled. Duration 175 ms by bot id=8024421344
+2025-06-29 07:09:27,375 - __main__ - ERROR - Ошибка в функции save_exchange_rate: permission denied for table exchange_rates
+
+2025-06-29 07:09:27,582 - aiogram.event - INFO - Update id=33789588 is handled. Duration 216 ms by bot id=8024421344
+2025-06-29 07:12:41,219 - __main__ - INFO - Курс сохранен в БД: 7.18 юаней за 1$ (ID: 2)
+2025-06-29 07:12:41,250 - __main__ - INFO - TelegramNotifier инициализирован. Chat ID: -1002768839240
+2025-06-29 07:12:41,437 - __main__ - INFO - Уведомление об обновлении курса отправлено в канал
+2025-06-29 07:12:41,625 - aiogram.event - INFO - Update id=33789589 is handled. Duration 417 ms by bot id=8024421344
+2025-06-29 07:12:55,736 - aiogram.event - INFO - Update id=33789590 is handled. Duration 89 ms by bot id=8024421344
+2025-06-29 07:13:07,767 - aiogram.event - INFO - Update id=33789591 is handled. Duration 94 ms by bot id=8024421344
+2025-06-29 07:13:57,354 - aiogram.event - INFO - Update id=33789592 is handled. Duration 225 ms by bot id=8024421344
+2025-06-29 07:14:00,007 - aiogram.event - INFO - Update id=33789593 is handled. Duration 157 ms by bot id=8024421344
+2025-06-29 07:14:03,568 - __main__ - INFO - Курс сохранен в БД: 7.2 юаней за 1$ (ID: 3)
+2025-06-29 07:14:03,728 - __main__ - INFO - Уведомление об обновлении курса отправлено в канал
+2025-06-29 07:14:03,809 - aiogram.event - INFO - Update id=33789594 is handled. Duration 259 ms by bot id=8024421344
+2025-06-29 07:14:10,253 - __main__ - INFO - Курс сохранен в БД: 7.18 юаней за 1$ (ID: 4)
+2025-06-29 07:14:10,410 - __main__ - INFO - Уведомление об обновлении курса отправлено в канал
+2025-06-29 07:14:10,572 - aiogram.event - INFO - Update id=33789595 is handled. Duration 328 ms by bot id=8024421344
+2025-06-29 07:14:19,281 - aiogram.event - INFO - Update id=33789596 is handled. Duration 82 ms by bot id=8024421344
+2025-06-29 07:14:30,793 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> page_opened
+2025-06-29 07:14:30,794 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 07:14:30] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-29 07:14:39,349 - __main__ - INFO - Найден существующий пользователь с ID=100
+2025-06-29 07:14:39,369 - __main__ - INFO - Заявка на выкуп создана: ID=33, пользователь=100
+2025-06-29 07:14:39,389 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> purchase_request_submitted
+2025-06-29 07:14:39,389 - __main__ - INFO - Заявка успешно создана с ID=33 для пользователя 100
+2025-06-29 07:14:39,390 - telegram_notifier - ERROR - Ошибка при отправке уведомления о заявке: Event loop is closed
+2025-06-29 07:14:39,391 - __main__ - WARNING - Не удалось отправить уведомление о заявке #33
+2025-06-29 07:14:39,391 - __main__ - INFO - Поток уведомления для заявки #33 запущен
+2025-06-29 07:14:39,391 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 07:14:39] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-29 07:14:52,237 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> page_opened
+2025-06-29 07:14:52,237 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 07:14:52] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-29 07:15:06,354 - __main__ - INFO - Найден существующий пользователь с ID=100
+2025-06-29 07:15:06,392 - __main__ - INFO - Заявка на выкуп создана: ID=34, пользователь=100
+2025-06-29 07:15:06,416 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> purchase_request_submitted
+2025-06-29 07:15:06,416 - __main__ - INFO - Заявка успешно создана с ID=34 для пользователя 100
+2025-06-29 07:15:06,417 - telegram_notifier - ERROR - Ошибка при отправке уведомления о заявке: Event loop is closed
+2025-06-29 07:15:06,417 - __main__ - WARNING - Не удалось отправить уведомление о заявке #34
+2025-06-29 07:15:06,418 - __main__ - INFO - Поток уведомления для заявки #34 запущен
+2025-06-29 07:15:06,418 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 07:15:06] "POST /submit_purchase_request HTTP/1.1" 200 -
