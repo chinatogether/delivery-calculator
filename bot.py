@@ -151,6 +151,7 @@ FAQ_DATA = {
         "Без видео - вопросы о возмещении или компенсации рассматриваться не будут."
     )
 }
+
 # Конфигурация базы данных
 DB_CONFIG = {
             'dbname': os.getenv('DB_NAME', 'delivery_db'),
@@ -273,7 +274,8 @@ async def send_tariffs_pdf(message: types.Message, user_id: int):
             await message.reply(
                 "❌ <b>Файл с тарифами не найден</b>\n\n"
                 "Обратитесь к менеджеру для получения актуальных тарифов:",
-                parse_mode="HTML"
+                parse_mode="HTML",
+                disable_web_page_preview=True
             )
             save_user_action(user_id, "tariffs_file_not_found")
             return
@@ -282,7 +284,8 @@ async def send_tariffs_pdf(message: types.Message, user_id: int):
         loading_message = await message.reply(
             "📋 <b>Загружаю актуальные тарифы...</b>\n\n"
             "⏳ Подождите немного, файл готовится к отправке.",
-            parse_mode="HTML"
+            parse_mode="HTML",
+            disable_web_page_preview=True
         )
         
         # Создаем объект файла
@@ -321,7 +324,8 @@ async def send_tariffs_pdf(message: types.Message, user_id: int):
         await message.reply(
             "❌ <b>Произошла ошибка при отправке тарифов</b>\n\n"
             "Попробуйте позже или обратитесь к менеджеру:",
-            parse_mode="HTML"
+            parse_mode="HTML",
+            disable_web_page_preview=True
         )
         save_user_action(user_id, "tariffs_send_error", {"error": str(e)})
 
@@ -377,18 +381,34 @@ def get_smart_response(message_text):
                 "📺 Наш канал с полезной информацией: <a href='https://t.me/Togetherchina'>t.me/Togetherchina</a>\n\n"
                 "Используйте кнопки ниже или меню бота для быстрого доступа к функциям!")
 
-# Функция очистки истории чата
+# Улучшенная функция очистки истории чата
 async def clear_chat_history(message: types.Message, user_id: int):
-    """Попытка удалить последние сообщения в чате"""
+    """Полная очистка истории чата"""
     try:
-        # Удаляем последние 20 сообщений (если возможно)
-        for i in range(1000):
+        # Получаем ID текущего сообщения
+        current_message_id = message.message_id
+        
+        # Пытаемся удалить последние 100 сообщений
+        deleted_count = 0
+        for i in range(1, 501):  # Увеличиваем диапазон для более полной очистки
             try:
-                await bot.delete_message(chat_id=message.chat.id, message_id=message.message_id - i)
-            except:
-                break  # Если не можем удалить сообщение, прекращаем
+                await bot.delete_message(chat_id=message.chat.id, message_id=current_message_id - i)
+                deleted_count += 1
+            except Exception as e:
+                # Если не можем удалить сообщение, продолжаем
+                continue
+        
+        # Удаляем само сообщение с командой перезапуска
+        try:
+            await bot.delete_message(chat_id=message.chat.id, message_id=current_message_id)
+            deleted_count += 1
+        except:
+            pass
+            
+        logger.info(f"Удалено сообщений для пользователя {user_id}: {deleted_count}")
+        
     except Exception as e:
-        logger.warning(f"Не удалось очистить историю чата для пользователя {user_id}: {e}")
+        logger.warning(f"Не удалось полностью очистить историю чата для пользователя {user_id}: {e}")
 
 # Команда /start
 @dp.message(Command("start"))
@@ -432,7 +452,8 @@ async def calculate_delivery(message: types.Message):
         "📊 <b>Калькулятор доставки</b>\n\n"
         "Нажмите кнопку ниже, чтобы открыть калькулятор и самостоятельно рассчитать стоимость доставки вашего груза из Китая.\n",
         reply_markup=keyboard,
-        parse_mode="HTML"
+        parse_mode="HTML",
+        disable_web_page_preview=True
     )
 
 # Команда /order - Запросить рассчет у менеджера
@@ -448,7 +469,8 @@ async def order_delivery(message: types.Message):
         "🚚 <b>Заказ доставки</b>\n\n"
         "Нажмите кнопку ниже, чтобы оформить заявку на выкуп и доставку товаров из Китая.\n\n",
         reply_markup=keyboard,
-        parse_mode="HTML"
+        parse_mode="HTML",
+        disable_web_page_preview=True
     )
 
 # Команда /tariffs - Актуальные тарифы
@@ -485,7 +507,7 @@ async def help_command(message: types.Message):
         "📺 <b>Подписывайтесь:</b> <a href='https://t.me/Togetherchina'>t.me/Togetherchina</a>\n\n"
         "💡 <b>Все команды доступны через меню бота!</b>"
     )
-    await message.reply(help_text, parse_mode="HTML")
+    await message.reply(help_text, parse_mode="HTML", disable_web_page_preview=True)
 
 # Команда /faq - Популярные вопросы
 @dp.message(Command("faq"))
@@ -498,7 +520,8 @@ async def faq_command(message: types.Message):
         "❓ <b>Популярные вопросы</b>\n\n"
         "Выберите интересующий вас вопрос:",
         reply_markup=keyboard,
-        parse_mode="HTML"
+        parse_mode="HTML",
+        disable_web_page_preview=True
     )
 
 # Команда /feedback - Отзывы    
@@ -509,9 +532,7 @@ async def feedback_command(message: types.Message):
     await message.reply(
         "📝 <b>Отзывы наших клиентов</b>\n\n"
         "🔗 Перейдите по ссылке, чтобы увидеть отзывы:\n"
-        "<a href='https://t.me/feedbacktogetherchina'>https://t.me/feedbacktogetherchina</a>\n\n"
-        "📺 <b>Также подписывайтесь на наш канал:</b>\n"
-        "<a href='https://t.me/Togetherchina'>t.me/Togetherchina</a>", 
+        "<a href='https://t.me/feedbacktogetherchina'>https://t.me/feedbacktogetherchina</a>\n", 
         parse_mode="HTML",
         disable_web_page_preview=True
     )
@@ -537,22 +558,25 @@ async def restart_bot(message: types.Message):
     
     save_user_action(user_id, "restart_command")
     
-    # Пытаемся очистить историю чата
+    # Полностью очищаем историю чата
     await clear_chat_history(message, user_id)
     
+    # Отправляем точно такое же сообщение, как при команде /start
     keyboard = get_main_reply_keyboard()
     
-    await message.reply(
-        f"🔄 <b>Бот перезапущен!</b>\n\n"
-        f"Привет снова, {first_name}! История чата очищена.\n\n"
-        "🚀 <b>China Together</b> - ваш надежный партнер для доставки из Китая!\n\n"
-        "💡 <b>Используйте кнопки ниже или меню бота для быстрого доступа к функциям:</b>\n"
-        "📊 Рассчитать стоимость доставки\n"
-        "🚚 Запросить рассчет у менеджера\n"
-        "📋 Актуальные тарифы\n"
-        "❓ Популярные вопросы\n\n"
-        "📺 <b>Наш канал:</b> <a href='https://t.me/Togetherchina'>t.me/Togetherchina</a>\n\n"
-        "Чем могу помочь?",
+    await bot.send_message(
+        chat_id=message.chat.id,
+        text=(
+            f"🚀 <b>Добро пожаловать, {first_name}!</b>\n\n"
+            "Я умный помощник China Together - помогу рассчитать стоимость доставку из Китая и оформить заказ!\n\n"
+            "🎯 <b>Что я умею:</b>\n"
+            "• 📊 Точный расчет стоимости доставки\n"
+            "• 🚚 Оформление заявок на выкуп товаров\n"
+            "• 📋 Предоставление актуальных тарифов\n"
+            "• 💬 Ответы на популярные вопросы\n\n"
+            "📺 <b>Подписывайтесь на наш канал:</b> <a href='https://t.me/Togetherchina'>t.me/Togetherchina</a>\n\n"
+            "💡 <b>Используйте кнопки ниже или меню бота для быстрого доступа к функциям!</b>"
+        ),
         reply_markup=keyboard,
         parse_mode="HTML",
         disable_web_page_preview=True
@@ -625,7 +649,8 @@ async def handle_text_message(message: types.Message):
     await message.reply(
         smart_response,
         reply_markup=keyboard,
-        parse_mode="HTML"
+        parse_mode="HTML",
+        disable_web_page_preview=True
     )
 
 # Обработка данных от веб-приложения
@@ -644,11 +669,11 @@ async def handle_web_app_data(message: types.Message):
         elif action == 'purchase_request_submitted':
             await handle_purchase_request_submitted(message, data, user_id, username)
         else:
-            await message.reply("✅ Данные получены и обработаны!")
+            await message.reply("✅ Данные получены и обработаны!", disable_web_page_preview=True)
             
     except Exception as e:
         logger.error(f"Ошибка обработки данных веб-приложения: {e}")
-        await message.reply("❌ Произошла ошибка при обработке данных.")
+        await message.reply("❌ Произошла ошибка при обработке данных.", disable_web_page_preview=True)
 
 # Обработка завершенного расчета
 async def handle_calculation_completed(message, data, user_id, username):
@@ -666,7 +691,8 @@ async def handle_calculation_completed(message, data, user_id, username):
             )],
             [InlineKeyboardButton(text="🔄 Новый расчет", callback_data="new_calculation")]
         ]),
-        parse_mode="HTML"
+        parse_mode="HTML",
+        disable_web_page_preview=True
     )
 
 # Обработка отправленной заявки
@@ -696,7 +722,8 @@ async def handle_callback(callback: CallbackQuery):
         keyboard = get_webapp_inline_keyboard(user_id, username, "calculate")
         await callback.message.answer(
             "🔄 Начните новый расчет доставки:",
-            reply_markup=keyboard
+            reply_markup=keyboard,
+            disable_web_page_preview=True
         )
         save_user_action(user_id, "new_calculation")
     
@@ -727,7 +754,8 @@ async def handle_callback(callback: CallbackQuery):
             await callback.message.edit_text(
                 FAQ_DATA[faq_key],
                 reply_markup=back_keyboard,
-                parse_mode="HTML"
+                parse_mode="HTML",
+                disable_web_page_preview=True
             )
             save_user_action(user_id, "faq_viewed", {"question": faq_key})
     
@@ -737,7 +765,8 @@ async def handle_callback(callback: CallbackQuery):
             "❓ <b>Популярные вопросы</b>\n\n"
             "Выберите интересующий вас вопрос:",
             reply_markup=keyboard,
-            parse_mode="HTML"
+            parse_mode="HTML",
+            disable_web_page_preview=True
         )
     
     await callback.answer()
@@ -758,14 +787,15 @@ async def handle_my_requests(message, user_id):
                 f"   💰 Сумма: {req['order_amount']}\n"
                 f"   📧 Email: {req['email']}\n\n"
             )
-        await message.reply(requests_text, parse_mode="HTML")
+        await message.reply(requests_text, parse_mode="HTML", disable_web_page_preview=True)
     else:
         username = message.from_user.username or f"user_{user_id}"
         keyboard = get_webapp_inline_keyboard(user_id, username, "order")
         await message.reply(
             "📭 У вас пока нет заявок на выкуп.\n\n"
             "Хотите оформить заявку?",
-            reply_markup=keyboard
+            reply_markup=keyboard,
+            disable_web_page_preview=True
         )
     save_user_action(user_id, "view_requests")
 

@@ -429,3 +429,59 @@ client_session: <aiohttp.client.ClientSession object at 0x7961ce4b2600>
 2025-06-29 13:24:40,794 - aiogram.dispatcher - WARNING - Received SIGINT signal
 2025-06-29 13:24:40,794 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
 2025-06-29 13:24:40,794 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-29 14:12:49,566 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-29 14:12:50,027 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-29 14:12:50,028 - aiogram.dispatcher - INFO - Start polling
+2025-06-29 14:12:50,075 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 14:12:50,535 - aiogram.event - INFO - Update id=33789609 is handled. Duration 303 ms by bot id=8024421344
+2025-06-29 14:12:50,536 - aiogram.event - INFO - Update id=33789605 is handled. Duration 396 ms by bot id=8024421344
+2025-06-29 14:12:50,537 - aiogram.event - INFO - Update id=33789607 is handled. Duration 325 ms by bot id=8024421344
+2025-06-29 14:12:50,558 - aiogram.event - INFO - Update id=33789608 is handled. Duration 336 ms by bot id=8024421344
+2025-06-29 14:12:50,587 - aiogram.event - INFO - Update id=33789606 is handled. Duration 421 ms by bot id=8024421344
+2025-06-29 14:13:33,914 - aiogram.event - INFO - Update id=33789610 is handled. Duration 178 ms by bot id=8024421344
+2025-06-29 14:13:37,055 - aiogram.event - INFO - Update id=33789611 is handled. Duration 94 ms by bot id=8024421344
+2025-06-29 14:13:41,908 - __main__ - INFO - Курс сохранен в БД: 10.0 юаней за 1$ (ID: 6)
+2025-06-29 14:13:41,937 - __main__ - INFO - Message worker начал работу
+2025-06-29 14:13:41,937 - __main__ - INFO - Message worker thread запущен
+2025-06-29 14:13:41,937 - __main__ - INFO - TelegramNotifier инициализирован. Chat ID: -1002768839240
+2025-06-29 14:13:42,105 - __main__ - INFO - Уведомление об обновлении курса отправлено в канал
+2025-06-29 14:13:42,212 - aiogram.event - INFO - Update id=33789612 is handled. Duration 319 ms by bot id=8024421344
+2025-06-29 14:13:51,108 - aiogram.event - INFO - Update id=33789613 is handled. Duration 84 ms by bot id=8024421344
+2025-06-29 14:24:47,020 - aiogram.event - INFO - Update id=33789614 is handled. Duration 165 ms by bot id=8024421344
+2025-06-29 14:27:46,127 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-06-29 14:27:46,134 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 14:27:46,134 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-29 14:27:50,747 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-29 14:27:50,905 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-29 14:27:50,906 - aiogram.dispatcher - INFO - Start polling
+2025-06-29 14:27:50,954 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 14:40:13,859 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-06-29 14:40:13,862 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 14:40:13,862 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-29 14:40:17,829 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-29 14:40:17,993 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-29 14:40:17,994 - aiogram.dispatcher - INFO - Start polling
+2025-06-29 14:40:18,044 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 15:10:57,006 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-06-29 15:10:57,008 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 15:10:57,008 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-29 15:11:33,086 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-29 15:11:33,324 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-29 15:11:33,325 - aiogram.dispatcher - INFO - Start polling
+2025-06-29 15:11:33,371 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 15:35:25,810 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-06-29 15:35:25,811 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 15:35:25,811 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-29 15:35:34,051 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-29 15:35:34,198 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-29 15:35:34,198 - aiogram.dispatcher - INFO - Start polling
+2025-06-29 15:35:34,245 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 15:36:45,952 - aiogram.event - INFO - Update id=33789615 is handled. Duration 259 ms by bot id=8024421344
+2025-06-29 15:37:01,281 - aiogram.event - INFO - Update id=33789616 is handled. Duration 211 ms by bot id=8024421344
+2025-06-29 15:37:05,862 - aiogram.event - INFO - Update id=33789617 is handled. Duration 76 ms by bot id=8024421344
+2025-06-29 15:37:17,773 - __main__ - INFO - Курс сохранен в БД: 7.17 юаней за 1$ (ID: 7)
+2025-06-29 15:37:17,806 - __main__ - INFO - Message worker начал работу
+2025-06-29 15:37:17,806 - __main__ - INFO - Message worker thread запущен
+2025-06-29 15:37:17,806 - __main__ - INFO - TelegramNotifier инициализирован. Chat ID: -1002768839240
+2025-06-29 15:37:17,970 - __main__ - INFO - Уведомление об обновлении курса отправлено в канал
+2025-06-29 15:37:18,060 - aiogram.event - INFO - Update id=33789618 is handled. Duration 299 ms by bot id=8024421344

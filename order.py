@@ -354,6 +354,9 @@ def register_order_routes(app):
             additional_notes = data.get('additional_notes', '').strip()
             terms_accepted = data.get('terms_accepted', False)
             
+            # Логируем получение заявки
+            logger.info(f"📥 Получена заявка от пользователя {telegram_id}")
+            
             # Извлекаем username из данных или создаем из telegram_contact
             username = data.get('username', '').strip()
             if not username and telegram_contact:
@@ -388,7 +391,7 @@ def register_order_routes(app):
             conn.close()
             
             if not user_result:
-                logger.info(f"Пользователь с telegram_id={telegram_id} не найден, создаем нового пользователя...")
+                logger.info(f"👤 Пользователь с telegram_id={telegram_id} не найден, создаем нового пользователя...")
                 # Создаем нового пользователя
                 telegram_user_id = save_telegram_user(
                     telegram_id=telegram_id, 
@@ -398,15 +401,16 @@ def register_order_routes(app):
                 )
                 
                 if not telegram_user_id:
-                    logger.error(f"Не удалось создать пользователя с telegram_id={telegram_id}")
+                    logger.error(f"❌ Не удалось создать пользователя с telegram_id={telegram_id}")
                     return jsonify({"error": "Ошибка при создании пользователя"}), 500
                 
-                logger.info(f"Создан новый пользователь с ID={telegram_user_id}")
+                logger.info(f"✅ Создан новый пользователь с ID={telegram_user_id}")
             else:
                 telegram_user_id = user_result[0]
-                logger.info(f"Найден существующий пользователь с ID={telegram_user_id}")
+                logger.info(f"✅ Найден существующий пользователь с ID={telegram_user_id}")
             
             # Сохраняем заявку
+            logger.info(f"💾 Сохранение заявки в БД...")
             request_id = save_purchase_request(
                 telegram_user_id=telegram_user_id,
                 calculation_id=calculation_id if calculation_id else None,
@@ -419,65 +423,64 @@ def register_order_routes(app):
                 terms_accepted=terms_accepted
             )
             
-            if request_id:
-                # Сохраняем действие
-                save_user_action(telegram_id, 'purchase_request_submitted', {
-                    'request_id': request_id,
-                    'calculation_id': calculation_id,
-                    'email': email,
-                    'order_amount': order_amount,
-                    'telegram_contact': telegram_contact,
-                    'is_new_user': not bool(user_result)
-                })
-                
-                logger.info(f"Заявка успешно создана с ID={request_id} для пользователя {telegram_user_id}")
-                
-                # НОВОЕ: Отправляем уведомление в Telegram
-                def send_notification():
-                    """Отправка уведомления в отдельном потоке"""
-                    try:
-                        notification_data = {
-                            'request_id': request_id,
-                            'telegram_contact': telegram_contact,
-                            'email': email,
-                            'order_amount': order_amount,
-                            'supplier_link': supplier_link,
-                            'promo_code': promo_code,
-                            'additional_notes': additional_notes,
-                            'calculation_id': calculation_id,
-                            'telegram_id': telegram_id,
-                            'username': username
-                        }
-                        
-                        success = send_order_notification(notification_data)
-                        if success:
-                            logger.info(f"Уведомление о заявке #{request_id} успешно отправлено в Telegram")
-                        else:
-                            logger.warning(f"Не удалось отправить уведомление о заявке #{request_id}")
-                            
-                    except Exception as e:
-                        logger.error(f"Ошибка при отправке уведомления о заявке #{request_id}: {e}")
-                
-                # Запускаем отправку уведомления в отдельном потоке
-                try:
-                    notification_thread = threading.Thread(target=send_notification)
-                    notification_thread.daemon = True
-                    notification_thread.start()
-                    logger.info(f"Поток уведомления для заявки #{request_id} запущен")
-                except Exception as e:
-                    logger.error(f"Ошибка при запуске потока уведомления: {e}")
-                
-                return jsonify({
-                    "success": True,
-                    "request_id": request_id,
-                    "message": "Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время."
-                })
-            else:
-                logger.error("Не удалось создать заявку - save_purchase_request вернул None")
+            if not request_id:
+                logger.error("❌ Не удалось создать заявку - save_purchase_request вернул None")
                 return jsonify({"error": "Ошибка при создании заявки"}), 500
+            
+            logger.info(f"✅ Заявка успешно создана с ID={request_id} для пользователя {telegram_user_id}")
+            
+            # Сохраняем действие
+            save_user_action(telegram_id, 'purchase_request_submitted', {
+                'request_id': request_id,
+                'calculation_id': calculation_id,
+                'email': email,
+                'order_amount': order_amount,
+                'telegram_contact': telegram_contact,
+                'is_new_user': not bool(user_result)
+            })
+            
+            # НОВОЕ: Отправляем уведомление в Telegram
+            logger.info(f"📤 Подготовка уведомления для заявки #{request_id}...")
+            
+            notification_data = {
+                'request_id': request_id,
+                'telegram_contact': telegram_contact,
+                'email': email,
+                'order_amount': order_amount,
+                'supplier_link': supplier_link,
+                'promo_code': promo_code,
+                'additional_notes': additional_notes,
+                'calculation_id': calculation_id,
+                'telegram_id': telegram_id,
+                'username': username
+            }
+            
+            # Отправляем уведомление (неблокирующий вызов)
+            try:
+                from notification_sender import send_order_notification
+                notification_success = send_order_notification(notification_data)
+                
+                if notification_success:
+                    logger.info(f"✅ Уведомление для заявки #{request_id} поставлено в очередь отправки")
+                else:
+                    logger.warning(f"⚠️ Не удалось поставить уведомление для заявки #{request_id} в очередь")
+                    
+            except ImportError as e:
+                logger.error(f"❌ Модуль notification_sender недоступен: {e}")
+            except Exception as e:
+                logger.error(f"❌ Ошибка при отправке уведомления для заявки #{request_id}: {e}")
+            
+            # Возвращаем успешный ответ независимо от статуса уведомления
+            logger.info(f"🎉 Заявка #{request_id} успешно обработана")
+            
+            return jsonify({
+                "success": True,
+                "request_id": request_id,
+                "message": "Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время."
+            })
                 
         except Exception as e:
-            logger.error(f"Ошибка при создании заявки: {str(e)}")
+            logger.error(f"❌ Критическая ошибка при создании заявки: {str(e)}")
             return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
 
     # 3. Также добавьте эту функцию для тестирования уведомлений (опционально):
