@@ -398,3 +398,34 @@ LINE 2: ...ange_rates (currency_pair, rate, recorded_at, source, notes)
 2025-06-29 13:19:35,089 - telegram_notifier - ERROR - Ошибка отправки сообщения в -1002768839240: Event loop is closed
 2025-06-29 13:19:35,089 - telegram_notifier - ERROR - Ошибка отправки сообщения в 138138847: Event loop is closed
 2025-06-29 13:19:35,090 - telegram_notifier - ERROR - Ошибка отправки сообщения в 148440745: Event loop is closed
+2025-06-29 13:21:32,488 - aiogram.event - INFO - Update id=33789602 is handled. Duration 316 ms by bot id=8024421344
+2025-06-29 13:21:36,016 - aiogram.event - INFO - Update id=33789603 is handled. Duration 100 ms by bot id=8024421344
+2025-06-29 13:21:44,165 - aiogram.event - INFO - Update id=33789604 is handled. Duration 220 ms by bot id=8024421344
+2025-06-29 13:23:44,723 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-06-29 13:23:44,812 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 13:23:44,814 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-29 13:23:59,008 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7961ce4b2600>
+2025-06-29 13:24:18,740 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-29 13:24:18,895 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-29 13:24:18,896 - aiogram.dispatcher - INFO - Start polling
+2025-06-29 13:24:18,944 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 13:24:23,313 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> page_opened
+2025-06-29 13:24:23,314 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:24:23] "GET /order?telegram_id=148440745&username=emilienches HTTP/1.1" 200 -
+2025-06-29 13:24:32,142 - __main__ - INFO - Найден существующий пользователь с ID=100
+2025-06-29 13:24:32,160 - __main__ - INFO - Заявка на выкуп создана: ID=42, пользователь=100
+2025-06-29 13:24:32,177 - __main__ - INFO - Действие пользователя сохранено: 148440745 -> purchase_request_submitted
+2025-06-29 13:24:32,177 - __main__ - INFO - Заявка успешно создана с ID=42 для пользователя 100
+2025-06-29 13:24:32,178 - telegram_notifier - INFO - Сообщение для группы -1002768839240 добавлено в очередь
+2025-06-29 13:24:32,178 - __main__ - INFO - Поток уведомления для заявки #42 запущен
+2025-06-29 13:24:32,178 - telegram_notifier - INFO - Сообщение для админа 138138847 добавлено в очередь
+2025-06-29 13:24:32,178 - telegram_notifier - INFO - Сообщение для админа 148440745 добавлено в очередь
+2025-06-29 13:24:32,178 - telegram_notifier - INFO - Уведомление о заявке #42 добавлено в очередь отправки
+2025-06-29 13:24:32,178 - __main__ - INFO - Уведомление о заявке #42 успешно отправлено в Telegram
+2025-06-29 13:24:32,179 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:24:32] "POST /submit_purchase_request HTTP/1.1" 200 -
+2025-06-29 13:24:32,179 - telegram_notifier - ERROR - Ошибка отправки сообщения в -1002768839240: Event loop is closed
+2025-06-29 13:24:32,180 - telegram_notifier - ERROR - Ошибка отправки сообщения в 138138847: Event loop is closed
+2025-06-29 13:24:32,180 - telegram_notifier - ERROR - Ошибка отправки сообщения в 148440745: Event loop is closed
+2025-06-29 13:24:40,794 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-06-29 13:24:40,794 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 13:24:40,794 - aiogram.dispatcher - INFO - Polling stopped

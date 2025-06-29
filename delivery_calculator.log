@@ -13271,3 +13271,56 @@ DETAIL:  Failing row contains (191, Обычные товары, null, null, nul
 2025-06-29 13:19:26,424 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:19:26] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
 2025-06-29 13:19:30,104 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:19:30] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
 2025-06-29 13:19:47,437 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:19:47] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-29 13:24:23,549 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:24:23] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-29 13:30:07,305 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:30:07] "[33mGET /robots.txt HTTP/1.1[0m" 404 -
+2025-06-29 13:33:44,254 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:33:44] "[33mGET /theme/META-INF/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/etc/passwd HTTP/1.1[0m" 404 -
+2025-06-29 13:33:44,962 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:33:44] "[33mPOST /theme/META-INF/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/windows/win.ini HTTP/1.1[0m" 404 -
+2025-06-29 13:35:50,659 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:35:50] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-29 13:37:56,888 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:37:56] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-29 13:38:11,789 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:38:11] "[33mGET /wordpress/wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-29 13:38:56,789 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:38:56] "[33mGET /wp-admin/setup-config.php HTTP/1.1[0m" 404 -
+2025-06-29 13:40:13,521 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:40:13] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-29 13:41:56,936 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:41:56] "GET / HTTP/1.1" 200 -
+2025-06-29 13:41:58,047 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:41:58] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-29 13:42:07,026 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:42:07] "[33mGET /wp-login.php HTTP/1.1[0m" 404 -
+2025-06-29 13:42:50,156 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:42:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-29 13:43:15,583 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:43:15] "[33mGET /.git/config HTTP/1.1[0m" 404 -
+2025-06-29 13:47:05,335 - __main__ - INFO - === Запуск China Together Delivery Calculator v2.3 (Calculations Only) ===
+2025-06-29 13:47:05,350 - __main__ - ERROR - Ошибка при инициализации базы данных: must be owner of table exchange_rates
+
+2025-06-29 13:47:05,351 - __main__ - ERROR - ❌ Ошибка инициализации: must be owner of table exchange_rates
+
+2025-06-29 13:47:05,357 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-29 13:47:05,357 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-29 13:47:09,803 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:47:09] "GET / HTTP/1.1" 200 -
+2025-06-29 13:47:29,647 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:47:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-29 13:48:23,935 - __main__ - INFO - === Запуск China Together Delivery Calculator v2.3 (Calculations Only) ===
+2025-06-29 13:48:23,945 - __main__ - ERROR - Ошибка при инициализации базы данных: must be owner of table exchange_rates
+
+2025-06-29 13:48:23,946 - __main__ - ERROR - ❌ Ошибка инициализации: must be owner of table exchange_rates
+
+2025-06-29 13:48:23,952 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-29 13:48:23,952 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-29 13:48:32,310 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:48:32] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-29 13:48:35,495 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:48:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-29 13:50:03,203 - __main__ - INFO - === Запуск China Together Delivery Calculator v2.3 (Calculations Only) ===
+2025-06-29 13:50:03,214 - __main__ - ERROR - Ошибка при инициализации базы данных: must be owner of table exchange_rates
+
+2025-06-29 13:50:03,214 - __main__ - ERROR - ❌ Ошибка инициализации: must be owner of table exchange_rates
+
+2025-06-29 13:50:03,221 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8061
+ * Running on http://10.128.0.11:8061
+2025-06-29 13:50:03,221 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-29 13:50:08,488 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:50:08] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-29 13:50:25,248 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:50:25] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-29 13:50:49,295 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:50:49] "GET / HTTP/1.1" 200 -
+2025-06-29 13:50:53,708 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:50:53] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-29 13:51:14,083 - werkzeug - INFO - 127.0.0.1 - - [29/Jun/2025 13:51:14] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -

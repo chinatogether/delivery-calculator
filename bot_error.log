@@ -10365,3 +10365,36 @@ Traceback (most recent call last):
     raise TelegramBadRequest(method=method, message=description)
 aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message to be replied not found
 INFO:aiogram.event:Update id=450950783 is handled. Duration 190 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950784 is handled. Duration 193 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950785 is handled. Duration 253 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950786 is handled. Duration 298 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950787 is handled. Duration 278 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950788 is handled. Duration 184 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950789 is handled. Duration 236 ms by bot id=7709869722

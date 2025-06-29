@@ -8,7 +8,7 @@ import os
 from functools import wraps
 from dotenv import load_dotenv
 import pytz
-from telegram_notifier import send_order_notification
+from notification_sender import send_order_notification
 import threading
 
 # Настройка логирования
