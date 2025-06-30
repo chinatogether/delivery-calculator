@@ -485,3 +485,20 @@ client_session: <aiohttp.client.ClientSession object at 0x7961ce4b2600>
 2025-06-29 15:37:17,806 - __main__ - INFO - TelegramNotifier инициализирован. Chat ID: -1002768839240
 2025-06-29 15:37:17,970 - __main__ - INFO - Уведомление об обновлении курса отправлено в канал
 2025-06-29 15:37:18,060 - aiogram.event - INFO - Update id=33789618 is handled. Duration 299 ms by bot id=8024421344
+2025-06-29 18:14:30,497 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-06-29 18:14:30,498 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 18:14:30,498 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-29 18:14:34,423 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-29 18:14:34,679 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-29 18:14:34,679 - aiogram.dispatcher - INFO - Start polling
+2025-06-29 18:14:34,734 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-29 20:36:48,129 - aiogram.event - INFO - Update id=33789619 is handled. Duration 16675 ms by bot id=8024421344
+2025-06-30 07:52:12,797 - aiogram.event - INFO - Update id=33789620 is handled. Duration 225 ms by bot id=8024421344
+2025-06-30 07:52:17,625 - aiogram.event - INFO - Update id=33789621 is handled. Duration 99 ms by bot id=8024421344
+2025-06-30 07:52:33,984 - __main__ - INFO - Курс сохранен в БД: 7.17 юаней за 1$ (ID: 8)
+2025-06-30 07:52:34,026 - __main__ - INFO - Message worker начал работу
+2025-06-30 07:52:34,026 - __main__ - INFO - Message worker thread запущен
+2025-06-30 07:52:34,027 - __main__ - INFO - TelegramNotifier инициализирован. Chat ID: -1002768839240
+2025-06-30 07:52:34,201 - __main__ - INFO - Уведомление об обновлении курса отправлено в канал
+2025-06-30 07:52:34,373 - aiogram.event - INFO - Update id=33789622 is handled. Duration 410 ms by bot id=8024421344
+2025-06-30 07:55:13,930 - aiogram.event - INFO - Update id=33789623 is handled. Duration 167 ms by bot id=8024421344

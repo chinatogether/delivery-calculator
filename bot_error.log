@@ -10504,3 +10504,36 @@ INFO:aiogram.event:Update id=450950843 is handled. Duration 182 ms by bot id=770
 INFO:aiogram.event:Update id=450950844 is handled. Duration 265 ms by bot id=7709869722
 INFO:__main__:Пользователь 148440745 скачал тарифы
 INFO:aiogram.event:Update id=450950845 is handled. Duration 583 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950846 is handled. Duration 221 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950847 is handled. Duration 11376 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950848 is handled. Duration 207 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950849 is handled. Duration 271 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950851 is handled. Duration 398 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 148440745: 30
+INFO:aiogram.event:Update id=450950850 is handled. Duration 30355 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950852 is handled. Duration 158 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950853 is handled. Duration 247 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950854 is handled. Duration 1391 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950855 is handled. Duration 178 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950856 is handled. Duration 230 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950857 is handled. Duration 237 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950858 is handled. Duration 115 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950859 is handled. Duration 183 ms by bot id=7709869722
+INFO:__main__:Пользователь 138138847 скачал тарифы
+INFO:aiogram.event:Update id=450950860 is handled. Duration 457 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950861 is handled. Duration 114 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950862 is handled. Duration 129 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950863 is handled. Duration 193 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950864 is handled. Duration 217 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950865 is handled. Duration 138 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950866 is handled. Duration 198 ms by bot id=7709869722
