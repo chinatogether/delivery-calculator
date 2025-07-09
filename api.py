@@ -138,7 +138,7 @@ def convert_cny_to_usd(amount_cny):
     return amount_cny / rate  # Делим юани на курс
 
 def init_database():
-    """Создание таблиц в базе данных"""
+    """Создание таблиц в базе данных (обновленная версия)"""
     conn = connect_to_db()
     cursor = conn.cursor()
     try:
@@ -176,26 +176,63 @@ def init_database():
             ON delivery_test.exchange_rates (currency_pair, recorded_at DESC)
         """)
         
-        # Таблица входных данных пользователей
+        # НЕ ПЕРЕСОЗДАЕМ таблицу user_inputs, так как она уже существует с правильной структурой
+        # Только проверяем, что она существует
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS delivery_test.user_inputs (
-                id SERIAL PRIMARY KEY,
-                telegram_user_id INTEGER REFERENCES delivery_test.telegram_users(id),
-                category VARCHAR(255),
-                total_weight DECIMAL(10,2),
-                cost_cny DECIMAL(10,2),
-                cost_usd DECIMAL(10,2),
-                exchange_rate DECIMAL(10,4),
-                volume DECIMAL(10,4),
-                use_box_dimensions BOOLEAN DEFAULT FALSE,
-                quantity INTEGER,
-                weight_per_box DECIMAL(10,2),
-                length DECIMAL(10,2),
-                width DECIMAL(10,2),
-                height DECIMAL(10,2),
-                created_at TIMESTAMP WITH TIME ZONE DEFAULT (NOW() AT TIME ZONE 'Europe/Moscow')
+            SELECT EXISTS (
+                SELECT FROM information_schema.tables 
+                WHERE table_schema = 'delivery_test' 
+                AND table_name = 'user_inputs'
             )
         """)
+        
+        user_inputs_exists = cursor.fetchone()[0]
+        if user_inputs_exists:
+            logger.info("✅ Таблица delivery_test.user_inputs уже существует")
+        else:
+            logger.warning("⚠️ Таблица delivery_test.user_inputs не найдена!")
+            # Если таблицы нет, создаем с правильной структурой
+            cursor.execute("""
+                CREATE TABLE delivery_test.user_inputs (
+                    id SERIAL PRIMARY KEY,
+                    category VARCHAR(255) NOT NULL,
+                    weight NUMERIC(10, 2) NOT NULL,
+                    length NUMERIC(10, 2) NOT NULL,
+                    width NUMERIC(10, 2) NOT NULL,
+                    height NUMERIC(10, 2) NOT NULL,
+                    cost NUMERIC(10, 2) NOT NULL,
+                    quantity INTEGER NOT NULL,
+                    created_at TIMESTAMP WITH TIME ZONE DEFAULT (NOW() AT TIME ZONE 'Europe/Moscow'),
+                    telegram_user_id INTEGER REFERENCES delivery_test.telegram_users(id),
+                    total_weight NUMERIC(10, 2),
+                    volume NUMERIC(10, 4),
+                    use_box_dimensions BOOLEAN DEFAULT FALSE,
+                    cost_cny NUMERIC(10, 2),
+                    cost_usd NUMERIC(10, 2),
+                    exchange_rate NUMERIC(10, 6),
+                    weight_per_box NUMERIC(10, 2)
+                )
+            """)
+            
+            # Создаем индексы
+            cursor.execute("""
+                CREATE INDEX IF NOT EXISTS idx_user_inputs_telegram_user_id 
+                ON delivery_test.user_inputs (telegram_user_id)
+            """)
+            cursor.execute("""
+                CREATE INDEX IF NOT EXISTS idx_user_inputs_total_weight 
+                ON delivery_test.user_inputs (total_weight)
+            """)
+            cursor.execute("""
+                CREATE INDEX IF NOT EXISTS idx_user_inputs_use_box_dimensions 
+                ON delivery_test.user_inputs (use_box_dimensions)
+            """)
+            cursor.execute("""
+                CREATE INDEX IF NOT EXISTS idx_user_inputs_volume 
+                ON delivery_test.user_inputs (volume)
+            """)
+            
+            logger.info("✅ Таблица delivery_test.user_inputs создана с правильной структурой")
         
         # Таблица расчетов
         cursor.execute("""
@@ -233,6 +270,30 @@ def init_database():
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT (NOW() AT TIME ZONE 'Europe/Moscow')
             )
         """)
+        
+        # Проверяем таблицы тарифов (weight и density)
+        cursor.execute("""
+            SELECT EXISTS (
+                SELECT FROM information_schema.tables 
+                WHERE table_schema = 'delivery_test' 
+                AND table_name = 'weight'
+            )
+        """)
+        weight_table_exists = cursor.fetchone()[0]
+        
+        cursor.execute("""
+            SELECT EXISTS (
+                SELECT FROM information_schema.tables 
+                WHERE table_schema = 'delivery_test' 
+                AND table_name = 'density'
+            )
+        """)
+        density_table_exists = cursor.fetchone()[0]
+        
+        if not weight_table_exists:
+            logger.warning("⚠️ Таблица delivery_test.weight не найдена!")
+        if not density_table_exists:
+            logger.warning("⚠️ Таблица delivery_test.density не найдена!")
         
         # Инициализируем курсы валют если их нет
         cursor.execute("""
@@ -314,25 +375,90 @@ def save_user_action(telegram_id, action, details=None):
 def save_user_input_to_db(category, total_weight, cost_cny, cost_usd, exchange_rate, volume=None, 
                          use_box_dimensions=False, quantity=None, weight_per_box=None,
                          length=None, width=None, height=None, telegram_user_id=None):
-    """Сохранение входных данных пользователя с улучшенным логированием"""
-    conn = connect_to_db()
-    cursor = conn.cursor()
+    """Сохранение входных данных пользователя с учетом реальной структуры БД"""
+    conn = None
+    cursor = None
+    
     try:
+        conn = connect_to_db()
+        cursor = conn.cursor()
         moscow_time = get_moscow_time()
         
-        # Логируем что пытаемся сохранить
-        logger.info(f"💾 Попытка сохранения user_input: category={category}, weight={total_weight}, cost_cny={cost_cny}")
-        logger.info(f"📊 Параметры: volume={volume}, use_box_dimensions={use_box_dimensions}, telegram_user_id={telegram_user_id}")
+        # Логируем входные данные
+        logger.info(f"💾 Сохранение user_input с реальной структурой БД:")
+        logger.info(f"   category={category}")
+        logger.info(f"   total_weight={total_weight}")
+        logger.info(f"   cost_cny={cost_cny}")
+        logger.info(f"   cost_usd={cost_usd}")
+        logger.info(f"   exchange_rate={exchange_rate}")
+        logger.info(f"   volume={volume}")
+        logger.info(f"   use_box_dimensions={use_box_dimensions}")
+        logger.info(f"   quantity={quantity}")
+        logger.info(f"   weight_per_box={weight_per_box}")
+        logger.info(f"   length={length}, width={width}, height={height}")
+        logger.info(f"   telegram_user_id={telegram_user_id}")
         
+        # Подготавливаем данные согласно реальной структуре таблицы
+        if use_box_dimensions and all([length, width, height, weight_per_box, quantity]):
+            # Режим коробок - все обязательные поля есть
+            weight_value = weight_per_box  # weight в БД = вес одной коробки
+            length_value = length
+            width_value = width  
+            height_value = height
+            cost_value = cost_cny  # cost в БД = стоимость в юанях
+            quantity_value = quantity
+        else:
+            # Режим прямого ввода - нужно заполнить обязательные поля
+            # Если размеры не указаны, рассчитываем их из объема
+            if volume and total_weight:
+                # Предполагаем куб для упрощения
+                side_length = (volume * 1000000) ** (1/3)  # объем в см³, потом корень кубический
+                length_value = side_length
+                width_value = side_length
+                height_value = side_length
+            else:
+                # Устанавливаем минимальные размеры
+                length_value = 10.0
+                width_value = 10.0
+                height_value = 10.0
+                
+            weight_value = total_weight  # weight в БД = общий вес
+            cost_value = cost_cny  # cost в БД = стоимость в юанях
+            quantity_value = 1  # количество коробок = 1 для режима прямого ввода
+        
+        logger.info(f"📦 Подготовленные данные для БД:")
+        logger.info(f"   weight={weight_value}")
+        logger.info(f"   length={length_value}, width={width_value}, height={height_value}")
+        logger.info(f"   cost={cost_value}")
+        logger.info(f"   quantity={quantity_value}")
+        
+        # Вставляем данные согласно реальной структуре
         cursor.execute("""
             INSERT INTO delivery_test.user_inputs (
-                category, total_weight, cost_cny, cost_usd, exchange_rate, volume, use_box_dimensions, 
-                quantity, weight_per_box, length, width, height, telegram_user_id, created_at
+                category, weight, length, width, height, cost, quantity,
+                telegram_user_id, total_weight, volume, use_box_dimensions, 
+                cost_cny, cost_usd, exchange_rate, weight_per_box, created_at
             )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id
-        """, (category, total_weight, cost_cny, cost_usd, exchange_rate, volume, use_box_dimensions, 
-              quantity, weight_per_box, length, width, height, telegram_user_id, moscow_time))
+        """, (
+            category,           # category - обязательное
+            weight_value,       # weight - обязательное (вес коробки или общий вес)
+            length_value,       # length - обязательное
+            width_value,        # width - обязательное  
+            height_value,       # height - обязательное
+            cost_value,         # cost - обязательное (стоимость в юанях)
+            quantity_value,     # quantity - обязательное
+            telegram_user_id,   # telegram_user_id - может быть NULL
+            total_weight,       # total_weight - дополнительное поле
+            volume,             # volume - может быть NULL
+            use_box_dimensions, # use_box_dimensions - boolean
+            cost_cny,           # cost_cny - дополнительное поле
+            cost_usd,           # cost_usd - дополнительное поле
+            exchange_rate,      # exchange_rate - дополнительное поле
+            weight_per_box,     # weight_per_box - может быть NULL
+            moscow_time         # created_at
+        ))
         
         input_id = cursor.fetchone()[0]
         conn.commit()
@@ -340,14 +466,29 @@ def save_user_input_to_db(category, total_weight, cost_cny, cost_usd, exchange_r
         logger.info(f"✅ user_input успешно сохранен с ID={input_id}")
         return input_id
         
+    except psycopg2.Error as db_error:
+        if conn:
+            conn.rollback()
+        logger.error(f"❌ Ошибка базы данных в save_user_input_to_db: {db_error}")
+        logger.error(f"📋 SQL Error Code: {db_error.pgcode}")
+        logger.error(f"📋 SQL Error Message: {db_error.pgerror}")
+        raise
+        
     except Exception as e:
-        conn.rollback()
-        logger.error(f"❌ Ошибка сохранения user_input: {str(e)}")
-        logger.error(f"📋 Данные которые пытались сохранить: category={category}, total_weight={total_weight}")
-        raise  # Перебрасываем исключение чтобы handle_db_errors его обработал
+        if conn:
+            conn.rollback()
+        logger.error(f"❌ Общая ошибка в save_user_input_to_db: {str(e)}")
+        
+        # Логируем подробную информацию об ошибке
+        import traceback
+        logger.error(f"🔍 Полный traceback:\n{traceback.format_exc()}")
+        raise
+        
     finally:
-        cursor.close()
-        conn.close()
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 @handle_db_errors
 def save_user_calculation(telegram_user_id, category, total_weight, density, product_cost_cny, 
@@ -417,37 +558,91 @@ def index():
 
 @app.route('/result')
 def result():
-    """Страница результатов"""
+    """Страница результатов с улучшенной обработкой ошибок"""
     results_param = request.args.get('results', None)
     telegram_id = request.args.get('telegram_id')
     calculation_id = request.args.get('calculation_id')
     
     try:
-        results = json.loads(unquote(results_param)) if results_param else {}
+        # Декодируем и парсим результаты
+        if results_param:
+            try:
+                results = json.loads(unquote(results_param))
+                logger.info(f"📊 Получены результаты для отображения: calculation_id={calculation_id}")
+            except (json.JSONDecodeError, ValueError) as e:
+                logger.error(f"❌ Ошибка декодирования результатов: {e}")
+                return render_template('result.html', error="Некорректный формат данных результатов.")
+        else:
+            results = None
+            logger.warning("⚠️ Параметр results отсутствует")
         
+        # Логируем действие пользователя
         if telegram_id:
             save_user_action(telegram_id, 'view_results', {
                 'has_results': bool(results),
-                'calculation_id': calculation_id
+                'calculation_id': calculation_id,
+                'timestamp': get_moscow_time().isoformat()
             })
         
-        if not results or not all(key in results for key in ["generalInformation", "bag", "corners", "frame"]):
+        # Проверяем корректность структуры результатов
+        if results:
+            required_keys = ["generalInformation", "bag", "corners", "frame"]
+            missing_keys = [key for key in required_keys if key not in results]
+            
+            if missing_keys:
+                logger.error(f"❌ Отсутствуют обязательные ключи в результатах: {missing_keys}")
+                return render_template('result.html', error=f"Неполные данные результатов. Отсутствуют: {', '.join(missing_keys)}")
+            
+            # Проверяем, что все числовые значения валидны
             try:
-                return render_template('result.html', error="Некорректные данные для отображения.")
-            except:
-                return jsonify({"error": "Некорректные данные для отображения."})
-
+                # Преобразуем Decimal значения в float для корректного отображения
+                def convert_decimals(obj):
+                    """Рекурсивно преобразует Decimal в float"""
+                    if isinstance(obj, dict):
+                        return {k: convert_decimals(v) for k, v in obj.items()}
+                    elif isinstance(obj, list):
+                        return [convert_decimals(item) for item in obj]
+                    elif isinstance(obj, Decimal):
+                        return float(obj)
+                    else:
+                        return obj
+                
+                results = convert_decimals(results)
+                logger.info(f"✅ Результаты успешно преобразованы для отображения")
+                
+            except Exception as e:
+                logger.error(f"❌ Ошибка преобразования данных: {e}")
+                return render_template('result.html', error="Ошибка обработки числовых данных.")
+        
+        # Возвращаем шаблон с результатами
         try:
-            return render_template('result.html', results=results, calculation_id=calculation_id)
-        except:
-            return jsonify({"results": results, "calculation_id": calculation_id})
+            return render_template('result.html', 
+                                 results=results, 
+                                 calculation_id=calculation_id,
+                                 telegram_id=telegram_id)
+        except Exception as e:
+            logger.error(f"❌ Ошибка рендеринга шаблона result.html: {e}")
+            # Возвращаем JSON как fallback
+            return jsonify({
+                "results": results, 
+                "calculation_id": calculation_id,
+                "error": "Template rendering failed",
+                "timestamp": get_moscow_time().isoformat()
+            })
         
     except Exception as e:
-        logger.error(f"Ошибка на странице результатов: {str(e)}")
+        logger.error(f"❌ Критическая ошибка на странице результатов: {str(e)}")
+        import traceback
+        logger.error(f"🔍 Полный traceback: {traceback.format_exc()}")
+        
         try:
-            return render_template('result.html', error="Произошла ошибка при обработке данных.")
+            return render_template('result.html', error=f"Произошла ошибка при обработке данных: {str(e)}")
         except:
-            return jsonify({"error": "Произошла ошибка при обработке данных."})
+            # Если даже шаблон не удается отрендерить
+            return jsonify({
+                "error": f"Критическая ошибка: {str(e)}",
+                "timestamp": get_moscow_time().isoformat()
+            }), 500
 
 @app.route('/calculate-old', methods=['GET', 'POST'])
 def calculate():

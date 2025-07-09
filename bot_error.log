@@ -10537,3 +10537,304 @@ INFO:aiogram.event:Update id=450950863 is handled. Duration 193 ms by bot id=770
 INFO:aiogram.event:Update id=450950864 is handled. Duration 217 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450950865 is handled. Duration 138 ms by bot id=7709869722
 INFO:aiogram.event:Update id=450950866 is handled. Duration 198 ms by bot id=7709869722
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950868 is handled. Duration 278 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950869 is handled. Duration 228 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 148440745: 14
+INFO:aiogram.event:Update id=450950867 is handled. Duration 31524 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950870 is handled. Duration 378 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950871 is handled. Duration 563 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950872 is handled. Duration 122 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950873 is handled. Duration 282 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950874 is handled. Duration 119 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950875 is handled. Duration 224 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950876 is handled. Duration 163 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950877 is handled. Duration 116 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950878 is handled. Duration 146 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950879 is handled. Duration 129 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950880 is handled. Duration 99 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 148440745: 20
+INFO:aiogram.event:Update id=450950881 is handled. Duration 26383 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950882 is handled. Duration 266 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950883 is handled. Duration 422 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950884 is handled. Duration 189 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950885 is handled. Duration 196 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950886 is handled. Duration 93 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950887 is handled. Duration 305 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950888 is handled. Duration 206 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950889 is handled. Duration 189 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950890 is handled. Duration 536 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950891 is handled. Duration 95 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950892 is handled. Duration 610 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950893 is handled. Duration 142 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 148440745: 26
+INFO:aiogram.event:Update id=450950894 is handled. Duration 25958 ms by bot id=7709869722
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+WARNING:aiogram.dispatcher:Sleep for 1.209044 seconds and try again... (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+WARNING:aiogram.dispatcher:Sleep for 1.519086 seconds and try again... (tryings = 2, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+WARNING:aiogram.dispatcher:Sleep for 1.854677 seconds and try again... (tryings = 3, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+WARNING:aiogram.dispatcher:Sleep for 2.295906 seconds and try again... (tryings = 4, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+WARNING:aiogram.dispatcher:Sleep for 2.997970 seconds and try again... (tryings = 5, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 6, bot id = 7709869722)
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950898 is handled. Duration 565 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950900 is handled. Duration 434 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950896 is handled. Duration 699 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950899 is handled. Duration 513 ms by bot id=7709869722
+INFO:__main__:Пользователь 138138847 скачал тарифы
+INFO:aiogram.event:Update id=450950897 is handled. Duration 1102 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 138138847: 21
+INFO:aiogram.event:Update id=450950895 is handled. Duration 39051 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950901 is handled. Duration 294 ms by bot id=7709869722
+INFO:__main__:Пользователь 138138847 скачал тарифы
+INFO:aiogram.event:Update id=450950902 is handled. Duration 769 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950903 is handled. Duration 151 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950904 is handled. Duration 131 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950905 is handled. Duration 187 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950906 is handled. Duration 170 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950907 is handled. Duration 107 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950908 is handled. Duration 151 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950909 is handled. Duration 289 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950910 is handled. Duration 261 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950911 is handled. Duration 184 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950912 is handled. Duration 359 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950913 is handled. Duration 145 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950914 is handled. Duration 142 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950915 is handled. Duration 131 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950916 is handled. Duration 179 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950917 is handled. Duration 235 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950918 is handled. Duration 303 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950919 is handled. Duration 159 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950920 is handled. Duration 239 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950921 is handled. Duration 158 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950922 is handled. Duration 139 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950923 is handled. Duration 289 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950924 is handled. Duration 274 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950925 is handled. Duration 133 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950926 is handled. Duration 132 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950927 is handled. Duration 117 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950928 is handled. Duration 131 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950929 is handled. Duration 124 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950930 is handled. Duration 285 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950931 is handled. Duration 122 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950932 is handled. Duration 153 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950933 is handled. Duration 367 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950935 is handled. Duration 198 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 138138847: 20
+INFO:aiogram.event:Update id=450950934 is handled. Duration 37775 ms by bot id=7709869722
+INFO:__main__:Пользователь 138138847 скачал тарифы
+INFO:aiogram.event:Update id=450950936 is handled. Duration 602 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950937 is handled. Duration 200 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950938 is handled. Duration 197 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950939 is handled. Duration 306 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950940 is handled. Duration 142 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950941 is handled. Duration 119 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950942 is handled. Duration 152 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950943 is handled. Duration 345 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950944 is handled. Duration 181 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950945 is handled. Duration 173 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950946 is handled. Duration 250 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950947 is handled. Duration 117 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950948 is handled. Duration 160 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950949 is handled. Duration 118 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950950 is handled. Duration 144 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950951 is handled. Duration 112 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950952 is handled. Duration 329 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950953 is handled. Duration 258 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950954 is handled. Duration 232 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950955 is handled. Duration 217 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950956 is handled. Duration 147 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950957 is handled. Duration 208 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950958 is handled. Duration 344 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950959 is handled. Duration 129 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950960 is handled. Duration 110 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950961 is handled. Duration 197 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950963 is handled. Duration 263 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 138138847: 12
+INFO:aiogram.event:Update id=450950962 is handled. Duration 35289 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950966 is handled. Duration 249 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950967 is handled. Duration 186 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 148440745: 6
+INFO:aiogram.event:Update id=450950964 is handled. Duration 34954 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950969 is handled. Duration 186 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950970 is handled. Duration 181 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950971 is handled. Duration 199 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950972 is handled. Duration 107 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950973 is handled. Duration 578 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950974 is handled. Duration 137 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 138138847: 3
+INFO:aiogram.event:Update id=450950965 is handled. Duration 36119 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950975 is handled. Duration 206 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950976 is handled. Duration 163 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950978 is handled. Duration 167 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 138138847: 2
+INFO:aiogram.event:Update id=450950968 is handled. Duration 36512 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 148440745: 18
+INFO:aiogram.event:Update id=450950977 is handled. Duration 32279 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950979 is handled. Duration 232 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950980 is handled. Duration 83 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950981 is handled. Duration 97 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950982 is handled. Duration 82 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950983 is handled. Duration 122 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950984 is handled. Duration 91 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950985 is handled. Duration 245 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 138138847: 11
+INFO:aiogram.event:Update id=450950986 is handled. Duration 38552 ms by bot id=7709869722
+WARNING:aiogram.dispatcher:Received SIGTERM signal
+INFO:aiogram.dispatcher:Polling stopped for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:__main__:🤖 China Together Bot запущен!
+INFO:__main__:🌐 Web App URL: https://china-together.ru
+INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/china_together_tariffs.pdf
+INFO:__main__:📋 Команды бота установлены!
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450950987 is handled. Duration 352 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950989 is handled. Duration 296 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 138138847: 2
+INFO:aiogram.event:Update id=450950988 is handled. Duration 30818 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950991 is handled. Duration 611 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950990 is handled. Duration 3874 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950992 is handled. Duration 251 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950993 is handled. Duration 138 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450950994 is handled. Duration 488 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950995 is handled. Duration 126 ms by bot id=7709869722
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+WARNING:aiogram.dispatcher:Sleep for 1.489051 seconds and try again... (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+WARNING:aiogram.dispatcher:Sleep for 2.104205 seconds and try again... (tryings = 2, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+WARNING:aiogram.dispatcher:Sleep for 2.699317 seconds and try again... (tryings = 3, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 4, bot id = 7709869722)
+INFO:aiogram.event:Update id=450950996 is handled. Duration 304 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950998 is handled. Duration 180 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 148440745: 30
+INFO:aiogram.event:Update id=450950997 is handled. Duration 39889 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450950999 is handled. Duration 124 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450951000 is handled. Duration 204 ms by bot id=7709869722
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+INFO:aiogram.event:Update id=450951001 is handled. Duration 365 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450951002 is handled. Duration 241 ms by bot id=7709869722
+INFO:__main__:Пользователь 138138847 скачал тарифы
+INFO:aiogram.event:Update id=450951003 is handled. Duration 701 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450951004 is handled. Duration 104 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 138138847: 9
+INFO:aiogram.event:Update id=450951005 is handled. Duration 37419 ms by bot id=7709869722
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+INFO:__main__:Удалено сообщений для пользователя 138138847: 2
+INFO:aiogram.event:Update id=450951006 is handled. Duration 39465 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450951007 is handled. Duration 318 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450951008 is handled. Duration 239 ms by bot id=7709869722
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+INFO:aiogram.event:Update id=450951009 is handled. Duration 498 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450951010 is handled. Duration 274 ms by bot id=7709869722

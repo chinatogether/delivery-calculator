@@ -7,15 +7,30 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+        /* ФИКСИРОВАННАЯ ЦВЕТОВАЯ СХЕМА - НЕ ЗАВИСИТ ОТ ТЕЛЕГРАМ */
         :root {
-            --primary-color: #E74C3C;
-            --secondary-color: #3498db;
-            --success-color: #27ae60;
-            --text-color: #ffffff;
-            --white: #333333;
-            --dark-card: #2a2a2a;
-            --border-color: #444444;
-            --hint-color: #999999;
+            --primary-color: #E74C3C !important;
+            --secondary-color: #3498db !important;
+            --success-color: #27ae60 !important;
+            --text-color: #ffffff !important;
+            --background-color: #1a1a1a !important;
+            --background-gradient: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%) !important;
+            --dark-card: #2a2a2a !important;
+            --input-background: #333333 !important;
+            --border-color: #444444 !important;
+            --hint-color: #999999 !important;
+            --error-color: #ff6b6b !important;
+        }
+
+        /* Переопределяем цвета Telegram Web App */
+        body {
+            --tg-theme-bg-color: var(--background-color) !important;
+            --tg-theme-text-color: var(--text-color) !important;
+            --tg-theme-hint-color: var(--hint-color) !important;
+            --tg-theme-link-color: var(--primary-color) !important;
+            --tg-theme-button-color: var(--primary-color) !important;
+            --tg-theme-button-text-color: #ffffff !important;
+            --tg-theme-secondary-bg-color: var(--dark-card) !important;
         }
 
         * {
@@ -27,12 +42,29 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
-            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            color: var(--text-color) !important;
+            background: var(--background-gradient) !important;
             min-height: 100vh;
             padding: 0;
             margin: 0;
             overflow-x: hidden;
+        }
+
+        /* Принудительно устанавливаем фон для всех возможных контейнеров */
+        html {
+            background: var(--background-color) !important;
+        }
+
+        /* Telegram Web App может изменять фон - переопределяем */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--background-gradient) !important;
+            z-index: -1;
         }
 
         .container {
@@ -40,6 +72,8 @@
             padding: 16px;
             margin: 0 auto;
             padding-bottom: 80px;
+            position: relative;
+            z-index: 1;
         }
 
         .header {
@@ -49,19 +83,19 @@
         }
 
         h1 {
-            color: var(--text-color);
+            color: var(--text-color) !important;
             font-size: 2.2rem;
             margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .subtitle {
-            color: var(--hint-color);
+            color: var(--hint-color) !important;
             font-size: 1.1rem;
         }
 
         .card {
-            background: var(--dark-card);
+            background: var(--dark-card) !important;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             padding: 20px;
@@ -70,7 +104,7 @@
         }
 
         .card h2 {
-            color: var(--primary-color);
+            color: var(--primary-color) !important;
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 16px;
@@ -104,7 +138,7 @@
         }
 
         .info-label {
-            color: var(--hint-color);
+            color: var(--hint-color) !important;
             font-size: 0.9rem;
         }
 
@@ -112,11 +146,11 @@
             font-weight: 500;
             font-size: 0.95rem;
             text-align: right;
-            color: var(--text-color);
+            color: var(--text-color) !important;
         }
 
         .currency-info {
-            background: rgba(52, 152, 219, 0.1);
+            background: rgba(52, 152, 219, 0.1) !important;
             border: 1px solid var(--secondary-color);
             border-radius: 8px;
             padding: 12px;
@@ -124,7 +158,7 @@
         }
 
         .currency-info h3 {
-            color: var(--secondary-color);
+            color: var(--secondary-color) !important;
             font-size: 1rem;
             margin-bottom: 8px;
         }
@@ -145,13 +179,13 @@
             padding: 12px 8px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
-            color: var(--text-color);
+            color: var(--text-color) !important;
         }
 
         .comparison-table th {
-            background: rgba(231, 76, 60, 0.1);
+            background: rgba(231, 76, 60, 0.1) !important;
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--primary-color) !important;
         }
 
         .comparison-table td:nth-child(2),
@@ -161,11 +195,11 @@
         }
 
         .fast-price {
-            color: var(--primary-color);
+            color: var(--primary-color) !important;
         }
 
         .regular-price {
-            color: var(--secondary-color);
+            color: var(--secondary-color) !important;
         }
 
         .details-section {
@@ -178,7 +212,7 @@
             padding: 12px 0;
             border: none;
             background: none;
-            color: var(--primary-color);
+            color: var(--primary-color) !important;
             font-size: 1rem;
             width: 100%;
             text-align: left;
@@ -186,7 +220,7 @@
         }
 
         .details-toggle:hover {
-            color: #c0392b;
+            color: #c0392b !important;
         }
 
         .details-content {
@@ -201,7 +235,7 @@
         .package-details {
             margin-bottom: 20px;
             padding: 16px;
-            background: rgba(52, 152, 219, 0.1);
+            background: rgba(52, 152, 219, 0.1) !important;
             border-radius: 8px;
             border: 1px solid var(--border-color);
         }
@@ -209,7 +243,7 @@
         .package-title {
             font-size: 1rem;
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--primary-color) !important;
             margin-bottom: 12px;
         }
 
@@ -229,7 +263,7 @@
         .btn {
             width: 100%;
             padding: 16px;
-            background: var(--primary-color);
+            background: var(--primary-color) !important;
             border: none;
             border-radius: 8px;
             font-size: 16px;
@@ -241,12 +275,13 @@
             justify-content: center;
             gap: 8px;
             text-decoration: none;
-            color: white;
+            color: white !important;
         }
 
         .btn:hover:not(:disabled) {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+            background: #c0392b !important;
         }
 
         .btn:active:not(:disabled) {
@@ -254,8 +289,8 @@
         }
 
         .error {
-            background: rgba(231, 76, 60, 0.1);
-            color: var(--primary-color);
+            background: rgba(231, 76, 60, 0.1) !important;
+            color: var(--primary-color) !important;
             padding: 16px;
             border-radius: 8px;
             text-align: center;
@@ -264,8 +299,19 @@
         }
 
         .error a {
-            color: var(--primary-color);
+            color: var(--primary-color) !important;
             text-decoration: underline;
+        }
+
+        .debug-info {
+            background: rgba(255, 193, 7, 0.1) !important;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #ffc107 !important;
         }
 
         @media (max-width: 480px) {
@@ -285,11 +331,46 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* ДОПОЛНИТЕЛЬНЫЕ ПЕРЕОПРЕДЕЛЕНИЯ ДЛЯ TELEGRAM WEB APP */
+        .telegram-web-app-wrapper {
+            background: var(--background-color) !important;
+        }
+
+        /* Переопределение для любых возможных контейнеров Telegram */
+        #root, .app, .main-container, [data-telegram] {
+            background: var(--background-color) !important;
+            color: var(--text-color) !important;
+        }
+
+        /* Принудительно устанавливаем цвета для всех текстовых элементов */
+        p, span, div, label {
+            color: var(--text-color) !important;
+        }
+
+        /* Переопределяем цвета hint элементов */
+        .info-label {
+            color: var(--hint-color) !important;
+        }
+
+        /* Для iOS Safari */
+        @supports (-webkit-appearance: none) {
+            input, select, textarea {
+                -webkit-appearance: none;
+                appearance: none;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        {% if results %}
+        {% if error %}
+        <div class="error">
+            <p>❌ {{ error }}</p>
+            <p>Пожалуйста, выполните расчет на <a href="/calculate">странице калькулятора</a>.</p>
+        </div>
+        
+        {% elif results %}
         <div class="header">
             <h1>✅ Расчет выполнен успешно!</h1>
             <p class="subtitle">Выберите оптимальный вариант доставки</p>
@@ -302,27 +383,6 @@
                 <span>Общая информация</span>
             </h2>
             
-            <!-- Информация о валютах -->
-            {% if results.generalInformation.get('exchangeRate') %}
-            <div class="currency-info">
-                <h3>💱 Валютная информация</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-label">Стоимость товара (¥)</span>
-                        <span class="info-value">¥{{ "%.2f"|format(results.generalInformation.productCostCNY) }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Стоимость товара ($)</span>
-                        <span class="info-value">${{ "%.2f"|format(results.generalInformation.productCostUSD) }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Курс CNY/USD</span>
-                        <span class="info-value">{{ "%.4f"|format(results.generalInformation.exchangeRate) }}</span>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-            
             <div class="info-grid">
                 <div class="info-item">
                     <span class="info-label">Категория</span>
@@ -330,21 +390,25 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">Общий вес</span>
-                    <span class="info-value">{{ "%.2f"|format(results.generalInformation.weight) }} кг</span>
+                    <span class="info-value">{{ "%.2f"|format(results.generalInformation.weight|float) }} кг</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Стоимость товара ($)</span>
+                    <span class="info-value">${{ "%.2f"|format(results.generalInformation.productCostUSD|float) }}</span>
                 </div>
                 {% if results.generalInformation.get('weightPerBox') %}
                 <div class="info-item">
                     <span class="info-label">Вес одной коробки</span>
-                    <span class="info-value">{{ "%.2f"|format(results.generalInformation.weightPerBox) }} кг</span>
+                    <span class="info-value">{{ "%.2f"|format(results.generalInformation.weightPerBox|float) }} кг</span>
                 </div>
                 {% endif %}
                 <div class="info-item">
                     <span class="info-label">Плотность</span>
-                    <span class="info-value">{{ "%.2f"|format(results.generalInformation.density) }} кг/м³</span>
+                    <span class="info-value">{{ "%.2f"|format(results.generalInformation.density|float) }} кг/м³</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Объем</span>
-                    <span class="info-value">{{ "%.4f"|format(results.generalInformation.volume) }} м³</span>
+                    <span class="info-value">{{ "%.4f"|format(results.generalInformation.volume|float) }} м³</span>
                 </div>
                 {% if results.generalInformation.boxCount > 1 %}
                 <div class="info-item">
@@ -358,7 +422,7 @@
                     {% else %}
                         <span class="info-label">Быстрое авто на 1 кг</span>
                     {% endif %}
-                    <span class="fast-price">{{ "%.2f"|format(results.generalInformation.fast_car_cost_per_kg) }} $/кг</span>
+                    <span class="fast-price">{{ "%.2f"|format(results.generalInformation.fast_car_cost_per_kg|float) }} $/кг</span>
                 </div>
                 <div class="info-item">
                     {% if results.generalInformation.category == 'Обувь' %}
@@ -366,7 +430,7 @@
                     {% else %}
                         <span class="info-label">Обычное авто на 1 кг</span>
                     {% endif %}
-                    <span class="regular-price">{{ "%.2f"|format(results.generalInformation.regular_car_cost_per_kg) }} $/кг</span>
+                    <span class="regular-price">{{ "%.2f"|format(results.generalInformation.regular_car_cost_per_kg|float) }} $/кг</span>
                 </div>
             </div>
         </div>
@@ -397,18 +461,18 @@
                     <tbody>
                         <tr>
                             <td>📦 Мешок</td>
-                            <td class="fast-price">${{ "%.2f"|format(results.bag.totalFast) }}</td>
-                            <td class="regular-price">${{ "%.2f"|format(results.bag.totalRegular) }}</td>
+                            <td class="fast-price">${{ "%.2f"|format(results.bag.totalFast|float) }}</td>
+                            <td class="regular-price">${{ "%.2f"|format(results.bag.totalRegular|float) }}</td>
                         </tr>
                         <tr>
                             <td>📐 Картонные уголки</td>
-                            <td class="fast-price">${{ "%.2f"|format(results.corners.totalFast) }}</td>
-                            <td class="regular-price">${{ "%.2f"|format(results.corners.totalRegular) }}</td>
+                            <td class="fast-price">${{ "%.2f"|format(results.corners.totalFast|float) }}</td>
+                            <td class="regular-price">${{ "%.2f"|format(results.corners.totalRegular|float) }}</td>
                         </tr>
                         <tr>
                             <td>🪵 Деревянный каркас</td>
-                            <td class="fast-price">${{ "%.2f"|format(results.frame.totalFast) }}</td>
-                            <td class="regular-price">${{ "%.2f"|format(results.frame.totalRegular) }}</td>
+                            <td class="fast-price">${{ "%.2f"|format(results.frame.totalFast|float) }}</td>
+                            <td class="regular-price">${{ "%.2f"|format(results.frame.totalRegular|float) }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -429,35 +493,35 @@
                         <div class="info-grid">
                             <div class="info-item">
                                 <span class="info-label">Вес с упаковкой</span>
-                                <span class="info-value">{{ "%.2f"|format(results.bag.packedWeight) }} кг</span>
+                                <span class="info-value">{{ "%.2f"|format(results.bag.packedWeight|float) }} кг</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Упаковка</span>
-                                <span class="info-value">${{ "%.2f"|format(results.bag.packagingCost) }}</span>
+                                <span class="info-value">${{ "%.2f"|format(results.bag.packagingCost|float) }}</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Разгрузка</span>
-                                <span class="info-value">${{ "%.2f"|format(results.bag.unloadCost) }}</span>
+                                <span class="info-value">${{ "%.2f"|format(results.bag.unloadCost|float) }}</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Страховка</span>
-                                <span class="info-value">{{ results.bag.insuranceRate }} (${{ "%.2f"|format(results.bag.insurance) }})</span>
+                                <span class="info-value">{{ results.bag.insuranceRate }} (${{ "%.2f"|format(results.bag.insurance|float) }})</span>
                             </div>
                             <div class="info-item">
-                                 {% if results.generalInformation.category == 'Обувь' %}
+                                {% if results.generalInformation.category == 'Обувь' %}
                                 <span class="info-label">Доставка оригинала</span>
                                 {% else %}
                                 <span class="info-label">Доставка быстрая</span>
                                 {% endif %}
-                                <span class="fast-price">${{ "%.2f"|format(results.bag.deliveryCostFast) }}</span>
+                                <span class="fast-price">${{ "%.2f"|format(results.bag.deliveryCostFast|float) }}</span>
                             </div>
                             <div class="info-item">
-                                 {% if results.generalInformation.category == 'Обувь' %}
+                                {% if results.generalInformation.category == 'Обувь' %}
                                 <span class="info-label">Доставка реплики</span>
                                 {% else %}
                                 <span class="info-label">Доставка обычная</span>
                                 {% endif %}
-                                <span class="regular-price">${{ "%.2f"|format(results.bag.deliveryCostRegular) }}</span>
+                                <span class="regular-price">${{ "%.2f"|format(results.bag.deliveryCostRegular|float) }}</span>
                             </div>
                         </div>
                     </div>
@@ -468,35 +532,35 @@
                         <div class="info-grid">
                             <div class="info-item">
                                 <span class="info-label">Вес с упаковкой</span>
-                                <span class="info-value">{{ "%.2f"|format(results.corners.packedWeight) }} кг</span>
+                                <span class="info-value">{{ "%.2f"|format(results.corners.packedWeight|float) }} кг</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Упаковка</span>
-                                <span class="info-value">${{ "%.2f"|format(results.corners.packagingCost) }}</span>
+                                <span class="info-value">${{ "%.2f"|format(results.corners.packagingCost|float) }}</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Разгрузка</span>
-                                <span class="info-value">${{ "%.2f"|format(results.corners.unloadCost) }}</span>
+                                <span class="info-value">${{ "%.2f"|format(results.corners.unloadCost|float) }}</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Страховка</span>
-                                <span class="info-value">{{ results.corners.insuranceRate }} (${{ "%.2f"|format(results.corners.insurance) }})</span>
+                                <span class="info-value">{{ results.corners.insuranceRate }} (${{ "%.2f"|format(results.corners.insurance|float) }})</span>
                             </div>
                             <div class="info-item">
-                                 {% if results.generalInformation.category == 'Обувь' %}
+                                {% if results.generalInformation.category == 'Обувь' %}
                                 <span class="info-label">Доставка оригинала</span>
                                 {% else %}
                                 <span class="info-label">Доставка быстрая</span>
                                 {% endif %}
-                                <span class="fast-price">${{ "%.2f"|format(results.corners.deliveryCostFast) }}</span>
+                                <span class="fast-price">${{ "%.2f"|format(results.corners.deliveryCostFast|float) }}</span>
                             </div>
                             <div class="info-item">
-                                 {% if results.generalInformation.category == 'Обувь' %}
+                                {% if results.generalInformation.category == 'Обувь' %}
                                 <span class="info-label">Доставка реплики</span>
                                 {% else %}
                                 <span class="info-label">Доставка обычная</span>
                                 {% endif %}
-                                <span class="regular-price">${{ "%.2f"|format(results.corners.deliveryCostRegular) }}</span>
+                                <span class="regular-price">${{ "%.2f"|format(results.corners.deliveryCostRegular|float) }}</span>
                             </div>
                         </div>
                     </div>
@@ -507,35 +571,35 @@
                         <div class="info-grid">
                             <div class="info-item">
                                 <span class="info-label">Вес с упаковкой</span>
-                                <span class="info-value">{{ "%.2f"|format(results.frame.packedWeight) }} кг</span>
+                                <span class="info-value">{{ "%.2f"|format(results.frame.packedWeight|float) }} кг</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Упаковка</span>
-                                <span class="info-value">${{ "%.2f"|format(results.frame.packagingCost) }}</span>
+                                <span class="info-value">${{ "%.2f"|format(results.frame.packagingCost|float) }}</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Разгрузка</span>
-                                <span class="info-value">${{ "%.2f"|format(results.frame.unloadCost) }}</span>
+                                <span class="info-value">${{ "%.2f"|format(results.frame.unloadCost|float) }}</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Страховка</span>
-                                <span class="info-value">{{ results.frame.insuranceRate }} (${{ "%.2f"|format(results.frame.insurance) }})</span>
+                                <span class="info-value">{{ results.frame.insuranceRate }} (${{ "%.2f"|format(results.frame.insurance|float) }})</span>
                             </div>
                             <div class="info-item">
-                                 {% if results.generalInformation.category == 'Обувь' %}
+                                {% if results.generalInformation.category == 'Обувь' %}
                                 <span class="info-label">Доставка оригинала</span>
                                 {% else %}
                                 <span class="info-label">Доставка быстрая</span>
                                 {% endif %}
-                                <span class="fast-price">${{ "%.2f"|format(results.frame.deliveryCostFast) }}</span>
+                                <span class="fast-price">${{ "%.2f"|format(results.frame.deliveryCostFast|float) }}</span>
                             </div>
                             <div class="info-item">
-                                 {% if results.generalInformation.category == 'Обувь' %}
+                                {% if results.generalInformation.category == 'Обувь' %}
                                 <span class="info-label">Доставка реплики</span>
                                 {% else %}
                                 <span class="info-label">Доставка обычная</span>
                                 {% endif %}
-                                <span class="regular-price">${{ "%.2f"|format(results.frame.deliveryCostRegular) }}</span>
+                                <span class="regular-price">${{ "%.2f"|format(results.frame.deliveryCostRegular|float) }}</span>
                             </div>
                         </div>
                     </div>
@@ -545,7 +609,7 @@
 
         <!-- Кнопки действий -->
         <div class="action-buttons card">
-            <a href="/order?calculation_id={{ calculation_id }}" class="btn">
+            <a href="/order?calculation_id={{ calculation_id or 'undefined' }}" class="btn">
                 <span>🚚</span>
                 <span>Заказать доставку</span>
             </a>
@@ -558,71 +622,101 @@
         {% else %}
         <div class="error">
             <p>❌ Данные для отображения отсутствуют.</p>
-            <p>Пожалуйста, выполните расчет на <a href="/">главной странице</a>.</p>
+            <p>Пожалуйста, выполните расчет на <a href="/calculate">странице калькулятора</a>.</p>
         </div>
         {% endif %}
     </div>
 
     <script>
-        // Инициализация Telegram Web App
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
+        // Обработка ошибок JavaScript
+        window.addEventListener('error', function(e) {
+            console.error('JavaScript error:', e.error);
+        });
+
+        // Инициализация Telegram Web App с проверкой
+        let tg = null;
+        try {
+            if (window.Telegram && window.Telegram.WebApp) {
+                tg = window.Telegram.WebApp;
+                tg.ready();
+                tg.expand();
+            }
+        } catch (e) {
+            console.warn('Telegram Web App недоступен:', e);
+        }
 
         // Функция переключения детальной информации
         function toggleDetails() {
-            const content = document.getElementById('detailsContent');
-            const button = document.querySelector('.details-toggle');
-            
-            if (content.classList.contains('active')) {
-                content.classList.remove('active');
-                button.textContent = '📊 Подробная разбивка стоимости';
-            } else {
-                content.classList.add('active');
-                button.textContent = '📊 Скрыть подробности';
-            }
-            
-            // Вибрация при нажатии
-            if (tg && tg.HapticFeedback) {
-                tg.HapticFeedback.impactOccurred('light');
+            try {
+                const content = document.getElementById('detailsContent');
+                const button = document.querySelector('.details-toggle');
+                
+                if (content && button) {
+                    if (content.classList.contains('active')) {
+                        content.classList.remove('active');
+                        button.textContent = '📊 Подробная разбивка стоимости';
+                    } else {
+                        content.classList.add('active');
+                        button.textContent = '📊 Скрыть подробности';
+                    }
+                    
+                    // Вибрация при нажатии
+                    if (tg && tg.HapticFeedback) {
+                        tg.HapticFeedback.impactOccurred('light');
+                    }
+                }
+            } catch (e) {
+                console.error('Error in toggleDetails:', e);
             }
         }
 
         {% if results %}
-        // Данные результатов
-        const resultsData = {
-            generalInformation: {{ results.generalInformation | tojson }},
-            bag: {{ results.bag | tojson }},
-            corners: {{ results.corners | tojson }},
-            frame: {{ results.frame | tojson }}
-        };
+        try {
+            // Данные результатов с безопасной обработкой
+            const resultsData = {{ results | tojson | safe }};
 
-        // Получаем telegram_id
-        let telegramId = null;
-        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-            telegramId = tg.initDataUnsafe.user.id;
-        } else {
-            const urlParams = new URLSearchParams(window.location.search);
-            telegramId = urlParams.get('telegram_id');
-        }
+            // Получаем telegram_id
+            let telegramId = null;
+            try {
+                if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                    telegramId = tg.initDataUnsafe.user.id;
+                } else {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    telegramId = urlParams.get('telegram_id');
+                }
+            } catch (e) {
+                console.warn('Не удалось получить telegram_id:', e);
+            }
 
-        // Настройка кнопки "Назад"
-        if (tg && tg.BackButton) {
-            tg.BackButton.show();
-            tg.BackButton.onClick(() => {
-                window.location.href = '/calculate';
-            });
-        }
+            // Настройка кнопки "Назад"
+            try {
+                if (tg && tg.BackButton) {
+                    tg.BackButton.show();
+                    tg.BackButton.onClick(() => {
+                        window.location.href = '/calculate';
+                    });
+                }
+            } catch (e) {
+                console.warn('Не удалось настроить кнопку "Назад":', e);
+            }
 
-        // Настройка главной кнопки
-        if (tg && tg.MainButton) {
-            tg.MainButton.text = "Заказать доставку";
-            tg.MainButton.color = "#E74C3C";
-            tg.MainButton.show();
+            // Настройка главной кнопки
+            try {
+                if (tg && tg.MainButton) {
+                    tg.MainButton.text = "Заказать доставку";
+                    tg.MainButton.color = "#E74C3C";
+                    tg.MainButton.show();
 
-            tg.MainButton.onClick(() => {
-                window.location.href = `/order?calculation_id={{ calculation_id }}`;
-            });
+                    tg.MainButton.onClick(() => {
+                        window.location.href = `/order?calculation_id={{ calculation_id or 'undefined' }}`;
+                    });
+                }
+            } catch (e) {
+                console.warn('Не удалось настроить главную кнопку:', e);
+            }
+
+        } catch (e) {
+            console.error('Error in results processing:', e);
         }
         {% endif %}
     </script>

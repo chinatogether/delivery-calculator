@@ -502,3 +502,120 @@ client_session: <aiohttp.client.ClientSession object at 0x7961ce4b2600>
 2025-06-30 07:52:34,201 - __main__ - INFO - Уведомление об обновлении курса отправлено в канал
 2025-06-30 07:52:34,373 - aiogram.event - INFO - Update id=33789622 is handled. Duration 410 ms by bot id=8024421344
 2025-06-30 07:55:13,930 - aiogram.event - INFO - Update id=33789623 is handled. Duration 167 ms by bot id=8024421344
+2025-06-30 18:34:55,132 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-30 18:34:55,521 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-30 18:34:55,521 - aiogram.dispatcher - INFO - Start polling
+2025-06-30 18:34:55,570 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-30 18:39:48,909 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-06-30 18:39:48,911 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-30 18:39:48,911 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-30 18:40:03,123 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-30 18:40:03,380 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-30 18:40:03,381 - aiogram.dispatcher - INFO - Start polling
+2025-06-30 18:40:03,431 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-30 18:50:59,600 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-06-30 18:50:59,600 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-30 18:50:59,600 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-30 18:51:08,644 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-30 18:51:08,808 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-30 18:51:08,809 - aiogram.dispatcher - INFO - Start polling
+2025-06-30 18:51:08,859 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-30 19:06:09,570 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-06-30 19:06:09,570 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-06-30 19:06:09,571 - aiogram.dispatcher - INFO - Polling stopped
+2025-06-30 19:06:19,377 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-06-30 19:06:19,632 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-06-30 19:06:19,632 - aiogram.dispatcher - INFO - Start polling
+2025-06-30 19:06:19,688 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-07-01 01:11:03,448 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-07-01 01:11:03,448 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-01 01:11:04,493 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-07-01 01:11:04,493 - aiogram.dispatcher - WARNING - Sleep for 1.339969 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-07-01 01:11:05,881 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-07-01 01:11:05,881 - aiogram.dispatcher - WARNING - Sleep for 1.618479 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-07-01 01:11:26,900 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2025-07-01 15:05:34,793 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-07-01 15:05:35,099 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-07-01 15:05:35,100 - aiogram.dispatcher - INFO - Start polling
+2025-07-01 15:05:35,159 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-07-01 15:06:22,690 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-07-01 15:06:22,690 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-07-01 15:06:22,690 - aiogram.dispatcher - INFO - Polling stopped
+2025-07-01 15:06:26,814 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-07-01 15:06:26,988 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-07-01 15:06:26,989 - aiogram.dispatcher - INFO - Start polling
+2025-07-01 15:06:27,036 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-07-01 15:50:11,442 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-07-01 15:50:11,445 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-07-01 15:50:11,446 - aiogram.dispatcher - INFO - Polling stopped
+2025-07-01 15:50:15,712 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-07-01 15:50:15,902 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-07-01 15:50:15,902 - aiogram.dispatcher - INFO - Start polling
+2025-07-01 15:50:15,949 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-07-01 15:54:01,206 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-07-01 15:54:01,206 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-07-01 15:54:01,209 - aiogram.dispatcher - INFO - Polling stopped
+2025-07-01 15:54:04,974 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-07-01 15:54:05,125 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-07-01 15:54:05,126 - aiogram.dispatcher - INFO - Start polling
+2025-07-01 15:54:05,171 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-07-01 16:03:26,732 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-07-01 16:03:26,732 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-07-01 16:03:26,732 - aiogram.dispatcher - INFO - Polling stopped
+2025-07-01 16:03:30,609 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-07-01 16:03:30,784 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-07-01 16:03:30,785 - aiogram.dispatcher - INFO - Start polling
+2025-07-01 16:03:30,834 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-07-02 12:03:14,725 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-07-02 12:03:14,842 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-02 12:03:26,025 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-07-02 12:04:56,589 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-07-02 12:04:56,589 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-02 12:05:07,728 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-07-02 13:37:14,798 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-07-02 13:37:14,798 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-02 13:37:25,935 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-07-02 13:57:39,066 - aiogram.event - INFO - Update id=33789624 is not handled. Duration 169 ms by bot id=8024421344
+2025-07-03 01:11:46,248 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-07-03 01:11:46,249 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-03 01:11:47,300 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-07-03 01:11:47,300 - aiogram.dispatcher - WARNING - Sleep for 1.220839 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-07-03 01:11:50,967 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-07-03 01:11:50,968 - aiogram.dispatcher - WARNING - Sleep for 1.772430 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-07-03 01:11:52,788 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-07-03 01:11:52,788 - aiogram.dispatcher - WARNING - Sleep for 2.177169 seconds and try again... (tryings = 3, bot id = 8024421344)
+2025-07-03 01:12:13,613 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2025-07-03 01:57:53,458 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-07-03 01:57:53,458 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-03 01:57:54,503 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-07-03 01:57:54,503 - aiogram.dispatcher - WARNING - Sleep for 1.455486 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-07-03 01:58:14,279 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2025-07-03 08:05:25,675 - aiogram.event - INFO - Update id=33789625 is handled. Duration 18953 ms by bot id=8024421344
+2025-07-04 06:07:05,598 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-07-04 06:07:05,598 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-04 06:07:16,745 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-07-04 08:58:26,362 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-07-04 08:58:26,362 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-04 08:58:37,499 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-07-04 10:07:57,908 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-07-04 10:07:57,908 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-04 10:08:09,059 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-07-08 14:06:04,419 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-07-08 14:06:04,482 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-08 14:06:15,623 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-07-08 22:05:33,416 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-07-08 22:05:33,416 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-08 22:05:44,794 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-07-08 22:06:03,632 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-07-08 22:06:03,633 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-08 22:06:14,684 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-07-09 02:37:23,211 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-07-09 02:37:23,211 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-09 02:37:34,360 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-07-09 08:05:49,976 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-07-09 08:05:49,976 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-07-09 08:06:01,154 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
