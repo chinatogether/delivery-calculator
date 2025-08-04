@@ -137,6 +137,23 @@ def convert_cny_to_usd(amount_cny):
     rate = get_current_exchange_rate()  # Сколько юаней за 1 доллар
     return amount_cny / rate  # Делим юани на курс
 
+def get_volume_rates():
+    """Получение тарифов за кубический метр для товаров с плотностью < 100 кг/м³"""
+    return {
+        'Обычные товары': {
+            'fast': Decimal('360'),
+            'regular': Decimal('320')
+        },
+        'Одежда': {
+            'fast': Decimal('420'), 
+            'regular': Decimal('380')
+        },
+        'Обувь': {
+            'fast': Decimal('360'),
+            'regular': Decimal('380')  # брендовая
+        }
+    }
+
 def init_database():
     """Создание таблиц в базе данных (обновленная версия)"""
     conn = connect_to_db()
@@ -732,16 +749,6 @@ def calculate():
 
         logger.info(f"📊 Плотность: {density}")
 
-        # Определяем процент страхования (теперь на основе стоимости в долларах)
-        cost_per_kg_usd = cost_usd / total_weight if total_weight > 0 else Decimal('0')
-        if cost_per_kg_usd < 20:
-            insurance_rate = Decimal('0.01')
-        else:
-            insurance_rate = Decimal('0.02')
-        insurance = cost_usd * insurance_rate
-
-        logger.info(f"💰 Страхование: rate={insurance_rate}, amount={insurance}")
-
         # Получаем тарифы из БД
         conn = connect_to_db()
         cursor = conn.cursor()
@@ -810,17 +817,175 @@ def calculate():
         insurance_corners = cost_usd * (Decimal('0.01') if cost_per_corners < 20 else Decimal('0.02'))
         insurance_frame = cost_usd * (Decimal('0.01') if cost_per_frame < 20 else Decimal('0.02'))
 
-        # Расчет доставки
-        delivery_cost_fast_bag = (fast_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
-        delivery_cost_regular_bag = (regular_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
-        delivery_cost_fast_corners = (fast_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
-        delivery_cost_regular_corners = (regular_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
-        delivery_cost_fast_frame = (fast_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
-        delivery_cost_regular_frame = (regular_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
+        # НОВАЯ ЛОГИКА: Проверяем плотность для выбора метода расчета
+        if density < 100:
+            logger.info(f"🧮 Плотность {density} < 100, используем расчет по объему")
+
+            # Определяем процент страхования (теперь на основе стоимости в долларах)
+            cost_per_kg_usd = cost_usd / total_weight if total_weight > 0 else Decimal('0')
+            if cost_per_kg_usd < 20:
+                insurance_rate = Decimal('0.01')
+            else:
+                insurance_rate = Decimal('0.02')
+            insurance = cost_usd * insurance_rate
+
+            logger.info(f"💰 Страхование: rate={insurance_rate}, amount={insurance}")
+
+            # Получаем тарифы по объему
+            volume_rates = get_volume_rates()
+            
+            # Нормализуем название категории для поиска в тарифах
+            category_normalized = category.strip()
+
+            if category_normalized not in volume_rates:
+                logger.error(f"❌ Категория '{category}' не найдена в тарифах по объему")
+                return jsonify({"error": f"Категория '{category}' не поддерживается для расчета по объему"}), 400
+                
+            rates = volume_rates[category_normalized]
+            
+            # Рассчитываем стоимость доставки по объему
+            delivery_cost_fast = (rates['fast'] * total_volume).quantize(Decimal('0.01'))
+            delivery_cost_regular = (rates['regular'] * total_volume).quantize(Decimal('0.01'))
+
+            logger.info(f"🚚 Доставка по объему: быстрая={delivery_cost_fast}, обычная={delivery_cost_regular}")
+
+            # Формируем результаты для низкой плотности (только один вариант - мешок)
+            results = {
+                "generalInformation": {
+                    "category": category,
+                    "fast_car_cost_per_kg": float((delivery_cost_fast/total_weight).quantize(Decimal('0.01'))),
+                    "regular_car_cost_per_kg": float((delivery_cost_regular/total_weight).quantize(Decimal('0.01'))),
+                    "weight": float(total_weight.quantize(Decimal('0.01'))),
+                    "density": float(density.quantize(Decimal('0.01'))),
+                    "productCostCNY": float(cost_cny),
+                    "productCostUSD": float(cost_usd.quantize(Decimal('0.01'))),
+                    "exchangeRate": float(exchange_rate.quantize(Decimal('0.0001'))),
+                    "exchangeRateNote": f"{exchange_rate} юаней за 1$",
+                    "insuranceRate": f"{insurance_rate * Decimal('100'):.0f}%",
+                    "insuranceAmount": float(insurance.quantize(Decimal('0.01'))),
+                    "volume": float(total_volume.quantize(Decimal('0.01'))),
+                    "boxCount": quantity if use_box_dimensions else 1,
+                    "weightPerBox": float(weight_per_box) if weight_per_box else None
+                    },
+                "bag": {
+                    "packedWeight": float(total_weight.quantize(Decimal('0.01'))),
+                    "packagingCost": float(packaging_cost_bag),
+                    "unloadCost": float(unload_cost_bag),
+                    "insurance": float(insurance.quantize(Decimal('0.01'))),
+                    "insuranceRate": f"{(insurance/cost_usd * Decimal('100')).quantize(Decimal('1')):.0f}%",
+                    "deliveryCostFast": float(delivery_cost_fast),
+                    "deliveryCostRegular": float(delivery_cost_regular),
+                    "totalFast": float((packaging_cost_bag + unload_cost_bag + insurance + delivery_cost_fast).quantize(Decimal('0.01'))),
+                    "totalRegular": float((packaging_cost_bag + unload_cost_bag + insurance + delivery_cost_regular).quantize(Decimal('0.01')))
+                },
+                "corners": {
+                    "packedWeight": float(packed_weight_corners.quantize(Decimal('0.01'))),
+                    "packagingCost": float(packaging_cost_corners.quantize(Decimal('0.01'))),
+                    "unloadCost": float(unload_cost_corners.quantize(Decimal('0.01'))),
+                    "insurance": float(insurance_corners.quantize(Decimal('0.01'))),
+                    "insuranceRate": f"{(insurance_corners/cost_usd * Decimal('100')).quantize(Decimal('1')):.0f}%",
+                    "deliveryCostFast": float(delivery_cost_fast),
+                    "deliveryCostRegular": float(delivery_cost_regular),
+                    "totalFast": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_fast).quantize(Decimal('0.01'))),
+                    "totalRegular": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_regular).quantize(Decimal('0.01')))
+                },
+                "frame": {
+                    "packedWeight": float(packed_weight_frame.quantize(Decimal('0.01'))),
+                    "packagingCost": float(packaging_cost_frame.quantize(Decimal('0.01'))),
+                    "unloadCost": float(unload_cost_frame.quantize(Decimal('0.01'))),
+                    "insurance": float(insurance_frame.quantize(Decimal('0.01'))),
+                    "insuranceRate": f"{(insurance_frame/cost_usd * Decimal('100')).quantize(Decimal('1')):.0f}%",
+                    "deliveryCostFast": float(delivery_cost_fast),
+                    "deliveryCostRegular": float(delivery_cost_regular),
+                    "totalFast": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_fast).quantize(Decimal('0.01'))),
+                    "totalRegular": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_regular).quantize(Decimal('0.01')))
+                }
+            }
+
+        else:
+            logger.info(f"🧮 Плотность {density} >= 100, используем обычный расчет по весу")
+
+            # ОБЫЧНАЯ ЛОГИКА для плотности >= 100 (весь существующий код)
+                # Определяем процент страхования (теперь на основе стоимости в долларах)
+            cost_per_kg_usd = cost_usd / total_weight if total_weight > 0 else Decimal('0')
+            if cost_per_kg_usd < 20:
+                insurance_rate = Decimal('0.01')
+            else:
+                insurance_rate = Decimal('0.02')
+            insurance = cost_usd * insurance_rate
+
+            logger.info(f"💰 Страхование: rate={insurance_rate}, amount={insurance}")
+
+                # Получаем тарифы из БД
+            conn = connect_to_db()
+            cursor = conn.cursor()
+
+            logger.info(f"🔍 Поиск тарифов для веса: {total_weight}")
+
+            # Расчет доставки
+            delivery_cost_fast_bag = (fast_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
+            delivery_cost_regular_bag = (regular_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
+            delivery_cost_fast_corners = (fast_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
+            delivery_cost_regular_corners = (regular_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
+            delivery_cost_fast_frame = (fast_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
+            delivery_cost_regular_frame = (regular_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
+
+                    # Формируем результаты
+            results = {
+                "generalInformation": {
+                    "category": category,
+                    "fast_car_cost_per_kg": float(fast_car_cost_per_kg.quantize(Decimal('0.01'))),
+                    "regular_car_cost_per_kg": float(regular_car_cost_per_kg.quantize(Decimal('0.01'))),
+                    "weight": float(total_weight.quantize(Decimal('0.01'))),
+                    "density": float(density.quantize(Decimal('0.01'))),
+                    "productCostCNY": float(cost_cny),
+                    "productCostUSD": float(cost_usd.quantize(Decimal('0.01'))),
+                    "exchangeRate": float(exchange_rate.quantize(Decimal('0.0001'))),
+                    "exchangeRateNote": f"{exchange_rate} юаней за 1$",
+                    "insuranceRate": f"{insurance_rate * Decimal('100'):.0f}%",
+                    "insuranceAmount": float(insurance.quantize(Decimal('0.01'))),
+                    "volume": float(total_volume.quantize(Decimal('0.01'))),
+                    "boxCount": quantity if use_box_dimensions else 1,
+                    "weightPerBox": float(weight_per_box) if weight_per_box else None
+                },
+                "bag": {
+                    "packedWeight": float(packed_weight_bag.quantize(Decimal('0.01'))),
+                    "packagingCost": float(packaging_cost_bag.quantize(Decimal('0.01'))),
+                    "unloadCost": float(unload_cost_bag.quantize(Decimal('0.01'))),
+                    "insurance": float(insurance_bag.quantize(Decimal('0.01'))),
+                    "insuranceRate": f"{(insurance_bag/cost_usd * Decimal('100')).quantize(Decimal('1')):.0f}%",
+                    "deliveryCostFast": float(delivery_cost_fast_bag),
+                    "deliveryCostRegular": float(delivery_cost_regular_bag),
+                    "totalFast": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_fast_bag).quantize(Decimal('0.01'))),
+                    "totalRegular": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_regular_bag).quantize(Decimal('0.01')))
+                },
+                "corners": {
+                    "packedWeight": float(packed_weight_corners.quantize(Decimal('0.01'))),
+                    "packagingCost": float(packaging_cost_corners.quantize(Decimal('0.01'))),
+                    "unloadCost": float(unload_cost_corners.quantize(Decimal('0.01'))),
+                    "insurance": float(insurance_corners.quantize(Decimal('0.01'))),
+                    "insuranceRate": f"{(insurance_corners/cost_usd * Decimal('100')).quantize(Decimal('1')):.0f}%",
+                    "deliveryCostFast": float(delivery_cost_fast_corners),
+                    "deliveryCostRegular": float(delivery_cost_regular_corners),
+                    "totalFast": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_fast_corners).quantize(Decimal('0.01'))),
+                    "totalRegular": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_regular_corners).quantize(Decimal('0.01')))
+                },
+                "frame": {
+                    "packedWeight": float(packed_weight_frame.quantize(Decimal('0.01'))),
+                    "packagingCost": float(packaging_cost_frame.quantize(Decimal('0.01'))),
+                    "unloadCost": float(unload_cost_frame.quantize(Decimal('0.01'))),
+                    "insurance": float(insurance_frame.quantize(Decimal('0.01'))),
+                    "insuranceRate": f"{(insurance_frame/cost_usd * Decimal('100')).quantize(Decimal('1')):.0f}%",
+                    "deliveryCostFast": float(delivery_cost_fast_frame),
+                    "deliveryCostRegular": float(delivery_cost_regular_frame),
+                    "totalFast": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_fast_frame).quantize(Decimal('0.01'))),
+                    "totalRegular": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_regular_frame).quantize(Decimal('0.01')))
+                }
+            }
 
         logger.info(f"💰 Расчеты завершены, начинаем сохранение в БД")
 
-        # ИСПРАВЛЕНИЕ: Логируем данные перед сохранением
+            # ИСПРАВЛЕНИЕ: Логируем данные перед сохранением
         logger.info(f"💾 Данные для сохранения user_input:")
         logger.info(f"   category={category}")
         logger.info(f"   total_weight={float(total_weight)}")
@@ -836,7 +1001,7 @@ def calculate():
         logger.info(f"   height={float(height) if height is not None else None}")
         logger.info(f"   telegram_user_id={telegram_user_id}")
 
-        # Сохраняем данные в БД
+            # Сохраняем данные в БД
         input_id = save_user_input_to_db(
             category=category,
             total_weight=float(total_weight),
@@ -858,59 +1023,6 @@ def calculate():
         else:
             logger.error(f"❌ save_user_input_to_db вернул None")
 
-        # Формируем результаты
-        results = {
-            "generalInformation": {
-                "category": category,
-                "fast_car_cost_per_kg": float(fast_car_cost_per_kg.quantize(Decimal('0.01'))),
-                "regular_car_cost_per_kg": float(regular_car_cost_per_kg.quantize(Decimal('0.01'))),
-                "weight": float(total_weight.quantize(Decimal('0.01'))),
-                "density": float(density.quantize(Decimal('0.01'))),
-                "productCostCNY": float(cost_cny),
-                "productCostUSD": float(cost_usd.quantize(Decimal('0.01'))),
-                "exchangeRate": float(exchange_rate.quantize(Decimal('0.0001'))),
-                "exchangeRateNote": f"{exchange_rate} юаней за 1$",
-                "insuranceRate": f"{insurance_rate * Decimal('100'):.0f}%",
-                "insuranceAmount": float(insurance.quantize(Decimal('0.01'))),
-                "volume": float(total_volume.quantize(Decimal('0.01'))),
-                "boxCount": quantity if use_box_dimensions else 1,
-                "weightPerBox": float(weight_per_box) if weight_per_box else None
-            },
-            "bag": {
-                "packedWeight": float(packed_weight_bag.quantize(Decimal('0.01'))),
-                "packagingCost": float(packaging_cost_bag.quantize(Decimal('0.01'))),
-                "unloadCost": float(unload_cost_bag.quantize(Decimal('0.01'))),
-                "insurance": float(insurance_bag.quantize(Decimal('0.01'))),
-                "insuranceRate": f"{(insurance_bag/cost_usd * Decimal('100')).quantize(Decimal('1')):.0f}%",
-                "deliveryCostFast": float(delivery_cost_fast_bag),
-                "deliveryCostRegular": float(delivery_cost_regular_bag),
-                "totalFast": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_fast_bag).quantize(Decimal('0.01'))),
-                "totalRegular": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_regular_bag).quantize(Decimal('0.01')))
-            },
-            "corners": {
-                "packedWeight": float(packed_weight_corners.quantize(Decimal('0.01'))),
-                "packagingCost": float(packaging_cost_corners.quantize(Decimal('0.01'))),
-                "unloadCost": float(unload_cost_corners.quantize(Decimal('0.01'))),
-                "insurance": float(insurance_corners.quantize(Decimal('0.01'))),
-                "insuranceRate": f"{(insurance_corners/cost_usd * Decimal('100')).quantize(Decimal('1')):.0f}%",
-                "deliveryCostFast": float(delivery_cost_fast_corners),
-                "deliveryCostRegular": float(delivery_cost_regular_corners),
-                "totalFast": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_fast_corners).quantize(Decimal('0.01'))),
-                "totalRegular": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_regular_corners).quantize(Decimal('0.01')))
-            },
-            "frame": {
-                "packedWeight": float(packed_weight_frame.quantize(Decimal('0.01'))),
-                "packagingCost": float(packaging_cost_frame.quantize(Decimal('0.01'))),
-                "unloadCost": float(unload_cost_frame.quantize(Decimal('0.01'))),
-                "insurance": float(insurance_frame.quantize(Decimal('0.01'))),
-                "insuranceRate": f"{(insurance_frame/cost_usd * Decimal('100')).quantize(Decimal('1')):.0f}%",
-                "deliveryCostFast": float(delivery_cost_fast_frame),
-                "deliveryCostRegular": float(delivery_cost_regular_frame),
-                "totalFast": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_fast_frame).quantize(Decimal('0.01'))),
-                "totalRegular": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_regular_frame).quantize(Decimal('0.01')))
-            }
-        }
-
         logger.info(f"💾 Сохранение расчета...")
 
         calculation_id = save_user_calculation(
@@ -924,7 +1036,7 @@ def calculate():
             insurance_rate=float(insurance_rate * Decimal('100')),
             insurance_amount=float(insurance.quantize(Decimal('0.01'))),
             volume=float(total_volume.quantize(Decimal('0.01'))),
-            box_count=quantity if use_box_dimensions else 1,
+             box_count=quantity if use_box_dimensions else 1,
             bag_total_fast=float(results["bag"]["totalFast"]),
             bag_total_regular=float(results["bag"]["totalRegular"]),
             corners_total_fast=float(results["corners"]["totalFast"]),
@@ -954,7 +1066,7 @@ def calculate():
 
         logger.info(f"🎉 Расчет завершен успешно")
 
-        # Возвращаем результат
+            # Возвращаем результат
         if request.method == 'POST':
             return jsonify(results)
         else:
@@ -1051,111 +1163,180 @@ def api_calculate():
         volume_per_box = (length / Decimal(100)) * (width / Decimal(100)) * (height / Decimal(100))
         total_volume = volume_per_box 
         density = total_weight / total_volume if total_volume > 0 else Decimal('0')
-        
-        # Определяем процент страхования (на основе USD)
-        cost_per_kg_usd = cost_usd / total_weight if total_weight > 0 else Decimal('0')
-        insurance_rate = Decimal('0.01') if cost_per_kg_usd < 20 else Decimal('0.02')
-        insurance = cost_usd * insurance_rate
-        
-        # Получаем тарифы из БД (такая же логика как в основном calculate)
-        conn = connect_to_db()
-        cursor = conn.cursor()
 
-        # Тарифы по весу
-        cursor.execute("""
-            SELECT min_weight, max_weight, coefficient_bag, bag_packing_cost, bag_unloading_cost,
-                   coefficient_corner, corner_packing_cost, corner_unloading_cost,
-                   coefficient_frame, frame_packing_cost, frame_unloading_cost
-            FROM delivery_test.weight
-            WHERE min_weight <= %s AND max_weight > %s
-        """, (total_weight, total_weight))
+        # НОВАЯ ЛОГИКА: Проверяем плотность для выбора метода расчета
+        if density < 100:
+            logger.info(f"🧮 API: Плотность {density} < 100, используем расчет по объему")
+            # Расчет по объему
+            volume_rates = get_volume_rates()
+            category_normalized = category.lower().strip()
+            
+            if category_normalized not in volume_rates:
+                return jsonify({"error": f"Категория '{category}' не поддерживается для расчета по объему"}), 400
+            
+            rates = volume_rates[category_normalized]
+            
+            # Определяем процент страхования (на основе USD)
+            cost_per_kg_usd = cost_usd / total_weight if total_weight > 0 else Decimal('0')
+            insurance_rate = Decimal('0.01') if cost_per_kg_usd < 20 else Decimal('0.02')
+            insurance = cost_usd * insurance_rate
+            
+            # Рассчитываем стоимость доставки по объему
+            delivery_cost_fast = (rates['fast'] * total_volume).quantize(Decimal('0.01'))
+            delivery_cost_regular = (rates['regular'] * total_volume).quantize(Decimal('0.01'))
+            
+            # Минимальные расходы на упаковку и разгрузку
+            packaging_cost = Decimal('5.00')
+            unload_cost = Decimal('3.00')
+
+            logger.info(f"🚚 API: Доставка по объему - быстрая: {delivery_cost_fast}, обычная: {delivery_cost_regular}")
+
+            # Сохраняем данные (как формат с использованием размеров коробок)
+            input_id = save_user_input_to_db(
+                category=category,
+                total_weight=float(total_weight),
+                cost_cny=float(cost_cny),
+                cost_usd=float(cost_usd),
+                exchange_rate=float(exchange_rate),
+                volume=float(total_volume),
+                use_box_dimensions=True,
+                quantity=quantity,
+                weight_per_box=float(weight_per_box),
+                length=float(length),
+                width=float(width),
+                height=float(height),
+                telegram_user_id=None  # Это запрос с сайта, не из Telegram
+            )
+            
+            # Возвращаем результат для расчета по объему
+            return jsonify({
+                "success": True,
+                "calculation_method": "by_volume",
+                "note": f"Плотность {density:.1f} кг/м³ < 100, расчет по объему",
+                "total_cost_bag_fast": float((packaging_cost + unload_cost + insurance + delivery_cost_fast).quantize(Decimal('0.01'))),
+                "total_cost_bag_regular": float((packaging_cost + unload_cost + insurance + delivery_cost_regular).quantize(Decimal('0.01'))),
+                "total_cost_corners_fast": 0,  # Не используется при расчете по объему
+                "total_cost_corners_regular": 0,
+                "total_cost_frame_fast": 0,
+                "total_cost_frame_regular": 0,
+                "total_weight": float(total_weight.quantize(Decimal('0.01'))),
+                "total_volume": float(total_volume.quantize(Decimal('0.001'))),
+                "density": float(density.quantize(Decimal('0.01'))),
+                "cost_cny": float(cost_cny),
+                "cost_usd": float(cost_usd.quantize(Decimal('0.01'))),
+                "exchange_rate": float(exchange_rate.quantize(Decimal('0.0001'))),
+                "exchange_rate_note": f"{exchange_rate} юаней за 1$",
+                "insurance_rate": f"{insurance_rate * Decimal('100'):.0f}%"
+            })
         
-        result_row_weight = cursor.fetchone()
-        if not result_row_weight:
+        else:
+            logger.info(f"🧮 API: Плотность {density} >= 100, используем обычный расчет по весу")
+        
+            # Определяем процент страхования (на основе USD)
+            cost_per_kg_usd = cost_usd / total_weight if total_weight > 0 else Decimal('0')
+            insurance_rate = Decimal('0.01') if cost_per_kg_usd < 20 else Decimal('0.02')
+            insurance = cost_usd * insurance_rate
+        
+            # Получаем тарифы из БД (такая же логика как в основном calculate)
+            conn = connect_to_db()
+            cursor = conn.cursor()
+
+            # Тарифы по весу
+            cursor.execute("""
+                SELECT min_weight, max_weight, coefficient_bag, bag_packing_cost, bag_unloading_cost,
+                    coefficient_corner, corner_packing_cost, corner_unloading_cost,
+                    coefficient_frame, frame_packing_cost, frame_unloading_cost
+                FROM delivery_test.weight
+                WHERE min_weight <= %s AND max_weight > %s
+            """, (total_weight, total_weight))
+            
+            result_row_weight = cursor.fetchone()
+            if not result_row_weight:
+                cursor.close()
+                conn.close()
+                return jsonify({"error": f"Вес {total_weight} кг вне диапазона тарифов"}), 400
+
+            (min_weight, max_weight, packing_factor_bag, packaging_cost_bag, unload_cost_bag,
+            additional_weight_corners, packaging_cost_corners, unload_cost_corners,
+            additional_weight_frame, packaging_cost_frame, unload_cost_frame) = [safe_decimal(value) for value in result_row_weight]
+
+            # Тарифы по плотности
+            cursor.execute("""
+                SELECT category, min_density, max_density, fast_delivery_cost, regular_delivery_cost
+                FROM delivery_test.density 
+                WHERE category = %s AND min_density <= %s AND max_density > %s
+            """, (category, density, density))
+        
+            result_row_density = cursor.fetchone()
+            if not result_row_density:
+                cursor.close()
+                conn.close()
+                return jsonify({"error": f"Плотность {density} кг/м³ вне диапазона для '{category}'"}), 400
+
+            (category_db, min_density, max_density, fast_car_cost_per_kg, regular_car_cost_per_kg) = [
+                safe_decimal(value) if isinstance(value, (int, float)) else value for value in result_row_density]
+
             cursor.close()
             conn.close()
-            return jsonify({"error": f"Вес {total_weight} кг вне диапазона тарифов"}), 400
-
-        (min_weight, max_weight, packing_factor_bag, packaging_cost_bag, unload_cost_bag,
-         additional_weight_corners, packaging_cost_corners, unload_cost_corners,
-         additional_weight_frame, packaging_cost_frame, unload_cost_frame) = [safe_decimal(value) for value in result_row_weight]
-
-        # Тарифы по плотности
-        cursor.execute("""
-            SELECT category, min_density, max_density, fast_delivery_cost, regular_delivery_cost
-            FROM delivery_test.density 
-            WHERE category = %s AND min_density <= %s AND max_density > %s
-        """, (category, density, density))
         
-        result_row_density = cursor.fetchone()
-        if not result_row_density:
-            cursor.close()
-            conn.close()
-            return jsonify({"error": f"Плотность {density} кг/м³ вне диапазона для '{category}'"}), 400
+            # Расчеты стоимости (такая же логика как в основном calculate)
+            packed_weight_bag = packing_factor_bag + total_weight
+            packed_weight_corners = additional_weight_corners + total_weight
+            packed_weight_frame = additional_weight_frame + total_weight
 
-        (category_db, min_density, max_density, fast_car_cost_per_kg, regular_car_cost_per_kg) = [
-            safe_decimal(value) if isinstance(value, (int, float)) else value for value in result_row_density]
+            # Расчет страховки для каждого типа (на основе USD)
+            cost_per_bag = cost_usd / packed_weight_bag if packed_weight_bag > 0 else Decimal('0')
+            cost_per_corners = cost_usd / packed_weight_corners if packed_weight_corners > 0 else Decimal('0')
+            cost_per_frame = cost_usd / packed_weight_frame if packed_weight_frame > 0 else Decimal('0')
 
-        cursor.close()
-        conn.close()
+            insurance_bag = cost_usd * (Decimal('0.01') if cost_per_bag < 20 else Decimal('0.02'))
+            insurance_corners = cost_usd * (Decimal('0.01') if cost_per_corners < 20 else Decimal('0.02'))
+            insurance_frame = cost_usd * (Decimal('0.01') if cost_per_frame < 20 else Decimal('0.02'))
+
+            # Расчет доставки
+            delivery_cost_fast_bag = (fast_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
+            delivery_cost_regular_bag = (regular_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
+            delivery_cost_fast_corners = (fast_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
+            delivery_cost_regular_corners = (regular_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
+            delivery_cost_fast_frame = (fast_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
+            delivery_cost_regular_frame = (regular_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
+
+            # Сохраняем данные (как формат с использованием размеров коробок)
+            input_id = save_user_input_to_db(
+                category=category,
+                total_weight=float(total_weight),
+                cost_cny=float(cost_cny),
+                cost_usd=float(cost_usd),
+                exchange_rate=float(exchange_rate),
+                volume=None,  # Будет рассчитан триггером
+                use_box_dimensions=True,
+                quantity=quantity,
+                weight_per_box=float(weight_per_box),
+                length=float(length),
+                width=float(width),
+                height=float(height),
+                telegram_user_id=None  # Это запрос с сайта, не из Telegram
+            )
+
+            # Формируем ответ
+            return jsonify({
+                "success": True,
+                "total_cost_bag_fast": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_fast_bag).quantize(Decimal('0.01'))),
+                "total_cost_bag_regular": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_regular_bag).quantize(Decimal('0.01'))),
+                "total_cost_corners_fast": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_fast_corners).quantize(Decimal('0.01'))),
+                "total_cost_corners_regular": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_regular_corners).quantize(Decimal('0.01'))),
+                "total_cost_frame_fast": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_fast_frame).quantize(Decimal('0.01'))),
+                "total_cost_frame_regular": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_regular_frame).quantize(Decimal('0.01'))),
+                "total_weight": float(total_weight.quantize(Decimal('0.01'))),
+                "total_volume": float(total_volume.quantize(Decimal('0.001'))),
+                "density": float(density.quantize(Decimal('0.01'))),
+                "cost_cny": float(cost_cny),
+                "cost_usd": float(cost_usd.quantize(Decimal('0.01'))),
+                "exchange_rate": float(exchange_rate.quantize(Decimal('0.0001'))),
+                "exchange_rate_note": f"{exchange_rate} юаней за 1$",
+                "insurance_rate": f"{insurance_rate * Decimal('100'):.0f}%"
+            })
         
-        # Расчеты стоимости (такая же логика как в основном calculate)
-        packed_weight_bag = packing_factor_bag + total_weight
-        packed_weight_corners = additional_weight_corners + total_weight
-        packed_weight_frame = additional_weight_frame + total_weight
-
-        # Расчет страховки для каждого типа (на основе USD)
-        cost_per_bag = cost_usd / packed_weight_bag if packed_weight_bag > 0 else Decimal('0')
-        cost_per_corners = cost_usd / packed_weight_corners if packed_weight_corners > 0 else Decimal('0')
-        cost_per_frame = cost_usd / packed_weight_frame if packed_weight_frame > 0 else Decimal('0')
-
-        insurance_bag = cost_usd * (Decimal('0.01') if cost_per_bag < 20 else Decimal('0.02'))
-        insurance_corners = cost_usd * (Decimal('0.01') if cost_per_corners < 20 else Decimal('0.02'))
-        insurance_frame = cost_usd * (Decimal('0.01') if cost_per_frame < 20 else Decimal('0.02'))
-
-        # Расчет доставки
-        delivery_cost_fast_bag = (fast_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
-        delivery_cost_regular_bag = (regular_car_cost_per_kg * packed_weight_bag).quantize(Decimal('0.01'))
-        delivery_cost_fast_corners = (fast_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
-        delivery_cost_regular_corners = (regular_car_cost_per_kg * packed_weight_corners).quantize(Decimal('0.01'))
-        delivery_cost_fast_frame = (fast_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
-        delivery_cost_regular_frame = (regular_car_cost_per_kg * packed_weight_frame).quantize(Decimal('0.01'))
-
-        # Сохраняем данные (как формат с использованием размеров коробок)
-        input_id = save_user_input_to_db(
-            category=category,
-            total_weight=float(total_weight),
-            cost_cny=float(cost_cny),
-            cost_usd=float(cost_usd),
-            exchange_rate=float(exchange_rate),
-            volume=None,  # Будет рассчитан триггером
-            use_box_dimensions=True,
-            quantity=quantity,
-            weight_per_box=float(weight_per_box),
-            length=float(length),
-            width=float(width),
-            height=float(height),
-            telegram_user_id=None  # Это запрос с сайта, не из Telegram
-        )
-
-        # Формируем ответ
-        return jsonify({
-            "success": True,
-            "total_cost_bag_fast": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_fast_bag).quantize(Decimal('0.01'))),
-            "total_cost_bag_regular": float((packaging_cost_bag + unload_cost_bag + insurance_bag + delivery_cost_regular_bag).quantize(Decimal('0.01'))),
-            "total_cost_corners_fast": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_fast_corners).quantize(Decimal('0.01'))),
-            "total_cost_corners_regular": float((packaging_cost_corners + unload_cost_corners + insurance_corners + delivery_cost_regular_corners).quantize(Decimal('0.01'))),
-            "total_cost_frame_fast": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_fast_frame).quantize(Decimal('0.01'))),
-            "total_cost_frame_regular": float((packaging_cost_frame + unload_cost_frame + insurance_frame + delivery_cost_regular_frame).quantize(Decimal('0.01'))),
-            "total_weight": float(total_weight.quantize(Decimal('0.01'))),
-            "total_volume": float(total_volume.quantize(Decimal('0.001'))),
-            "density": float(density.quantize(Decimal('0.01'))),
-            "cost_cny": float(cost_cny),
-            "cost_usd": float(cost_usd.quantize(Decimal('0.01'))),
-            "exchange_rate": float(exchange_rate.quantize(Decimal('0.0001'))),
-            "exchange_rate_note": f"{exchange_rate} юаней за 1$",
-            "insurance_rate": f"{insurance_rate * Decimal('100'):.0f}%"
-        })
         
     except Exception as e:
         logger.error(f"Ошибка в api_calculate: {str(e)}")

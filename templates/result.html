@@ -609,7 +609,8 @@
 
         <!-- Кнопки действий -->
         <div class="action-buttons card">
-            <a href="/order?calculation_id={{ calculation_id or 'undefined' }}" class="btn">
+            <!-- <a href="/order?calculation_id={{ calculation_id or 'undefined' }}" class="btn"> -->
+            <a href="https://forms.gle/45ey41gUAgY3cTWJA" class="btn">
                 <span>🚚</span>
                 <span>Заказать доставку</span>
             </a>
@@ -688,37 +689,67 @@
                 console.warn('Не удалось получить telegram_id:', e);
             }
 
-            // Настройка кнопки "Назад"
-            try {
-                if (tg && tg.BackButton) {
-                    tg.BackButton.show();
-                    tg.BackButton.onClick(() => {
-                        window.location.href = '/calculate';
-                    });
-                }
-            } catch (e) {
-                console.warn('Не удалось настроить кнопку "Назад":', e);
+
+                        // Настройка кнопки "Назад"
+            if (tg && tg.BackButton) {
+                tg.BackButton.show();
+                tg.BackButton.onClick(() => {
+                    if (confirm('Вы уверены, что хотите выйти?')) {
+                        tg.close();
+                    }
+                });
             }
 
-            // Настройка главной кнопки
-            try {
-                if (tg && tg.MainButton) {
-                    tg.MainButton.text = "Заказать доставку";
-                    tg.MainButton.color = "#E74C3C";
-                    tg.MainButton.show();
-
-                    tg.MainButton.onClick(() => {
-                        window.location.href = `/order?calculation_id={{ calculation_id or 'undefined' }}`;
-                    });
-                }
-            } catch (e) {
-                console.warn('Не удалось настроить главную кнопку:', e);
-            }
+            // // Настройка главной кнопки
+            // try {
+            //     if (tg && tg.MainButton) {
+            //         tg.MainButton.text = "Заказать доставку";
+            //         tg.MainButton.color = "#E74C3C";
+            //         tg.MainButton.show();
+                    
+            //         tg.MainButton.onClick(() => {
+            //             // window.location.href = `/order?calculation_id={{ calculation_id or 'undefined' }}`;
+            //             window.location.href = `https://forms.gle/45ey41gUAgY3cTWJA`;
+            //         });
+            //     }
+            // } catch (e) {
+            //     console.warn('Не удалось настроить главную кнопку:', e);
+            // }
 
         } catch (e) {
             console.error('Error in results processing:', e);
         }
         {% endif %}
     </script>
+    <script>
+    let tg = null;
+
+    // Проверяем, доступен ли Telegram Web App
+    if (window.Telegram && window.Telegram.WebApp) {
+        tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+
+        // Настройка кнопки "Назад"
+        if (tg.BackButton) {
+            tg.BackButton.show();
+
+            // Добавляем обработчик нажатия
+            tg.BackButton.onClick(() => {
+                // Закрываем окно Telegram Web App
+                tg.close();
+            });
+        }
+    }
+
+    // Альтернативный способ закрытия (на случай, если кнопка не отображается)
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Backspace' || (e.key === 'Escape')) {
+            if (tg && tg.close) {
+                tg.close();
+            }
+        }
+    });
+</script>
 </body>
 </html>

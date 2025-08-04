@@ -252,7 +252,7 @@ def get_webapp_inline_keyboard(user_id, username, action="calculate"):
         web_app_url = f"{WEB_APP_URL}/calculate?telegram_id={user_id}&username={username}"
         button_text = "📊 Открыть калькулятор"
     else:  # order
-        web_app_url = f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}"
+        web_app_url = "https://forms.gle/45ey41gUAgY3cTWJA"
         button_text = "🚚 Открыть форму заказа"
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
@@ -407,7 +407,7 @@ async def start(message: types.Message):
     
     await message.reply(
         f"🚀 <b>Добро пожаловать, {first_name}!</b>\n\n"
-        "Я помогу Вам рассчитать стоимость доставку из Китая и оформить заказ!\n\n"
+        "Я помогу Вам рассчитать стоимость доставки из Китая и оформить заказ!\n\n"
         "🎯 <b>Что я делаю для вашего удобства:</b>\n"
         "• 📊 Рассчитываю стоимость доставки\n"
         "• 🚚 Оформляю заявки на поиск поставщика и выкуп товара\n"
@@ -547,7 +547,7 @@ async def restart_bot(message: types.Message):
         chat_id=message.chat.id,
         text=(
             f"🚀 <b>Добро пожаловать, {first_name}!</b>\n\n"
-            "Я помогу Вам рассчитать стоимость доставку из Китая и оформить заказ!\n\n"
+            "Я помогу Вам рассчитать стоимость доставки из Китая и оформить заказ!\n\n"
             "🎯 <b>Что я делаю для вашего удобства:</b>\n"
             "• 📊 Рассчитываю стоимость доставки\n"
             "• 🚚 Оформляю заявки на поиск поставщика и выкуп товара\n"
@@ -665,7 +665,8 @@ async def handle_calculation_completed(message, data, user_id, username):
         reply_markup=InlineKeyboardMarkup(inline_keyboard=[
             [InlineKeyboardButton(
                 text="🚚 Запросить рассчет у менеджера", 
-                web_app=WebAppInfo(url=f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}")
+                #web_app=WebAppInfo(url=f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}")
+                web_app=WebAppInfo(url="https://forms.gle/45ey41gUAgY3cTWJA")
             )],
             [InlineKeyboardButton(text="🔄 Новый расчет", callback_data="new_calculation")]
         ]),

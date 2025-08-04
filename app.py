@@ -7,7 +7,6 @@ from psycopg2.extras import RealDictCursor
 import time
 import glob
 from pdf_generator import generate_tariffs_pdf, get_latest_pdf_info
-from dotenv import load_dotenv
 
 app = Flask(__name__, template_folder='templates')
 # Получаем директорию, где находится app.py
@@ -415,7 +414,7 @@ UNIFIED_STYLE = '''
     }
 </style>
 '''
-load_dotenv()
+
 # Конфигурация базы данных
 DB_CONFIG = {
             'dbname': os.getenv('DB_NAME', 'delivery_db'),
@@ -762,6 +761,10 @@ def index():
                             </div>
                         </form>
                     </div>
+                    <a href="/summary" class="button info">
+                        <span>🧾</span>
+                        Открыть сводную таблицу
+                    </a>
 
                     <div class="buttons-container">
                         <a href="/download" class="button success">
@@ -794,6 +797,7 @@ def index():
                         </a>
                     </div>
                 </div>
+                
 
                 <div id="systemStatus" style="display: none;" class="main-content">
                     <h3>🔧 Состояние системы</h3>
@@ -1343,6 +1347,233 @@ def api_pdf_info():
             
     except Exception as e:
         return jsonify({'error': f'Ошибка получения информации о PDF: {str(e)}'}), 500
+
+@app.route('/summary')
+def summary():
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+    # Получаем параметры фильтрации и пагинации
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+    telegram_id = request.args.get('telegram_id')
+    category = request.args.get('category')
+    page = int(request.args.get('page', 1))
+    per_page = 50
+    offset = (page - 1) * per_page
+
+    try:
+        # Базовый SQL-запрос
+        query = """
+            SELECT 
+                user_id, telegram_id, username, first_name, last_name,
+                input_category, weight, height, width, length, cost, quantity,
+                input_total_weight, calc_total_weight, density, product_cost,
+                insurance_rate, box_count, calculation_created_at
+            FROM delivery_test.summary_view
+            WHERE 1=1
+        """
+
+        # Добавляем условия фильтрации
+        if start_date:
+            query += f" AND calculation_created_at >= '{start_date} 00:00:00'"
+        if end_date:
+            query += f" AND calculation_created_at <= '{end_date} 23:59:59'"
+        if telegram_id:
+            query += f" AND telegram_id = {int(telegram_id)}"
+        if category:
+            query += f" AND input_category ILIKE '%{category}%'"
+
+        # Добавляем пагинацию
+        query += f" ORDER BY calculation_created_at DESC LIMIT {per_page} OFFSET {offset}"
+
+        cursor.execute(query)
+        data = cursor.fetchall()
+
+        # Подсчет общего количества записей для пагинации
+        count_query = """
+            SELECT COUNT(*) AS total 
+            FROM delivery_test.summary_view
+            WHERE 1=1
+        """
+        if start_date:
+            count_query += f" AND calculation_created_at >= '{start_date} 00:00:00'"
+        if end_date:
+            count_query += f" AND calculation_created_at <= '{end_date} 23:59:59'"
+        if telegram_id:
+            count_query += f" AND telegram_id = {int(telegram_id)}"
+        if category:
+            count_query += f" AND input_category ILIKE '%{category}%'"
+
+        cursor.execute(count_query)
+        total_results = cursor.fetchone()['total']
+        total_pages = (total_results + per_page - 1) // per_page
+
+    except Exception as e:
+        return render_error(f"Ошибка при загрузке данных: {str(e)}")
+    finally:
+        cursor.close()
+        conn.close()
+
+    return render_template_string('''
+        <!DOCTYPE html>
+        <html lang="ru">
+        <head>
+            <meta charset="UTF-8">
+            <title>Сводная информация</title>
+            ''' + UNIFIED_STYLE + '''
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <img src="https://raw.githubusercontent.com/EmilIskhakov/china-together-logo/main/photo_2024-05-27_15-00-14%20 (2).jpg" 
+                         alt="China Together Logo" class="logo" onerror="this.style.display='none'">
+                    <h1>🧾 Сводная информация</h1>
+                    <p>Данные пользователей, расчетов и вводных параметров</p>
+                </div>
+                <div class="main-content">
+                    <form method="get" action="/summary" class="form-section">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div>
+                                <label for="start_date">Дата начала:</label>
+                                <input type="date" name="start_date" id="start_date" value="{{ request.args.get('start_date') }}">
+                            </div>
+                            <div>
+                                <label for="end_date">Дата окончания:</label>
+                                <input type="date" name="end_date" id="end_date" value="{{ request.args.get('end_date') }}">
+                            </div>
+                            <div>
+                                <label for="telegram_id">Telegram ID:</label>
+                                <input type="text" name="telegram_id" id="telegram_id" placeholder="Например: 123456789" value="{{ request.args.get('telegram_id') }}">
+                            </div>
+                            <div>
+                                <label for="category">Категория:</label>
+                                <input type="text" name="category" id="category" placeholder="Введите категорию" value="{{ request.args.get('category') }}">
+                            </div>
+                        </div>
+                        <div class="buttons-container" style="margin-top: 20px;">
+                            <button type="submit" class="button success">
+                                <span>🔍</span>
+                                Применить фильтры
+                            </button>
+                            <a href="/summary" class="button secondary">
+                                <span>🗑️</span>
+                                Очистить фильтры
+                            </a>
+                            <a href="/export_summary{{ '?' + request.query_string.decode() if request.query_string else '' }}" class="button info">
+                                <span>📤</span>
+                                Скачать Excel
+                            </a>
+                        </div>
+                    </form>
+
+                    <div class="table-container">
+                        <h3 class="chart-title">📋 Последние записи</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Telegram ID</th>
+                                    <th>Пользователь</th>
+                                    <th>Категория</th>
+                                    <th>Вес (кг)</th>
+                                    <th>Цена ($)</th>
+                                    <th>Дата расчета</th>
+                                    <th>Размеры (Д×Ш×В)</th>
+                                    <th>Кол-во</th>
+                                    <th>Страховка (%)</th>
+                                    <th>Коробок</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in data %}
+                                <tr>
+                                    <td>{{ row.telegram_id or '-' }}</td>
+                                    <td>{{ row.username or 'Аноним' }}</td>
+                                    <td>{{ row.input_category or '-' }}</td>
+                                    <td>{{ "%.2f"|format(row.calc_total_weight or 0) }}</td>
+                                    <td>{{ "%.2f"|format(row.product_cost or 0) }}</td>
+                                    <td>{{ row.calculation_created_at.strftime('%d.%m %H:%M') if row.calculation_created_at else '-' }}</td>
+                                    <td>{{ row.length or 0 }}×{{ row.width or 0 }}×{{ row.height or 0 }}</td>
+                                    <td>{{ row.quantity or 0 }}</td>
+                                    <td>{{ "%.2f"|format(row.insurance_rate or 0) }}</td>
+                                    <td>{{ row.box_count or 0 }}</td>
+                                </tr>
+                                {% endfor %}
+                                {% if not data %}
+                                <tr>
+                                    <td colspan="10" style="text-align:center; color:#7f8c8d;">Нет данных</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Пагинация -->
+                    <div class="pagination">
+                        <div class="buttons-container" style="justify-content: center;">
+                            {% if page > 1 %}
+                            <a href="/summary?page={{ page - 1 }}&start_date={{ request.args.get('start_date') }}
+                               &end_date={{ request.args.get('end_date') }}
+                               &telegram_id={{ request.args.get('telegram_id') }}
+                               &category={{ request.args.get('category') }}"
+                               class="button secondary">
+                               ← Предыдущая
+                            </a>
+                            {% endif %}
+                            <span style="margin: 0 10px;">Страница {{ page }} из {{ total_pages }}</span>
+                            {% if page < total_pages %}
+                            <a href="/summary?page={{ page + 1 }}&start_date={{ request.args.get('start_date') }}
+                               &end_date={{ request.args.get('end_date') }}
+                               &telegram_id={{ request.args.get('telegram_id') }}
+                               &category={{ request.args.get('category') }}"
+                               class="button secondary">
+                               Следующая →
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>
+    ''', data=data, request=request, total_pages=total_pages, page=page)
+
+@app.route('/export_summary')
+def export_summary():
+    try:
+        conn = connect_to_db()
+        # Получаем параметры фильтрации
+        start_date = request.args.get('start_date')
+        end_date = request.args.get('end_date')
+        telegram_id = request.args.get('telegram_id')
+        category = request.args.get('category')
+
+        # Базовый SQL-запрос
+        query = "SELECT * FROM delivery_test.summary_view WHERE 1=1"
+        if start_date:
+            query += f" AND calculation_created_at >= '{start_date} 00:00:00'"
+        if end_date:
+            query += f" AND calculation_created_at <= '{end_date} 23:59:59'"
+        if telegram_id:
+            query += f" AND telegram_id = {int(telegram_id)}"
+        if category:
+            query += f" AND input_category ILIKE '%{category}%'"
+
+        df = pd.read_sql(query, conn)
+
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_path = os.path.join(app.config['UPLOAD_FOLDER'], f"summary_export_{timestamp}.xlsx")
+
+        df.to_excel(output_path, index=False, engine='xlsxwriter')
+
+        return send_from_directory(
+            app.config['UPLOAD_FOLDER'],
+            f"summary_export_{timestamp}.xlsx",
+            as_attachment=True,
+            download_name=f"summary_export_{timestamp}.xlsx"
+        )
+    except Exception as e:
+        return render_error(f"Ошибка при экспорте: {str(e)}")
 
 @app.route('/api/system_info')
 def api_system_info():

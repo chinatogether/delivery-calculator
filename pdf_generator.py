@@ -1,361 +1,405 @@
-<!DOCTYPE html>
-<html lang="ru">
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+PDF Generator для China Together
+Модуль для генерации PDF файлов с тарифами доставки
+"""
 
+import os
+import glob
+import logging
+from datetime import datetime
+import psycopg2
+from psycopg2.extras import RealDictCursor
+from jinja2 import Template
+import pdfkit
+from collections import OrderedDict
+
+# Настройка логирования
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Получаем директорию, где находится этот файл
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Конфигурация путей относительно текущего файла
+PDF_FOLDER = os.path.join(BASE_DIR, "pdf-files")
+TEMPLATES_FOLDER = os.path.join(BASE_DIR, "templates")
+
+# Путь к wkhtmltopdf (попробуем найти автоматически)
+def find_wkhtmltopdf():
+    """Автоматически находит путь к wkhtmltopdf"""
+    possible_paths = [
+        '/usr/bin/wkhtmltopdf',
+        '/usr/local/bin/wkhtmltopdf',
+        '/opt/wkhtmltopdf/bin/wkhtmltopdf',
+        'wkhtmltopdf'  # Если в PATH
+    ]
+    
+    for path in possible_paths:
+        if os.path.exists(path) or path == 'wkhtmltopdf':
+            try:
+                # Проверяем, работает ли команда
+                os.system(f"{path} --version > /dev/null 2>&1")
+                return path
+            except:
+                continue
+    
+    logger.warning("wkhtmltopdf не найден, используем значение по умолчанию")
+    return '/usr/bin/wkhtmltopdf'
+
+WKHTMLTOPDF_PATH = find_wkhtmltopdf()
+WKHTMLTOPDF_CONFIG = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
+
+# Настройки для wkhtmltopdf
+PDF_OPTIONS = {
+    'page-size': 'A4',
+    'margin-top': '15mm',
+    'margin-right': '15mm',
+    'margin-bottom': '15mm',
+    'margin-left': '15mm',
+    'encoding': "UTF-8",
+    'no-outline': None,
+    'enable-local-file-access': None,
+    'print-media-type': None,
+    'disable-smart-shrinking': None,
+    'zoom': '1.2',  # Увеличивает масштаб для лучшей читаемости
+    'dpi': '300',
+    'quiet': '',  # Подавляем вывод wkhtmltopdf
+}
+
+class PDFGenerator:
+    """Класс для генерации PDF файлов с тарифами"""
+    
+    def __init__(self, db_config):
+        """
+        Инициализация генератора PDF
+        
+        Args:
+            db_config (dict): Конфигурация подключения к БД
+        """
+        self.db_config = db_config
+        self.ensure_directories()
+        logger.info(f"PDF Generator инициализирован. PDF папка: {PDF_FOLDER}")
+    
+    def ensure_directories(self):
+        """Создает необходимые директории"""
+        try:
+            os.makedirs(PDF_FOLDER, exist_ok=True)
+            os.makedirs(TEMPLATES_FOLDER, exist_ok=True)
+            logger.info(f"Директории созданы: {PDF_FOLDER}, {TEMPLATES_FOLDER}")
+        except Exception as e:
+            logger.error(f"Ошибка создания директорий: {str(e)}")
+    
+    def connect_to_db(self):
+        """Подключение к базе данных"""
+        try:
+            return psycopg2.connect(**self.db_config)
+        except Exception as e:
+            logger.error(f"Ошибка подключения к БД: {str(e)}")
+            raise
+    
+    def remove_old_pdf_files(self):
+        """Удаляет старые PDF файлы"""
+        try:
+            pdf_files = glob.glob(os.path.join(PDF_FOLDER, "*.pdf"))
+            
+            for file_path in pdf_files:
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+                    logger.info(f"Удален старый PDF файл: {file_path}")
+            return True
+        except Exception as e:
+            logger.error(f"Ошибка при удалении старых PDF файлов: {str(e)}")
+            return False
+    
+    def get_density_data_for_pdf(self):
+        """Получает данные из таблицы density для формирования PDF с упорядоченными категориями"""
+        conn = self.connect_to_db()
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+        
+        try:
+            cursor.execute("""
+                SELECT category, min_density, max_density, density_range,
+                    fast_delivery_cost, regular_delivery_cost
+                FROM delivery_test.density
+                ORDER BY category, min_density DESC
+            """)
+            
+            rows = cursor.fetchall()
+            
+            if not rows:
+                logger.warning("Нет данных в таблице density")
+                return {}
+            
+                    # Определяем желаемый порядок категорий
+            category_order = [
+                'Обычные товары',
+                'Одежда', 
+                'Обувь'
+            ]
+            
+            # Группируем данные по категориям
+            temp_categories_data = {}
+            for row in rows:
+                category = row['category']
+                if category not in temp_categories_data:
+                    temp_categories_data[category] = []
+                temp_categories_data[category].append(row)
+            
+             # Создаем упорядоченный словарь согласно category_order
+            from collections import OrderedDict
+            categories_data = OrderedDict()
+            
+            # Сначала добавляем категории в заданном порядке
+            for category in category_order:
+                if category in temp_categories_data:
+                    categories_data[category] = temp_categories_data[category]
+            
+            # Затем добавляем все остальные категории, которые не были в списке
+            for category, data in temp_categories_data.items():
+                if category not in categories_data:
+                    categories_data[category] = data
+            
+                logger.info(f"Получено данных для {len(categories_data)} категорий в заданном порядке")
+                return categories_data
+        
+        except Exception as e:
+            logger.error(f"Ошибка получения данных для PDF: {str(e)}")
+            return {}
+        finally:
+            cursor.close()
+            conn.close()
+    
+    def load_html_template(self):
+        """Загружает HTML шаблон для PDF"""
+        template_path = os.path.join(TEMPLATES_FOLDER, 'pdf_template.html')
+        
+        try:
+            if not os.path.exists(template_path):
+                logger.error(f"HTML шаблон не найден: {template_path}")
+                # Создаем базовый шаблон, если его нет
+                self.create_default_template()
+            
+            with open(template_path, 'r', encoding='utf-8') as f:
+                template_content = f.read()
+            return Template(template_content)
+        except Exception as e:
+            logger.error(f"Ошибка загрузки HTML шаблона: {str(e)}")
+            raise
+    
+    def create_default_template(self):
+        """Создает базовый HTML шаблон, если его нет"""
+        template_path = os.path.join(TEMPLATES_FOLDER, 'pdf_template.html')
+        
+        default_template = '''<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Тарифы доставки - China Together</title>
     <style>
-        @page {
-            size: A4;
-            margin: 4mm;
-        }
-
-        body {
-            font-family: 'DejaVu Sans', Arial, sans-serif;
-            background-color: #ffffff;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            font-size: 12px;
-            line-height: 1.4;
-        }
-
-        /* .container {
-            width: 100%;
-            margin: 0;
-            padding: 0;
-        } */
-
-        .header {
-            text-align: center;
-            margin-bottom: 8px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #E74C3C;
-        }
-
-        .logo {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 0px;
-            border: 3px solid #E74C3C;
-            /* Яркий красный цвет без прозрачности */
-            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
-            /* Чуть теплее, чем раньше */
-            background-color: #fff;
-            /* Белый фон для лучшей видимости */
-        }
-
-        h1 {
-            color: #E74C3C;
-            font-size: 2.1rem;
-            margin-bottom: 0px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .subtitle {
-            color: #666;
-            font-size: 10px;
-            margin: 0;
-        }
-
-        h2 {
-            color: #ffffff;
-            margin: 8px 0 6px 0;
-            font-size: 14px;
-            font-weight: bold;
-            border-bottom: 1px solid #E74C3C;
-            padding-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 8px;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px 8px;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        th {
-            background-color: #f8f9fa;
-            font-weight: bold;
-            color: #2c3e50;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        td {
-            font-size: 10px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #fff3f2;
-        }
-
-        .additional-info {
-            margin-top: 8px;
-            font-size: 10px;
-            line-height: 1.4;
-            color: #555;
-            background-color: #f8f9fa;
-            padding: 12px;
-            border-radius: 6px;
-            border-left: 4px solid #E74C3C;
-        }
-
-        .additional-info h3 {
-            margin: 0 0 8px 0;
-            color: #E74C3C;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .additional-info ol {
-            margin: 0;
-            padding-left: 15px;
-        }
-
-        .additional-info li {
-            margin-bottom: 4px;
-        }
-
-        .additional-info strong {
-            color: #2c3e50;
-        }
-
-        .footer {
-            text-align: center;
-            font-size: 9px;
-            color: #777;
-            margin-top: 30px;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
-        }
-
-        .page-break {
-            page-break-before: always;
-        }
-
-        .category-page {
-            min-height: 80vh;
-        }
-
-        .generated-date {
-            text-align: right;
-            font-size: 9px;
-            color: #999;
-            margin-bottom: 6px;
-        }
-
-        .stats-info {
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 8px;
-            background-color: #e8f4fd;
-            padding: 8px;
-            border-radius: 4px;
-        }
-
-        .density-high {
-            background-color: #fff5f5 !important;
-            font-weight: bold;
-        }
-
-        .density-medium {
-            background-color: #fffbf0 !important;
-        }
-
-        .density-low {
-            background-color: #f0fff4 !important;
-        }
-
-        .price-highlight {
-            font-weight: bold;
-            color: #E74C3C;
-        }
-
-        .category-header {
-            background: linear-gradient(135deg, #E74C3C 0%, #c0392b 100%);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 6px;
-            text-align: center;
-
-            /* НОВОЕ: добавляем рамку */
-            border: 2px solid #E74C3C;
-            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
-        }
-
-        .category-header h2 {
-            margin: 0;
-            border: none;
-            color: white;
-            font-size: 14px;
-        }
-
-        /* Дополнительно для мобильных */
-        @media (max-width: 768px) {
-            h2 {
-                display: block !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-                color: #ffffff !important;
-            }
-
-            .category-header {
-                border: 2px solid #E74C3C !important;
-                background: linear-gradient(135deg, #E74C3C 0%, #c0392b 100%) !important;
-                color: white !important;
-                padding: 10px !important;
-                border-radius: 5px !important;
-                box-shadow: 0 2px 8px rgba(231, 76, 60, 0.4) !important;
-            }
-
-            h1 {
-                font-size: 2rem !important;
-            }
-
-            h2 {
-                font-size: 1.5rem !important;
-            }
-
-            table th,
-            table td {
-                font-size: 13px !important;
-            }
-        }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #E74C3C; text-align: center; }
+        h2 { color: #E74C3C; margin-top: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        .info { margin-top: 15px; font-size: 12px; background: #f8f9fa; padding: 10px; }
     </style>
 </head>
-
 <body>
-    <!-- <div class="container">
-        <div class="generated-date">
-            Сформирован: {{ generation_date }}
-        </div> -->
-
-    <!-- Титульная страница -->
-    <div class="header">
-        <img src="/static/images/photo_2024-05-27_15-00-14.jpg" alt="China Together" class="logo">
-        <h1>China Together</h1>
-        <p class="subtitle">Актуальные тарифы доставки из Китая</p>
-
-        <div class="stats-info">
-            📊 Доступно {{ total_categories }} категорий товаров
-        </div>
-    </div>
-
+    <h1>China Together - Тарифы доставки</h1>
+    <p style="text-align: center; color: #666;">Сгенерировано: {{ generation_date }}</p>
+    
     {% for category, rows in categories_data.items() %}
-    {% if not loop.first %}
-    <div class="page-break"></div>
-    {% endif %}
-
-    <div class="category-page">
-        <div class="category-header">
-            {% if category == 'Обычные товары' %}
-            <h2>Обычный товар/Хоз товары/Сумки/Коврики/Шапки</h2>
-            {% else %}
-            <h2>{{ category }}</h2>
-            {% endif %}
-        </div>
-
+        <h2>{{ category }}</h2>
         <table>
             <thead>
                 <tr>
-                    <th style="width: 40%;">Плотность (кг/м³)</th>
-                    {% if category == 'Обувь' %}
-                    <th style="width: 30%;">Доставка оригинала ($/kg)</th>
-                    {% else %}
-                    <th style="width: 30%;">Быстрое авто ($/kg)</th>
-                    {% endif %}
-                    {% if category == 'Обувь' %}
-                    <th style="width: 30%;">Доставка реплики ($/kg)</th>
-                    {% else %}
-                    <th style="width: 30%;">Обычное авто ($/kg)</th>
-                    {% endif %}
+                    <th>Плотность</th>
+                    <th>Быстрое авто ($/kg)</th>
+                    <th>Обычное авто ($/kg)</th>
                 </tr>
             </thead>
             <tbody>
                 {% for row in rows %}
-                <tr {% if row.fast_delivery_cost>= 3.5 %}class="density-medium"{% elif row.fast_delivery_cost >= 2.5
-                    %}class="density-medium"{% else %}class="density-medium"{% endif %}>
-                    <td style="text-align: left; font-weight: bold;">{{ row.density_range }}</td>
-                    {% if row.density_range == '<100' %} <td>По запросу</td>
-                        {% else %}
-                        <td>${{ "%.2f"|format(row.fast_delivery_cost) }}</td>
-                        {% endif %}
-                        {% if row.density_range == '<100' %} <td>По запросу</td>
-                            {% else %}
-                            <td>${{ "%.2f"|format(row.regular_delivery_cost) }}</td>
-                            {% endif %}
+                <tr>
+                    <td>{{ row.density_range }}</td>
+                    <td>${{ "%.2f"|format(row.fast_delivery_cost) }}</td>
+                    <td>${{ "%.2f"|format(row.regular_delivery_cost) }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-
-        <div class="additional-info">
-            <h3>📋 Важная информация по доставке:</h3>
-            <ol>
-                {% if category == 'Обувь' %}
-                <li><strong>Сроки доставки:</strong> Быстрое авто (12-15 дней)</li>
-                {% elif category == 'Обычные товары' %}
-                <li><strong>Сроки доставки:</strong> Быстрое авто (13-16 дней), Обычное авто (17-25 дней)</li>
-                {% else %}
-                <li><strong>Сроки доставки:</strong> Быстрое авто (15-18 дней), Обычное авто (20-25 дней)</li>
-                {% endif %}
-                <li><strong>Страхование товара:</strong>
-                    <ul style="margin: 2px 0; padding-left: 15px;">
-                        <li>до 20$/kg — 1% от стоимости</li>
-                        <li>20-30$/kg — 2% от стоимости</li>
-                        <li>30-40$/kg — 3% от стоимости</li>
-                        <li>свыше 40$/kg — обсуждается индивидуально</li>
-                    </ul>
-                </li>
-                <li><strong>Стоимость упаковки:</strong>
-                    <ul style="margin: 2px 0; padding-left: 15px;">
-                        <li>Мешок + скотч: 3$/место</li>
-                        <li>Уголки из картона + скотч: 8$/место</li>
-                        <li>Деревянный каркас + скотч: 15$/место</li>
-                        <li>Паллета: 30$/куб</li>
-                    </ul>
-                </li>
-                <li><strong>Дополнительные условия:</strong> Копии брендов +0.2$ к тарифу</li>
-                <li><strong>Запрещенные к перевозке товары:</strong> порошковые вещества, легковоспламеняющиеся
-                    материалы, жидкости, табачные изделия, лекарственные препараты, режущие предметы, продукты питания
-                </li>
-            </ol>
+        <div class="info">
+            <strong>Информация по доставке:</strong><br>
+            • Сроки: Быстрое авто (12-15 дней), Обычное авто (18-25 дней)<br>
+            • Страховка: до 20$/kg - 1%, 20-30$/kg - 2%, 30-40$/kg - 3%, свыше 40$/kg - индивидуально<br>
+            • Упаковка: мешок+скотч 3$/место, уголки 8$/место, каркас 15$/место, паллета 30$/куб<br>
+            • Копии брендов: +0.2$ к тарифу<br>
         </div>
-
-        {% if not loop.last %}
-        <div style="margin-top: 2px; text-align: center; font-size: 8px; color: #999;">
-            Страница {{ loop.index }} из {{ loop.length }}
-        </div>
-        {% endif %}
-    </div>
+        <div style="page-break-after: always;"></div>
     {% endfor %}
-
-    <div class="footer">
-        <p><strong>© {{ generation_date[:4] }} China Together</strong></p>
-        <p>📞 Контакты: t.me/Togetherchina | 📧 @Chinatogether_bot</p>
-        <p>🌐 Ваш надёжный партнёр по доставке из Китая</p>
-    </div>
-    </div>
 </body>
+</html>'''
+        
+        try:
+            with open(template_path, 'w', encoding='utf-8') as f:
+                f.write(default_template)
+            logger.info(f"Создан базовый HTML шаблон: {template_path}")
+        except Exception as e:
+            logger.error(f"Ошибка создания базового шаблона: {str(e)}")
+    
+    def generate_pdf_from_db(self, filename="china_together_tariffs.pdf"):
+        """
+        Основная функция генерации PDF из данных БД
+        
+        Args:
+            filename (str): Имя файла PDF
+            
+        Returns:
+            tuple: (success: bool, message: str, file_path: str)
+        """
+        try:
+            logger.info("Начинаем генерацию PDF...")
+            
+            # Проверяем wkhtmltopdf
+            if not os.path.exists(WKHTMLTOPDF_PATH) and WKHTMLTOPDF_PATH != 'wkhtmltopdf':
+                return False, f"wkhtmltopdf не найден по пути: {WKHTMLTOPDF_PATH}", None
+            
+            # Удаляем старые PDF файлы
+            self.remove_old_pdf_files()
+            
+            # Получаем данные из БД
+            categories_data = self.get_density_data_for_pdf()
+            
+            if not categories_data:
+                return False, "Нет данных в базе для генерации PDF", None
+            
+            # Загружаем HTML шаблон
+            template = self.load_html_template()
+            
+            # Подготавливаем данные для шаблона
+            template_data = {
+                'categories_data': categories_data,
+                'generation_date': datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
+                'total_categories': len(categories_data)
+            }
+            
+            # Рендерим HTML
+            html_content = template.render(**template_data)
+            
+            # Генерируем PDF
+            output_path = os.path.join(PDF_FOLDER, filename)
+            
+            logger.info(f"Создаем PDF файл: {output_path}")
+            
+            pdfkit.from_string(
+                html_content, 
+                output_path, 
+                options=PDF_OPTIONS,
+                configuration=WKHTMLTOPDF_CONFIG
+            )
+            
+            if os.path.exists(output_path):
+                file_size = os.path.getsize(output_path)
+                logger.info(f"PDF успешно создан: {output_path} (размер: {file_size} байт)")
+                return True, f"PDF успешно создан (размер: {file_size//1024} КБ)", output_path
+            else:
+                return False, "PDF файл не был создан", None
+                
+        except Exception as e:
+            error_msg = f"Ошибка при генерации PDF: {str(e)}"
+            logger.error(error_msg)
+            return False, error_msg, None
+    
+    def get_pdf_info(self):
+        """Получает информацию о существующих PDF файлах"""
+        try:
+            pdf_files = glob.glob(os.path.join(PDF_FOLDER, "*.pdf"))
+            
+            if not pdf_files:
+                return None
+            
+            # Берем самый новый файл
+            latest_file = max(pdf_files, key=os.path.getctime)
+            
+            file_stat = os.stat(latest_file)
+            file_info = {
+                'filename': os.path.basename(latest_file),
+                'full_path': latest_file,
+                'size': file_stat.st_size,
+                'size_kb': file_stat.st_size // 1024,
+                'created': datetime.fromtimestamp(file_stat.st_ctime).strftime("%d.%m.%Y %H:%M:%S"),
+                'modified': datetime.fromtimestamp(file_stat.st_mtime).strftime("%d.%m.%Y %H:%M:%S")
+            }
+            
+            return file_info
+            
+        except Exception as e:
+            logger.error(f"Ошибка получения информации о PDF: {str(e)}")
+            return None
 
-</html>
+def create_pdf_generator():
+    """Фабричная функция для создания генератора PDF"""
+    db_config = {
+        'dbname': os.getenv('DB_NAME', 'delivery_db'),
+        'user': os.getenv('DB_USER'), 
+        'password': os.getenv('DB_PASSWORD'),
+        'host': os.getenv('DB_HOST', 'localhost'),
+        'port': os.getenv('DB_PORT', '5432'),
+        'connect_timeout': int(os.getenv('DB_TIMEOUT', '10'))
+    }
+    
+    return PDFGenerator(db_config)
+
+def generate_tariffs_pdf():
+    """
+    Основная функция для вызова из app.py
+    
+    Returns:
+        tuple: (success: bool, message: str, file_path: str)
+    """
+    try:
+        generator = create_pdf_generator()
+        return generator.generate_pdf_from_db()
+    except Exception as e:
+        error_msg = f"Критическая ошибка генерации PDF: {str(e)}"
+        logger.error(error_msg)
+        return False, error_msg, None
+
+def get_latest_pdf_info():
+    """
+    Получает информацию о последнем созданном PDF
+    
+    Returns:
+        dict or None: Информация о файле
+    """
+    try:
+        generator = create_pdf_generator()
+        return generator.get_pdf_info()
+    except Exception as e:
+        logger.error(f"Ошибка получения информации о PDF: {str(e)}")
+        return None
+
+if __name__ == "__main__":
+    # Тестирование генерации PDF
+    print("Тестируем генерацию PDF...")
+    print(f"Рабочая директория: {BASE_DIR}")
+    print(f"PDF папка: {PDF_FOLDER}")
+    print(f"Templates папка: {TEMPLATES_FOLDER}")
+    print(f"wkhtmltopdf путь: {WKHTMLTOPDF_PATH}")
+    
+    success, message, file_path = generate_tariffs_pdf()
+    
+    if success:
+        print(f"✅ {message}")
+        print(f"📁 Файл: {file_path}")
+        
+        # Показываем информацию о файле
+        pdf_info = get_latest_pdf_info()
+        if pdf_info:
+            print(f"📊 Размер: {pdf_info['size_kb']} КБ")
+            print(f"📅 Создан: {pdf_info['created']}")
+    else:
+        print(f"❌ {message}")
