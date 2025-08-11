@@ -431,6 +431,17 @@
             color: var(--primary-color) !important;
         }
 
+        /* Отладочная информация */
+        .debug-info {
+            background: rgba(255, 255, 0, 0.1);
+            border: 1px solid #ffff00;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.8rem;
+            color: #ffff00;
+        }
+
         @media (max-width: 480px) {
             .privacy-modal-content {
                 width: 95%;
@@ -441,9 +452,7 @@
             .privacy-modal h3 {
                 font-size: 1.1rem;
             }
-        }
 
-        @media (max-width: 480px) {
             .container {
                 padding: 12px;
             }
@@ -507,6 +516,14 @@
             <img src="/static/images/photo_2024-05-27_15-00-14.jpg" alt="China Together" class="logo">
             <h1>China Together</h1>
             <p class="subtitle">Оформите заявку на выкуп и доставку товара</p>
+        </div>
+
+        <!-- Отладочная информация -->
+        <div class="debug-info" id="debugInfo" style="display: none;">
+            <strong>Отладка:</strong><br>
+            Telegram ID: <span id="debugTelegramId">не определен</span><br>
+            Username: <span id="debugUsername">не определен</span><br>
+            Calculation ID: <span id="debugCalculationId">не определен</span>
         </div>
 
         <!-- Информационная секция -->
@@ -666,48 +683,116 @@
         </div>
 
     <script>
+        console.log('🚀 Скрипт запущен');
+
         // Обработка ошибок JavaScript
         window.addEventListener('error', function(e) {
-            console.error('JavaScript error:', e.error);
+            console.error('❌ JavaScript error:', e.error);
         });
 
-        // Инициализация Telegram Web App с проверкой
-        let tg = null;
-        try {
-            if (window.Telegram && window.Telegram.WebApp) {
-                tg = window.Telegram.WebApp;
-                tg.ready();
-                tg.expand();
-            }
-        } catch (e) {
-            console.warn('Telegram Web App недоступен:', e);
-        }
-
-        // Получаем данные пользователя
+        // Глобальные переменные
         let telegramUserId = null;
         let telegramUsername = null;
         let calculationId = null;
+        let tg = null;
 
-        try {
-            if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
-                telegramUserId = tg.initDataUnsafe.user.id;
-                telegramUsername = tg.initDataUnsafe.user.username || `user_${tg.initDataUnsafe.user.id}`;
-            } else {
-                const urlParams = new URLSearchParams(window.location.search);
-                telegramUserId = urlParams.get('telegram_id') || 'test_user';
-                telegramUsername = urlParams.get('username') || 'test_username';
-                calculationId = urlParams.get('calculation_id');
+        // Инициализация Telegram Web App с улучшенной обработкой
+        function initTelegramWebApp() {
+            console.log('🔄 Инициализация Telegram Web App...');
+            
+            try {
+                if (window.Telegram && window.Telegram.WebApp) {
+                    tg = window.Telegram.WebApp;
+                    console.log('✅ Telegram Web App доступен');
+                    
+                    tg.ready();
+                    tg.expand();
+                    
+                    // Получаем данные пользователя из Telegram
+                    if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                        telegramUserId = tg.initDataUnsafe.user.id;
+                        telegramUsername = tg.initDataUnsafe.user.username || `user_${tg.initDataUnsafe.user.id}`;
+                        console.log('✅ Данные пользователя из Telegram:', {
+                            id: telegramUserId,
+                            username: telegramUsername
+                        });
+                    } else {
+                        console.log('⚠️ Данные пользователя из Telegram недоступны');
+                    }
+                } else {
+                    console.log('⚠️ Telegram Web App недоступен');
+                }
+            } catch (e) {
+                console.warn('⚠️ Ошибка при инициализации Telegram Web App:', e);
             }
-        } catch (e) {
-            console.warn('Не удалось получить данные пользователя:', e);
         }
 
-        // Предзаполняем Telegram контакт, если известен username
-        if (telegramUsername && telegramUsername !== 'test_username') {
-            document.getElementById('telegramContact').value = `@${telegramUsername}`;
+        // Получение данных из URL параметров
+        function getDataFromURL() {
+            console.log('🔄 Получение данных из URL...');
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Приоритет: сначала из Telegram, потом из URL
+            if (!telegramUserId) {
+                telegramUserId = urlParams.get('telegram_id') || 'test_user';
+                console.log('📋 Telegram ID из URL:', telegramUserId);
+            }
+            
+            if (!telegramUsername) {
+                telegramUsername = urlParams.get('username') || 'test_username';
+                console.log('📋 Username из URL:', telegramUsername);
+            }
+            
+            if (!calculationId) {
+                calculationId = urlParams.get('calculation_id');
+                console.log('📋 Calculation ID из URL:', calculationId);
+            }
         }
 
-        // Обработка checkbox - исправленная версия
+        // Обновление отладочной информации
+        function updateDebugInfo() {
+            document.getElementById('debugTelegramId').textContent = telegramUserId || 'не определен';
+            document.getElementById('debugUsername').textContent = telegramUsername || 'не определен';
+            document.getElementById('debugCalculationId').textContent = calculationId || 'не определен';
+            
+            // Показываем отладочную информацию в dev режиме
+            if (window.location.search.includes('debug=1')) {
+                document.getElementById('debugInfo').style.display = 'block';
+            }
+        }
+
+        // Предзаполнение полей формы
+        function prefillForm() {
+            console.log('🔄 Предзаполнение формы...');
+            
+            // Предзаполняем Telegram контакт
+            const telegramContactField = document.getElementById('telegramContact');
+            if (telegramUsername && telegramUsername !== 'test_username') {
+                const telegramContact = telegramUsername.startsWith('@') ? telegramUsername : `@${telegramUsername}`;
+                telegramContactField.value = telegramContact;
+                console.log('✅ Telegram контакт предзаполнен:', telegramContact);
+            }
+        }
+
+        // Инициализация всех компонентов
+        function initialize() {
+            console.log('🚀 Начало инициализации...');
+            
+            initTelegramWebApp();
+            getDataFromURL();
+            updateDebugInfo();
+            prefillForm();
+            
+            console.log('✅ Инициализация завершена');
+            console.log('📊 Итоговые данные:', {
+                telegramUserId,
+                telegramUsername,
+                calculationId
+            });
+        }
+
+        // Обработка checkbox
         const termsCheckbox = document.getElementById('termsAccepted');
         const termsWrapper = document.getElementById('termsWrapper');
 
@@ -751,6 +836,8 @@
 
         // Функция валидации формы
         function validateForm() {
+            console.log('🔄 Валидация формы...');
+            
             let isValid = true;
             const fields = [
                 {
@@ -784,24 +871,28 @@
                         element.style.borderColor = '#dc3545';
                     }
                     isValid = false;
+                    console.log(`❌ Ошибка валидации поля: ${field.id}`);
                 } else {
                     if (errorElement) {
                         errorElement.style.display = 'none';
                     }
                     if (field.id !== 'termsAccepted') {
-                        element.style.borderColor = var(--border-color);
+                        element.style.borderColor = 'var(--border-color)';
                     }
                 }
             });
 
+            console.log('📊 Результат валидации:', isValid ? '✅ Успех' : '❌ Ошибки');
             return isValid;
         }
 
-        // Обработчик формы
+        // ОСНОВНОЙ ОБРАБОТЧИК ФОРМЫ
         document.getElementById('purchaseRequestForm').addEventListener('submit', async function (event) {
             event.preventDefault();
+            console.log('📤 Отправка формы...');
 
             if (!validateForm()) {
+                console.log('❌ Форма не прошла валидацию');
                 if (tg && tg.HapticFeedback) {
                     tg.HapticFeedback.notificationOccurred('error');
                 }
@@ -819,6 +910,7 @@
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<span>⏳</span><span>Отправляем заявку...</span>';
 
+                // Подготавливаем данные формы
                 const formData = {
                     telegram_id: telegramUserId,
                     calculation_id: calculationId,
@@ -828,9 +920,13 @@
                     order_amount: document.getElementById('orderAmount').value,
                     promo_code: document.getElementById('promoCode').value.trim(),
                     additional_notes: document.getElementById('additionalNotes').value.trim(),
-                    terms_accepted: document.getElementById('termsAccepted').checked
+                    terms_accepted: document.getElementById('termsAccepted').checked,
+                    username: telegramUsername  // Добавляем username
                 };
 
+                console.log('📋 Данные для отправки:', formData);
+
+                // AJAX запрос к серверу
                 const response = await fetch('/submit_purchase_request', {
                     method: 'POST',
                     headers: {
@@ -839,9 +935,14 @@
                     body: JSON.stringify(formData)
                 });
 
+                console.log('📊 Ответ сервера - статус:', response.status);
+
                 const result = await response.json();
+                console.log('📊 Ответ сервера - данные:', result);
 
                 if (result.success) {
+                    console.log('✅ Заявка успешно отправлена!');
+                    
                     if (tg && tg.HapticFeedback) {
                         tg.HapticFeedback.notificationOccurred('success');
                     }
@@ -868,10 +969,21 @@
                     // Очищаем форму
                     document.getElementById('purchaseRequestForm').reset();
                     updateCheckboxStyle(); // Обновляем стиль checkbox после сброса
+                    
+                    // Восстанавливаем предзаполненные данные
+                    prefillForm();
 
                     // Показываем уведомление в Telegram
                     if (tg && tg.showAlert) {
                         tg.showAlert('✅ ' + result.message);
+                    }
+
+                    // Логируем статус отправки уведомлений
+                    if (result.telegram_notification_sent) {
+                        console.log('✅ Telegram уведомление отправлено');
+                    }
+                    if (result.google_form_sent) {
+                        console.log('✅ Google Form отправлена');
                     }
 
                 } else {
@@ -879,7 +991,7 @@
                 }
 
             } catch (error) {
-                console.error('Ошибка при отправке заявки:', error);
+                console.error('❌ Ошибка при отправке заявки:', error);
 
                 if (tg && tg.HapticFeedback) {
                     tg.HapticFeedback.notificationOccurred('error');
@@ -887,6 +999,8 @@
 
                 if (tg && tg.showAlert) {
                     tg.showAlert('❌ Ошибка при отправке заявки: ' + error.message);
+                } else {
+                    alert('❌ Ошибка при отправке заявки: ' + error.message);
                 }
 
                 const submitBtn = document.getElementById('submitRequestBtn');
@@ -902,7 +1016,7 @@
                 if (errorElement && errorElement.style.display === 'block') {
                     errorElement.style.display = 'none';
                     if (this.type !== 'checkbox') {
-                        this.style.borderColor = var(--border-color);
+                        this.style.borderColor = 'var(--border-color)';
                     }
                 }
             });
@@ -936,9 +1050,6 @@
             console.warn('Не удалось настроить главную кнопку:', e);
         }
 
-        // Инициализация стиля checkbox при загрузке
-        updateCheckboxStyle();
-
         // Функции для модального окна политики конфиденциальности
         function showPrivacyModal() {
             document.getElementById('privacyModal').style.display = 'block';
@@ -962,6 +1073,22 @@
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
                 closePrivacyModal();
+            }
+        });
+
+        // Запуск инициализации при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM загружен, запуск инициализации...');
+            initialize();
+            updateCheckboxStyle(); // Инициализация стиля checkbox
+        });
+
+        // Дополнительная инициализация при полной загрузке
+        window.addEventListener('load', function() {
+            console.log('🏁 Страница полностью загружена');
+            // Дополнительные проверки после полной загрузки
+            if (!telegramUserId || telegramUserId === 'test_user') {
+                console.log('⚠️ Внимание: используются тестовые данные пользователя');
             }
         });
     </script>

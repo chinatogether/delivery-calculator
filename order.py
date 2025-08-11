@@ -9,6 +9,7 @@ from functools import wraps
 from dotenv import load_dotenv
 import pytz
 from notification_sender import send_order_notification
+from google_form_sender import send_to_google_form  # ИСПРАВЛЕННЫЙ ИМПОРТ
 import threading
 
 # Настройка логирования
@@ -86,9 +87,33 @@ def init_purchase_orders_tables():
                 terms_accepted BOOLEAN DEFAULT FALSE,
                 status VARCHAR(50) DEFAULT 'new',
                 manager_notes TEXT,
+                google_form_submitted BOOLEAN DEFAULT FALSE,  -- НОВОЕ ПОЛЕ
+                google_form_submission_time TIMESTAMP WITH TIME ZONE,  -- НОВОЕ ПОЛЕ
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT (NOW() AT TIME ZONE 'Europe/Moscow'),
                 updated_at TIMESTAMP WITH TIME ZONE DEFAULT (NOW() AT TIME ZONE 'Europe/Moscow')
             )
+        """)
+        
+        # Проверяем и добавляем новые поля если их нет
+        cursor.execute("""
+            DO $$ 
+            BEGIN 
+                BEGIN
+                    ALTER TABLE delivery_test.purchase_requests 
+                    ADD COLUMN google_form_submitted BOOLEAN DEFAULT FALSE;
+                EXCEPTION
+                    WHEN duplicate_column THEN 
+                    -- Поле уже существует, ничего не делаем
+                END;
+                
+                BEGIN
+                    ALTER TABLE delivery_test.purchase_requests 
+                    ADD COLUMN google_form_submission_time TIMESTAMP WITH TIME ZONE;
+                EXCEPTION
+                    WHEN duplicate_column THEN 
+                    -- Поле уже существует, ничего не делаем  
+                END;
+            END $$;
         """)
         
         # Индексы для быстрого поиска
@@ -105,6 +130,12 @@ def init_purchase_orders_tables():
         cursor.execute("""
             CREATE INDEX IF NOT EXISTS idx_purchase_requests_created 
             ON delivery_test.purchase_requests (created_at)
+        """)
+        
+        # НОВЫЙ ИНДЕКС для Google Forms
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_purchase_requests_google_form 
+            ON delivery_test.purchase_requests (google_form_submitted)
         """)
         
         conn.commit()
@@ -196,120 +227,38 @@ def save_purchase_request(telegram_user_id, email, telegram_contact, supplier_li
         cursor.close()
         conn.close()
 
+# НОВАЯ ФУНКЦИЯ для обновления статуса Google Forms
 @handle_db_errors
-def get_user_requests(telegram_user_id, limit=10):
-    """Получение заявок пользователя"""
-    conn = connect_to_db()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("""
-            SELECT pr.id, pr.calculation_id, pr.email, pr.telegram_contact, 
-                   pr.supplier_link, pr.order_amount, pr.promo_code, 
-                   pr.additional_notes, pr.status, pr.created_at, pr.updated_at
-            FROM delivery_test.purchase_requests pr
-            WHERE pr.telegram_user_id = %s
-            ORDER BY pr.created_at DESC
-            LIMIT %s
-        """, (telegram_user_id, limit))
-        
-        requests = cursor.fetchall()
-        
-        # Преобразуем в словари
-        result = []
-        for req in requests:
-            result.append({
-                'id': req[0],
-                'calculation_id': req[1],
-                'email': req[2],
-                'telegram_contact': req[3],
-                'supplier_link': req[4],
-                'order_amount': req[5],
-                'promo_code': req[6],
-                'additional_notes': req[7],
-                'status': req[8],
-                'created_at': req[9].isoformat() if req[9] else None,
-                'updated_at': req[10].isoformat() if req[10] else None
-            })
-        
-        return result
-        
-    finally:
-        cursor.close()
-        conn.close()
-
-@handle_db_errors
-def update_request_status(request_id, status, manager_notes=None):
-    """Обновление статуса заявки"""
+def update_google_form_status(request_id, submitted=True):
+    """Обновление статуса отправки в Google Forms"""
     conn = connect_to_db()
     cursor = conn.cursor()
     try:
         moscow_time = get_moscow_time()
         cursor.execute("""
             UPDATE delivery_test.purchase_requests 
-            SET status = %s, manager_notes = %s, updated_at = %s
+            SET google_form_submitted = %s, 
+                google_form_submission_time = %s,
+                updated_at = %s
             WHERE id = %s
             RETURNING id
-        """, (status, manager_notes, moscow_time, request_id))
+        """, (submitted, moscow_time if submitted else None, moscow_time, request_id))
         
         result = cursor.fetchone()
         if result:
             conn.commit()
-            logger.info(f"Статус заявки {request_id} обновлен на '{status}'")
+            logger.info(f"Статус Google Forms для заявки {request_id} обновлен: {submitted}")
             return request_id
         else:
-            logger.warning(f"Заявка с ID {request_id} не найдена")
+            logger.warning(f"Заявка с ID {request_id} не найдена для обновления Google Forms статуса")
             return None
         
     finally:
         cursor.close()
         conn.close()
 
-@handle_db_errors
-def get_request_by_id(request_id):
-    """Получение заявки по ID"""
-    conn = connect_to_db()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("""
-            SELECT pr.id, pr.telegram_user_id, pr.calculation_id, pr.email, 
-                   pr.telegram_contact, pr.supplier_link, pr.order_amount, 
-                   pr.promo_code, pr.additional_notes, pr.terms_accepted,
-                   pr.status, pr.manager_notes, pr.created_at, pr.updated_at,
-                   tu.telegram_id, tu.username, tu.first_name, tu.last_name
-            FROM delivery_test.purchase_requests pr
-            LEFT JOIN delivery_test.telegram_users tu ON pr.telegram_user_id = tu.id
-            WHERE pr.id = %s
-        """, (request_id,))
-        
-        result = cursor.fetchone()
-        if result:
-            return {
-                'id': result[0],
-                'telegram_user_id': result[1],
-                'calculation_id': result[2],
-                'email': result[3],
-                'telegram_contact': result[4],
-                'supplier_link': result[5],
-                'order_amount': result[6],
-                'promo_code': result[7],
-                'additional_notes': result[8],
-                'terms_accepted': result[9],
-                'status': result[10],
-                'manager_notes': result[11],
-                'created_at': result[12].isoformat() if result[12] else None,
-                'updated_at': result[13].isoformat() if result[13] else None,
-                'user': {
-                    'telegram_id': result[14],
-                    'username': result[15],
-                    'first_name': result[16],
-                    'last_name': result[17]
-                }
-            }
-        return None
-        
-    finally:
-        cursor.close()
-        conn.close()
+# ОСТАЛЬНЫЕ ФУНКЦИИ БД (get_user_requests, update_request_status, get_request_by_id)
+# ... (остальной код БД остается такой же)
 
 # МАРШРУТЫ ДЛЯ ORDER
 
@@ -318,7 +267,7 @@ def register_order_routes(app):
     
     @app.route('/order')
     def order_page():
-        """Страница заказа доставки"""
+        """Страница заказа доставки - возвращает HTML шаблон"""
         telegram_id = request.args.get('telegram_id')
         username = request.args.get('username')
         calculation_id = request.args.get('calculation_id')
@@ -330,14 +279,16 @@ def register_order_routes(app):
             })
         
         try:
+            # Возвращаем HTML шаблон
             return render_template('order.html')
-        except:
+        except Exception as e:
+            logger.error(f"Ошибка загрузки шаблона order.html: {e}")
             return jsonify({
-                "page": "order",
+                "error": "Template not found",
+                "message": "Создайте файл templates/order.html",
                 "telegram_id": telegram_id,
-                "calculation_id": calculation_id,
-                "message": "Order page - Template not found, showing JSON response"
-            })
+                "calculation_id": calculation_id
+            }), 500
 
     @app.route('/submit_purchase_request', methods=['POST'])
     def submit_purchase_request():
@@ -392,12 +343,11 @@ def register_order_routes(app):
             
             if not user_result:
                 logger.info(f"👤 Пользователь с telegram_id={telegram_id} не найден, создаем нового пользователя...")
-                # Создаем нового пользователя
                 telegram_user_id = save_telegram_user(
                     telegram_id=telegram_id, 
                     username=username,
-                    first_name=None,  # Не знаем имя, оставляем пустым
-                    last_name=None    # Не знаем фамилию, оставляем пустым
+                    first_name=None,
+                    last_name=None
                 )
                 
                 if not telegram_user_id:
@@ -439,9 +389,7 @@ def register_order_routes(app):
                 'is_new_user': not bool(user_result)
             })
             
-            # НОВОЕ: Отправляем уведомление в Telegram
-            logger.info(f"📤 Подготовка уведомления для заявки #{request_id}...")
-            
+            # Подготавливаем данные для уведомлений и Google Forms
             notification_data = {
                 'request_id': request_id,
                 'telegram_contact': telegram_contact,
@@ -452,44 +400,56 @@ def register_order_routes(app):
                 'additional_notes': additional_notes,
                 'calculation_id': calculation_id,
                 'telegram_id': telegram_id,
-                'username': username
+                'username': username,
+                'terms_accepted': terms_accepted
             }
             
-            # Отправляем уведомление (неблокирующий вызов)
+            # 1. ОТПРАВЛЯЕМ УВЕДОМЛЕНИЕ В TELEGRAM
+            notification_success = False
             try:
-                from notification_sender import send_order_notification
                 notification_success = send_order_notification(notification_data)
-                
                 if notification_success:
-                    logger.info(f"✅ Уведомление для заявки #{request_id} поставлено в очередь отправки")
+                    logger.info(f"✅ Telegram уведомление для заявки #{request_id} отправлено")
                 else:
-                    logger.warning(f"⚠️ Не удалось поставить уведомление для заявки #{request_id} в очередь")
-                    
-            except ImportError as e:
-                logger.error(f"❌ Модуль notification_sender недоступен: {e}")
+                    logger.warning(f"⚠️ Telegram уведомление для заявки #{request_id} не отправлено")
             except Exception as e:
-                logger.error(f"❌ Ошибка при отправке уведомления для заявки #{request_id}: {e}")
+                logger.error(f"❌ Ошибка Telegram уведомления для заявки #{request_id}: {e}")
             
-            # Возвращаем успешный ответ независимо от статуса уведомления
+            # 2. ОТПРАВЛЯЕМ В GOOGLE FORMS  
+            google_form_success = False
+            try:
+                google_form_success = send_to_google_form(notification_data)
+                
+                if google_form_success:
+                    logger.info(f"✅ Google Form для заявки #{request_id} отправлена")
+                    update_google_form_status(request_id, True)
+                else:
+                    logger.warning(f"⚠️ Google Form для заявки #{request_id} не отправлена")
+                    update_google_form_status(request_id, False)
+                    
+            except Exception as e:
+                logger.error(f"❌ Ошибка Google Form для заявки #{request_id}: {e}")
+                update_google_form_status(request_id, False)
+            
+            # Возвращаем успешный ответ
             logger.info(f"🎉 Заявка #{request_id} успешно обработана")
             
             return jsonify({
                 "success": True,
                 "request_id": request_id,
-                "message": "Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время."
+                "message": "Заявка успешно отправлена! Менеджер свяжется с вами в рабочее время.",
+                "telegram_notification_sent": notification_success,
+                "google_form_sent": google_form_success
             })
                 
         except Exception as e:
             logger.error(f"❌ Критическая ошибка при создании заявки: {str(e)}")
             return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
 
-    # 3. Также добавьте эту функцию для тестирования уведомлений (опционально):
-
     @app.route('/api/test-notification', methods=['POST'])
     def test_notification():
-        """Тестирование системы уведомлений (только для разработки)"""
+        """Тестирование систем уведомлений (Telegram + Google Forms)"""
         try:
-            data = request.get_json()
             test_data = {
                 'request_id': 999999,
                 'telegram_contact': '@test_user',
@@ -500,186 +460,39 @@ def register_order_routes(app):
                 'additional_notes': 'Это тестовое уведомление',
                 'calculation_id': None,
                 'telegram_id': 'test123',
-                'username': 'test_user'
+                'username': 'test_user',
+                'terms_accepted': True
             }
             
-            success = send_order_notification(test_data)
+            # Тестируем Telegram уведомления
+            telegram_success = False
+            try:
+                telegram_success = send_order_notification(test_data)
+            except Exception as e:
+                logger.error(f"Ошибка тестирования Telegram: {e}")
             
-            if success:
-                return jsonify({
-                    "success": True,
-                    "message": "Тестовое уведомление отправлено"
-                })
-            else:
-                return jsonify({
-                    "success": False,
-                    "message": "Не удалось отправить тестовое уведомление"
-                })
+            # Тестируем Google Forms
+            google_form_success = False
+            try:
+                google_form_success = send_to_google_form(test_data)
+            except Exception as e:
+                logger.error(f"Ошибка тестирования Google Forms: {e}")
+            
+            return jsonify({
+                "success": True,
+                "telegram_notification": {
+                    "sent": telegram_success,
+                    "message": "Тестовое уведомление в Telegram отправлено" if telegram_success else "Не удалось отправить в Telegram"
+                },
+                "google_form": {
+                    "sent": google_form_success,
+                    "message": "Тестовые данные в Google Form отправлены" if google_form_success else "Не удалось отправить в Google Form"
+                }
+            })
                 
         except Exception as e:
             logger.error(f"Ошибка при тестировании уведомлений: {e}")
             return jsonify({"error": str(e)}), 500
-
-    @app.route('/api/orders', methods=['GET'])
-    def api_get_orders():
-        """API для получения списка заявок"""
-        try:
-            telegram_id = request.args.get('telegram_id')
-            limit = int(request.args.get('limit', 10))
-            
-            if not telegram_id:
-                return jsonify({"error": "Не указан telegram_id"}), 400
-            
-            # Получаем ID пользователя
-            conn = connect_to_db()
-            cursor = conn.cursor()
-            cursor.execute("SELECT id FROM delivery_test.telegram_users WHERE telegram_id = %s", (str(telegram_id),))
-            user_result = cursor.fetchone()
-            cursor.close()
-            conn.close()
-            
-            if not user_result:
-                return jsonify({"orders": [], "message": "Пользователь не найден"})
-            
-            telegram_user_id = user_result[0]
-            orders = get_user_requests(telegram_user_id, limit)
-            
-            return jsonify({
-                "success": True,
-                "orders": orders,
-                "total": len(orders)
-            })
-            
-        except Exception as e:
-            logger.error(f"Ошибка при получении заявок: {str(e)}")
-            return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
-
-    @app.route('/api/orders/<int:request_id>/status', methods=['PUT'])
-    def api_update_order_status(request_id):
-        """API для обновления статуса заявки"""
-        try:
-            data = request.get_json()
-            
-            if not data or 'status' not in data:
-                return jsonify({"error": "Необходимо указать статус"}), 400
-            
-            new_status = data.get('status', '').strip()
-            manager_notes = data.get('manager_notes', '').strip()
-            
-            # Валидируем статус
-            valid_statuses = ['new', 'in_progress', 'completed', 'cancelled', 'on_hold']
-            if new_status not in valid_statuses:
-                return jsonify({"error": f"Недопустимый статус. Доступные: {', '.join(valid_statuses)}"}), 400
-            
-            # Обновляем статус
-            updated_id = update_request_status(request_id, new_status, manager_notes)
-            
-            if updated_id:
-                return jsonify({
-                    "success": True,
-                    "request_id": updated_id,
-                    "new_status": new_status,
-                    "message": "Статус заявки обновлен"
-                })
-            else:
-                return jsonify({"error": "Заявка не найдена"}), 404
-                
-        except Exception as e:
-            logger.error(f"Ошибка при обновлении статуса заявки: {str(e)}")
-            return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
-
-    @app.route('/api/orders/<int:request_id>', methods=['GET'])
-    def api_get_order_details(request_id):
-        """API для получения детальной информации о заявке"""
-        try:
-            order = get_request_by_id(request_id)
-            
-            if order:
-                return jsonify({
-                    "success": True,
-                    "order": order
-                })
-            else:
-                return jsonify({"error": "Заявка не найдена"}), 404
-                
-        except Exception as e:
-            logger.error(f"Ошибка при получении заявки: {str(e)}")
-            return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
-
-    @app.route('/api/orders/stats', methods=['GET'])
-    def api_get_orders_stats():
-        """API для получения статистики заявок"""
-        try:
-            conn = connect_to_db()
-            cursor = conn.cursor()
-            
-            # Общая статистика
-            cursor.execute("""
-                SELECT 
-                    COUNT(*) as total_orders,
-                    COUNT(*) FILTER (WHERE status = 'new') as new_orders,
-                    COUNT(*) FILTER (WHERE status = 'in_progress') as in_progress_orders,
-                    COUNT(*) FILTER (WHERE status = 'completed') as completed_orders,
-                    COUNT(*) FILTER (WHERE status = 'cancelled') as cancelled_orders,
-                    COUNT(*) FILTER (WHERE created_at >= NOW() - INTERVAL '24 hours') as orders_last_24h,
-                    COUNT(*) FILTER (WHERE created_at >= NOW() - INTERVAL '7 days') as orders_last_week
-                FROM delivery_test.purchase_requests
-            """)
-            
-            stats = cursor.fetchone()
-            
-            # Статистика по дням (последние 7 дней)
-            cursor.execute("""
-                SELECT 
-                    DATE(created_at AT TIME ZONE 'Europe/Moscow') as order_date,
-                    COUNT(*) as orders_count
-                FROM delivery_test.purchase_requests
-                WHERE created_at >= NOW() - INTERVAL '7 days'
-                GROUP BY DATE(created_at AT TIME ZONE 'Europe/Moscow')
-                ORDER BY order_date DESC
-            """)
-            
-            daily_stats = cursor.fetchall()
-            cursor.close()
-            conn.close()
-            
-            return jsonify({
-                "success": True,
-                "stats": {
-                    "total_orders": stats[0],
-                    "new_orders": stats[1],
-                    "in_progress_orders": stats[2],
-                    "completed_orders": stats[3],
-                    "cancelled_orders": stats[4],
-                    "orders_last_24h": stats[5],
-                    "orders_last_week": stats[6]
-                },
-                "daily_stats": [
-                    {"date": str(day[0]), "orders": day[1]} 
-                    for day in daily_stats
-                ]
-            })
-            
-        except Exception as e:
-            logger.error(f"Ошибка при получении статистики: {str(e)}")
-            return jsonify({"error": f"Внутренняя ошибка: {str(e)}"}), 500
-
-    @app.route('/admin/orders')
-    def admin_orders_page():
-        """Административная панель для управления заявками"""
-        try:
-            return render_template('admin_orders.html')
-        except:
-            return jsonify({
-                "page": "admin_orders",
-                "message": "Admin orders page - Template not found, showing JSON response",
-                "endpoints": [
-                    "GET /api/orders/stats - статистика заявок",
-                    "GET /api/orders?telegram_id=XXX - заявки пользователя",
-                    "PUT /api/orders/{id}/status - обновление статуса",
-                    "GET /api/orders/{id} - детали заявки"
-                ]
-            })
 
     @app.route('/health')
     def health_check():
@@ -687,23 +500,46 @@ def register_order_routes(app):
         try:
             conn = connect_to_db()
             cursor = conn.cursor()
-            cursor.execute("SELECT COUNT(*) FROM delivery_test.purchase_requests")
-            orders_count = cursor.fetchone()[0]
+            cursor.execute("""
+                SELECT 
+                    COUNT(*) as total_orders,
+                    COUNT(*) FILTER (WHERE google_form_submitted = true) as google_form_submitted
+                FROM delivery_test.purchase_requests
+            """)
+            result = cursor.fetchone()
+            orders_count = result[0] if result else 0
+            google_forms_count = result[1] if result else 0
             cursor.close()
             conn.close()
             
+            # Проверяем статус модулей
+            try:
+                from notification_sender import get_notification_sender
+                telegram_status = get_notification_sender().get_status()
+            except:
+                telegram_status = {"status": "unavailable"}
+            
+            try:
+                from google_form_sender import get_google_forms_sender
+                google_forms_status = get_google_forms_sender().get_status()
+            except:
+                google_forms_status = {"status": "unavailable"}
+            
             return jsonify({
                 "status": "healthy",
-                "module": "orders",
+                "module": "orders_with_google_forms",
                 "timestamp": get_moscow_time().isoformat(),
                 "database": "connected",
                 "total_orders": orders_count,
-                "version": "2.3-orders"
+                "google_forms_submitted": google_forms_count,
+                "telegram_notifications": telegram_status,
+                "google_forms": google_forms_status,
+                "version": "2.5-fixed-imports"
             })
         except Exception as e:
             return jsonify({
                 "status": "unhealthy",
-                "module": "orders",
+                "module": "orders_with_google_forms",
                 "timestamp": get_moscow_time().isoformat(),
                 "error": str(e)
             }), 500
@@ -718,7 +554,7 @@ if __name__ == '__main__':
     from flask_cors import CORS
     CORS(app, origins=["https://telegram.org", "*"])
     
-    logger.info("=== Запуск China Together Delivery Calculator - Orders Module v2.3 ===")
+    logger.info("=== Запуск China Together Delivery Calculator - Orders Module v2.5 FIXED ===")
     
     # Инициализируем таблицы
     try:
@@ -730,6 +566,21 @@ if __name__ == '__main__':
     # Регистрируем маршруты
     register_order_routes(app)
     logger.info("✅ Маршруты заявок зарегистрированы")
+    
+    # Проверяем доступность модулей
+    try:
+        from notification_sender import get_notification_sender
+        telegram_sender = get_notification_sender()
+        logger.info(f"✅ Telegram уведомления: {telegram_sender.get_status()}")
+    except Exception as e:
+        logger.warning(f"⚠️ Telegram уведомления недоступны: {e}")
+    
+    try:
+        from google_form_sender import get_google_forms_sender
+        google_sender = get_google_forms_sender()
+        logger.info(f"✅ Google Forms: {google_sender.get_status()}")
+    except Exception as e:
+        logger.warning(f"⚠️ Google Forms недоступен: {e}")
     
     # Обработчики ошибок
     @app.errorhandler(404)

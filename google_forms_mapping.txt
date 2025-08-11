@@ -1,0 +1,18 @@
+Google Forms Field Mapping
+==============================
+
+Form URL: https://docs.google.com/forms/d/e/1FAIpQLSfONB0hP9sCKurPmcyuHyAj_ffmF2tmLrum9kKlyMSWqDGm_w/viewform
+
+Found fields:
+telegram_contact: entry.1244169801
+supplier_link: entry.1319459294
+promo_code: entry.211960837
+terms_accepted: entry.363561279
+
+# Обновите field_mapping в google_forms_sender.py:
+self.field_mapping = {
+    'telegram_contact': 'entry.1244169801',
+    'supplier_link': 'entry.1319459294',
+    'promo_code': 'entry.211960837',
+    'terms_accepted': 'entry.363561279',
+}

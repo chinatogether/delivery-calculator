@@ -252,7 +252,7 @@ def get_webapp_inline_keyboard(user_id, username, action="calculate"):
         web_app_url = f"{WEB_APP_URL}/calculate?telegram_id={user_id}&username={username}"
         button_text = "📊 Открыть калькулятор"
     else:  # order
-        web_app_url = "https://forms.gle/45ey41gUAgY3cTWJA"
+        web_app_url = f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}"
         button_text = "🚚 Открыть форму заказа"
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
@@ -666,7 +666,7 @@ async def handle_calculation_completed(message, data, user_id, username):
             [InlineKeyboardButton(
                 text="🚚 Запросить рассчет у менеджера", 
                 #web_app=WebAppInfo(url=f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}")
-                web_app=WebAppInfo(url="https://forms.gle/45ey41gUAgY3cTWJA")
+                web_app=WebAppInfo(url=f"{WEB_APP_URL}/order?telegram_id={user_id}&username={username}")
             )],
             [InlineKeyboardButton(text="🔄 Новый расчет", callback_data="new_calculation")]
         ]),

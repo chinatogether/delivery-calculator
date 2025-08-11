@@ -912,3 +912,66 @@ Original description: Too Many Requests: retry after 5
 2025-08-04 20:53:49,098 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
 2025-08-04 20:53:49,099 - aiogram.dispatcher - INFO - Start polling
 2025-08-04 20:53:49,146 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-05 01:16:34,176 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-08-05 01:16:34,209 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-08-05 01:16:35,256 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-08-05 01:16:35,256 - aiogram.dispatcher - WARNING - Sleep for 1.331773 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-08-05 01:17:03,923 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2025-08-05 18:14:05,501 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-08-05 18:14:05,855 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-05 18:14:05,866 - aiogram.dispatcher - INFO - Polling stopped
+2025-08-05 18:14:33,839 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-08-05 18:14:34,082 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-08-05 18:14:34,083 - aiogram.dispatcher - INFO - Start polling
+2025-08-05 18:14:34,129 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-05 18:17:59,191 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-08-05 18:17:59,195 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-05 18:17:59,195 - aiogram.dispatcher - INFO - Polling stopped
+2025-08-05 18:18:06,738 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-08-05 18:18:06,886 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-08-05 18:18:06,886 - aiogram.dispatcher - INFO - Start polling
+2025-08-05 18:18:06,933 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-05 18:36:10,393 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-08-05 18:36:10,394 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-05 18:36:10,394 - aiogram.dispatcher - INFO - Polling stopped
+2025-08-05 18:36:22,290 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-08-05 18:36:22,439 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-08-05 18:36:22,439 - aiogram.dispatcher - INFO - Start polling
+2025-08-05 18:36:22,485 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-07 11:49:24,710 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-08-07 11:49:24,806 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-08-07 11:49:35,982 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-08-07 19:11:51,018 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-08-07 19:11:51,019 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-08-07 19:12:02,171 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-08-07 19:12:12,269 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-08-07 19:12:12,269 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-08-07 19:12:23,417 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-08-08 12:45:10,347 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-08-08 12:45:10,372 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-08-08 12:45:21,541 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-08-11 17:46:29,566 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-08-11 17:46:30,995 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-11 17:46:31,027 - aiogram.dispatcher - INFO - Polling stopped
+2025-08-11 17:47:12,142 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-08-11 17:47:12,374 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-08-11 17:47:12,374 - aiogram.dispatcher - INFO - Start polling
+2025-08-11 17:47:12,422 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-11 17:51:58,632 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-08-11 17:51:58,760 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-11 17:51:58,760 - aiogram.dispatcher - INFO - Polling stopped
+2025-08-11 18:15:35,557 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-08-11 18:15:46,298 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-08-11 18:15:46,535 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-08-11 18:15:46,536 - aiogram.dispatcher - INFO - Start polling
+2025-08-11 18:15:46,583 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-11 18:15:47,986 - aiogram.event - INFO - Update id=33789627 is handled. Duration 1338 ms by bot id=8024421344
+2025-08-11 18:15:47,987 - aiogram.event - INFO - Update id=33789626 is handled. Duration 1339 ms by bot id=8024421344
+2025-08-11 18:16:24,187 - aiogram.event - INFO - Update id=33789628 is handled. Duration 207 ms by bot id=8024421344
+2025-08-11 18:16:27,303 - aiogram.event - INFO - Update id=33789629 is handled. Duration 182 ms by bot id=8024421344
+2025-08-11 18:16:39,197 - __main__ - INFO - Курс сохранен в БД: 7.19 юаней за 1$ (ID: 9)
+2025-08-11 18:16:39,226 - __main__ - INFO - Message worker начал работу
+2025-08-11 18:16:39,226 - __main__ - INFO - Message worker thread запущен
+2025-08-11 18:16:39,226 - __main__ - INFO - TelegramNotifier инициализирован. Chat ID: -1002768839240
+2025-08-11 18:16:39,470 - __main__ - INFO - Уведомление об обновлении курса отправлено в канал
+2025-08-11 18:16:39,607 - aiogram.event - INFO - Update id=33789630 is handled. Duration 449 ms by bot id=8024421344
