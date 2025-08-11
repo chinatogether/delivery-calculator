@@ -975,3 +975,17 @@ Original description: Too Many Requests: retry after 5
 2025-08-11 18:16:39,226 - __main__ - INFO - TelegramNotifier инициализирован. Chat ID: -1002768839240
 2025-08-11 18:16:39,470 - __main__ - INFO - Уведомление об обновлении курса отправлено в канал
 2025-08-11 18:16:39,607 - aiogram.event - INFO - Update id=33789630 is handled. Duration 449 ms by bot id=8024421344
+2025-08-11 18:22:42,935 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-08-11 18:22:42,936 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-11 18:22:42,936 - aiogram.dispatcher - INFO - Polling stopped
+2025-08-11 18:22:51,650 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-08-11 18:22:51,831 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-08-11 18:22:51,831 - aiogram.dispatcher - INFO - Start polling
+2025-08-11 18:22:51,879 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-11 18:40:29,460 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-08-11 18:40:29,462 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-08-11 18:40:29,462 - aiogram.dispatcher - INFO - Polling stopped
+2025-08-11 18:40:38,565 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-08-11 18:40:38,718 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-08-11 18:40:38,719 - aiogram.dispatcher - INFO - Start polling
+2025-08-11 18:40:38,766 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
