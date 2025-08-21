@@ -16611,3 +16611,513 @@ INFO:__main__:📋 Tariffs PDF Path: /home/chinatogether/xlsx-web/pdf-files/chin
 INFO:__main__:📋 Команды бота установлены!
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @Chinatogether_bot id=7709869722 - 'Chinatogether_bot'
+INFO:aiogram.event:Update id=450953564 is handled. Duration 267 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450953562 is handled. Duration 16928 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450953563 is handled. Duration 682 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953566 is handled. Duration 170 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953567 is handled. Duration 171 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 148440745: 27
+INFO:aiogram.event:Update id=450953565 is handled. Duration 40741 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953568 is handled. Duration 199 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953569 is handled. Duration 118 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953570 is handled. Duration 151 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953571 is handled. Duration 147 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953572 is handled. Duration 145 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953573 is handled. Duration 115 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953574 is handled. Duration 141 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953575 is handled. Duration 284 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953576 is handled. Duration 401 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953577 is handled. Duration 122 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953578 is handled. Duration 127 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953579 is handled. Duration 126 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953580 is handled. Duration 145 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953581 is handled. Duration 211 ms by bot id=7709869722
+INFO:__main__:Пользователь 2118975312 скачал тарифы
+INFO:aiogram.event:Update id=450953582 is handled. Duration 553 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953583 is handled. Duration 255 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953584 is handled. Duration 188 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953585 is handled. Duration 188 ms by bot id=7709869722
+INFO:__main__:Пользователь 972989875 скачал тарифы
+INFO:aiogram.event:Update id=450953586 is handled. Duration 593 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953587 is handled. Duration 282 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953588 is handled. Duration 152 ms by bot id=7709869722
+INFO:__main__:Пользователь 624614111 скачал тарифы
+INFO:aiogram.event:Update id=450953589 is handled. Duration 559 ms by bot id=7709869722
+INFO:__main__:Пользователь 1014178180 скачал тарифы
+INFO:aiogram.event:Update id=450953590 is handled. Duration 544 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953591 is handled. Duration 191 ms by bot id=7709869722
+INFO:__main__:Пользователь 1303160863 скачал тарифы
+INFO:aiogram.event:Update id=450953592 is handled. Duration 894 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953593 is handled. Duration 204 ms by bot id=7709869722
+INFO:__main__:Пользователь 5474579668 скачал тарифы
+INFO:aiogram.event:Update id=450953594 is handled. Duration 568 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953595 is handled. Duration 242 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953596 is handled. Duration 271 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953597 is handled. Duration 200 ms by bot id=7709869722
+INFO:__main__:Пользователь 1484902943 скачал тарифы
+INFO:aiogram.event:Update id=450953598 is handled. Duration 440 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953599 is handled. Duration 198 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953600 is handled. Duration 188 ms by bot id=7709869722
+INFO:__main__:Пользователь 1222811603 скачал тарифы
+INFO:aiogram.event:Update id=450953601 is handled. Duration 873 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953602 is handled. Duration 118 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953603 is handled. Duration 273 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953604 is handled. Duration 204 ms by bot id=7709869722
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+INFO:aiogram.event:Update id=450953605 is handled. Duration 307 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953606 is handled. Duration 202 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953607 is handled. Duration 194 ms by bot id=7709869722
+INFO:__main__:Пользователь 505165643 скачал тарифы
+INFO:aiogram.event:Update id=450953608 is handled. Duration 529 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953609 is handled. Duration 92 ms by bot id=7709869722
+INFO:__main__:Пользователь 505165643 скачал тарифы
+INFO:aiogram.event:Update id=450953610 is handled. Duration 506 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953611 is handled. Duration 220 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953612 is handled. Duration 91 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953613 is handled. Duration 311 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953614 is handled. Duration 469 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953615 is handled. Duration 138 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953616 is handled. Duration 118 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953617 is handled. Duration 133 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953618 is handled. Duration 204 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953619 is handled. Duration 129 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953620 is handled. Duration 367 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953621 is handled. Duration 140 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953622 is handled. Duration 189 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953623 is handled. Duration 119 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953624 is handled. Duration 109 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953625 is handled. Duration 128 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953626 is handled. Duration 186 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953627 is handled. Duration 190 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953628 is handled. Duration 144 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953629 is handled. Duration 303 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953630 is handled. Duration 163 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953631 is handled. Duration 132 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953632 is handled. Duration 119 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953633 is handled. Duration 133 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953634 is handled. Duration 190 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953635 is handled. Duration 125 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953636 is handled. Duration 198 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953637 is handled. Duration 186 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953638 is handled. Duration 115 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953639 is handled. Duration 199 ms by bot id=7709869722
+INFO:__main__:Пользователь 876232253 скачал тарифы
+INFO:aiogram.event:Update id=450953640 is handled. Duration 441 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953641 is handled. Duration 188 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953642 is handled. Duration 132 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953643 is handled. Duration 117 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953644 is handled. Duration 141 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953645 is handled. Duration 222 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953646 is handled. Duration 188 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953647 is handled. Duration 207 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953649 is handled. Duration 170 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 415447223: 1
+INFO:aiogram.event:Update id=450953648 is handled. Duration 38702 ms by bot id=7709869722
+INFO:__main__:Пользователь 415447223 скачал тарифы
+INFO:aiogram.event:Update id=450953650 is handled. Duration 1319 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953651 is handled. Duration 223 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953652 is handled. Duration 199 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953653 is handled. Duration 220 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953654 is handled. Duration 132 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953655 is handled. Duration 207 ms by bot id=7709869722
+INFO:__main__:Пользователь 415183216 скачал тарифы
+INFO:aiogram.event:Update id=450953656 is handled. Duration 876 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953657 is handled. Duration 347 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953658 is handled. Duration 201 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953659 is handled. Duration 107 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953660 is handled. Duration 178 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953661 is handled. Duration 272 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953662 is handled. Duration 187 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953663 is handled. Duration 278 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953664 is handled. Duration 182 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953665 is handled. Duration 282 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953666 is handled. Duration 181 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953667 is handled. Duration 210 ms by bot id=7709869722
+INFO:__main__:Пользователь 356747789 скачал тарифы
+INFO:aiogram.event:Update id=450953668 is handled. Duration 705 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953669 is handled. Duration 229 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953670 is handled. Duration 184 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953671 is handled. Duration 150 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953672 is handled. Duration 344 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953673 is handled. Duration 142 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953674 is handled. Duration 157 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953675 is handled. Duration 342 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953676 is handled. Duration 156 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953677 is handled. Duration 140 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953678 is handled. Duration 299 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953679 is handled. Duration 139 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953680 is handled. Duration 419 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953681 is handled. Duration 191 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953682 is handled. Duration 292 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953683 is handled. Duration 148 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953684 is handled. Duration 135 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953685 is handled. Duration 227 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953686 is handled. Duration 147 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953687 is handled. Duration 278 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953688 is handled. Duration 157 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953689 is handled. Duration 146 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953690 is handled. Duration 443 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953691 is handled. Duration 162 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953692 is handled. Duration 225 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953693 is handled. Duration 284 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953694 is handled. Duration 240 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953695 is handled. Duration 211 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953696 is handled. Duration 225 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953697 is handled. Duration 331 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953698 is handled. Duration 225 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 415447223: 7
+INFO:aiogram.event:Update id=450953699 is handled. Duration 36470 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 415447223: 2
+INFO:aiogram.event:Update id=450953700 is handled. Duration 38418 ms by bot id=7709869722
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+WARNING:aiogram.dispatcher:Sleep for 1.354622 seconds and try again... (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+WARNING:aiogram.dispatcher:Sleep for 1.996495 seconds and try again... (tryings = 2, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+WARNING:aiogram.dispatcher:Sleep for 2.659077 seconds and try again... (tryings = 3, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 4, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+WARNING:aiogram.dispatcher:Sleep for 1.408585 seconds and try again... (tryings = 1, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+WARNING:aiogram.dispatcher:Sleep for 1.792581 seconds and try again... (tryings = 2, bot id = 7709869722)
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+WARNING:aiogram.dispatcher:Sleep for 2.253724 seconds and try again... (tryings = 3, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 4, bot id = 7709869722)
+INFO:aiogram.event:Update id=450953701 is handled. Duration 213 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953702 is handled. Duration 244 ms by bot id=7709869722
+INFO:__main__:Пользователь 433266885 скачал тарифы
+INFO:aiogram.event:Update id=450953703 is handled. Duration 544 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953704 is handled. Duration 282 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953705 is handled. Duration 229 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953706 is handled. Duration 112 ms by bot id=7709869722
+INFO:__main__:Пользователь 244209369 скачал тарифы
+INFO:aiogram.event:Update id=450953707 is handled. Duration 548 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953708 is handled. Duration 302 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953709 is handled. Duration 229 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953710 is handled. Duration 244 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953711 is handled. Duration 201 ms by bot id=7709869722
+INFO:__main__:Пользователь 1757632632 скачал тарифы
+INFO:aiogram.event:Update id=450953712 is handled. Duration 747 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953713 is handled. Duration 175 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953714 is handled. Duration 258 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953715 is handled. Duration 136 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953716 is handled. Duration 202 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953717 is handled. Duration 217 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953718 is handled. Duration 205 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953719 is handled. Duration 189 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953720 is handled. Duration 183 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953721 is handled. Duration 221 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953722 is handled. Duration 386 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953723 is handled. Duration 209 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953724 is handled. Duration 123 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953725 is handled. Duration 294 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953726 is handled. Duration 140 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953727 is handled. Duration 283 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953728 is handled. Duration 178 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953729 is handled. Duration 130 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953730 is handled. Duration 400 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953731 is handled. Duration 116 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953732 is handled. Duration 253 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953733 is handled. Duration 213 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953734 is handled. Duration 143 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953735 is handled. Duration 388 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953736 is handled. Duration 134 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953737 is handled. Duration 121 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953738 is handled. Duration 286 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953739 is handled. Duration 207 ms by bot id=7709869722
+INFO:__main__:Пользователь 200029388 скачал тарифы
+INFO:aiogram.event:Update id=450953740 is handled. Duration 880 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953741 is handled. Duration 239 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953742 is handled. Duration 247 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953743 is handled. Duration 104 ms by bot id=7709869722
+INFO:__main__:Пользователь 401703841 скачал тарифы
+INFO:aiogram.event:Update id=450953744 is handled. Duration 685 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953745 is handled. Duration 292 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953746 is handled. Duration 366 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953747 is handled. Duration 138 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953748 is handled. Duration 151 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953749 is handled. Duration 130 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953750 is handled. Duration 131 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953751 is handled. Duration 117 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953752 is handled. Duration 139 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953753 is handled. Duration 130 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953754 is handled. Duration 139 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953755 is handled. Duration 168 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953756 is handled. Duration 334 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953757 is handled. Duration 175 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953758 is handled. Duration 232 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953759 is handled. Duration 111 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953760 is handled. Duration 254 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953761 is handled. Duration 112 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953762 is handled. Duration 139 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953763 is handled. Duration 755 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953764 is handled. Duration 160 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953765 is handled. Duration 435 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953766 is handled. Duration 137 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953767 is handled. Duration 124 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953768 is handled. Duration 236 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953769 is handled. Duration 105 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953770 is handled. Duration 242 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953771 is handled. Duration 299 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953772 is handled. Duration 92 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953773 is handled. Duration 304 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953774 is handled. Duration 96 ms by bot id=7709869722
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+INFO:aiogram.event:Update id=450953775 is handled. Duration 360 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953776 is handled. Duration 178 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953777 is handled. Duration 192 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953778 is handled. Duration 202 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953779 is handled. Duration 228 ms by bot id=7709869722
+INFO:__main__:Пользователь 852470571 скачал тарифы
+INFO:aiogram.event:Update id=450953780 is handled. Duration 623 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953781 is handled. Duration 117 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953782 is handled. Duration 219 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953783 is handled. Duration 117 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953784 is handled. Duration 320 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953785 is handled. Duration 440 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953786 is handled. Duration 132 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953787 is handled. Duration 215 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953788 is handled. Duration 133 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953789 is handled. Duration 122 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953790 is handled. Duration 208 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953791 is handled. Duration 120 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953792 is handled. Duration 130 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953793 is handled. Duration 265 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953794 is handled. Duration 211 ms by bot id=7709869722
+INFO:__main__:Пользователь 1173267121 скачал тарифы
+INFO:aiogram.event:Update id=450953795 is handled. Duration 454 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953796 is handled. Duration 236 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953797 is handled. Duration 218 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953798 is handled. Duration 140 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953799 is handled. Duration 199 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953800 is handled. Duration 133 ms by bot id=7709869722
+INFO:__main__:Пользователь 928353939 скачал тарифы
+INFO:aiogram.event:Update id=450953801 is handled. Duration 771 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953802 is handled. Duration 194 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953803 is handled. Duration 315 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953804 is handled. Duration 287 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953805 is handled. Duration 156 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953806 is handled. Duration 270 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953807 is handled. Duration 183 ms by bot id=7709869722
+INFO:__main__:Удалено сообщений для пользователя 953430671: 8
+INFO:aiogram.event:Update id=450953808 is handled. Duration 41944 ms by bot id=7709869722
+INFO:__main__:Пользователь 757517466 скачал тарифы
+INFO:aiogram.event:Update id=450953809 is handled. Duration 966 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953810 is handled. Duration 193 ms by bot id=7709869722
+INFO:__main__:Пользователь 757517466 скачал тарифы
+INFO:aiogram.event:Update id=450953811 is handled. Duration 511 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953812 is handled. Duration 296 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953813 is handled. Duration 141 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450953814 is handled. Duration 681 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953815 is handled. Duration 107 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953816 is handled. Duration 260 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953817 is handled. Duration 180 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953818 is handled. Duration 111 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953819 is handled. Duration 207 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953820 is handled. Duration 91 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953821 is handled. Duration 228 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953822 is handled. Duration 185 ms by bot id=7709869722
+INFO:__main__:Пользователь 449386056 скачал тарифы
+INFO:aiogram.event:Update id=450953823 is handled. Duration 462 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953824 is handled. Duration 199 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953825 is handled. Duration 294 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953826 is handled. Duration 152 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953827 is handled. Duration 193 ms by bot id=7709869722
+INFO:__main__:Пользователь 6314512734 скачал тарифы
+INFO:aiogram.event:Update id=450953828 is handled. Duration 831 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953829 is handled. Duration 219 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953830 is handled. Duration 186 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953831 is handled. Duration 198 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953832 is handled. Duration 187 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953833 is handled. Duration 279 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953834 is handled. Duration 191 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953835 is handled. Duration 194 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953836 is handled. Duration 191 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953837 is handled. Duration 184 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953838 is handled. Duration 192 ms by bot id=7709869722
+INFO:__main__:Пользователь 333371816 скачал тарифы
+INFO:aiogram.event:Update id=450953839 is handled. Duration 884 ms by bot id=7709869722
+INFO:__main__:Пользователь 807106266 скачал тарифы
+INFO:aiogram.event:Update id=450953840 is handled. Duration 571 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953841 is handled. Duration 233 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953842 is handled. Duration 204 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953843 is handled. Duration 213 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953844 is handled. Duration 195 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953845 is handled. Duration 101 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953846 is handled. Duration 208 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953847 is handled. Duration 126 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953848 is handled. Duration 437 ms by bot id=7709869722
+INFO:__main__:Пользователь 1260667682 скачал тарифы
+INFO:aiogram.event:Update id=450953849 is handled. Duration 527 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953850 is handled. Duration 227 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953851 is handled. Duration 133 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953852 is handled. Duration 287 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953853 is handled. Duration 230 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953854 is handled. Duration 199 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953855 is handled. Duration 216 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953856 is handled. Duration 114 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953857 is handled. Duration 208 ms by bot id=7709869722
+INFO:__main__:Пользователь 8030714381 скачал тарифы
+INFO:aiogram.event:Update id=450953858 is handled. Duration 610 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953859 is handled. Duration 184 ms by bot id=7709869722
+INFO:__main__:Пользователь 874234638 скачал тарифы
+INFO:aiogram.event:Update id=450953860 is handled. Duration 502 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953861 is handled. Duration 234 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953862 is handled. Duration 133 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953863 is handled. Duration 212 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953864 is handled. Duration 239 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953865 is handled. Duration 242 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953866 is handled. Duration 179 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953867 is handled. Duration 196 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953868 is handled. Duration 215 ms by bot id=7709869722
+INFO:__main__:Пользователь 640666535 скачал тарифы
+INFO:aiogram.event:Update id=450953869 is handled. Duration 738 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953870 is handled. Duration 368 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953871 is handled. Duration 193 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953872 is handled. Duration 126 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953873 is handled. Duration 193 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953874 is handled. Duration 208 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953875 is handled. Duration 264 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953876 is handled. Duration 254 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953877 is handled. Duration 355 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953878 is handled. Duration 204 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953879 is handled. Duration 105 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953880 is handled. Duration 189 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953881 is handled. Duration 108 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953882 is handled. Duration 176 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953883 is handled. Duration 88 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953884 is handled. Duration 182 ms by bot id=7709869722
+INFO:__main__:Пользователь 966013947 скачал тарифы
+INFO:aiogram.event:Update id=450953885 is handled. Duration 473 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953886 is handled. Duration 204 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953887 is handled. Duration 206 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953888 is handled. Duration 233 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953889 is handled. Duration 196 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953890 is handled. Duration 394 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953891 is handled. Duration 194 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953892 is handled. Duration 200 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953893 is handled. Duration 293 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953894 is handled. Duration 215 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953895 is handled. Duration 219 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953896 is handled. Duration 209 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953897 is handled. Duration 177 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953898 is handled. Duration 207 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953899 is handled. Duration 172 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953900 is handled. Duration 282 ms by bot id=7709869722
+INFO:__main__:Пользователь 5777401835 скачал тарифы
+INFO:aiogram.event:Update id=450953901 is handled. Duration 645 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953902 is handled. Duration 201 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953903 is handled. Duration 201 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953904 is handled. Duration 285 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953905 is handled. Duration 283 ms by bot id=7709869722
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7709869722)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 7709869722)
+INFO:aiogram.event:Update id=450953906 is handled. Duration 224 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953907 is handled. Duration 110 ms by bot id=7709869722
+INFO:__main__:Пользователь 397861851 скачал тарифы
+INFO:aiogram.event:Update id=450953908 is handled. Duration 502 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953909 is handled. Duration 231 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953910 is handled. Duration 427 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953911 is handled. Duration 133 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953912 is handled. Duration 158 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953913 is handled. Duration 296 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953914 is handled. Duration 192 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953915 is handled. Duration 310 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953916 is handled. Duration 134 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953917 is handled. Duration 201 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953918 is handled. Duration 285 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953919 is handled. Duration 129 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953920 is handled. Duration 203 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953921 is handled. Duration 120 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953922 is handled. Duration 176 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953923 is handled. Duration 261 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953924 is handled. Duration 181 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953925 is handled. Duration 96 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953926 is handled. Duration 116 ms by bot id=7709869722
+INFO:__main__:Пользователь 255775852 скачал тарифы
+INFO:aiogram.event:Update id=450953927 is handled. Duration 447 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953928 is handled. Duration 115 ms by bot id=7709869722
+INFO:__main__:Пользователь 148440745 скачал тарифы
+INFO:aiogram.event:Update id=450953929 is handled. Duration 648 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953930 is handled. Duration 195 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953931 is handled. Duration 246 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953932 is handled. Duration 79 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953933 is handled. Duration 192 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953934 is handled. Duration 119 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953935 is handled. Duration 194 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953936 is handled. Duration 257 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953937 is handled. Duration 317 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953938 is handled. Duration 120 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953939 is handled. Duration 141 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953940 is handled. Duration 1340 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953941 is handled. Duration 128 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953942 is handled. Duration 196 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953943 is handled. Duration 289 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953944 is handled. Duration 229 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953945 is handled. Duration 102 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953946 is handled. Duration 132 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953947 is handled. Duration 204 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953948 is handled. Duration 260 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953949 is handled. Duration 195 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953950 is handled. Duration 188 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953951 is handled. Duration 290 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953952 is handled. Duration 202 ms by bot id=7709869722
+INFO:__main__:Пользователь 932651138 скачал тарифы
+INFO:aiogram.event:Update id=450953953 is handled. Duration 1144 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953954 is handled. Duration 118 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953955 is handled. Duration 182 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953956 is handled. Duration 88 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953957 is handled. Duration 189 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953958 is handled. Duration 165 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953959 is handled. Duration 137 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953960 is handled. Duration 214 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953961 is handled. Duration 297 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953962 is handled. Duration 188 ms by bot id=7709869722
+INFO:__main__:Пользователь 278948900 скачал тарифы
+INFO:aiogram.event:Update id=450953963 is handled. Duration 847 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953964 is handled. Duration 82 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953965 is handled. Duration 187 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953966 is handled. Duration 235 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953967 is handled. Duration 214 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953968 is handled. Duration 152 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953969 is handled. Duration 260 ms by bot id=7709869722
+INFO:__main__:Пользователь 966417274 скачал тарифы
+INFO:aiogram.event:Update id=450953970 is handled. Duration 938 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953971 is handled. Duration 278 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953972 is handled. Duration 200 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953973 is handled. Duration 201 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953974 is handled. Duration 187 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953975 is handled. Duration 191 ms by bot id=7709869722
+INFO:__main__:Пользователь 731856682 скачал тарифы
+INFO:aiogram.event:Update id=450953976 is handled. Duration 516 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953977 is handled. Duration 208 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953978 is handled. Duration 143 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953979 is handled. Duration 297 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953980 is handled. Duration 103 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953981 is handled. Duration 258 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953982 is handled. Duration 230 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953983 is handled. Duration 103 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450953984 is handled. Duration 243 ms by bot id=7709869722

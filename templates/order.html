@@ -564,17 +564,19 @@
                     <div id="telegramContactError" class="error-message"></div>
                 </div>
 
-                <!-- Ссылка на поставщика -->
+                <!-- Ссылка на поставщика или описание товара - ОБЯЗАТЕЛЬНОЕ ПОЛЕ -->
                 <div class="form-group">
                     <label for="supplierLink">
-                        Ссылка на поставщика на 1688
+                        Ссылка на поставщика или описание товара <span class="required">*</span>
                     </label>
-                    <textarea id="supplierLink" name="supplierLink"
-                        placeholder="Вставьте ссылку на товар или поставщика. Если поставщика нет, мы поможем вам его найти."
+                    <textarea id="supplierLink" name="supplierLink" required
+                        placeholder="Укажите ссылку на товар с 1688.com или опишите что ищете (например: 'детские игрушки', 'нет ссылки, помогите найти', 'одежда для женщин' и т.д.)"
                         style="min-height: 80px; resize: vertical;"></textarea>
                     <div class="help-text">
-                        Если поставщика нет, мы поможем вам его найти.
+                        Можете указать ссылку на товар/поставщика с 1688.com или просто описать что ищете.<br>
+                        Например: "нет ссылки", "ищу поставщика обуви", "детские товары" и т.д.
                     </div>
+                    <div id="supplierLinkError" class="error-message"></div>
                 </div>
 
                 <!-- Сумма заказа -->
@@ -907,7 +909,7 @@
             }
         }
 
-        // Функция валидации формы
+        // Функция валидации формы - ОБНОВЛЕНА
         function validateForm() {
             console.log('🔄 Валидация формы...');
             
@@ -917,6 +919,11 @@
                     id: 'telegramContact',
                     validator: (val) => val.startsWith('@') || val.startsWith('https://t.me/'),
                     message: 'Формат: @nickname или https://t.me/nickname'
+                },
+                {
+                    id: 'supplierLink',  
+                    validator: (val) => val.trim().length >= 3, // Минимум 3 символа
+                    message: 'Укажите ссылку на поставщика или опишите что ищете (минимум 3 символа)'
                 },
                 {
                     id: 'orderAmount',
@@ -989,7 +996,7 @@
                     calculation_id: calculationId,
                     email: `${telegramUserId}@telegram.user`,
                     telegram_contact: document.getElementById('telegramContact').value.trim(),
-                    supplier_link: document.getElementById('supplierLink').value.trim(),
+                    supplier_link: document.getElementById('supplierLink').value.trim(),  // ТЕПЕРЬ ОБЯЗАТЕЛЬНОЕ
                     order_amount: document.getElementById('orderAmount').value,
                     promo_code: document.getElementById('promoCode').value.trim(),
                     additional_notes: document.getElementById('additionalNotes').value.trim(),
