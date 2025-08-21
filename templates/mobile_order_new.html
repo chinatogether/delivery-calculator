@@ -1,0 +1,139 @@
+{% extends "mobile_base.html" %}
+
+{% block page_title %}Новая заявка{% endblock %}
+
+{% block content %}
+<form id="newOrderForm">
+    <!-- Выбор клиента -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-user"></i>
+                Клиент
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Выберите клиента *</label>
+            <select name="client_id" class="form-control" required>
+                <option value="">Выберите клиента</option>
+                {% for c in clients %}
+                <option value="{{ c.id }}" {{ 'selected' if client and c.id == client.id }}>
+                    {{ c.full_name }}{% if c.company %} ({{ c.company }}){% endif %}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        {% if not client %}
+        <div class="mt-2">
+            <a href="{{ url_for('add_client') }}" class="btn btn-outline btn-sm w-100">
+                <i class="fas fa-plus"></i> Добавить нового клиента
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Информация о заказе -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-shopping-cart"></i>
+                Детали заказа
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Сумма заказа (USD)</label>
+            <input type="number" name="order_amount" class="form-control" step="0.01" min="0" 
+                   value="{{ amount or '' }}" placeholder="1000.00">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Комиссия (USD)</label>
+            <input type="number" name="commission_amount" class="form-control" step="0.01" min="0" 
+                   placeholder="100.00">
+            <small class="text-muted">Обычно 10% от суммы заказа</small>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Ссылка на товар</label>
+            <input type="url" name="supplier_link" class="form-control" 
+                   placeholder="https://taobao.com/item/123456">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Описание товара</label>
+            <textarea name="product_description" class="form-control" rows="3" 
+                      placeholder="Краткое описание заказываемого товара..."></textarea>
+        </div>
+    </div>
+
+    <!-- Настройки заявки -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-cogs"></i>
+                Настройки
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox" name="assign_to_me" checked>
+                <span>Назначить заявку на меня</span>
+            </label>
+            <small class="text-muted">Если отключено, заявка будет доступна всем менеджерам</small>
+        </div>
+        
+        {% if calculation %}
+        <div class="alert alert-success">
+            <strong>Заявка создается на основе расчета</strong><br>
+            Категория: {{ calculation.category }}<br>
+            Вес: {{ calculation.weight }}кг, Объем: {{ calculation.volume }}м³<br>
+            Расчетная стоимость: ${{ "%.2f"|format(calculation.total_cost_usd) }}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Кнопки действий -->
+    <div class="card">
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('orders_list') }}" class="btn btn-secondary" style="flex: 1;">
+                <i class="fas fa-arrow-left"></i> Отмена
+            </a>
+            <button type="submit" class="btn btn-primary" style="flex: 2;">
+                <i class="fas fa-plus"></i> Создать заявку
+            </button>
+        </div>
+    </div>
+</form>
+
+<script>
+// Автоматический расчет комиссии
+document.querySelector('input[name="order_amount"]').addEventListener('input', function(e) {
+    const amount = parseFloat(e.target.value) || 0;
+    const commission = amount * 0.1; // 10%
+    document.querySelector('input[name="commission_amount"]').value = commission > 0 ? commission.toFixed(2) : '';
+});
+
+// Обработка формы создания заявки
+handleFormSubmit('newOrderForm', '/api/orders/create', function(result) {
+    if (result.order_id) {
+        showNotification('Заявка успешно создана!');
+        setTimeout(() => {
+            window.location.href = `/orders/${result.order_id}`;
+        }, 1000);
+    }
+});
+
+// Предзаполнение при выборе клиента
+document.querySelector('select[name="client_id"]').addEventListener('change', function(e) {
+    const clientId = e.target.value;
+    if (clientId) {
+        // Можно загрузить дополнительную информацию о клиенте
+        // и предзаполнить поля если нужно
+    }
+});
+</script>
+{% endblock %}

@@ -1,34 +1,17 @@
-from flask import Flask, request, redirect, send_from_directory, render_template, jsonify, session, flash, url_for
+from flask import Flask, request, redirect, render_template, jsonify, session, flash, url_for
 import os
 from datetime import datetime, timedelta
 import psycopg2
-import pandas as pd
 from psycopg2.extras import RealDictCursor
-import time
-import glob
-from pdf_generator import generate_tariffs_pdf, get_latest_pdf_info
 from dotenv import load_dotenv
 import json
 from functools import wraps
 import secrets
 from decimal import Decimal
-import hashlib
-import xlsxwriter
-from io import BytesIO
+import calendar
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = secrets.token_hex(16)
-
-# Получаем директорию, где находится app.py
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# Папка для хранения файлов
-UPLOAD_FOLDER = "/home/chinatogether/xlsx-files"
-PDF_FOLDER = "/home/chinatogether/pdf-files"
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-# Файл для информации о последней загрузке
-LAST_FILE_INFO = "/home/chinatogether/xlsx-files/last_file_info.txt"
 
 load_dotenv()
 
@@ -42,26 +25,25 @@ DB_CONFIG = {
     'connect_timeout': int(os.getenv('DB_TIMEOUT', '10'))
 }
 
-# Авторизованные пользователи (временно, потом заменим на БД)
-AUTHORIZED_USERS = {
-    'director@chinatogether.ru': {
+# Менеджеры и директор
+USERS = {
+    'director@company.ru': {
         'name': 'Директор',
         'role': 'director',
-        'permissions': ['all']
+        'password': 'director123'
     },
-    'manager1@chinatogether.ru': {
-        'name': 'Менеджер 1',
-        'role': 'manager', 
-        'permissions': ['orders', 'users', 'calculations']
-    },
-    'manager2@chinatogether.ru': {
-        'name': 'Менеджер 2',
+    'manager1@company.ru': {
+        'name': 'Менеджер Анна',
         'role': 'manager',
-        'permissions': ['orders', 'users', 'calculations']
+        'password': 'manager123'
+    },
+    'manager2@company.ru': {
+        'name': 'Менеджер Максим', 
+        'role': 'manager',
+        'password': 'manager123'
     }
 }
 
-# Подключение к базе данных
 def connect_to_db():
     return psycopg2.connect(**DB_CONFIG)
 
@@ -73,289 +55,135 @@ def require_auth(f):
         return f(*args, **kwargs)
     return decorated_function
 
-def require_permission(permission):
+def require_role(role):
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
-            if 'user_email' not in session:
-                return redirect(url_for('login'))
-            
-            user = AUTHORIZED_USERS.get(session['user_email'])
-            if not user:
-                flash('Доступ запрещен', 'error')
-                return redirect(url_for('dashboard'))
-            
-            if 'all' not in user['permissions'] and permission not in user['permissions']:
+            if session.get('user_role') != role:
                 flash('Недостаточно прав доступа', 'error')
                 return redirect(url_for('dashboard'))
-            
             return f(*args, **kwargs)
         return decorated_function
     return decorator
 
-# Инициализация таблиц для новой функциональности
-def init_management_tables():
+# Инициализация таблиц
+def init_tables():
     conn = connect_to_db()
     cursor = conn.cursor()
     try:
-        # Создаем схему если не существует
+        # Создаем схему
         cursor.execute("CREATE SCHEMA IF NOT EXISTS delivery_test")
         
-        # Обновляем таблицу purchase_requests с новыми статусами
+        # Таблица клиентов
         cursor.execute("""
-            DO $$ 
-            BEGIN
-                IF NOT EXISTS (SELECT 1 FROM information_schema.columns 
-                              WHERE table_schema='delivery_test' 
-                              AND table_name='purchase_requests' 
-                              AND column_name='manager_email') THEN
-                    ALTER TABLE delivery_test.purchase_requests 
-                    ADD COLUMN manager_email VARCHAR(255),
-                    ADD COLUMN status_history JSONB DEFAULT '[]',
-                    ADD COLUMN updated_by VARCHAR(255);
-                END IF;
-            END $$;
-        """)
-        
-        # Таблица действий менеджеров
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS delivery_test.manager_actions (
+            CREATE TABLE IF NOT EXISTS delivery_test.clients (
                 id SERIAL PRIMARY KEY,
-                manager_email VARCHAR(255) NOT NULL,
-                action_type VARCHAR(100) NOT NULL,
-                target_id INTEGER,
-                target_type VARCHAR(50),
-                description TEXT,
-                details JSONB,
-                created_at TIMESTAMP WITH TIME ZONE DEFAULT (NOW() AT TIME ZONE 'Europe/Moscow')
+                full_name VARCHAR(255),
+                telegram_username VARCHAR(100),
+                telegram_chat_id VARCHAR(50),
+                company VARCHAR(255),
+                phone VARCHAR(50),
+                email VARCHAR(255),
+                comment TEXT,
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+                updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+                created_by VARCHAR(255)
             )
         """)
         
-        # Таблица пользователей с расширенной информацией
+        # Таблица заявок с расширенными статусами
         cursor.execute("""
-            DO $$ 
-            BEGIN
-                IF NOT EXISTS (SELECT 1 FROM information_schema.columns 
-                              WHERE table_schema='delivery_test' 
-                              AND table_name='telegram_users' 
-                              AND column_name='company') THEN
-                    ALTER TABLE delivery_test.telegram_users 
-                    ADD COLUMN company VARCHAR(255),
-                    ADD COLUMN phone VARCHAR(50),
-                    ADD COLUMN email VARCHAR(255),
-                    ADD COLUMN full_name VARCHAR(255);
-                END IF;
-            END $$;
-        """)
-        
-        # Таблица счет-фактур
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS delivery_test.invoices (
+            CREATE TABLE IF NOT EXISTS delivery_test.orders (
                 id SERIAL PRIMARY KEY,
-                invoice_number VARCHAR(100) UNIQUE NOT NULL,
-                telegram_user_id INTEGER REFERENCES delivery_test.telegram_users(id),
-                calculation_id INTEGER REFERENCES delivery_test.user_calculation(id),
-                from_address TEXT,
-                to_address TEXT,
+                client_id INTEGER REFERENCES delivery_test.clients(id),
+                manager_email VARCHAR(255),
+                status VARCHAR(50) DEFAULT 'new',
+                order_amount DECIMAL(12,2),
+                commission_amount DECIMAL(12,2),
+                reject_reason TEXT,
+                supplier_link TEXT,
                 product_description TEXT,
-                weight DECIMAL(10,2),
-                volume DECIMAL(10,4),
-                packaging_type VARCHAR(50),
-                product_cost DECIMAL(10,2),
-                delivery_cost DECIMAL(10,2),
-                delivery_type VARCHAR(50),
-                packaging_cost DECIMAL(10,2),
-                unloading_cost DECIMAL(10,2),
-                total_amount DECIMAL(10,2),
-                status VARCHAR(50) DEFAULT 'draft',
-                created_by VARCHAR(255),
-                created_at TIMESTAMP WITH TIME ZONE DEFAULT (NOW() AT TIME ZONE 'Europe/Moscow'),
-                updated_at TIMESTAMP WITH TIME ZONE DEFAULT (NOW() AT TIME ZONE 'Europe/Moscow')
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+                updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+                status_history JSONB DEFAULT '[]',
+                closed_at TIMESTAMP WITH TIME ZONE,
+                is_closed BOOLEAN DEFAULT FALSE
             )
         """)
+        
+        # Таблица расчетов доставки
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS delivery_test.delivery_calculations (
+                id SERIAL PRIMARY KEY,
+                client_id INTEGER REFERENCES delivery_test.clients(id),
+                order_id INTEGER REFERENCES delivery_test.orders(id),
+                manager_email VARCHAR(255),
+                category VARCHAR(100),
+                weight DECIMAL(10,3),
+                volume DECIMAL(10,6),
+                product_cost_cny DECIMAL(12,2),
+                product_cost_usd DECIMAL(12,2),
+                delivery_cost_usd DECIMAL(12,2),
+                total_cost_usd DECIMAL(12,2),
+                exchange_rate DECIMAL(8,4),
+                calculation_details JSONB,
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+            )
+        """)
+        
+        
+        # Таблица менеджеров (для статистики)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS delivery_test.managers (
+                id SERIAL PRIMARY KEY,
+                email VARCHAR(255) UNIQUE,
+                name VARCHAR(255),
+                role VARCHAR(50),
+                is_active BOOLEAN DEFAULT TRUE,
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+            )
+        """)
+        
+        # Добавляем начальные данные
+        cursor.execute("""
+            INSERT INTO delivery_test.managers (email, name, role) 
+            VALUES 
+                ('director@company.ru', 'Директор', 'director'),
+                ('manager1@company.ru', 'Менеджер Анна', 'manager'),
+                ('manager2@company.ru', 'Менеджер Максим', 'manager')
+            ON CONFLICT (email) DO NOTHING
+        """)
+        
         
         conn.commit()
-        print("Таблицы управления успешно созданы/обновлены")
+        print("✅ Таблицы успешно созданы")
         
     except Exception as e:
         conn.rollback()
-        print(f"Ошибка при создании таблиц управления: {str(e)}")
+        print(f"❌ Ошибка создания таблиц: {str(e)}")
         raise
     finally:
         cursor.close()
         conn.close()
 
-# Функции для работы с заявками
-def get_all_orders(filters=None):
-    conn = connect_to_db()
-    cursor = conn.cursor(cursor_factory=RealDictCursor)
-    try:
-        base_query = """
-            SELECT pr.id, pr.email, pr.telegram_contact, pr.supplier_link,
-                   pr.order_amount, pr.promo_code, pr.additional_notes,
-                   pr.status, pr.manager_email, pr.created_at, pr.updated_at,
-                   tu.username, tu.first_name, tu.company, tu.phone,
-                   uc.category, uc.total_weight, uc.product_cost_usd
-            FROM delivery_test.purchase_requests pr
-            LEFT JOIN delivery_test.telegram_users tu ON pr.telegram_user_id = tu.id
-            LEFT JOIN delivery_test.user_calculation uc ON pr.calculation_id = uc.id
-        """
-        
-        conditions = []
-        params = []
-        
-        if filters:
-            if filters.get('status'):
-                conditions.append("pr.status = %s")
-                params.append(filters['status'])
-            if filters.get('manager_email'):
-                conditions.append("pr.manager_email = %s")
-                params.append(filters['manager_email'])
-            if filters.get('date_from'):
-                conditions.append("pr.created_at >= %s")
-                params.append(filters['date_from'])
-            if filters.get('date_to'):
-                conditions.append("pr.created_at <= %s")
-                params.append(filters['date_to'])
-        
-        if conditions:
-            base_query += " WHERE " + " AND ".join(conditions)
-        
-        base_query += " ORDER BY pr.created_at DESC"
-        
-        cursor.execute(base_query, params)
-        return cursor.fetchall()
-        
-    finally:
-        cursor.close()
-        conn.close()
-
-def update_order_status(order_id, new_status, manager_email, notes=None):
-    conn = connect_to_db()
-    cursor = conn.cursor()
-    try:
-        # Получаем текущий статус
-        cursor.execute("SELECT status, status_history FROM delivery_test.purchase_requests WHERE id = %s", (order_id,))
-        current_data = cursor.fetchone()
-        
-        if not current_data:
-            return False
-        
-        current_status, status_history = current_data
-        if status_history is None:
-            status_history = []
-        
-        # Добавляем новую запись в историю
-        status_entry = {
-            'status': new_status,
-            'changed_by': manager_email,
-            'changed_at': datetime.now().isoformat(),
-            'notes': notes
-        }
-        status_history.append(status_entry)
-        
-        # Обновляем заявку
-        cursor.execute("""
-            UPDATE delivery_test.purchase_requests 
-            SET status = %s, manager_email = %s, status_history = %s, 
-                updated_at = NOW(), updated_by = %s
-            WHERE id = %s
-        """, (new_status, manager_email, json.dumps(status_history), manager_email, order_id))
-        
-        # Записываем действие менеджера
-        cursor.execute("""
-            INSERT INTO delivery_test.manager_actions 
-            (manager_email, action_type, target_id, target_type, description, details)
-            VALUES (%s, %s, %s, %s, %s, %s)
-        """, (manager_email, 'status_change', order_id, 'order', 
-              f'Изменен статус на {new_status}', 
-              json.dumps({'old_status': current_status, 'new_status': new_status, 'notes': notes})))
-        
-        conn.commit()
-        return True
-        
-    except Exception as e:
-        conn.rollback()
-        print(f"Ошибка обновления статуса: {e}")
-        return False
-    finally:
-        cursor.close()
-        conn.close()
-
-def log_manager_action(manager_email, action_type, target_id=None, target_type=None, description=None, details=None):
-    conn = connect_to_db()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("""
-            INSERT INTO delivery_test.manager_actions 
-            (manager_email, action_type, target_id, target_type, description, details)
-            VALUES (%s, %s, %s, %s, %s, %s)
-        """, (manager_email, action_type, target_id, target_type, description, json.dumps(details) if details else None))
-        conn.commit()
-    except Exception as e:
-        print(f"Ошибка логирования действия: {e}")
-    finally:
-        cursor.close()
-        conn.close()
-
-# Функции для работы с курсом валют
-def get_current_exchange_rate():
-    conn = connect_to_db()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("""
-            SELECT rate, recorded_at, source 
-            FROM delivery_test.exchange_rates 
-            WHERE currency_pair = 'CNY/USD' 
-            ORDER BY recorded_at DESC 
-            LIMIT 1
-        """)
-        result = cursor.fetchone()
-        if result:
-            return {'rate': float(result[0]), 'recorded_at': result[1], 'source': result[2]}
-        return {'rate': 7.20, 'recorded_at': datetime.now(), 'source': 'default'}
-    finally:
-        cursor.close()
-        conn.close()
-
-def update_exchange_rate(rate, manager_email):
-    conn = connect_to_db()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("""
-            INSERT INTO delivery_test.exchange_rates (currency_pair, rate, recorded_at, source, notes)
-            VALUES (%s, %s, %s, %s, %s)
-        """, ('CNY/USD', rate, datetime.now(), f'manual_by_{manager_email}', f'Обновлен менеджером {manager_email}'))
-        
-        log_manager_action(manager_email, 'exchange_rate_update', None, 'system', 
-                          f'Обновлен курс валют на {rate}', {'rate': rate})
-        
-        conn.commit()
-        return True
-    except Exception as e:
-        print(f"Ошибка обновления курса: {e}")
-        return False
-    finally:
-        cursor.close()
-        conn.close()
-
-# МАРШРУТЫ
+# === МАРШРУТЫ АВТОРИЗАЦИИ ===
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email', '').lower().strip()
+        password = request.form.get('password', '').strip()
         
-        if email in AUTHORIZED_USERS:
+        if email in USERS and USERS[email]['password'] == password:
             session['user_email'] = email
-            session['user_name'] = AUTHORIZED_USERS[email]['name']
-            session['user_role'] = AUTHORIZED_USERS[email]['role']
-            flash(f'Добро пожаловать, {AUTHORIZED_USERS[email]["name"]}!', 'success')
+            session['user_name'] = USERS[email]['name']
+            session['user_role'] = USERS[email]['role']
+            flash(f'Добро пожаловать, {USERS[email]["name"]}!', 'success')
             return redirect(url_for('dashboard'))
         else:
-            flash('Доступ запрещен. Обратитесь к администратору.', 'error')
+            flash('Неверный email или пароль', 'error')
     
-    return render_template('login.html')
+    return render_template('mobile_login.html')
 
 @app.route('/logout')
 def logout():
@@ -363,391 +191,1070 @@ def logout():
     flash('Вы успешно вышли из системы', 'success')
     return redirect(url_for('login'))
 
+# === ГЛАВНАЯ СТРАНИЦА ===
+
 @app.route('/')
 @require_auth
 def dashboard():
-    # Получаем статистику для дашборда
-    analytics = get_analytics_data()
-    funnel_data = get_funnel_data()
-    
-    # Получаем данные для графиков
+    stats = get_dashboard_stats()
+    return render_template('mobile_dashboard.html', stats=stats)
+
+def get_dashboard_stats():
     conn = connect_to_db()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
     
     try:
-        # Расчеты по дням
-        cursor.execute("""
-            SELECT DATE(created_at) AS date, COUNT(*) AS count
-            FROM delivery_test.user_calculation
-            WHERE created_at >= NOW() - INTERVAL '30 days'
-            GROUP BY DATE(created_at)
-            ORDER BY date DESC
-        """)
-        calculations_by_day = cursor.fetchall()
+        user_role = session.get('user_role')
+        user_email = session.get('user_email')
         
-        # Заявки по статусам
-        cursor.execute("""
-            SELECT status, COUNT(*) as count
-            FROM delivery_test.purchase_requests
-            GROUP BY status
-        """)
-        orders_by_status = cursor.fetchall()
+        stats = {}
         
-        # Активность менеджеров (если пользователь директор)
-        manager_stats = []
-        if session.get('user_role') == 'director':
+        # Общая статистика
+        cursor.execute("SELECT COUNT(*) as total FROM delivery_test.clients")
+        stats['total_clients'] = cursor.fetchone()['total']
+        
+        cursor.execute("SELECT COUNT(*) as total FROM delivery_test.orders WHERE created_at >= date_trunc('month', CURRENT_DATE)")
+        stats['orders_this_month'] = cursor.fetchone()['total']
+        
+        if user_role == 'manager':
+            # Статистика менеджера
             cursor.execute("""
-                SELECT pr.manager_email, COUNT(*) as orders_count,
-                       COUNT(CASE WHEN pr.status = 'completed' THEN 1 END) as completed_count
-                FROM delivery_test.purchase_requests pr
-                WHERE pr.manager_email IS NOT NULL
-                GROUP BY pr.manager_email
+                SELECT COUNT(*) as my_orders 
+                FROM delivery_test.orders 
+                WHERE manager_email = %s AND created_at >= date_trunc('month', CURRENT_DATE)
+            """, (user_email,))
+            stats['my_orders'] = cursor.fetchone()['my_orders']
+            
+            cursor.execute("""
+                SELECT COALESCE(SUM(order_amount), 0) as total_amount
+                FROM delivery_test.orders 
+                WHERE manager_email = %s AND status = 'paid' 
+                AND created_at >= date_trunc('month', CURRENT_DATE)
+            """, (user_email,))
+            stats['my_revenue'] = cursor.fetchone()['total_amount']
+            
+        elif user_role == 'director':
+            # Статистика директора
+            cursor.execute("""
+                SELECT 
+                    manager_email,
+                    COUNT(*) as orders_count,
+                    COALESCE(SUM(order_amount), 0) as total_amount,
+                    COALESCE(SUM(commission_amount), 0) as total_commission
+                FROM delivery_test.orders 
+                WHERE created_at >= date_trunc('month', CURRENT_DATE)
+                  AND manager_email IS NOT NULL -- Добавляем это условие
+                GROUP BY manager_email
             """)
-            manager_stats = cursor.fetchall()
-    
+            stats['manager_stats'] = cursor.fetchall()
+        
+        # Заявки требующие внимания
+        cursor.execute("SELECT COUNT(*) as count FROM delivery_test.orders WHERE status = 'new'")
+        stats['new_orders'] = cursor.fetchone()['count']
+        
+        return stats
+        
     finally:
         cursor.close()
         conn.close()
+
+# === УПРАВЛЕНИЕ КЛИЕНТАМИ ===
+
+@app.route('/clients')
+@require_auth
+def clients_list():
+    search = request.args.get('search', '')
     
-    return render_template('dashboard.html', 
-                         analytics=analytics,
-                         funnel_data=funnel_data,
-                         calculations_by_day=calculations_by_day,
-                         orders_by_status=orders_by_status,
-                         manager_stats=manager_stats)
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        query = """
+            SELECT c.*, 
+                   COUNT(o.id) as orders_count,
+                   COALESCE(SUM(o.order_amount), 0) as total_amount
+            FROM delivery_test.clients c
+            LEFT JOIN delivery_test.orders o ON c.id = o.client_id
+        """
+        params = []
+        
+        if search:
+            query += " WHERE (c.full_name ILIKE %s OR c.company ILIKE %s OR c.telegram_username ILIKE %s)"
+            search_param = f"%{search}%"
+            params.extend([search_param, search_param, search_param])
+        
+        query += " GROUP BY c.id ORDER BY c.created_at DESC"
+        
+        cursor.execute(query, params)
+        clients = cursor.fetchall()
+        
+        return render_template('mobile_clients.html', clients=clients, search=search)
+        
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/clients/<int:client_id>')
+@require_auth
+def client_detail(client_id):
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        # Получаем данные клиента
+        cursor.execute("SELECT * FROM delivery_test.clients WHERE id = %s", (client_id,))
+        client = cursor.fetchone()
+        
+        if not client:
+            flash('Клиент не найден', 'error')
+            return redirect(url_for('clients_list'))
+        
+        # Получаем заявки клиента
+        cursor.execute("""
+            SELECT * FROM delivery_test.orders 
+            WHERE client_id = %s 
+            ORDER BY created_at DESC 
+            LIMIT 20
+        """, (client_id,))
+        orders = cursor.fetchall()
+        
+        # Получаем расчеты клиента
+        cursor.execute("""
+            SELECT * FROM delivery_test.delivery_calculations 
+            WHERE client_id = %s 
+            ORDER BY created_at DESC 
+            LIMIT 10
+        """, (client_id,))
+        calculations = cursor.fetchall()
+        
+        return render_template('mobile_client_detail.html', 
+                             client=client, orders=orders, calculations=calculations)
+        
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/clients/<int:client_id>/edit', methods=['GET', 'POST'])
+@require_auth
+def edit_client(client_id):
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        if request.method == 'POST':
+            data = request.get_json() if request.is_json else request.form
+            
+            cursor.execute("""
+                UPDATE delivery_test.clients 
+                SET full_name = %s, telegram_username = %s, telegram_chat_id = %s,
+                    company = %s, phone = %s, email = %s, comment = %s,
+                    updated_at = NOW()
+                WHERE id = %s
+            """, (
+                data.get('full_name'),
+                data.get('telegram_username'),
+                data.get('telegram_chat_id'),
+                data.get('company'),
+                data.get('phone'),
+                data.get('email'),
+                data.get('comment'),
+                client_id
+            ))
+            
+            conn.commit()
+            
+            if request.is_json:
+                return jsonify({'success': True, 'message': 'Клиент обновлен'})
+            else:
+                flash('Данные клиента обновлены', 'success')
+                return redirect(url_for('client_detail', client_id=client_id))
+        
+        # GET запрос
+        cursor.execute("SELECT * FROM delivery_test.clients WHERE id = %s", (client_id,))
+        client = cursor.fetchone()
+        
+        if not client:
+            flash('Клиент не найден', 'error')
+            return redirect(url_for('clients_list'))
+        
+        return render_template('mobile_client_edit.html', client=client)
+        
+    finally:
+        cursor.close()
+        conn.close()
+
+# === УПРАВЛЕНИЕ ЗАЯВКАМИ ===
 
 @app.route('/orders')
-@require_permission('orders')
-def orders_page():
-    # Получаем фильтры из запроса
-    filters = {}
-    if request.args.get('status'):
-        filters['status'] = request.args.get('status')
-    if request.args.get('manager'):
-        filters['manager_email'] = request.args.get('manager')
-    if request.args.get('date_from'):
-        filters['date_from'] = request.args.get('date_from')
-    if request.args.get('date_to'):
-        filters['date_to'] = request.args.get('date_to')
+@require_auth
+def orders_list():
+    status_filter = request.args.get('status', '')
+    manager_filter = request.args.get('manager', '')
     
-    orders = get_all_orders(filters)
-    
-    # Получаем список статусов и менеджеров для фильтров
     conn = connect_to_db()
-    cursor = conn.cursor()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
     try:
-        cursor.execute("SELECT DISTINCT status FROM delivery_test.purchase_requests WHERE status IS NOT NULL")
-        statuses = [row[0] for row in cursor.fetchall()]
+        query = """
+            SELECT o.*, c.full_name, c.telegram_username, c.company
+            FROM delivery_test.orders o
+            LEFT JOIN delivery_test.clients c ON o.client_id = c.id
+            WHERE 1=1
+        """
+        params = []
         
-        cursor.execute("SELECT DISTINCT manager_email FROM delivery_test.purchase_requests WHERE manager_email IS NOT NULL")
-        managers = [row[0] for row in cursor.fetchall()]
+        if status_filter:
+            query += " AND o.status = %s"
+            params.append(status_filter)
+        
+        if manager_filter:
+            query += " AND o.manager_email = %s"
+            params.append(manager_filter)
+        
+        # Менеджер видит только свои заявки + новые
+        if session.get('user_role') == 'manager':
+            query += " AND (o.manager_email = %s OR o.manager_email IS NULL)"
+            params.append(session.get('user_email'))
+        
+        query += " ORDER BY o.created_at DESC"
+        
+        cursor.execute(query, params)
+        orders = cursor.fetchall()
+        
+        # Получаем список менеджеров для фильтра
+        cursor.execute("SELECT DISTINCT manager_email FROM delivery_test.orders WHERE manager_email IS NOT NULL")
+        managers = [row['manager_email'] for row in cursor.fetchall()]
+        
+        return render_template('mobile_orders.html', 
+                             orders=orders, managers=managers,
+                             status_filter=status_filter, manager_filter=manager_filter)
+        
     finally:
         cursor.close()
         conn.close()
-    
-    return render_template('orders.html', orders=orders, statuses=statuses, managers=managers, filters=filters)
 
-@app.route('/users')
-@require_permission('users')
-def users_page():
+@app.route('/orders/<int:order_id>')
+@require_auth  
+def order_detail(order_id):
     conn = connect_to_db()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
     try:
         cursor.execute("""
-            SELECT tu.id, tu.telegram_id, tu.username, tu.first_name, tu.last_name,
-                   tu.company, tu.phone, tu.email, tu.full_name, tu.created_at,
-                   COUNT(uc.id) as calculations_count,
-                   COUNT(pr.id) as orders_count,
-                   MAX(tu.last_activity) as last_activity
-            FROM delivery_test.telegram_users tu
-            LEFT JOIN delivery_test.user_calculation uc ON tu.id = uc.telegram_user_id
-            LEFT JOIN delivery_test.purchase_requests pr ON tu.id = pr.telegram_user_id
-            GROUP BY tu.id
-            ORDER BY tu.last_activity DESC NULLS LAST
-        """)
-        users = cursor.fetchall()
+            SELECT o.*, c.full_name, c.telegram_username, c.telegram_chat_id, c.company, c.phone
+            FROM delivery_test.orders o
+            LEFT JOIN delivery_test.clients c ON o.client_id = c.id
+            WHERE o.id = %s
+        """, (order_id,))
+        order = cursor.fetchone()
+        
+        if not order:
+            flash('Заявка не найдена', 'error')
+            return redirect(url_for('orders_list'))
+        
+        return render_template('mobile_order_detail.html', order=order)
+        
     finally:
         cursor.close()
         conn.close()
-    
-    return render_template('users.html', users=users)
-
-@app.route('/exchange-rate')
-@require_permission('all')  # Только директор
-def exchange_rate_page():
-    current_rate = get_current_exchange_rate()
-    
-    # Получаем историю курсов
-    conn = connect_to_db()
-    cursor = conn.cursor(cursor_factory=RealDictCursor)
-    try:
-        cursor.execute("""
-            SELECT rate, recorded_at, source, notes
-            FROM delivery_test.exchange_rates
-            WHERE currency_pair = 'CNY/USD'
-            ORDER BY recorded_at DESC
-            LIMIT 20
-        """)
-        rate_history = cursor.fetchall()
-    finally:
-        cursor.close()
-        conn.close()
-    
-    return render_template('exchange_rate.html', current_rate=current_rate, rate_history=rate_history)
-
-@app.route('/settings')
-@require_permission('all')  # Только директор
-def settings_page():
-    if os.path.exists(LAST_FILE_INFO):
-        with open(LAST_FILE_INFO, 'r', encoding='utf-8') as f:
-            last_file_info = f.read()
-    else:
-        last_file_info = "Файл ещё не загружен."
-    
-    pdf_info = get_latest_pdf_info()
-    
-    return render_template('settings.html', last_file_info=last_file_info, pdf_info=pdf_info)
-
-# API МАРШРУТЫ
 
 @app.route('/api/orders/<int:order_id>/status', methods=['POST'])
-@require_permission('orders')
-def update_order_status_api(order_id):
+@require_auth
+def update_order_status(order_id):
     data = request.get_json()
     new_status = data.get('status')
     notes = data.get('notes', '')
+    reject_reason = data.get('reject_reason', '')
     
-    if not new_status:
-        return jsonify({'error': 'Статус не указан'}), 400
+    conn = connect_to_db()
+    cursor = conn.cursor()
     
-    success = update_order_status(order_id, new_status, session['user_email'], notes)
-    
-    if success:
+    try:
+        # Получаем текущий статус
+        cursor.execute("SELECT status, status_history FROM delivery_test.orders WHERE id = %s", (order_id,))
+        result = cursor.fetchone()
+        
+        if not result:
+            return jsonify({'error': 'Заявка не найдена'}), 404
+        
+        old_status, status_history = result
+        if status_history is None:
+            status_history = []
+        
+        # Добавляем запись в историю
+        status_entry = {
+            'status': new_status,
+            'changed_by': session['user_email'],
+            'changed_at': datetime.now().isoformat(),
+            'notes': notes,
+            'reject_reason': reject_reason
+        }
+        status_history.append(status_entry)
+        
+        # Определяем нужно ли закрыть заявку
+        is_closed = new_status in ['paid', 'cancelled']
+        closed_at = datetime.now() if is_closed else None
+        
+        # Обновляем заявку
+        cursor.execute("""
+            UPDATE delivery_test.orders 
+            SET status = %s, status_history = %s, updated_at = NOW(),
+                reject_reason = %s, is_closed = %s, closed_at = %s
+            WHERE id = %s
+        """, (new_status, json.dumps(status_history), reject_reason, is_closed, closed_at, order_id))
+        
+        conn.commit()
         return jsonify({'success': True, 'message': 'Статус обновлен'})
-    else:
-        return jsonify({'error': 'Ошибка обновления статуса'}), 500
+        
+    except Exception as e:
+        conn.rollback()
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/api/orders/<int:order_id>/assign', methods=['POST'])
+@require_auth
+def assign_order(order_id):
+    manager_email = session.get('user_email')
+    
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("""
+            UPDATE delivery_test.orders 
+            SET manager_email = %s, updated_at = NOW()
+            WHERE id = %s AND manager_email IS NULL
+        """, (manager_email, order_id))
+        
+        if cursor.rowcount == 0:
+            return jsonify({'error': 'Заявка уже назначена'}), 400
+        
+        conn.commit()
+        return jsonify({'success': True, 'message': 'Заявка назначена вам'})
+        
+    except Exception as e:
+        conn.rollback()
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+# === РАСЧЕТ ДОСТАВКИ ===
+
+@app.route('/calculator')
+@require_auth
+def calculator():
+    return render_template('mobile_calculator.html')
+
+@app.route('/api/calculate', methods=['POST'])
+@require_auth
+def calculate_delivery():
+    data = request.get_json()
+    
+    try:
+        # Получаем текущий курс
+        conn = connect_to_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT rate FROM delivery_test.exchange_rates ORDER BY recorded_at DESC LIMIT 1")
+        exchange_rate = cursor.fetchone()[0] if cursor.fetchone() else 7.25
+        
+        # Выполняем расчет (упрощенная логика)
+        weight = float(data.get('weight', 0))
+        volume = float(data.get('volume', 0))
+        product_cost_cny = float(data.get('product_cost_cny', 0))
+        
+        # Конвертируем в USD
+        product_cost_usd = product_cost_cny / exchange_rate
+        
+        # Расчет доставки (примерная формула)
+        delivery_cost_usd = max(weight * 5, volume * 1000 * 8)
+        total_cost_usd = product_cost_usd + delivery_cost_usd
+        
+        calculation = {
+            'weight': weight,
+            'volume': volume,
+            'product_cost_cny': product_cost_cny,
+            'product_cost_usd': round(product_cost_usd, 2),
+            'delivery_cost_usd': round(delivery_cost_usd, 2),
+            'total_cost_usd': round(total_cost_usd, 2),
+            'exchange_rate': exchange_rate
+        }
+        
+        # Сохраняем расчет если указан клиент
+        if data.get('client_id'):
+            cursor.execute("""
+                INSERT INTO delivery_test.delivery_calculations 
+                (client_id, manager_email, category, weight, volume, 
+                 product_cost_cny, product_cost_usd, delivery_cost_usd, 
+                 total_cost_usd, exchange_rate, calculation_details)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                RETURNING id
+            """, (
+                data.get('client_id'), session['user_email'], data.get('category'),
+                weight, volume, product_cost_cny, product_cost_usd,
+                delivery_cost_usd, total_cost_usd, exchange_rate,
+                json.dumps(calculation)
+            ))
+            
+            calculation_id = cursor.fetchone()[0]
+            calculation['id'] = calculation_id
+            conn.commit()
+        
+        cursor.close()
+        conn.close()
+        
+        return jsonify({'success': True, 'calculation': calculation})
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# === КУРС ВАЛЮТ ===
+
+@app.route('/exchange-rate')
+@require_auth  
+def exchange_rate():
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        cursor.execute("""
+            SELECT rate, source, recorded_at 
+            FROM delivery_test.exchange_rates 
+            ORDER BY recorded_at DESC 
+            LIMIT 10
+        """)
+        rates = cursor.fetchall()
+        
+        current_rate = rates[0] if rates else {'rate': 7.25}
+        
+        return render_template('mobile_exchange_rate.html', 
+                             current_rate=current_rate, history=rates)
+        
+    finally:
+        cursor.close()
+        conn.close()
 
 @app.route('/api/exchange-rate', methods=['POST'])
-@require_permission('all')
-def update_exchange_rate_api():
+@require_auth
+def update_exchange_rate():
     data = request.get_json()
-    rate = data.get('rate')
+    new_rate = data.get('rate')
     
-    if not rate or rate <= 0:
+    if not new_rate or new_rate <= 0:
         return jsonify({'error': 'Некорректный курс'}), 400
     
-    success = update_exchange_rate(rate, session['user_email'])
+    conn = connect_to_db()
+    cursor = conn.cursor()
     
-    if success:
+    try:
+        cursor.execute("""
+            INSERT INTO delivery_test.exchange_rates (rate, source)
+            VALUES (%s, %s)
+        """, (new_rate, session['user_email']))
+        
+        conn.commit()
         return jsonify({'success': True, 'message': 'Курс обновлен'})
-    else:
-        return jsonify({'error': 'Ошибка обновления курса'}), 500
+        
+    except Exception as e:
+        conn.rollback()
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
 
-@app.route('/api/export/orders')
-@require_permission('orders')
-def export_orders():
-    # Получаем заявки для экспорта
-    orders = get_all_orders()
+# === АНАЛИТИКА ДИРЕКТОРА ===
+
+@app.route('/analytics')
+@require_role('director')
+def analytics():
+    month = request.args.get('month', datetime.now().strftime('%Y-%m'))
     
-    # Создаем Excel файл в памяти
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        # Статистика по менеджерам за месяц
+        cursor.execute("""
+            SELECT 
+                o.manager_email,
+                COUNT(*) as total_orders,
+                COUNT(CASE WHEN o.status = 'paid' THEN 1 END) as paid_orders,
+                COALESCE(SUM(o.order_amount), 0) as total_amount,
+                COALESCE(SUM(o.commission_amount), 0) as total_commission
+            FROM delivery_test.orders o
+            WHERE DATE_TRUNC('month', o.created_at) = DATE_TRUNC('month', %s::date)
+            GROUP BY o.manager_email
+        """, (month + '-01',))
+        
+        manager_stats = cursor.fetchall()
+        
+        # Статистика по статусам
+        cursor.execute("""
+            SELECT status, COUNT(*) as count
+            FROM delivery_test.orders 
+            WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', %s::date)
+            GROUP BY status
+        """, (month + '-01',))
+        
+        status_stats = cursor.fetchall()
+        
+        return render_template('mobile_analytics.html', 
+                             manager_stats=manager_stats,
+                             status_stats=status_stats,
+                             selected_month=month)
+        
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/clients/add', methods=['GET', 'POST'])
+@require_auth
+def add_client():
+    if request.method == 'POST':
+        data = request.get_json() if request.is_json else request.form
+        
+        conn = connect_to_db()
+        cursor = conn.cursor()
+        
+        try:
+            cursor.execute("""
+                INSERT INTO delivery_test.clients 
+                (full_name, telegram_username, telegram_chat_id, company, phone, email, comment, created_by)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                RETURNING id
+            """, (
+                data.get('full_name'),
+                data.get('telegram_username'),
+                data.get('telegram_chat_id'),
+                data.get('company'),
+                data.get('phone'),
+                data.get('email'),
+                data.get('comment'),
+                session['user_email']
+            ))
+            
+            client_id = cursor.fetchone()[0]
+            conn.commit()
+            
+            if request.is_json:
+                return jsonify({'success': True, 'client_id': client_id, 'message': 'Клиент создан'})
+            else:
+                flash('Клиент успешно добавлен', 'success')
+                return redirect(url_for('client_detail', client_id=client_id))
+                
+        except Exception as e:
+            conn.rollback()
+            if request.is_json:
+                return jsonify({'error': str(e)}), 500
+            else:
+                flash(f'Ошибка: {str(e)}', 'error')
+        finally:
+            cursor.close()
+            conn.close()
+    
+    return render_template('mobile_client_add.html')
+
+@app.route('/orders/new')
+@require_auth
+def new_order():
+    client_id = request.args.get('client_id')
+    calculation_id = request.args.get('calculation_id')
+    amount = request.args.get('amount')
+    
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        # Получаем список клиентов
+        cursor.execute("SELECT telegram_username, full_name, company FROM delivery_test.clients ORDER BY full_name")
+        clients = cursor.fetchall()
+        
+        # Получаем данные клиента если указан
+        client = None
+        if telegram_username:
+            cursor.execute("SELECT * FROM delivery_test.clients WHERE telegram_username = %s", (client_id,))
+            client = cursor.fetchone()
+        
+        # Получаем данные расчета если указан
+        calculation = None
+        if calculation_id:
+            cursor.execute("SELECT * FROM delivery_test.delivery_calculations WHERE id = %s", (calculation_id,))
+            calculation = cursor.fetchone()
+        
+        return render_template('mobile_order_new.html', 
+                             clients=clients, client=client, 
+                             calculation=calculation, amount=amount)
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/api/orders/create', methods=['POST'])
+@require_auth
+def create_order():
+    data = request.get_json()
+    
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("""
+            INSERT INTO delivery_test.orders 
+            (client_id, manager_email, status, order_amount, commission_amount, 
+             supplier_link, product_description)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            RETURNING id
+        """, (
+            data.get('client_id'),
+            session['user_email'] if data.get('assign_to_me') else None,
+            'assigned' if data.get('assign_to_me') else 'new',
+            data.get('order_amount'),
+            data.get('commission_amount'),
+            data.get('supplier_link'),
+            data.get('product_description')
+        ))
+        
+        order_id = cursor.fetchone()[0]
+        conn.commit()
+        
+        return jsonify({'success': True, 'order_id': order_id, 'message': 'Заявка создана'})
+        
+    except Exception as e:
+        conn.rollback()
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/api/orders/from-calculation', methods=['POST'])
+@require_auth
+def create_order_from_calculation():
+    data = request.get_json()
+    
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        # Получаем данные расчета
+        cursor.execute("SELECT * FROM delivery_test.delivery_calculations WHERE id = %s", 
+                      (data.get('calculation_id'),))
+        calculation = cursor.fetchone()
+        
+        if not calculation:
+            return jsonify({'error': 'Расчет не найден'}), 404
+        
+        # Создаем заявку на основе расчета
+        cursor.execute("""
+            INSERT INTO delivery_test.orders 
+            (client_id, manager_email, status, order_amount, commission_amount, product_description)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            RETURNING id
+        """, (
+            calculation['client_id'],
+            session['user_email'],
+            'assigned',
+            calculation['total_cost_usd'],
+            calculation['total_cost_usd'] * 0.1,  # 10% комиссии
+            f"Расчет #{calculation['id']}: {calculation['category']}, {calculation['weight']}кг, {calculation['volume']}м³"
+        ))
+        
+        order_id = cursor.fetchone()[0]
+        
+        # Связываем заявку с расчетом
+        cursor.execute("""
+            UPDATE delivery_test.delivery_calculations 
+            SET order_id = %s 
+            WHERE id = %s
+        """, (order_id, calculation['id']))
+        
+        conn.commit()
+        
+        return jsonify({'success': True, 'order_id': order_id, 'message': 'Заявка создана из расчета'})
+        
+    except Exception as e:
+        conn.rollback()
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/api/clients')
+@require_auth
+def api_clients():
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        cursor.execute("""
+            SELECT telegram_username, full_name, company, telegram_username 
+            FROM delivery_test.clients 
+            ORDER BY full_name 
+            LIMIT 100
+        """)
+        clients = cursor.fetchall()
+        
+        return jsonify([dict(client) for client in clients])
+        
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/api/exchange-rate/current')
+@require_auth
+def api_current_exchange_rate():
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        cursor.execute("""
+            SELECT rate, recorded_at, source 
+            FROM delivery_test.exchange_rates 
+            ORDER BY recorded_at DESC 
+            LIMIT 1
+        """)
+        rate = cursor.fetchone()
+        
+        if rate:
+            return jsonify(dict(rate))
+        else:
+            return jsonify({'rate': 7.25, 'recorded_at': datetime.now(), 'source': 'system'})
+            
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/api/analytics/export')
+@require_role('director')
+def export_analytics():
+    month = request.args.get('month', datetime.now().strftime('%Y-%m'))
+    format_type = request.args.get('format', 'excel')
+    
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        # Получаем данные для экспорта
+        cursor.execute("""
+            SELECT 
+                o.id, o.status, o.order_amount, o.commission_amount, o.created_at,
+                o.manager_email, c.full_name, c.company, c.telegram_username
+            FROM delivery_test.orders o
+            LEFT JOIN delivery_test.clients c ON o.client_id = c.id
+            WHERE DATE_TRUNC('month', o.created_at) = DATE_TRUNC('month', %s::date)
+            ORDER BY o.created_at DESC
+        """, (month + '-01',))
+        
+        orders = cursor.fetchall()
+        
+        if format_type == 'excel':
+            return export_to_excel(orders, month)
+        else:
+            return export_to_pdf(orders, month)
+            
+    finally:
+        cursor.close()
+        conn.close()
+
+def export_to_excel(orders, month):
+    from io import BytesIO
+    import xlsxwriter
+    
     output = BytesIO()
     workbook = xlsxwriter.Workbook(output)
-    worksheet = workbook.add_worksheet('Заявки')
+    worksheet = workbook.add_worksheet('Отчет по заявкам')
     
     # Заголовки
-    headers = ['ID', 'Email', 'Telegram', 'Сумма заказа', 'Статус', 'Менеджер', 'Дата создания']
+    headers = ['ID', 'Клиент', 'Компания', 'Менеджер', 'Статус', 'Сумма', 'Комиссия', 'Дата']
     for col, header in enumerate(headers):
         worksheet.write(0, col, header)
     
     # Данные
     for row, order in enumerate(orders, 1):
         worksheet.write(row, 0, order['id'])
-        worksheet.write(row, 1, order['email'] or '')
-        worksheet.write(row, 2, order['telegram_contact'] or '')
-        worksheet.write(row, 3, order['order_amount'] or '')
+        worksheet.write(row, 1, order['full_name'] or '')
+        worksheet.write(row, 2, order['company'] or '')
+        worksheet.write(row, 3, order['manager_email'] or '')
         worksheet.write(row, 4, order['status'] or '')
-        worksheet.write(row, 5, order['manager_email'] or '')
-        worksheet.write(row, 6, order['created_at'].strftime('%d.%m.%Y %H:%M') if order['created_at'] else '')
+        worksheet.write(row, 5, order['order_amount'] or 0)
+        worksheet.write(row, 6, order['commission_amount'] or 0)
+        worksheet.write(row, 7, order['created_at'].strftime('%d.%m.%Y') if order['created_at'] else '')
     
     workbook.close()
     output.seek(0)
-    
-    # Логируем действие
-    log_manager_action(session['user_email'], 'export', None, 'orders', 'Экспорт заявок в Excel')
     
     from flask import Response
     return Response(
         output.getvalue(),
         mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        headers={'Content-Disposition': f'attachment; filename=orders_{datetime.now().strftime("%Y%m%d")}.xlsx'}
+        headers={'Content-Disposition': f'attachment; filename=analytics_{month}.xlsx'}
     )
 
-@app.route('/api/export/users')
-@require_permission('users')
-def export_users():
+# Функция для закрытия заявок по окончании месяца
+@app.route('/api/close-month', methods=['POST'])
+@require_role('director')
+def close_month():
+    data = request.get_json()
+    month = data.get('month')  # Формат: YYYY-MM
+    
+    if not month:
+        return jsonify({'error': 'Месяц не указан'}), 400
+    
     conn = connect_to_db()
-    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    cursor = conn.cursor()
+    
     try:
+        # Закрываем все оплаченные заявки указанного месяца
         cursor.execute("""
-            SELECT tu.id, tu.telegram_id, tu.username, tu.first_name, tu.last_name,
-                   tu.company, tu.phone, tu.email, tu.full_name, tu.created_at,
-                   COUNT(uc.id) as calculations_count,
-                   COUNT(pr.id) as orders_count
-            FROM delivery_test.telegram_users tu
-            LEFT JOIN delivery_test.user_calculation uc ON tu.id = uc.telegram_user_id
-            LEFT JOIN delivery_test.purchase_requests pr ON tu.id = pr.telegram_user_id
-            GROUP BY tu.id
-            ORDER BY tu.created_at DESC
-        """)
-        users = cursor.fetchall()
-    finally:
-        cursor.close()
-        conn.close()
-    
-    # Создаем Excel файл
-    output = BytesIO()
-    workbook = xlsxwriter.Workbook(output)
-    worksheet = workbook.add_worksheet('Пользователи')
-    
-    # Заголовки
-    headers = ['ID', 'Telegram ID', 'Username', 'Имя', 'Фамилия', 'Компания', 'Телефон', 'Email', 'Расчеты', 'Заявки', 'Дата регистрации']
-    for col, header in enumerate(headers):
-        worksheet.write(0, col, header)
-    
-    # Данные
-    for row, user in enumerate(users, 1):
-        worksheet.write(row, 0, user['id'])
-        worksheet.write(row, 1, user['telegram_id'] or '')
-        worksheet.write(row, 2, user['username'] or '')
-        worksheet.write(row, 3, user['first_name'] or '')
-        worksheet.write(row, 4, user['last_name'] or '')
-        worksheet.write(row, 5, user['company'] or '')
-        worksheet.write(row, 6, user['phone'] or '')
-        worksheet.write(row, 7, user['email'] or '')
-        worksheet.write(row, 8, user['calculations_count'])
-        worksheet.write(row, 9, user['orders_count'])
-        worksheet.write(row, 10, user['created_at'].strftime('%d.%m.%Y %H:%M') if user['created_at'] else '')
-    
-    workbook.close()
-    output.seek(0)
-    
-    # Логируем действие
-    log_manager_action(session['user_email'], 'export', None, 'users', 'Экспорт пользователей в Excel')
-    
-    from flask import Response
-    return Response(
-        output.getvalue(),
-        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        headers={'Content-Disposition': f'attachment; filename=users_{datetime.now().strftime("%Y%m%d")}.xlsx'}
-    )
-
-# Остальные функции из оригинального app.py...
-# (get_analytics_data, get_funnel_data, remove_old_files, clear_table, load_data_to_db, etc.)
-
-def get_analytics_data():
-    conn = connect_to_db()
-    cursor = conn.cursor(cursor_factory=RealDictCursor)
-    try:
-        cursor.execute("SELECT COUNT(*) as total FROM delivery_test.user_calculation")
-        total_calculations = cursor.fetchone()['total']
-
-        cursor.execute("""
-            SELECT COUNT(*) as today 
-            FROM delivery_test.user_calculation 
-            WHERE DATE(created_at) = CURRENT_DATE
-        """)
-        today_calculations = cursor.fetchone()['today']
-
-        cursor.execute("SELECT AVG(total_weight) as avg_weight FROM delivery_test.user_calculation")
-        avg_weight = cursor.fetchone()['avg_weight'] or 0
-
-        cursor.execute("""
-            SELECT category, COUNT(*) as count 
-            FROM delivery_test.user_calculation 
-            GROUP BY category 
-            ORDER BY count DESC 
-            LIMIT 1
-        """)
-        popular_category_data = cursor.fetchone()
-        popular_category = popular_category_data['category'] if popular_category_data else "Нет данных"
-
-        cursor.execute("""
-            SELECT COUNT(DISTINCT telegram_user_id) as active_users
-            FROM delivery_test.user_calculation 
-            WHERE created_at >= NOW() - INTERVAL '7 days'
-        """)
-        active_users = cursor.fetchone()['active_users']
-
-        return {
-            'total_calculations': total_calculations,
-            'today_calculations': today_calculations,
-            'avg_weight': float(avg_weight),
-            'popular_category': popular_category,
-            'active_users': active_users
-        }
+            UPDATE delivery_test.orders 
+            SET is_closed = TRUE, closed_at = NOW()
+            WHERE status = 'paid' 
+            AND DATE_TRUNC('month', created_at) = DATE_TRUNC('month', %s::date)
+            AND NOT is_closed
+        """, (month + '-01',))
+        
+        closed_count = cursor.rowcount
+        conn.commit()
+        
+        return jsonify({
+            'success': True, 
+            'message': f'Закрыто {closed_count} заявок за {month}',
+            'closed_count': closed_count
+        })
+        
     except Exception as e:
-        print(f"Ошибка при получении статистики: {str(e)}")
-        return {
-            'total_calculations': 0, 'today_calculations': 0,
-            'avg_weight': 0.0, 'popular_category': 'Нет данных', 'active_users': 0
-        }
+        conn.rollback()
+        return jsonify({'error': str(e)}), 500
     finally:
         cursor.close()
         conn.close()
 
-def get_funnel_data():
+# API для получения статистики менеджера
+@app.route('/api/manager-stats/<manager_email>')
+@require_auth
+def manager_stats(manager_email):
+    # Проверяем права доступа
+    if session.get('user_role') != 'director' and session.get('user_email') != manager_email:
+        return jsonify({'error': 'Доступ запрещен'}), 403
+    
+    month = request.args.get('month', datetime.now().strftime('%Y-%m'))
+    
     conn = connect_to_db()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
     try:
-        cursor.execute("SELECT COUNT(*) as visits FROM delivery_test.telegram_users")
-        visits = cursor.fetchone()['visits']
+        cursor.execute("""
+            SELECT 
+                COUNT(*) as total_orders,
+                COUNT(CASE WHEN status = 'paid' THEN 1 END) as paid_orders,
+                COUNT(CASE WHEN status = 'rejected' THEN 1 END) as rejected_orders,
+                COALESCE(SUM(order_amount), 0) as total_amount,
+                COALESCE(SUM(commission_amount), 0) as total_commission,
+                COALESCE(AVG(order_amount), 0) as avg_order_amount
+            FROM delivery_test.orders 
+            WHERE manager_email = %s
+            AND DATE_TRUNC('month', created_at) = DATE_TRUNC('month', %s::date)
+        """, (manager_email, month + '-01'))
         
-        cursor.execute("SELECT COUNT(DISTINCT telegram_user_id) as started FROM delivery_test.user_inputs")
-        started = cursor.fetchone()['started']
+        stats = cursor.fetchone()
         
-        cursor.execute("SELECT COUNT(DISTINCT telegram_user_id) as completed FROM delivery_test.user_calculation")
-        completed = cursor.fetchone()['completed']
+        # Получаем историю по дням
+        cursor.execute("""
+            SELECT 
+                DATE(created_at) as date,
+                COUNT(*) as orders_count,
+                COALESCE(SUM(order_amount), 0) as daily_amount
+            FROM delivery_test.orders 
+            WHERE manager_email = %s
+            AND DATE_TRUNC('month', created_at) = DATE_TRUNC('month', %s::date)
+            GROUP BY DATE(created_at)
+            ORDER BY date
+        """, (manager_email, month + '-01'))
         
-        cursor.execute("SELECT COUNT(*) as orders FROM delivery_test.purchase_requests")
-        orders = cursor.fetchone()['orders']
-
-        conversion_started = (started / visits * 100) if visits > 0 else 0
-        conversion_completed = (completed / started * 100) if started > 0 else 0
-        conversion_orders = (orders / completed * 100) if completed > 0 else 0
-
-        return {
-            'visits': visits, 'started': started, 'completed': completed, 'orders': orders,
-            'conversion_started': conversion_started,
-            'conversion_completed': conversion_completed,
-            'conversion_orders': conversion_orders
-        }
-    except Exception as e:
-        return {
-            'visits': 0, 'started': 0, 'completed': 0, 'orders': 0,
-            'conversion_started': 0, 'conversion_completed': 0, 'conversion_orders': 0
-        }
+        daily_stats = cursor.fetchall()
+        
+        return jsonify({
+            'stats': dict(stats),
+            'daily_stats': [dict(day) for day in daily_stats]
+        })
+        
     finally:
         cursor.close()
         conn.close()
+
+# Функция инициализации с примерными данными
+@app.route('/api/init-demo-data', methods=['POST'])
+@require_role('director')
+def init_demo_data():
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    
+    try:
+        # Добавляем демо клиентов
+        demo_clients = [
+            ('Иван Петров', 'ivan_petrov', '123456789', 'ООО "Торговый дом"', '+7 (999) 123-45-67', 'ivan@example.com', 'Постоянный клиент'),
+            ('Анна Сидорова', 'anna_sid', '987654321', 'ИП Сидорова А.А.', '+7 (999) 765-43-21', 'anna@example.com', 'Новый клиент'),
+            ('Максим Козлов', 'max_kozlov', '456789123', 'АО "Импорт-Экспорт"', '+7 (999) 456-78-90', 'max@example.com', 'VIP клиент'),
+        ]
+        
+        for client in demo_clients:
+            cursor.execute("""
+                INSERT INTO delivery_test.clients 
+                (full_name, telegram_username, telegram_chat_id, company, phone, email, comment, created_by)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT DO NOTHING
+            """, (*client, 'director@company.ru'))
+        
+        # Добавляем демо заявки
+        cursor.execute("SELECT telegram_username FROM delivery_test.clients LIMIT 3")
+        client_ids = [row[0] for row in cursor.fetchall()]
+        
+        managers = ['manager1@company.ru', 'manager2@company.ru']
+        statuses = ['new', 'assigned', 'ordered', 'purchased', 'paid', 'rejected']
+        
+        import random
+        for i in range(20):
+            cursor.execute("""
+                INSERT INTO delivery_test.orders 
+                (client_id, manager_email, status, order_amount, commission_amount, product_description, created_at)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """, (
+                random.choice(client_ids),
+                random.choice(managers) if random.random() > 0.2 else None,
+                random.choice(statuses),
+                round(random.uniform(100, 5000), 2),
+                round(random.uniform(10, 500), 2),
+                f'Демо товар #{i+1}',
+                datetime.now() - timedelta(days=random.randint(0, 30))
+            ))
+        
+        conn.commit()
+        return jsonify({'success': True, 'message': 'Демо данные добавлены'})
+        
+    except Exception as e:
+        conn.rollback()
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+# Middleware для логирования действий
+def log_user_action(action, details=None):
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("""
+            INSERT INTO delivery_test.manager_actions
+            (user_email, action, details, created_at)
+            VALUES (%s, %s, %s, NOW())
+        """, (session.get('user_email'), action, json.dumps(details) if details else None))
+        conn.commit()
+    except:
+        pass  # Логирование не должно ломать основной функционал
+    finally:
+        cursor.close()
+        conn.close()
+
+# WebSocket для уведомлений в реальном времени (опционально)
+@app.route('/api/notifications')
+@require_auth
+def get_notifications():
+    user_email = session.get('user_email')
+    user_role = session.get('user_role')
+    
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        notifications = []
+        
+        # Новые заявки для менеджеров
+        if user_role == 'manager':
+            cursor.execute("""
+                SELECT COUNT(*) as count 
+                FROM delivery_test.orders 
+                WHERE status = 'new' AND manager_email IS NULL
+                AND created_at > NOW() - INTERVAL '1 hour'
+            """)
+            new_orders = cursor.fetchone()['count']
+            
+            if new_orders > 0:
+                notifications.append({
+                    'type': 'new_orders',
+                    'title': 'Новые заявки',
+                    'message': f'{new_orders} новых заявок требуют назначения',
+                    'action_url': '/orders?status=new'
+                })
+        
+        # Просроченные заявки для директора
+        if user_role == 'director':
+            cursor.execute("""
+                SELECT COUNT(*) as count 
+                FROM delivery_test.orders 
+                WHERE status IN ('assigned', 'ordered') 
+                AND created_at < NOW() - INTERVAL '3 days'
+            """)
+            overdue_orders = cursor.fetchone()['count']
+            
+            if overdue_orders > 0:
+                notifications.append({
+                    'type': 'overdue_orders',
+                    'title': 'Просроченные заявки',
+                    'message': f'{overdue_orders} заявок висят больше 3 дней',
+                    'action_url': '/analytics'
+                })
+        
+        return jsonify(notifications)
+        
+    finally:
+        cursor.close()
+        conn.close()
+
+# Функция для отправки уведомлений в Telegram (интеграция с ботом)
+def send_telegram_notification(chat_id, message):
+    # Эта функция будет интегрироваться с вашим Telegram ботом
+    # Пример реализации:
+    import requests
+    
+    BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+    if not BOT_TOKEN or not chat_id:
+        return False
+    
+    try:
+        url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+        data = {
+            'chat_id': chat_id,
+            'text': message,
+            'parse_mode': 'HTML'
+        }
+        response = requests.post(url, data=data, timeout=10)
+        return response.status_code == 200
+    except:
+        return False
+
+# Хук для отправки уведомлений при изменении статуса заявки
+@app.after_request
+def after_request(response):
+    # Логируем действия пользователя
+    if request.method in ['POST', 'PUT', 'DELETE'] and session.get('user_email'):
+        action = f"{request.method} {request.endpoint}"
+        log_user_action(action, {'path': request.path, 'data': request.get_json() if request.is_json else None})
+    
+    return response
 
 if __name__ == '__main__':
-    # Создаем необходимые директории
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-    os.makedirs(PDF_FOLDER, exist_ok=True)
-    
-    # Инициализируем таблицы управления
+    # Создаем дополнительные таблицы
     try:
-        init_management_tables()
-        print("✅ Таблицы управления инициализированы")
+        init_tables() # ✅ Вызываем главную функцию
+        print("✅ Таблица логирования создана")
     except Exception as e:
-        print(f"❌ Ошибка инициализации таблиц: {e}")
+        print(f"❌ Ошибка создания таблицы логирования: {e}")
     
-    print("Запуск приложения China Together Management System")
-    print(f"Excel файлы: {UPLOAD_FOLDER}")
-    print(f"PDF файлы: {PDF_FOLDER}")
+    print("🚀 Мобильное приложение запущено")
+    print("📱 Откройте http://localhost:8060 на мобильном устройстве")
+    print("👥 Тестовые аккаунты:")
+    print("   Директор: director@company.ru / director123")
+    print("   Менеджер: manager1@company.ru / manager123")
     
-    try:
-        app.run(host='0.0.0.0', port=8060, debug=True)
-    except Exception as e:
-        print(f"Ошибка запуска приложения: {str(e)}")
-        raise
+    app.run(host='0.0.0.0', port=8060, debug=True)

@@ -1,0 +1,113 @@
+{% extends "mobile_base.html" %}
+
+{% block page_title %}Главная{% endblock %}
+
+{% block top_actions %}
+<a href="{{ url_for('logout') }}" class="btn btn-outline btn-sm">
+    <i class="fas fa-sign-out-alt"></i>
+</a>
+{% endblock %}
+
+{% block content %}
+<!-- Приветствие -->
+<div class="card">
+    <div class="d-flex align-items-center gap-3">
+        <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+            {{ session.user_name[0] }}
+        </div>
+        <div>
+            <div class="fw-bold">{{ session.user_name }}</div>
+            <div class="text-muted">{{ 'Директор' if session.user_role == 'director' else 'Менеджер' }}</div>
+        </div>
+    </div>
+</div>
+
+<!-- Основная статистика -->
+<div class="stats-grid">
+    {% if session.user_role == 'manager' %}
+    <div class="stat-card">
+        <div class="stat-value">{{ stats.my_orders or 0 }}</div>
+        <div class="stat-label">Мои заявки</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">${{ "%.0f"|format(stats.my_revenue or 0) }}</div>
+        <div class="stat-label">Мой доход</div>
+    </div>
+    {% else %}
+    <div class="stat-card">
+        <div class="stat-value">{{ stats.orders_this_month or 0 }}</div>
+        <div class="stat-label">Заявки за месяц</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{ stats.total_clients or 0 }}</div>
+        <div class="stat-label">Всего клиентов</div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Новые заявки -->
+{% if stats.new_orders > 0 %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-bell text-warning"></i>
+            Требуют внимания
+        </div>
+        <span class="status-badge status-new">{{ stats.new_orders }}</span>
+    </div>
+    <p class="text-muted mb-0">Новых заявок без назначенного менеджера</p>
+    <div class="mt-2">
+        <a href="{{ url_for('orders_list') }}?status=new" class="btn btn-primary btn-sm">
+            <i class="fas fa-eye"></i> Посмотреть
+        </a>
+    </div>
+</div>
+{% endif %}
+
+<!-- Быстрые действия -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-bolt"></i>
+            Быстрые действия
+        </div>
+    </div>
+    <div class="d-flex gap-2" style="flex-wrap: wrap;">
+        <a href="{{ url_for('calculator') }}" class="btn btn-primary btn-sm" style="flex: 1;">
+            <i class="fas fa-calculator"></i> Расчет
+        </a>
+        <a href="{{ url_for('clients_list') }}" class="btn btn-secondary btn-sm" style="flex: 1;">
+            <i class="fas fa-users"></i> Клиенты
+        </a>
+        {% if session.user_role == 'director' %}
+        <a href="{{ url_for('analytics') }}" class="btn btn-success btn-sm" style="flex: 1;">
+            <i class="fas fa-chart-bar"></i> Отчеты
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Статистика менеджеров (только для директора) -->
+{% if session.user_role == 'director' and stats.manager_stats %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-users"></i>
+            Производительность менеджеров
+        </div>
+    </div>
+    {% for manager in stats.manager_stats %}
+    <div class="list-item">
+        <div class="list-item-content">
+            <div class="list-item-title">{{ manager.manager_email.split('@')[0] }}</div>
+            <div class="list-item-subtitle">{{ manager.orders_count }} заявок • ${{ "%.0f"|format(manager.total_amount or 0) }}</div>
+        </div>
+        <div class="list-item-meta">
+            <div class="fw-bold">${{ "%.0f"|format(manager.total_commission or 0) }}</div>
+            <div class="text-muted">комиссия</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,202 @@
+{% extends "mobile_base.html" %}
+
+{% block page_title %}Аналитика{% endblock %}
+
+{% block top_actions %}
+<button class="btn btn-outline btn-sm" onclick="showPeriodModal()">
+    <i class="fas fa-calendar"></i>
+</button>
+{% endblock %}
+
+{% block content %}
+<!-- Выбранный период -->
+<div class="card">
+    <div class="d-flex align-items-center justify-content-between">
+        <div>
+            <div class="fw-bold">{{ selected_month.replace('-', '.') }}</div>
+            <div class="text-muted">Отчетный период</div>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="showPeriodModal()">
+            <i class="fas fa-calendar"></i> Изменить
+        </button>
+    </div>
+</div>
+
+<!-- Общая статистика -->
+<div class="stats-grid">
+    {% set total_orders = manager_stats|sum(attribute='total_orders') %}
+    {% set total_amount = manager_stats|sum(attribute='total_amount') %}
+    {% set total_commission = manager_stats|sum(attribute='total_commission') %}
+    
+    <div class="stat-card">
+        <div class="stat-value">{{ total_orders }}</div>
+        <div class="stat-label">Всего заявок</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">${{ "%.0f"|format(total_amount) }}</div>
+        <div class="stat-label">Общий оборот</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">${{ "%.0f"|format(total_commission) }}</div>
+        <div class="stat-label">Общая комиссия</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{ "%.1f"|format((manager_stats|selectattr('paid_orders')|sum(attribute='paid_orders') / total_orders * 100) if total_orders > 0 else 0) }}%</div>
+        <div class="stat-label">Конверсия</div>
+    </div>
+</div>
+
+<!-- Производительность менеджеров -->
+{% if manager_stats %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-users"></i>
+            Производительность менеджеров
+        </div>
+    </div>
+    
+    {% for manager in manager_stats|sort(attribute='total_amount', reverse=true) %}
+    <div class="list-item">
+        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; margin-right: 1rem;">
+            {{ (manager.manager_email or 'M')[0].upper() }}
+        </div>
+        <div class="list-item-content">
+            <div class="list-item-title">{{ manager.manager_email.split('@')[0] if manager.manager_email else 'Неназначен' }}</div>
+            <div class="list-item-subtitle">
+                {{ manager.total_orders }} заявок • {{ manager.paid_orders }} оплачено
+            </div>
+            <div class="mt-1">
+                <div style="background: #e2e8f0; height: 6px; border-radius: 3px; overflow: hidden;">
+                    {% set completion_rate = (manager.paid_orders / manager.total_orders * 100) if manager.total_orders > 0 else 0 %}
+                    <div style="background: {{ '#10b981' if completion_rate >= 80 else '#f59e0b' if completion_rate >= 60 else '#ef4444' }}; 
+                                height: 100%; 
+                                width: {{ completion_rate }}%;
+                                transition: width 0.3s ease;"></div>
+                </div>
+                <div class="text-muted" style="font-size: 0.8rem; margin-top: 0.25rem;">
+                    {{ "%.1f"|format(completion_rate) }}% успешных
+                </div>
+            </div>
+        </div>
+        <div class="list-item-meta">
+            <div class="fw-bold">${{ "%.0f"|format(manager.total_amount or 0) }}</div>
+            <div class="text-muted" style="font-size: 0.8rem;">${{ "%.0f"|format(manager.total_commission or 0) }} ком.</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Статистика по статусам -->
+{% if status_stats %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-chart-pie"></i>
+            Распределение по статусам
+        </div>
+    </div>
+    
+    {% for status in status_stats %}
+    <div class="d-flex align-items-center justify-content-between mb-2">
+        <div class="d-flex align-items-center gap-2">
+            <span class="status-badge status-{{ status.status }}">
+                {% if status.status == 'new' %}Новые
+                {% elif status.status == 'assigned' %}Назначены
+                {% elif status.status == 'ordered' %}Заказали
+                {% elif status.status == 'purchased' %}Выкуплены
+                {% elif status.status == 'paid' %}Оплачены
+                {% elif status.status == 'rejected' %}Отказы
+                {% else %}{{ status.status }}
+                {% endif %}
+            </span>
+        </div>
+        <div class="fw-bold">{{ status.count }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Тренды -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-chart-line"></i>
+            Ключевые показатели
+        </div>
+    </div>
+    
+    <div style="display: grid; gap: 1rem;">
+        <div class="d-flex justify-content-between align-items-center p-2" style="background: #f8fafc; border-radius: 6px;">
+            <span>Средний чек</span>
+            <span class="fw-bold">${{ "%.0f"|format(total_amount / total_orders) if total_orders > 0 else 0 }}</span>
+        </div>
+        
+        <div class="d-flex justify-content-between align-items-center p-2" style="background: #f8fafc; border-radius: 6px;">
+            <span>Средняя комиссия</span>
+            <span class="fw-bold">${{ "%.0f"|format(total_commission / total_orders) if total_orders > 0 else 0 }}</span>
+        </div>
+        
+        <div class="d-flex justify-content-between align-items-center p-2" style="background: #f8fafc; border-radius: 6px;">
+            <span>Конверсия в оплату</span>
+            <span class="fw-bold">{{ "%.1f"|format((manager_stats|selectattr('paid_orders')|sum(attribute='paid_orders') / total_orders * 100) if total_orders > 0 else 0) }}%</span>
+        </div>
+    </div>
+</div>
+
+<!-- Экспорт отчета -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-download"></i>
+            Экспорт данных
+        </div>
+    </div>
+    
+    <div class="d-flex gap-2">
+        <button class="btn btn-primary btn-sm" onclick="exportToExcel()" style="flex: 1;">
+            <i class="fas fa-file-excel"></i> Excel
+        </button>
+        <button class="btn btn-secondary btn-sm" onclick="exportToPdf()" style="flex: 1;">
+            <i class="fas fa-file-pdf"></i> PDF
+        </button>
+    </div>
+</div>
+
+<!-- Модальное окно выбора периода -->
+<div id="periodModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Выбор периода</h3>
+            <button class="modal-close" onclick="hideModal('periodModal')">&times;</button>
+        </div>
+        
+        <form method="GET">
+            <div class="form-group">
+                <label class="form-label">Месяц и год</label>
+                <input type="month" name="month" class="form-control" value="{{ selected_month }}" required>
+            </div>
+            
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-secondary" onclick="hideModal('periodModal')">Отмена</button>
+                <button type="submit" class="btn btn-primary">Применить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function showPeriodModal() {
+    showModal('periodModal');
+}
+
+function exportToExcel() {
+    window.location.href = `/api/analytics/export?month={{ selected_month }}&format=excel`;
+}
+
+function exportToPdf() {
+    window.location.href = `/api/analytics/export?month={{ selected_month }}&format=pdf`;
+}
+</script>
+{% endblock %}

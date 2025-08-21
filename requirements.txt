@@ -1,16 +1,303 @@
+# Flask и основные зависимости
 Flask==2.3.3
-psycopg2-binary==2.9.7
-pandas==2.1.1
-python-dotenv==1.0.0
-xlsxwriter==3.1.3
 Werkzeug==2.3.7
 Jinja2==3.1.2
 click==8.1.7
 itsdangerous==2.1.2
 MarkupSafe==2.1.3
+
+# База данных
+psycopg2-binary==2.9.7
+SQLAlchemy==2.0.21  # опционально для ORM
+
+# Обработка данных
+pandas==2.1.1
 numpy==1.25.2
-pytz==2023.3
+
+# Конфигурация
+python-dotenv==1.0.0
+
+# Работа с Excel
+xlsxwriter==3.1.3
 openpyxl==3.1.2
+
+# Работа с PDF
 reportlab==4.0.4
+
+# Работа с изображениями
 Pillow==10.0.1
+
+# HTTP запросы (для Telegram API)
+requests==2.31.0
+
+# Время и даты
+pytz==2023.3
+
+# CORS для API
 Flask-CORS==4.0.0
+
+# Безопасность
+cryptography==41.0.4
+
+# Логирование
+structlog==23.1.0
+
+# Валидация данных
+marshmallow==3.20.1
+
+# Кэширование (опционально)
+redis==4.6.0
+
+# Мониторинг (опционально)
+prometheus-client==0.17.1
+
+# Тестирование
+pytest==7.4.2
+pytest-flask==1.2.0
+
+# Линтеры и форматирование
+flake8==6.0.0
+black==23.7.0
+
+# Дополнительные утилиты
+python-slugify==8.0.1
+phonenumbers==8.13.19
+
+# WebSocket поддержка (опционально)
+Flask-SocketIO==5.3.6
+python-socketio==5.8.0
+
+# JWT токены (если понадобится API аутентификация)
+PyJWT==2.8.0
+
+# Планировщик задач (для автоматических операций)
+APScheduler==3.10.4
+
+# HTTP сервер для продакшена
+gunicorn==21.2.0
+
+# Переменные окружения для продакшена
+python-decouple==3.8
+
+# Сжатие ответов
+Flask-Compress==1.13
+
+# Ограничение скорости запросов
+Flask-Limiter==3.5.0
+
+# Миграции БД (если понадобится)
+alembic==1.12.0
+
+# Работа с JSON
+ujson==5.8.0
+
+# Дата и время
+arrow==1.2.3
+
+# UUID генерация
+uuid==1.30
+
+# Хэширование паролей
+bcrypt==4.0.1
+
+# Валидация email
+email-validator==2.0.0
+
+# Работа с URL
+furl==2.1.3
+
+# Цветной вывод в консоль
+colorama==0.4.6
+
+# Прогресс-бары
+tqdm==4.66.1
+
+# Конфигурация для разных окружений
+dynaconf==3.2.3
+
+# Сериализация
+msgpack==1.0.7
+
+# Работа с CSV
+csvkit==1.1.1
+
+# Математические операции
+scipy==1.11.3
+
+# Графики (если понадобится серверная генерация)
+matplotlib==3.7.2
+seaborn==0.12.2
+
+# QR коды (для интеграции с мобильными приложениями)
+qrcode==7.4.2
+
+# Штрих-коды
+python-barcode==0.14.0
+
+# Работа с архивами
+patool==1.12.0
+
+# HTML парсинг (для интеграции с сайтами поставщиков)
+beautifulsoup4==4.12.2
+
+# Markdown (для документации)
+Markdown==3.5
+
+# Сжатие изображений
+Pillow-SIMD==10.0.1.post1  # альтернатива Pillow с лучшей производительностью
+
+# Геолокация (если понадобится для логистики)
+geopy==2.4.0
+
+# Работа с файлами
+pathlib2==2.3.7
+
+# Отправка email
+Flask-Mail==0.9.1
+
+# Очереди задач (для фоновых операций)
+celery==5.3.2
+redis==4.6.0  # как брокер для celery
+
+# Мониторинг производительности
+newrelic==9.0.0  # опционально
+
+# Сжатие данных
+lz4==4.3.2
+
+# Работа с XML (для интеграции с API)
+lxml==4.9.3
+
+# Парсинг конфигураций
+configparser==6.0.0
+
+# Работа с командной строкой
+typer==0.9.0
+
+# Документация API
+flask-restx==1.2.0
+flasgger==0.9.7.1
+
+# Безопасность заголовков
+flask-talisman==1.1.0
+
+# Сессии
+Flask-Session==0.5.0
+
+# Кэширование
+Flask-Caching==2.1.0
+
+# Миграции упрощенные
+Flask-Migrate==4.0.5
+
+# SQLAlchemy утилиты
+Flask-SQLAlchemy==3.0.5
+
+# Админка (опционально)
+Flask-Admin==1.6.1
+
+# Debug toolbar для разработки
+Flask-DebugToolbar==0.13.1
+
+# Профилирование
+Werkzeug==2.3.7
+
+# Логирование в JSON
+python-json-logger==2.0.7
+
+# Мониторинг ошибок
+sentry-sdk==1.32.0
+
+# Работа с часовыми поясами
+zoneinfo==0.2.1  # для Python < 3.9
+
+# Валидация схем JSON
+jsonschema==4.19.1
+
+# Работа с куками
+flask-cookies==0.1.3
+
+# Поддержка CORS
+flask-cors==4.0.0
+
+# Ограничение размера загружаемых файлов
+Werkzeug==2.3.7
+
+# Кэширование Redis с поддержкой JSON
+rejson==0.5.6
+
+# Работа с Kubernetes (для деплоя)
+kubernetes==27.2.0
+
+# Docker SDK
+docker==6.1.3
+
+# Мониторинг системы
+psutil==5.9.6
+
+# Работа с процессами
+supervisor==4.2.5
+
+# Nginx конфигурация
+nginx-python==1.1
+
+# Systemd интеграция
+systemd-python==235
+
+# Backup утилиты
+boto3==1.28.62  # для AWS S3
+
+# Работа с FTP
+ftplib==1.0.0
+
+# SSH клиент
+paramiko==3.3.1
+
+# Работа с Git
+GitPython==3.1.37
+
+# Шифрование файлов
+cryptography==41.0.4
+
+# Компрессия файлов
+gzip==1.0
+
+# Работа с сетью
+netaddr==0.8.0
+
+# DNS утилиты
+dnspython==2.4.2
+
+# Работа с SSL
+pyOpenSSL==23.2.0
+
+# Markdown to PDF
+weasyprint==60.1
+
+# HTML to PDF
+pdfkit==1.0.0
+wkhtmltopdf==0.2
+
+# Работа с ZIP архивами
+zipfile36==0.1.3
+
+# Генерация случайных данных
+Faker==19.6.2
+
+# Валидация данных
+cerberus==1.3.5
+
+# Работа с конфигурацией YAML
+PyYAML==6.0.1
+
+# Мониторинг файловой системы
+watchdog==3.0.0
+
+# Работа с базами данных NoSQL
+pymongo==4.5.0  # MongoDB (опционально)
+
+# Очереди сообщений
+pika==1.3.2  # RabbitMQ (опционально)
+
+# Metrics and monitoring
+statsd==4.0.1

@@ -1,0 +1,75 @@
+{% extends "mobile_base.html" %}
+
+{% block page_title %}Клиенты{% endblock %}
+
+{% block top_actions %}
+<a href="{{ url_for('add_client') }}" class="btn btn-primary btn-sm">
+    <i class="fas fa-plus"></i>
+</a>
+{% endblock %}
+
+{% block content %}
+<!-- Поиск -->
+<div class="search-box">
+    <i class="fas fa-search"></i>
+    <input type="text" class="form-control" placeholder="Поиск клиентов..." 
+           value="{{ search }}" onkeyup="searchClients(this.value)">
+</div>
+
+<!-- Список клиентов -->
+<div id="clientsList">
+    {% for client in clients %}
+    <a href="{{ url_for('client_detail', client_id=client.id) }}" class="card" style="text-decoration: none; color: inherit; display: block;">
+        <div class="d-flex align-items-center gap-3">
+            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+                {{ (client.full_name or 'К')[0].upper() }}
+            </div>
+            <div class="list-item-content">
+                <div class="list-item-title">{{ client.full_name or 'Без имени' }}</div>
+                <div class="list-item-subtitle">
+                    {% if client.company %}{{ client.company }}{% endif %}
+                    {% if client.telegram_username %} • @{{ client.telegram_username }}{% endif %}
+                </div>
+                <div class="d-flex gap-3 mt-1">
+                    <small class="text-muted">{{ client.orders_count }} заявок</small>
+                    <small class="text-muted">${{ "%.0f"|format(client.total_amount or 0) }}</small>
+                </div>
+            </div>
+            {% if client.telegram_chat_id %}
+            <div class="status-badge status-new" style="font-size: 0.7rem;">
+                <i class="fab fa-telegram-plane"></i>
+            </div>
+            {% endif %}
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% if not clients %}
+<div class="card text-center">
+    <i class="fas fa-users" style="font-size: 3rem; color: #e2e8f0; margin-bottom: 1rem;"></i>
+    <h3>Клиенты не найдены</h3>
+    <p class="text-muted">Добавьте первого клиента</p>
+    <a href="{{ url_for('add_client') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Добавить клиента
+    </a>
+</div>
+{% endif %}
+
+<script>
+function searchClients(query) {
+    const url = new URL(window.location);
+    if (query) {
+        url.searchParams.set('search', query);
+    } else {
+        url.searchParams.delete('search');
+    }
+    
+    // Debounce
+    clearTimeout(window.searchTimeout);
+    window.searchTimeout = setTimeout(() => {
+        window.location.href = url.toString();
+    }, 300);
+}
+</script>
+{% endblock %}

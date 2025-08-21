@@ -1,0 +1,243 @@
+{% extends "mobile_base.html" %}
+
+{% block page_title %}{{ client.full_name or 'Клиент' }}{% endblock %}
+
+{% block top_actions %}
+<a href="{{ url_for('edit_client', client_id=client.id) }}" class="btn btn-outline btn-sm">
+    <i class="fas fa-edit"></i>
+</a>
+{% endblock %}
+
+{% block content %}
+<!-- Информация о клиенте -->
+<div class="card">
+    <div class="d-flex align-items-center gap-3 mb-3">
+        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">
+            {{ (client.full_name or 'К')[0].upper() }}
+        </div>
+        <div>
+            <h2 class="mb-1">{{ client.full_name or 'Без имени' }}</h2>
+            {% if client.company %}
+            <div class="text-muted"><i class="fas fa-building"></i> {{ client.company }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        {% if client.telegram_username %}
+        <div>
+            <label class="text-muted">Telegram</label>
+            <div><i class="fab fa-telegram-plane"></i> @{{ client.telegram_username }}</div>
+        </div>
+        {% endif %}
+        
+        {% if client.telegram_chat_id %}
+        <div>
+            <label class="text-muted">ID чата</label>
+            <div><code>{{ client.telegram_chat_id }}</code></div>
+        </div>
+        {% endif %}
+        
+        {% if client.phone %}
+        <div>
+            <label class="text-muted">Телефон</label>
+            <div><a href="tel:{{ client.phone }}"><i class="fas fa-phone"></i> {{ client.phone }}</a></div>
+        </div>
+        {% endif %}
+        
+        {% if client.email %}
+        <div>
+            <label class="text-muted">Email</label>
+            <div><a href="mailto:{{ client.email }}"><i class="fas fa-envelope"></i> {{ client.email }}</a></div>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if client.comment %}
+    <div class="mt-3 p-3" style="background: #f8fafc; border-radius: 8px;">
+        <label class="text-muted">Комментарий</label>
+        <div>{{ client.comment }}</div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Быстрые действия -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Действия</div>
+    </div>
+    <div class="d-flex gap-2" style="flex-wrap: wrap;">
+        <button class="btn btn-primary btn-sm" onclick="showCalculatorModal()" style="flex: 1;">
+            <i class="fas fa-calculator"></i> Новый расчет
+        </button>
+        <button class="btn btn-success btn-sm" onclick="showNewOrderModal()" style="flex: 1;">
+            <i class="fas fa-plus"></i> Новая заявка
+        </button>
+        {% if client.telegram_chat_id %}
+        <a href="https://t.me/{{ client.telegram_chat_id }}" class="btn btn-secondary btn-sm" style="flex: 1;">
+            <i class="fab fa-telegram-plane"></i> Написать
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Заявки клиента -->
+{% if orders %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-clipboard-list"></i>
+            Заявки ({{ orders|length }})
+        </div>
+    </div>
+    {% for order in orders %}
+    <a href="{{ url_for('order_detail', order_id=order.id) }}" class="list-item">
+        <div class="list-item-content">
+            <div class="list-item-title">Заявка #{{ order.id }}</div>
+            <div class="list-item-subtitle">
+                {% if order.order_amount %}${{ "%.0f"|format(order.order_amount) }}{% else %}Сумма не указана{% endif %}
+                • {{ order.created_at.strftime('%d.%m.%Y') }}
+            </div>
+        </div>
+        <div class="list-item-meta">
+            <span class="status-badge status-{{ order.status }}">{{ order.status }}</span>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Расчеты клиента -->
+{% if calculations %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-calculator"></i>
+            Расчеты ({{ calculations|length }})
+        </div>
+    </div>
+    {% for calc in calculations %}
+    <div class="list-item">
+        <div class="list-item-content">
+            <div class="list-item-title">{{ calc.category or 'Расчет' }}</div>
+            <div class="list-item-subtitle">
+                {{ calc.weight }}кг • {{ calc.volume }}м³ • {{ calc.created_at.strftime('%d.%m.%Y') }}
+            </div>
+        </div>
+        <div class="list-item-meta">
+            <div class="fw-bold">${{ "%.0f"|format(calc.total_cost_usd) }}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Модальное окно для быстрого расчета -->
+<div id="calculatorModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Быстрый расчет</h3>
+            <button class="modal-close" onclick="hideModal('calculatorModal')">&times;</button>
+        </div>
+        
+        <form id="quickCalculatorForm">
+            <input type="hidden" name="client_id" value="{{ client.id }}">
+            
+            <div class="form-group">
+                <label class="form-label">Категория товара</label>
+                <select name="category" class="form-control" required>
+                    <option value="">Выберите категорию</option>
+                    <option value="обычные">Обычные товары</option>
+                    <option value="одежда">Одежда</option>
+                    <option value="обувь">Обувь</option>
+                    <option value="электроника">Электроника</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Вес (кг)</label>
+                <input type="number" name="weight" class="form-control" step="0.1" min="0" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Объем (м³)</label>
+                <input type="number" name="volume" class="form-control" step="0.001" min="0" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Стоимость товара (юани)</label>
+                <input type="number" name="product_cost_cny" class="form-control" step="0.01" min="0" required>
+            </div>
+            
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-secondary" onclick="hideModal('calculatorModal')">Отмена</button>
+                <button type="submit" class="btn btn-primary">Рассчитать</button>
+            </div>
+        </form>
+        
+        <div id="calculationResult" style="display: none; margin-top: 1rem;">
+            <!-- Результат расчета будет показан здесь -->
+        </div>
+    </div>
+</div>
+
+<script>
+function showCalculatorModal() {
+    showModal('calculatorModal');
+}
+
+function showNewOrderModal() {
+    // Перенаправляем на страницу создания заявки с предзаполненным клиентом
+    window.location.href = `/orders/new?client_id={{ client.id }}`;
+}
+
+// Обработка формы быстрого расчета
+handleFormSubmit('quickCalculatorForm', '/api/calculate', function(result) {
+    if (result.calculation) {
+        document.getElementById('calculationResult').innerHTML = `
+            <div class="card">
+                <h4>Результат расчета</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <label class="text-muted">Товар</label>
+                        <div>$${result.calculation.product_cost_usd}</div>
+                    </div>
+                    <div>
+                        <label class="text-muted">Доставка</label>
+                        <div>$${result.calculation.delivery_cost_usd}</div>
+                    </div>
+                </div>
+                <div class="mt-2 p-2" style="background: #f0f9ff; border-radius: 6px;">
+                    <div class="fw-bold">Итого: $${result.calculation.total_cost_usd}</div>
+                </div>
+                <div class="mt-2">
+                    <button class="btn btn-success btn-sm w-100" onclick="createOrderFromCalculation(${result.calculation.id})">
+                        <i class="fas fa-plus"></i> Создать заявку
+                    </button>
+                </div>
+            </div>
+        `;
+        document.getElementById('calculationResult').style.display = 'block';
+    }
+});
+
+function createOrderFromCalculation(calculationId) {
+    // Создание заявки на основе расчета
+    apiRequest('/api/orders/from-calculation', {
+        method: 'POST',
+        body: JSON.stringify({
+            calculation_id: calculationId,
+            client_id: {{ client.id }}
+        })
+    })
+    .then(result => {
+        hideModal('calculatorModal');
+        showNotification('Заявка создана!');
+        setTimeout(() => location.reload(), 1000);
+    })
+    .catch(error => {
+        showNotification(error.message, 'error');
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends "mobile_base.html" %}
+
+{% block page_title %}Заявки{% endblock %}
+
+{% block top_actions %}
+<button class="btn btn-outline btn-sm" onclick="showFiltersModal()">
+    <i class="fas fa-filter"></i>
+</button>
+{% endblock %}
+
+{% block content %}
+<!-- Быстрые фильтры -->
+<div class="d-flex gap-2 mb-3" style="overflow-x: auto; padding-bottom: 0.5rem;">
+    <a href="{{ url_for('orders_list') }}" class="btn {{ 'btn-primary' if not status_filter else 'btn-outline' }} btn-sm" style="white-space: nowrap;">
+        Все
+    </a>
+    <a href="{{ url_for('orders_list') }}?status=new" class="btn {{ 'btn-primary' if status_filter == 'new' else 'btn-outline' }} btn-sm" style="white-space: nowrap;">
+        Новые
+    </a>
+    <a href="{{ url_for('orders_list') }}?status=assigned" class="btn {{ 'btn-primary' if status_filter == 'assigned' else 'btn-outline' }} btn-sm" style="white-space: nowrap;">
+        В работе
+    </a>
+    <a href="{{ url_for('orders_list') }}?status=ordered" class="btn {{ 'btn-primary' if status_filter == 'ordered' else 'btn-outline' }} btn-sm" style="white-space: nowrap;">
+        Заказали
+    </a>
+    <a href="{{ url_for('orders_list') }}?status=paid" class="btn {{ 'btn-primary' if status_filter == 'paid' else 'btn-outline' }} btn-sm" style="white-space: nowrap;">
+        Оплачено
+    </a>
+</div>
+
+<!-- Список заявок -->
+{% for order in orders %}
+<a href="{{ url_for('order_detail', order_id=order.id) }}" class="card" style="text-decoration: none; color: inherit; display: block;">
+    <div class="d-flex align-items-center gap-3">
+        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem;">
+            #{{ order.id }}
+        </div>
+        <div class="list-item-content">
+            <div class="list-item-title">{{ order.full_name or 'Клиент не указан' }}</div>
+            <div class="list-item-subtitle">
+                {% if order.order_amount %}${{ "%.0f"|format(order.order_amount) }}{% else %}Сумма не указана{% endif %}
+                • {{ order.created_at.strftime('%d.%m %H:%M') }}
+                {% if order.manager_email %}
+                • {{ order.manager_email.split('@')[0] }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="list-item-meta">
+            <span class="status-badge status-{{ order.status }}">
+                {% if order.status == 'new' %}Новая
+                {% elif order.status == 'assigned' %}Назначена
+                {% elif order.status == 'ordered' %}Заказал
+                {% elif order.status == 'purchased' %}Выкуплен
+                {% elif order.status == 'paid' %}Оплачено
+                {% elif order.status == 'rejected' %}Отказ
+                {% else %}{{ order.status }}
+                {% endif %}
+            </span>
+            {% if order.status == 'new' and not order.manager_email %}
+            <div class="mt-1">
+                <button class="btn btn-primary btn-sm" onclick="event.preventDefault(); assignOrder({{ order.id }})" style="font-size: 0.7rem; padding: 0.25rem 0.5rem;">
+                    Взять
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</a>
+{% endfor %}
+
+{% if not orders %}
+<div class="card text-center">
+    <i class="fas fa-clipboard-list" style="font-size: 3rem; color: #e2e8f0; margin-bottom: 1rem;"></i>
+    <h3>Заявки не найдены</h3>
+    <p class="text-muted">Нет заявок соответствующих фильтрам</p>
+</div>
+{% endif %}
+
+<!-- Модальное окно фильтров -->
+<div id="filtersModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Фильтры</h3>
+            <button class="modal-close" onclick="hideModal('filtersModal')">&times;</button>
+        </div>
+        
+        <form method="GET">
+            <div class="form-group">
+                <label class="form-label">Статус</label>
+                <select name="status" class="form-control">
+                    <option value="">Все статусы</option>
+                    <option value="new" {{ 'selected' if status_filter == 'new' }}>Новые</option>
+                    <option value="assigned" {{ 'selected' if status_filter == 'assigned' }}>Назначены</option>
+                    <option value="ordered" {{ 'selected' if status_filter == 'ordered' }}>Заказали</option>
+                    <option value="purchased" {{ 'selected' if status_filter == 'purchased' }}>Выкуплены</option>
+                    <option value="paid" {{ 'selected' if status_filter == 'paid' }}>Оплачены</option>
+                    <option value="rejected" {{ 'selected' if status_filter == 'rejected' }}>Отказы</option>
+                </select>
+            </div>
+            
+            {% if session.user_role == 'director' %}
+            <div class="form-group">
+                <label class="form-label">Менеджер</label>
+                <select name="manager" class="form-control">
+                    <option value="">Все менеджеры</option>
+                    {% for manager in managers %}
+                    <option value="{{ manager }}" {{ 'selected' if manager_filter == manager }}>
+                        {{ manager.split('@')[0] }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endif %}
+            
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-secondary" onclick="hideModal('filtersModal')">Отмена</button>
+                <button type="submit" class="btn btn-primary">Применить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function showFiltersModal() {
+    showModal('filtersModal');
+}
+
+function assignOrder(orderId) {
+    apiRequest(`/api/orders/${orderId}/assign`, {
+        method: 'POST'
+    })
+    .then(result => {
+        showNotification(result.message);
+        setTimeout(() => location.reload(), 1000);
+    })
+    .catch(error => {
+        showNotification(error.message, 'error');
+    });
+}
+</script>
+{% endblock %}

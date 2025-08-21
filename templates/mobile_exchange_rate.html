@@ -1,0 +1,154 @@
+{% extends "mobile_base.html" %}
+
+{% block page_title %}Курс валют{% endblock %}
+
+{% block content %}
+<!-- Текущий курс -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-exchange-alt"></i>
+            Текущий курс
+        </div>
+    </div>
+    <div class="text-center">
+        <div style="font-size: 3rem; font-weight: bold; color: var(--primary); margin: 1rem 0;">
+            {{ "%.4f"|format(current_rate.rate) }}
+        </div>
+        <div class="text-muted">юаней за 1 доллар США</div>
+        <div class="text-muted mt-2">
+            Обновлен: {{ current_rate.created_at.strftime('%d.%m.%Y %H:%M') }}
+            {% if current_rate.updated_by %}
+            • {{ current_rate.updated_by.split('@')[0] }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Обновление курса -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-edit"></i>
+            Обновить курс
+        </div>
+    </div>
+    
+    <form id="updateRateForm">
+        <div class="form-group">
+            <label class="form-label">Новый курс (CNY за 1 USD)</label>
+            <input type="number" name="rate" class="form-control" step="0.0001" min="1" max="15" 
+                   placeholder="{{ '%.4f'|format(current_rate.rate) }}" required>
+            <small class="text-muted">Обычно от 6.5 до 8.0</small>
+        </div>
+        
+        <button type="submit" class="btn btn-primary w-100">
+            <i class="fas fa-sync-alt"></i> Обновить курс
+        </button>
+    </form>
+</div>
+
+<!-- Популярные курсы -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-star"></i>
+            Быстрые значения
+        </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.2000)">7.2000</button>
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.2500)">7.2500</button>
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.3000)">7.3000</button>
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.1500)">7.1500</button>
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.1000)">7.1000</button>
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.0500)">7.0500</button>
+    </div>
+</div>
+
+<!-- История изменений -->
+{% if history %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-history"></i>
+            История изменений
+        </div>
+    </div>
+    {% for rate in history[:10] %}
+    <div class="list-item">
+        <div class="list-item-content">
+            <div class="list-item-title">{{ "%.4f"|format(rate.rate) }} CNY/USD</div>
+            <div class="list-item-subtitle">
+                {{ rate.created_at.strftime('%d.%m.%Y %H:%M') }}
+                {% if rate.updated_by %}
+                • {{ rate.updated_by.split('@')[0] }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="list-item-meta">
+            {% if loop.index > 1 %}
+                {% set prev_rate = history[loop.index0 - 1].rate %}
+                {% set change = rate.rate - prev_rate %}
+                {% if change != 0 %}
+                <span class="status-badge {{ 'status-success' if change > 0 else 'status-danger' }}">
+                    {{ '+' if change > 0 }}{{ "%.4f"|format(change) }}
+                </span>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Калькулятор конвертации -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-calculator"></i>
+            Быстрая конвертация
+        </div>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center;">
+        <div>
+            <input type="number" id="cnyAmount" class="form-control" placeholder="0" oninput="convertCnyToUsd()">
+            <small class="text-muted">CNY (юани)</small>
+        </div>
+        <div class="text-center">
+            <i class="fas fa-exchange-alt" style="color: var(--primary);"></i>
+        </div>
+        <div>
+            <input type="number" id="usdAmount" class="form-control" placeholder="0" oninput="convertUsdToCny()">
+            <small class="text-muted">USD (доллары)</small>
+        </div>
+    </div>
+</div>
+
+<script>
+function setRate(rate) {
+    document.querySelector('input[name="rate"]').value = rate.toFixed(4);
+}
+
+function convertCnyToUsd() {
+    const cny = parseFloat(document.getElementById('cnyAmount').value) || 0;
+    const rate = {{ current_rate.rate }};
+    const usd = cny / rate;
+    document.getElementById('usdAmount').value = usd > 0 ? usd.toFixed(2) : '';
+}
+
+function convertUsdToCny() {
+    const usd = parseFloat(document.getElementById('usdAmount').value) || 0;
+    const rate = {{ current_rate.rate }};
+    const cny = usd * rate;
+    document.getElementById('cnyAmount').value = cny > 0 ? cny.toFixed(2) : '';
+}
+
+// Обработка формы обновления курса
+handleFormSubmit('updateRateForm', '/api/exchange-rate', function(result) {
+    showNotification('Курс успешно обновлен!');
+    setTimeout(() => location.reload(), 1000);
+});
+</script>
+{% endblock %}
