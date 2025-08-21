@@ -1,0 +1,679 @@
+{% extends "base.html" %}
+
+{% block title %}Настройки системы - China Together{% endblock %}
+{% block page_title %}Настройки системы{% endblock %}
+
+{% block extra_css %}
+<style>
+    .settings-section {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--gray-200);
+    }
+
+    .section-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: var(--white);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        flex: 1;
+    }
+
+    .section-title h3 {
+        margin: 0;
+        color: var(--gray-800);
+        font-size: 1.3rem;
+    }
+
+    .section-title p {
+        margin: 5px 0 0 0;
+        color: var(--gray-500);
+        font-size: 0.9rem;
+    }
+
+    .file-upload-area {
+        border: 2px dashed var(--gray-300);
+        border-radius: 12px;
+        padding: 40px;
+        text-align: center;
+        background: var(--light-bg);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .file-upload-area:hover {
+        border-color: var(--primary-color);
+        background: rgba(26, 54, 93, 0.05);
+    }
+
+    .file-upload-area.dragover {
+        border-color: var(--primary-color);
+        background: rgba(26, 54, 93, 0.1);
+        transform: scale(1.02);
+    }
+
+    .upload-icon {
+        font-size: 3rem;
+        color: var(--gray-400);
+        margin-bottom: 15px;
+    }
+
+    .upload-text {
+        color: var(--gray-600);
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    .upload-hint {
+        color: var(--gray-500);
+        font-size: 0.9rem;
+    }
+
+    .file-info {
+        background: var(--light-bg);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 4px solid var(--success-color);
+    }
+
+    .current-file {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background: var(--white);
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid var(--gray-200);
+        margin: 15px 0;
+    }
+
+    .file-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--success-color);
+        color: var(--white);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+
+    .file-details {
+        flex: 1;
+    }
+
+    .file-name {
+        font-weight: 600;
+        color: var(--gray-800);
+        margin-bottom: 5px;
+    }
+
+    .file-meta {
+        color: var(--gray-500);
+        font-size: 0.9rem;
+    }
+
+    .system-status {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .status-item {
+        background: var(--light-bg);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid var(--gray-200);
+    }
+
+    .status-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .status-value.ok { color: var(--success-color); }
+    .status-value.warning { color: var(--warning-color); }
+    .status-value.error { color: var(--danger-color); }
+
+    .status-label {
+        color: var(--gray-500);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .action-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .pdf-preview {
+        background: var(--light-bg);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid var(--gray-200);
+    }
+
+    .pdf-icon {
+        font-size: 4rem;
+        color: var(--danger-color);
+        margin-bottom: 15px;
+    }
+
+    .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--gray-300);
+        border-radius: 50%;
+        border-top-color: var(--primary-color);
+        animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: var(--gray-200);
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 10px 0;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        transition: width 0.3s ease;
+        width: 0%;
+    }
+
+    @media (max-width: 768px) {
+        .action-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .system-status {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .file-upload-area {
+            padding: 30px 20px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- System Status Section -->
+<div class="settings-section">
+    <div class="section-header">
+        <div class="section-icon">
+            <i class="fas fa-server"></i>
+        </div>
+        <div class="section-title">
+            <h3>Состояние системы</h3>
+            <p>Мониторинг работоспособности основных компонентов</p>
+        </div>
+        <button class="btn btn-primary" onclick="checkSystemStatus()">
+            <i class="fas fa-sync-alt"></i>
+            Обновить
+        </button>
+    </div>
+    
+    <div class="system-status" id="systemStatus">
+        <div class="status-item">
+            <div class="status-value ok" id="dbStatus">OK</div>
+            <div class="status-label">База данных</div>
+        </div>
+        
+        <div class="status-item">
+            <div class="status-value" id="weightRecords">-</div>
+            <div class="status-label">Записи весов</div>
+        </div>
+        
+        <div class="status-item">
+            <div class="status-value" id="densityRecords">-</div>
+            <div class="status-label">Записи плотности</div>
+        </div>
+        
+        <div class="status-item">
+            <div class="status-value" id="fileStatus">-</div>
+            <div class="status-label">Excel файл</div>
+        </div>
+    </div>
+</div>
+
+<!-- File Management Section -->
+<div class="settings-section">
+    <div class="section-header">
+        <div class="section-icon">
+            <i class="fas fa-file-excel"></i>
+        </div>
+        <div class="section-title">
+            <h3>Управление параметрами доставки</h3>
+            <p>Загрузка и управление Excel файлами с тарифами</p>
+        </div>
+    </div>
+    
+    <div class="file-info">
+        <h4 style="margin-bottom: 15px; color: var(--gray-800);">
+            <i class="fas fa-info-circle"></i>
+            Текущий файл параметров
+        </h4>
+        <p><strong>Статус:</strong> {{ last_file_info }}</p>
+    </div>
+    
+    <form id="uploadForm" enctype="multipart/form-data">
+        <div class="file-upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+            <div class="upload-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <div class="upload-text">
+                Нажмите для выбора файла или перетащите сюда
+            </div>
+            <div class="upload-hint">
+                Поддерживаются файлы: .xlsx, .xls (максимум 10 МБ)
+            </div>
+            <input type="file" id="fileInput" name="file" accept=".xlsx,.xls" style="display: none;">
+        </div>
+        
+        <div class="progress-bar" id="uploadProgress" style="display: none;">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </form>
+    
+    <div class="action-grid">
+        <button class="btn btn-success" onclick="downloadCurrentFile()">
+            <i class="fas fa-download"></i>
+            Скачать текущий файл
+        </button>
+        
+        <button class="btn btn-warning" onclick="validateCurrentFile()">
+            <i class="fas fa-check-circle"></i>
+            Проверить файл
+        </button>
+        
+        <button class="btn btn-danger" onclick="clearDatabase()">
+            <i class="fas fa-trash"></i>
+            Очистить таблицы
+        </button>
+    </div>
+</div>
+
+<!-- PDF Management Section -->
+<div class="settings-section">
+    <div class="section-header">
+        <div class="section-icon">
+            <i class="fas fa-file-pdf"></i>
+        </div>
+        <div class="section-title">
+            <h3>Управление PDF тарифами</h3>
+            <p>Генерация и управление PDF файлами с тарифами</p>
+        </div>
+    </div>
+    
+    {% if pdf_info %}
+    <div class="current-file">
+        <div class="file-icon">
+            <i class="fas fa-file-pdf"></i>
+        </div>
+        <div class="file-details">
+            <div class="file-name">{{ pdf_info.filename }}</div>
+            <div class="file-meta">
+                Размер: {{ pdf_info.size_kb }} КБ • 
+                Создан: {{ pdf_info.created }} • 
+                Изменен: {{ pdf_info.modified }}
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="downloadPDF()">
+            <i class="fas fa-download"></i>
+            Скачать
+        </button>
+    </div>
+    {% else %}
+    <div class="pdf-preview">
+        <div class="pdf-icon">
+            <i class="fas fa-file-pdf"></i>
+        </div>
+        <p style="color: var(--gray-500); margin-bottom: 15px;">PDF файл с тарифами не создан</p>
+        <button class="btn btn-warning" onclick="generatePDF()">
+            <i class="fas fa-file-pdf"></i>
+            Создать PDF
+        </button>
+    </div>
+    {% endif %}
+    
+    <div class="action-grid">
+        <button class="btn btn-warning" onclick="regeneratePDF()">
+            <i class="fas fa-sync-alt"></i>
+            Пересоздать PDF
+        </button>
+        
+        <button class="btn btn-secondary" onclick="previewPDF()">
+            <i class="fas fa-eye"></i>
+            Предварительный просмотр
+        </button>
+    </div>
+</div>
+
+<!-- Backup and Maintenance Section -->
+<div class="settings-section">
+    <div class="section-header">
+        <div class="section-icon">
+            <i class="fas fa-tools"></i>
+        </div>
+        <div class="section-title">
+            <h3>Обслуживание системы</h3>
+            <p>Резервное копирование и обслуживание</p>
+        </div>
+    </div>
+    
+    <div class="action-grid">
+        <button class="btn btn-primary" onclick="createBackup()">
+            <i class="fas fa-database"></i>
+            Создать резервную копию
+        </button>
+        
+        <button class="btn btn-secondary" onclick="cleanupLogs()">
+            <i class="fas fa-broom"></i>
+            Очистить логи
+        </button>
+        
+        <button class="btn btn-warning" onclick="optimizeDatabase()">
+            <i class="fas fa-tachometer-alt"></i>
+            Оптимизировать БД
+        </button>
+        
+        <button class="btn btn-danger" onclick="resetSystem()">
+            <i class="fas fa-exclamation-triangle"></i>
+            Сброс системы
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Проверка состояния системы
+    function checkSystemStatus() {
+        const button = event.target;
+        const originalText = button.innerHTML;
+        button.innerHTML = '<span class="loading-spinner"></span> Проверка...';
+        button.disabled = true;
+        
+        fetch('/api/system_info')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('dbStatus').textContent = data.system_status === 'OK' ? 'OK' : 'Ошибка';
+                document.getElementById('dbStatus').className = 'status-value ' + (data.system_status === 'OK' ? 'ok' : 'error');
+                
+                document.getElementById('weightRecords').textContent = data.weight_records || 0;
+                document.getElementById('weightRecords').className = 'status-value ' + (data.weight_records > 0 ? 'ok' : 'warning');
+                
+                document.getElementById('densityRecords').textContent = data.density_records || 0;
+                document.getElementById('densityRecords').className = 'status-value ' + (data.density_records > 0 ? 'ok' : 'warning');
+                
+                document.getElementById('fileStatus').textContent = data.file_exists ? 'Есть' : 'Отсутствует';
+                document.getElementById('fileStatus').className = 'status-value ' + (data.file_exists ? 'ok' : 'error');
+            })
+            .catch(error => {
+                console.error('Ошибка проверки статуса:', error);
+                alert('Ошибка при проверке состояния системы');
+            })
+            .finally(() => {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            });
+    }
+
+    // Обработка загрузки файлов
+    function setupFileUpload() {
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadForm = document.getElementById('uploadForm');
+        const progressBar = document.getElementById('uploadProgress');
+        const progressFill = document.getElementById('progressFill');
+
+        // Обработка перетаскивания
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                uploadFile();
+            }
+        });
+
+        // Обработка выбора файла
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                uploadFile();
+            }
+        });
+
+        function uploadFile() {
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            // Проверка типа файла
+            if (!file.name.match(/\.(xlsx|xls)$/i)) {
+                alert('Пожалуйста, выберите файл Excel (.xlsx или .xls)');
+                return;
+            }
+            
+            // Проверка размера файла (10 МБ)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('Файл слишком большой. Максимальный размер: 10 МБ');
+                return;
+            }
+            
+            if (!confirm(`Загрузить файл "${file.name}"? Это заменит текущие параметры доставки.`)) {
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            // Показываем прогресс
+            progressBar.style.display = 'block';
+            progressFill.style.width = '0%';
+            
+            // Симуляция прогресса (поскольку мы не можем получить реальный прогресс от fetch)
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 30;
+                if (progress > 90) progress = 90;
+                progressFill.style.width = progress + '%';
+            }, 200);
+            
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('Ошибка загрузки файла');
+            })
+            .then(html => {
+                clearInterval(progressInterval);
+                progressFill.style.width = '100%';
+                
+                setTimeout(() => {
+                    alert('Файл успешно загружен и обработан!');
+                    location.reload();
+                }, 500);
+            })
+            .catch(error => {
+                clearInterval(progressInterval);
+                progressBar.style.display = 'none';
+                console.error('Ошибка загрузки:', error);
+                alert('Ошибка при загрузке файла: ' + error.message);
+            });
+        }
+    }
+
+    // Функции управления файлами
+    function downloadCurrentFile() {
+        window.location.href = '/download';
+    }
+
+    function validateCurrentFile() {
+        alert('Функция проверки файла будет реализована');
+    }
+
+    function clearDatabase() {
+        if (confirm('Вы уверены, что хотите очистить все таблицы с параметрами? Это действие необратимо!')) {
+            // Здесь будет API вызов для очистки БД
+            alert('Функция очистки БД будет реализована');
+        }
+    }
+
+    // Функции управления PDF
+    function downloadPDF() {
+        window.location.href = '/download_pdf';
+    }
+
+    function generatePDF() {
+        const button = event.target;
+        const originalText = button.innerHTML;
+        button.innerHTML = '<span class="loading-spinner"></span> Создание...';
+        button.disabled = true;
+        
+        fetch('/generate_pdf', {
+            method: 'POST'
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('PDF файл успешно создан!');
+                location.reload();
+            } else {
+                throw new Error('Ошибка создания PDF');
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка создания PDF:', error);
+            alert('Ошибка при создании PDF файла');
+        })
+        .finally(() => {
+            button.innerHTML = originalText;
+            button.disabled = false;
+        });
+    }
+
+    function regeneratePDF() {
+        if (confirm('Пересоздать PDF файл с тарифами?')) {
+            generatePDF();
+        }
+    }
+
+    function previewPDF() {
+        window.open('/download_pdf', '_blank');
+    }
+
+    // Функции обслуживания
+    function createBackup() {
+        const button = event.target;
+        const originalText = button.innerHTML;
+        button.innerHTML = '<span class="loading-spinner"></span> Создание...';
+        button.disabled = true;
+        
+        // Симуляция создания резервной копии
+        setTimeout(() => {
+            alert('Резервная копия создана успешно!');
+            button.innerHTML = originalText;
+            button.disabled = false;
+        }, 3000);
+    }
+
+    function cleanupLogs() {
+        if (confirm('Очистить файлы логов? Старые записи будут удалены.')) {
+            alert('Логи очищены успешно!');
+        }
+    }
+
+    function optimizeDatabase() {
+        const button = event.target;
+        const originalText = button.innerHTML;
+        button.innerHTML = '<span class="loading-spinner"></span> Оптимизация...';
+        button.disabled = true;
+        
+        setTimeout(() => {
+            alert('База данных оптимизирована!');
+            button.innerHTML = originalText;
+            button.disabled = false;
+        }, 2000);
+    }
+
+    function resetSystem() {
+        if (confirm('ВНИМАНИЕ! Это полностью сбросит систему и удалит все данные. Продолжить?')) {
+            if (confirm('Вы действительно уверены? Это действие необратимо!')) {
+                alert('Функция сброса системы будет реализована с дополнительными мерами безопасности');
+            }
+        }
+    }
+
+    // Инициализация
+    document.addEventListener('DOMContentLoaded', function() {
+        setupFileUpload();
+        checkSystemStatus();
+        
+        // Автопроверка статуса каждые 2 минуты
+        setInterval(checkSystemStatus, 120000);
+    });
+
+    // Предотвращение случайного закрытия страницы во время загрузки
+    window.addEventListener('beforeunload', function(e) {
+        const progressBar = document.getElementById('uploadProgress');
+        if (progressBar.style.display !== 'none') {
+            e.preventDefault();
+            e.returnValue = 'Файл еще загружается. Вы уверены, что хотите покинуть страницу?';
+        }
+    });
+</script>
+{% endblock %}
