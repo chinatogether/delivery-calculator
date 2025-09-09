@@ -8,20 +8,26 @@
     <div class="card-header">
         <div class="card-title">
             <i class="fas fa-exchange-alt"></i>
-            Текущий курс
+            Текущий курс {{ current_rate.currency_pair or 'CNY/USD' }}
         </div>
+        <span class="status-badge status-paid">Актуальный</span>
     </div>
     <div class="text-center">
         <div style="font-size: 3rem; font-weight: bold; color: var(--primary); margin: 1rem 0;">
-            {{ "%.4f"|format(current_rate.rate) }}
+            {{ "%.6f"|format(current_rate.rate) }}
         </div>
         <div class="text-muted">юаней за 1 доллар США</div>
         <div class="text-muted mt-2">
-            Обновлен: {{ current_rate.created_at.strftime('%d.%m.%Y %H:%M') }}
-            {% if current_rate.updated_by %}
-            • {{ current_rate.updated_by.split('@')[0] }}
+            Обновлен: {{ current_rate.recorded_at.strftime('%d.%m.%Y %H:%M') }}
+            {% if current_rate.source and current_rate.source != 'system' %}
+            • {{ current_rate.source.split('@')[0] }}
             {% endif %}
         </div>
+        {% if current_rate.notes %}
+        <div class="text-muted mt-1" style="font-style: italic;">
+            {{ current_rate.notes }}
+        </div>
+        {% endif %}
     </div>
 </div>
 
@@ -36,10 +42,26 @@
     
     <form id="updateRateForm">
         <div class="form-group">
-            <label class="form-label">Новый курс (CNY за 1 USD)</label>
-            <input type="number" name="rate" class="form-control" step="0.0001" min="1" max="15" 
-                   placeholder="{{ '%.4f'|format(current_rate.rate) }}" required>
-            <small class="text-muted">Обычно от 6.5 до 8.0</small>
+            <label class="form-label">Валютная пара</label>
+            <select name="currency_pair" class="form-control">
+                <option value="CNY/USD">CNY/USD (Юань к доллару)</option>
+                <option value="USD/CNY">USD/CNY (Доллар к юаню)</option>
+                <option value="EUR/CNY">EUR/CNY (Евро к юаню)</option>
+                <option value="RUB/CNY">RUB/CNY (Рубль к юаню)</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Новый курс</label>
+            <input type="number" name="rate" class="form-control" step="0.000001" min="0.000001" 
+                   placeholder="{{ '%.6f'|format(current_rate.rate) }}" required>
+            <small class="text-muted">Точность до 6 знаков после запятой</small>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Комментарий (необязательно)</label>
+            <textarea name="notes" class="form-control" rows="2" 
+                      placeholder="Источник курса, причина изменения..."></textarea>
         </div>
         
         <button type="submit" class="btn btn-primary w-100">
@@ -48,21 +70,69 @@
     </form>
 </div>
 
-<!-- Популярные курсы -->
+<!-- Быстрые значения для CNY/USD -->
 <div class="card">
     <div class="card-header">
         <div class="card-title">
             <i class="fas fa-star"></i>
-            Быстрые значения
+            Быстрые значения (CNY/USD)
         </div>
     </div>
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
-        <button class="btn btn-outline btn-sm" onclick="setRate(7.2000)">7.2000</button>
-        <button class="btn btn-outline btn-sm" onclick="setRate(7.2500)">7.2500</button>
-        <button class="btn btn-outline btn-sm" onclick="setRate(7.3000)">7.3000</button>
-        <button class="btn btn-outline btn-sm" onclick="setRate(7.1500)">7.1500</button>
-        <button class="btn btn-outline btn-sm" onclick="setRate(7.1000)">7.1000</button>
-        <button class="btn btn-outline btn-sm" onclick="setRate(7.0500)">7.0500</button>
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.200000)">7.200000</button>
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.250000)">7.250000</button>
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.300000)">7.300000</button>
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.150000)">7.150000</button>
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.100000)">7.100000</button>
+        <button class="btn btn-outline btn-sm" onclick="setRate(7.050000)">7.050000</button>
+    </div>
+</div>
+
+<!-- Сравнение с банками -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-university"></i>
+            Справочные курсы банков
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="updateBankRates()">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+    </div>
+    
+    <div id="bankRates">
+        <div class="list-item">
+            <div class="list-item-content">
+                <div class="list-item-title">Центробанк РФ</div>
+                <div class="list-item-subtitle">Официальный курс на сегодня</div>
+            </div>
+            <div class="list-item-meta">
+                <div class="fw-bold">7.2156</div>
+                <div class="text-muted">CNY/RUB</div>
+            </div>
+        </div>
+        
+        <div class="list-item">
+            <div class="list-item-content">
+                <div class="list-item-title">Сбербанк</div>
+                <div class="list-item-subtitle">Курс покупки/продажи</div>
+            </div>
+            <div class="list-item-meta">
+                <div class="fw-bold">7.2500</div>
+                <div class="text-muted">CNY/USD</div>
+            </div>
+        </div>
+        
+        <div class="list-item">
+            <div class="list-item-content">
+                <div class="list-item-title">Yahoo Finance</div>
+                <div class="list-item-subtitle">Биржевой курс</div>
+            </div>
+            <div class="list-item-meta">
+                <div class="fw-bold">7.2389</div>
+                <div class="text-muted">CNY/USD</div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -74,15 +144,21 @@
             <i class="fas fa-history"></i>
             История изменений
         </div>
+        <span class="text-muted">{{ history|length }} записей</span>
     </div>
     {% for rate in history[:10] %}
     <div class="list-item">
         <div class="list-item-content">
-            <div class="list-item-title">{{ "%.4f"|format(rate.rate) }} CNY/USD</div>
+            <div class="list-item-title">
+                {{ rate.currency_pair or 'CNY/USD' }}: {{ "%.6f"|format(rate.rate) }}
+                {% if rate.notes %}
+                <small style="color: var(--text-light); margin-left: 0.5rem;">{{ rate.notes }}</small>
+                {% endif %}
+            </div>
             <div class="list-item-subtitle">
-                {{ rate.created_at.strftime('%d.%m.%Y %H:%M') }}
-                {% if rate.updated_by %}
-                • {{ rate.updated_by.split('@')[0] }}
+                {{ rate.recorded_at.strftime('%d.%m.%Y %H:%M') }}
+                {% if rate.source and rate.source != 'system' %}
+                • {{ rate.source.split('@')[0] }}
                 {% endif %}
             </div>
         </div>
@@ -91,14 +167,22 @@
                 {% set prev_rate = history[loop.index0 - 1].rate %}
                 {% set change = rate.rate - prev_rate %}
                 {% if change != 0 %}
-                <span class="status-badge {{ 'status-success' if change > 0 else 'status-danger' }}">
-                    {{ '+' if change > 0 }}{{ "%.4f"|format(change) }}
+                <span class="status-badge {% if change > 0 %}status-success{% else %}status-danger{% endif %}">
+                    {{ '+' if change > 0 }}{{ "%.6f"|format(change) }}
                 </span>
                 {% endif %}
             {% endif %}
         </div>
     </div>
     {% endfor %}
+    
+    {% if history|length > 10 %}
+    <div class="text-center mt-2">
+        <button class="btn btn-outline btn-sm" onclick="loadMoreHistory()">
+            Показать еще...
+        </button>
+    </div>
+    {% endif %}
 </div>
 {% endif %}
 
@@ -111,44 +195,245 @@
         </div>
     </div>
     
+    <div class="form-group">
+        <label class="form-label">Валютная пара для конвертации</label>
+        <select id="conversionPair" class="form-control" onchange="updateConversionLabels()">
+            <option value="CNY/USD">CNY → USD</option>
+            <option value="USD/CNY">USD → CNY</option>
+        </select>
+    </div>
+    
     <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center;">
         <div>
-            <input type="number" id="cnyAmount" class="form-control" placeholder="0" oninput="convertCnyToUsd()">
-            <small class="text-muted">CNY (юани)</small>
+            <input type="number" id="fromAmount" class="form-control" placeholder="0" oninput="convertCurrency()">
+            <small class="text-muted" id="fromCurrency">CNY (юани)</small>
         </div>
         <div class="text-center">
-            <i class="fas fa-exchange-alt" style="color: var(--primary);"></i>
+            <button class="btn btn-outline btn-sm" onclick="swapCurrencies()">
+                <i class="fas fa-exchange-alt"></i>
+            </button>
         </div>
         <div>
-            <input type="number" id="usdAmount" class="form-control" placeholder="0" oninput="convertUsdToCny()">
-            <small class="text-muted">USD (доллары)</small>
+            <input type="number" id="toAmount" class="form-control" placeholder="0" oninput="convertCurrencyReverse()">
+            <small class="text-muted" id="toCurrency">USD (доллары)</small>
         </div>
+    </div>
+    
+    <div class="mt-2 text-center text-muted" style="font-size: 0.8rem;">
+        Курс: 1 <span id="rateDisplay">CNY = {{ "%.6f"|format(1/current_rate.rate) }} USD</span>
+    </div>
+</div>
+
+<!-- Автоматическое обновление -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-robot"></i>
+            Автоматическое обновление
+        </div>
+        <label class="switch">
+            <input type="checkbox" id="autoUpdate">
+            <span class="slider"></span>
+        </label>
+    </div>
+    
+    <div id="autoUpdateSettings" style="display: none;">
+        <div class="form-group">
+            <label class="form-label">Интервал обновления</label>
+            <select class="form-control">
+                <option value="300">Каждые 5 минут</option>
+                <option value="900">Каждые 15 минут</option>
+                <option value="1800">Каждые 30 минут</option>
+                <option value="3600">Каждый час</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Источник</label>
+            <select class="form-control">
+                <option value="yahoo">Yahoo Finance</option>
+                <option value="cbrf">Центробанк РФ</option>
+                <option value="sber">Сбербанк</option>
+            </select>
+        </div>
+        
+        <small class="text-muted">
+            <i class="fas fa-info-circle"></i>
+            Автоматическое обновление будет работать только при открытой вкладке
+        </small>
     </div>
 </div>
 
 <script>
 function setRate(rate) {
-    document.querySelector('input[name="rate"]').value = rate.toFixed(4);
+    document.querySelector('input[name="rate"]').value = rate.toFixed(6);
 }
 
-function convertCnyToUsd() {
-    const cny = parseFloat(document.getElementById('cnyAmount').value) || 0;
-    const rate = {{ current_rate.rate }};
-    const usd = cny / rate;
-    document.getElementById('usdAmount').value = usd > 0 ? usd.toFixed(2) : '';
+function updateConversionLabels() {
+    const pair = document.getElementById('conversionPair').value;
+    const fromCurrency = document.getElementById('fromCurrency');
+    const toCurrency = document.getElementById('toCurrency');
+    const rateDisplay = document.getElementById('rateDisplay');
+    
+    if (pair === 'CNY/USD') {
+        fromCurrency.textContent = 'CNY (юани)';
+        toCurrency.textContent = 'USD (доллары)';
+        rateDisplay.textContent = `CNY = {{ "%.6f"|format(1/current_rate.rate) }} USD`;
+    } else {
+        fromCurrency.textContent = 'USD (доллары)';
+        toCurrency.textContent = 'CNY (юани)';
+        rateDisplay.textContent = `USD = {{ "%.6f"|format(current_rate.rate) }} CNY`;
+    }
+    
+    convertCurrency();
 }
 
-function convertUsdToCny() {
-    const usd = parseFloat(document.getElementById('usdAmount').value) || 0;
+function convertCurrency() {
+    const pair = document.getElementById('conversionPair').value;
+    const fromAmount = parseFloat(document.getElementById('fromAmount').value) || 0;
     const rate = {{ current_rate.rate }};
-    const cny = usd * rate;
-    document.getElementById('cnyAmount').value = cny > 0 ? cny.toFixed(2) : '';
+    
+    let toAmount;
+    if (pair === 'CNY/USD') {
+        toAmount = fromAmount / rate;
+    } else {
+        toAmount = fromAmount * rate;
+    }
+    
+    document.getElementById('toAmount').value = toAmount > 0 ? toAmount.toFixed(6) : '';
 }
+
+function convertCurrencyReverse() {
+    const pair = document.getElementById('conversionPair').value;
+    const toAmount = parseFloat(document.getElementById('toAmount').value) || 0;
+    const rate = {{ current_rate.rate }};
+    
+    let fromAmount;
+    if (pair === 'CNY/USD') {
+        fromAmount = toAmount * rate;
+    } else {
+        fromAmount = toAmount / rate;
+    }
+    
+    document.getElementById('fromAmount').value = fromAmount > 0 ? fromAmount.toFixed(6) : '';
+}
+
+function swapCurrencies() {
+    const conversionPair = document.getElementById('conversionPair');
+    conversionPair.value = conversionPair.value === 'CNY/USD' ? 'USD/CNY' : 'CNY/USD';
+    updateConversionLabels();
+}
+
+function updateBankRates() {
+    // Симуляция загрузки курсов банков
+    const bankRatesEl = document.getElementById('bankRates');
+    bankRatesEl.innerHTML = '<div class="text-center p-3"><i class="fas fa-spinner fa-spin"></i> Загрузка...</div>';
+    
+    setTimeout(() => {
+        // Здесь бы был реальный API запрос к банкам
+        bankRatesEl.innerHTML = `
+            <div class="list-item">
+                <div class="list-item-content">
+                    <div class="list-item-title">Центробанк РФ</div>
+                    <div class="list-item-subtitle">Обновлено: ${new Date().toLocaleString()}</div>
+                </div>
+                <div class="list-item-meta">
+                    <div class="fw-bold">${(Math.random() * 0.1 + 7.2).toFixed(6)}</div>
+                    <div class="text-muted">CNY/USD</div>
+                </div>
+            </div>
+        `;
+        showNotification('Курсы банков обновлены');
+    }, 2000);
+}
+
+function loadMoreHistory() {
+    // Загрузка дополнительной истории через AJAX
+    showNotification('Функция в разработке', 'warning');
+}
+
+// Автоматическое обновление
+document.getElementById('autoUpdate').addEventListener('change', function() {
+    const settings = document.getElementById('autoUpdateSettings');
+    settings.style.display = this.checked ? 'block' : 'none';
+    
+    if (this.checked) {
+        showNotification('Автоматическое обновление включено', 'success');
+        // Здесь можно запустить периодическое обновление
+    } else {
+        showNotification('Автоматическое обновление отключено');
+    }
+});
 
 // Обработка формы обновления курса
 handleFormSubmit('updateRateForm', '/api/exchange-rate', function(result) {
     showNotification('Курс успешно обновлен!');
     setTimeout(() => location.reload(), 1000);
 });
+
+// Горячие клавиши
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.key === 'r') {
+        e.preventDefault();
+        location.reload();
+    }
+});
 </script>
+
+<style>
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.status-badge.status-success {
+    background: rgb(34 197 94 / 0.1);
+    color: #16a34a;
+}
+
+.status-badge.status-danger {
+    background: rgb(239 68 68 / 0.1);
+    color: #dc2626;
+}
+</style>
 {% endblock %}

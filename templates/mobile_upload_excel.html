@@ -1,0 +1,303 @@
+{% extends "mobile_base.html" %}
+
+{% block page_title %}Загрузка Excel{% endblock %}
+
+{% block top_actions %}
+<a href="{{ url_for('settings') }}" class="btn btn-outline btn-sm">
+    <i class="fas fa-arrow-left"></i>
+</a>
+{% endblock %}
+
+{% block content %}
+<!-- Загрузка файла -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-file-excel"></i>
+            Загрузить Excel файл
+        </div>
+    </div>
+    
+    <form method="POST" enctype="multipart/form-data" id="uploadForm">
+        <div class="form-group">
+            <label class="form-label">Выберите Excel файл (.xlsx, .xls)</label>
+            <input type="file" name="file" class="form-control" accept=".xlsx,.xls" required>
+            <small class="text-muted">Максимальный размер файла: 10MB</small>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Описание (необязательно)</label>
+            <textarea name="description" class="form-control" rows="3" placeholder="Краткое описание содержимого файла..."></textarea>
+        </div>
+        
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-upload"></i> Загрузить и обработать
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Инструкции -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-info-circle"></i>
+            Инструкции
+        </div>
+    </div>
+    
+    <div style="font-size: 0.9rem; line-height: 1.6;">
+        <p><strong>Поддерживаемые форматы:</strong> Excel (.xlsx, .xls)</p>
+        
+        <p><strong>Рекомендуемая структура файла:</strong></p>
+        <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+            <li>Первая строка - заголовки столбцов</li>
+            <li>Каждая строка - отдельная запись</li>
+            <li>Максимум 1000 строк за раз</li>
+        </ul>
+        
+        <p><strong>Примеры столбцов:</strong></p>
+        <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+            <li>Название товара</li>
+            <li>Цена в юанях</li>
+            <li>Вес (кг)</li>
+            <li>Объем (м³)</li>
+            <li>Категория</li>
+            <li>Поставщик</li>
+        </ul>
+        
+        <p><strong>После загрузки:</strong> Система обработает данные и предложит сгенерировать PDF отчет с расчетами доставки.</p>
+    </div>
+</div>
+
+<!-- Последние загрузки -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-history"></i>
+            Последние загрузки
+        </div>
+    </div>
+    
+    <div class="list-item">
+        <div class="list-item-content">
+            <div class="list-item-title">products_2025_08_21.xlsx</div>
+            <div class="list-item-subtitle">21.08.2025 14:30 • 150 строк • Обработан</div>
+        </div>
+        <div class="list-item-meta">
+            <button class="btn btn-outline btn-sm" onclick="downloadReport('products_2025_08_21')">
+                <i class="fas fa-download"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="list-item">
+        <div class="list-item-content">
+            <div class="list-item-title">catalog_summer.xlsx</div>
+            <div class="list-item-subtitle">20.08.2025 09:15 • 89 строк • Обработан</div>
+        </div>
+        <div class="list-item-meta">
+            <button class="btn btn-outline btn-sm" onclick="downloadReport('catalog_summer')">
+                <i class="fas fa-download"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="text-center mt-2">
+        <small class="text-muted">Файлы хранятся 30 дней</small>
+    </div>
+</div>
+
+<!-- Шаблоны Excel -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-download"></i>
+            Шаблоны Excel
+        </div>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+        <button class="btn btn-secondary btn-sm" onclick="downloadTemplate('products')">
+            <i class="fas fa-file-excel"></i> Шаблон для товаров
+        </button>
+        
+        <button class="btn btn-secondary btn-sm" onclick="downloadTemplate('calculations')">
+            <i class="fas fa-file-excel"></i> Шаблон для расчетов
+        </button>
+        
+        <button class="btn btn-secondary btn-sm" onclick="downloadTemplate('clients')">
+            <i class="fas fa-file-excel"></i> Шаблон для клиентов
+        </button>
+    </div>
+</div>
+
+<!-- Прогресс загрузки -->
+<div id="uploadProgress" class="card" style="display: none;">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-spinner fa-spin"></i>
+            Обработка файла
+        </div>
+    </div>
+    
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+    </div>
+    
+    <div id="progressText" class="text-center mt-2">
+        Загрузка файла...
+    </div>
+</div>
+
+<script>
+// Обработка формы загрузки
+document.getElementById('uploadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const file = formData.get('file');
+    
+    if (!file) {
+        showNotification('Выберите файл для загрузки', 'error');
+        return;
+    }
+    
+    // Проверяем размер файла (10MB)
+    if (file.size > 10 * 1024 * 1024) {
+        showNotification('Файл слишком большой. Максимум 10MB', 'error');
+        return;
+    }
+    
+    // Показываем прогресс
+    showUploadProgress();
+    
+    // Симуляция прогресса
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+        progress += Math.random() * 30;
+        if (progress > 90) progress = 90;
+        updateProgress(progress, 'Обработка данных...');
+    }, 500);
+    
+    // Отправляем файл
+    fetch('/upload-excel', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        clearInterval(progressInterval);
+        updateProgress(100, 'Завершено!');
+        
+        if (response.ok) {
+            setTimeout(() => {
+                hideUploadProgress();
+                showNotification('Файл успешно обработан!');
+                
+                // Предлагаем создать PDF
+                if (confirm('Файл обработан. Создать PDF отчет?')) {
+                    window.location.href = '/generate-pdf';
+                } else {
+                    location.reload();
+                }
+            }, 1000);
+        } else {
+            hideUploadProgress();
+            response.text().then(text => {
+                showNotification('Ошибка обработки файла: ' + text, 'error');
+            });
+        }
+    })
+    .catch(error => {
+        clearInterval(progressInterval);
+        hideUploadProgress();
+        showNotification('Ошибка загрузки: ' + error.message, 'error');
+    });
+});
+
+function showUploadProgress() {
+    document.getElementById('uploadProgress').style.display = 'block';
+    document.getElementById('uploadForm').style.display = 'none';
+}
+
+function hideUploadProgress() {
+    document.getElementById('uploadProgress').style.display = 'none';
+    document.getElementById('uploadForm').style.display = 'block';
+}
+
+function updateProgress(percent, text) {
+    document.getElementById('progressFill').style.width = percent + '%';
+    document.getElementById('progressText').textContent = text;
+}
+
+function downloadTemplate(type) {
+    const templates = {
+        'products': '/static/templates/products_template.xlsx',
+        'calculations': '/static/templates/calculations_template.xlsx',
+        'clients': '/static/templates/clients_template.xlsx'
+    };
+    
+    if (templates[type]) {
+        window.location.href = templates[type];
+    } else {
+        showNotification('Шаблон в разработке', 'warning');
+    }
+}
+
+function downloadReport(filename) {
+    window.location.href = `/api/download-report/${filename}`;
+}
+
+// Drag & Drop
+const uploadForm = document.getElementById('uploadForm');
+const fileInput = uploadForm.querySelector('input[type="file"]');
+
+uploadForm.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    uploadForm.style.background = 'var(--light)';
+});
+
+uploadForm.addEventListener('dragleave', function(e) {
+    e.preventDefault();
+    uploadForm.style.background = '';
+});
+
+uploadForm.addEventListener('drop', function(e) {
+    e.preventDefault();
+    uploadForm.style.background = '';
+    
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        fileInput.files = files;
+        showNotification('Файл выбран: ' + files[0].name);
+    }
+});
+</script>
+
+<style>
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--success));
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+#uploadForm {
+    transition: background-color 0.2s;
+}
+
+.btn-outline:hover {
+    transform: translateY(-1px);
+}
+</style>
+{% endblock %}

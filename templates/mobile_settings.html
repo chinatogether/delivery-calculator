@@ -1,8 +1,52 @@
 {% extends "mobile_base.html" %}
 
-{% block page_title %}Настройки{% endblock %}
+{% block page_title %}Настройки системы{% endblock %}
+
+{% block top_actions %}
+<button class="btn btn-outline btn-sm" onclick="refreshSystemInfo()">
+    <i class="fas fa-sync-alt"></i>
+</button>
+{% endblock %}
 
 {% block content %}
+<!-- Мониторинг системы -->
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-server"></i>
+            Состояние сервера
+        </div>
+        <span class="status-badge status-paid">Онлайн</span>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem;">
+        <div class="stat-card">
+            <div class="stat-value">{{ "%.1f"|format(system_info.memory.percent) }}%</div>
+            <div class="stat-label">ОЗУ</div>
+            <small class="text-muted">{{ "%.1f"|format(system_info.memory.available) }}GB свободно</small>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ "%.1f"|format(system_info.disk.percent) }}%</div>
+            <div class="stat-label">Диск</div>
+            <small class="text-muted">{{ "%.1f"|format(system_info.disk.free) }}GB свободно</small>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ "%.1f"|format(system_info.cpu.percent) }}%</div>
+            <div class="stat-label">CPU</div>
+            <small class="text-muted">Загрузка процессора</small>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ "%.1f"|format(system_info.process.memory_mb) }}MB</div>
+            <div class="stat-label">Приложение</div>
+            <small class="text-muted">Память процесса</small>
+        </div>
+    </div>
+    
+    <div style="font-size: 0.9rem; color: var(--text-light);">
+        <i class="fas fa-clock"></i> Время работы: {{ system_info.uptime.split('.')[0] }}
+    </div>
+</div>
+
 <!-- Управление пользователями -->
 <div class="card">
     <div class="card-header">
@@ -10,76 +54,143 @@
             <i class="fas fa-users-cog"></i>
             Пользователи системы
         </div>
-    </div>
-    
-    <div class="list-item">
-        <div class="list-item-content">
-            <div class="list-item-title">Директор</div>
-            <div class="list-item-subtitle">director@company.ru</div>
-        </div>
-        <span class="status-badge status-paid">Активен</span>
-    </div>
-    
-    <div class="list-item">
-        <div class="list-item-content">
-            <div class="list-item-title">Менеджер Анна</div>
-            <div class="list-item-subtitle">manager1@company.ru</div>
-        </div>
-        <span class="status-badge status-paid">Активен</span>
-    </div>
-    
-    <div class="list-item">
-        <div class="list-item-content">
-            <div class="list-item-title">Менеджер Максим</div>
-            <div class="list-item-subtitle">manager2@company.ru</div>
-        </div>
-        <span class="status-badge status-paid">Активен</span>
-    </div>
-    
-    <div class="mt-2">
-        <button class="btn btn-primary btn-sm w-100" onclick="showAddUserModal()">
-            <i class="fas fa-user-plus"></i> Добавить менеджера
+        <button class="btn btn-primary btn-sm" onclick="showAddUserModal()">
+            <i class="fas fa-user-plus"></i>
         </button>
     </div>
+    
+    {% for user in users %}
+    <div class="list-item">
+        <div class="list-item-content">
+            <div class="list-item-title">
+                {{ user.name }}
+                {% if user.role == 'director' %}
+                    <i class="fas fa-crown" style="color: #f59e0b; margin-left: 0.5rem;"></i>
+                {% elif user.role == 'manager' %}
+                    <i class="fas fa-user-tie" style="color: var(--primary); margin-left: 0.5rem;"></i>
+                {% endif %}
+            </div>
+            <div class="list-item-subtitle">
+                {{ user.email }} • {{ user.role }}
+                {% if user.permissions and user.permissions|length > 0 %}
+                    • {{ user.permissions|length }} прав
+                {% endif %}
+            </div>
+        </div>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+            {% if user.is_active %}
+                <span class="status-badge status-paid">Активен</span>
+            {% else %}
+                <span class="status-badge status-rejected">Отключен</span>
+            {% endif %}
+            
+            {% if user.email != session.user_email %}
+            <div class="dropdown">
+                <button class="btn btn-outline btn-sm" onclick="toggleUserActions({{ user.id }})">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <div id="userActions{{ user.id }}" class="dropdown-menu" style="display: none; position: absolute; background: white; border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-md); z-index: 100; min-width: 150px;">
+                    <button class="dropdown-item" onclick="changePassword({{ user.id }}, '{{ user.name }}')">
+                        <i class="fas fa-key"></i> Сменить пароль
+                    </button>
+                    <button class="dropdown-item" onclick="toggleUserStatus({{ user.id }})">
+                        <i class="fas fa-power-off"></i> 
+                        {% if user.is_active %}Отключить{% else %}Включить{% endif %}
+                    </button>
+                    <button class="dropdown-item" onclick="editPermissions({{ user.id }}, '{{ user.name }}')">
+                        <i class="fas fa-shield-alt"></i> Права доступа
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
 </div>
 
-<!-- Системные операции -->
+<!-- Активность пользователей -->
+{% if user_activity %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-chart-line"></i>
+            Активность за неделю
+        </div>
+    </div>
+    
+    {% for activity in user_activity %}
+    <div class="list-item">
+        <div class="list-item-content">
+            <div class="list-item-title">{{ activity.manager_email.split('@')[0] }}</div>
+            <div class="list-item-subtitle">{{ activity.actions_count }} действий</div>
+        </div>
+        <div class="list-item-meta">
+            <div class="text-muted">{{ activity.last_activity.strftime('%d.%m %H:%M') }}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Последние ошибки -->
+{% if recent_errors %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fas fa-exclamation-triangle"></i>
+            Последние ошибки
+        </div>
+        {% if recent_errors|length > 0 %}
+        <span class="status-badge status-warning">{{ recent_errors|length }}</span>
+        {% endif %}
+    </div>
+    
+    {% for error in recent_errors[:5] %}
+    <div class="list-item">
+        <div class="list-item-content">
+            <div class="list-item-title" style="font-size: 0.8rem; font-family: monospace;">
+                {{ error.message[:60] }}{% if error.message|length > 60 %}...{% endif %}
+            </div>
+            <div class="list-item-subtitle">{{ error.timestamp }}</div>
+        </div>
+    </div>
+    {% endfor %}
+    
+    {% if recent_errors|length > 5 %}
+    <div class="text-center mt-2">
+        <button class="btn btn-outline btn-sm" onclick="showAllErrors()">
+            Показать все ({{ recent_errors|length }})
+        </button>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+<!-- Дополнительные функции -->
 <div class="card">
     <div class="card-header">
         <div class="card-title">
             <i class="fas fa-tools"></i>
-            Системные операции
+            Инструменты
         </div>
     </div>
     
-    <button class="btn btn-success btn-sm w-100 mb-2" onclick="initDemoData()">
-        <i class="fas fa-database"></i> Инициализировать демо данные
-    </button>
-    
-    <button class="btn btn-warning btn-sm w-100 mb-2" onclick="closeCurrentMonth()">
-        <i class="fas fa-calendar-times"></i> Закрыть текущий месяц
-    </button>
-    
-    <button class="btn btn-secondary btn-sm w-100" onclick="exportSystemReport()">
-        <i class="fas fa-download"></i> Экспорт полного отчета
-    </button>
-</div>
-
-<!-- Информация о системе -->
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">
-            <i class="fas fa-info-circle"></i>
-            О системе
-        </div>
-    </div>
-    
-    <div style="font-size: 0.9rem; line-height: 1.6;">
-        <p><strong>Мобильная система управления логистикой</strong></p>
-        <p>Версия: 1.0.0</p>
-        <p>Последнее обновление: {{ datetime.now().strftime('%d.%m.%Y') }}</p>
-        <p>Всего пользователей: 3</p>
-        <p>База данных: PostgreSQL</p>
+    <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+        <a href="/upload-excel" class="btn btn-primary">
+            <i class="fas fa-file-excel"></i> Загрузить Excel
+        </a>
+        
+        <button class="btn btn-success" onclick="exportSystemReport()">
+            <i class="fas fa-download"></i> Экспорт отчета
+        </button>
+        
+        <button class="btn btn-warning" onclick="initDemoData()">
+            <i class="fas fa-database"></i> Демо данные
+        </button>
+        
+        <button class="btn btn-secondary" onclick="cleanupLogs()">
+            <i class="fas fa-broom"></i> Очистить логи
+        </button>
     </div>
 </div>
 
@@ -87,7 +198,7 @@
 <div id="addUserModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 class="modal-title">Новый менеджер</h3>
+            <h3 class="modal-title">Новый пользователь</h3>
             <button class="modal-close" onclick="hideModal('addUserModal')">&times;</button>
         </div>
         
@@ -103,21 +214,129 @@
             </div>
             
             <div class="form-group">
+                <label class="form-label">Роль</label>
+                <select name="role" class="form-control" required>
+                    <option value="manager">Менеджер</option>
+                    <option value="director">Директор</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
                 <label class="form-label">Временный пароль</label>
                 <input type="password" name="password" class="form-control" required>
             </div>
             
+            <div class="form-group">
+                <label class="form-label">Права доступа</label>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; font-size: 0.9rem;">
+                    <label><input type="checkbox" name="permissions" value="clients"> Клиенты</label>
+                    <label><input type="checkbox" name="permissions" value="orders"> Заявки</label>
+                    <label><input type="checkbox" name="permissions" value="calculator"> Калькулятор</label>
+                    <label><input type="checkbox" name="permissions" value="exchange_rate"> Курсы</label>
+                    <label><input type="checkbox" name="permissions" value="analytics"> Аналитика</label>
+                    <label><input type="checkbox" name="permissions" value="excel"> Excel/PDF</label>
+                </div>
+            </div>
+            
             <div class="d-flex gap-2">
                 <button type="button" class="btn btn-secondary" onclick="hideModal('addUserModal')">Отмена</button>
-                <button type="submit" class="btn btn-primary">Добавить</button>
+                <button type="submit" class="btn btn-primary">Создать</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно смены пароля -->
+<div id="changePasswordModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Смена пароля</h3>
+            <button class="modal-close" onclick="hideModal('changePasswordModal')">&times;</button>
+        </div>
+        
+        <form id="changePasswordForm">
+            <input type="hidden" id="changePasswordUserId">
+            <div class="form-group">
+                <label class="form-label">Пользователь</label>
+                <input type="text" id="changePasswordUserName" class="form-control" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Новый пароль</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-secondary" onclick="hideModal('changePasswordModal')">Отмена</button>
+                <button type="submit" class="btn btn-primary">Изменить</button>
             </div>
         </form>
     </div>
 </div>
 
 <script>
+// Управление пользователями
 function showAddUserModal() {
     showModal('addUserModal');
+}
+
+function toggleUserActions(userId) {
+    const menu = document.getElementById(`userActions${userId}`);
+    // Сначала скрываем все другие меню
+    document.querySelectorAll('.dropdown-menu').forEach(m => {
+        if (m !== menu) m.style.display = 'none';
+    });
+    // Переключаем текущее
+    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+function changePassword(userId, userName) {
+    document.getElementById('changePasswordUserId').value = userId;
+    document.getElementById('changePasswordUserName').value = userName;
+    hideAllDropdowns();
+    showModal('changePasswordModal');
+}
+
+function toggleUserStatus(userId) {
+    if (confirm('Изменить статус пользователя?')) {
+        apiRequest(`/api/users/${userId}/toggle`, {
+            method: 'POST'
+        })
+        .then(result => {
+            showNotification(result.message);
+            setTimeout(() => location.reload(), 1000);
+        })
+        .catch(error => {
+            showNotification(error.message, 'error');
+        });
+    }
+    hideAllDropdowns();
+}
+
+function editPermissions(userId, userName) {
+    // Здесь можно добавить модальное окно для редактирования прав
+    showNotification('Функция в разработке', 'warning');
+    hideAllDropdowns();
+}
+
+function hideAllDropdowns() {
+    document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = 'none');
+}
+
+// Системные функции
+function refreshSystemInfo() {
+    apiRequest('/api/system-status')
+    .then(result => {
+        showNotification('Информация о системе обновлена');
+        setTimeout(() => location.reload(), 500);
+    })
+    .catch(error => {
+        showNotification('Ошибка обновления', 'error');
+    });
+}
+
+function exportSystemReport() {
+    window.location.href = '/api/analytics/export?format=excel&full=true';
 }
 
 function initDemoData() {
@@ -134,16 +353,13 @@ function initDemoData() {
     }
 }
 
-function closeCurrentMonth() {
-    const currentMonth = new Date().toISOString().substring(0, 7);
-    
-    if (confirm(`Закрыть текущий месяц (${currentMonth})? Все оплаченные заявки будут помечены как закрытые.`)) {
-        apiRequest('/api/close-month', {
-            method: 'POST',
-            body: JSON.stringify({ month: currentMonth })
+function cleanupLogs() {
+    if (confirm('Очистить старые логи? Это действие необратимо.')) {
+        apiRequest('/api/cleanup-logs', {
+            method: 'POST'
         })
         .then(result => {
-            showNotification(`Месяц закрыт! Закрыто заявок: ${result.closed_count}`);
+            showNotification('Логи очищены');
         })
         .catch(error => {
             showNotification(error.message, 'error');
@@ -151,15 +367,121 @@ function closeCurrentMonth() {
     }
 }
 
-function exportSystemReport() {
-    window.location.href = '/api/analytics/export?format=excel&full=true';
+function showAllErrors() {
+    // Можно открыть отдельную страницу с полным списком ошибок
+    window.open('/admin/errors', '_blank');
 }
 
 // Обработка формы добавления пользователя
 handleFormSubmit('addUserForm', '/api/users/create', function(result) {
     hideModal('addUserModal');
-    showNotification('Менеджер добавлен в систему!');
+    showNotification('Пользователь создан!');
     setTimeout(() => location.reload(), 1000);
 });
+
+// Обработка формы смены пароля
+document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const userId = document.getElementById('changePasswordUserId').value;
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    apiRequest(`/api/users/${userId}/password`, {
+        method: 'POST',
+        body: JSON.stringify(data)
+    })
+    .then(result => {
+        hideModal('changePasswordModal');
+        showNotification('Пароль изменен!');
+        this.reset();
+    })
+    .catch(error => {
+        showNotification(error.message, 'error');
+    });
+});
+
+// Закрытие выпадающих меню при клике вне их
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.dropdown')) {
+        hideAllDropdowns();
+    }
+});
+
+// Автоматическое обновление системной информации каждые 30 секунд
+setInterval(function() {
+    if (document.visibilityState === 'visible') {
+        apiRequest('/api/system-status')
+        .then(result => {
+            // Можно обновить показатели без перезагрузки страницы
+            console.log('Системная информация обновлена');
+        })
+        .catch(error => {
+            console.log('Ошибка обновления системной информации');
+        });
+    }
+}, 30000);
 </script>
+
+<style>
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    z-index: 100;
+    min-width: 180px;
+    padding: 0.5rem 0;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+    background: var(--light);
+}
+
+.dropdown-item i {
+    width: 1rem;
+    margin-right: 0.5rem;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+</style>
 {% endblock %}
