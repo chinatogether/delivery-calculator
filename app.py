@@ -1017,14 +1017,396 @@ def create_pdf_report(data, source_filename):
 @app.route('/clients')
 @require_auth
 def clients_list():
-    # Упрощенная версия для экономии места
-    return render_template('mobile_clients.html', clients=[], search='')
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        search = request.args.get('search', '')
+        
+        # Запрос для получения клиентов
+        query = """
+            SELECT 
+                c.id,
+                c.full_name,
+                c.telegram_username,
+                c.telegram_chat_id,
+                c.company,
+                c.phone,
+                c.email,
+                c.comment,
+                c.created_at,
+                c.created_by,
+                COUNT(o.id) as orders_count,
+                COALESCE(SUM(o.order_amount), 0) as total_amount
+            FROM delivery_test.clients c
+            LEFT JOIN delivery_test.orders o ON c.id = o.client_id
+        """
+        params = []
+        
+        if search:
+            query += """ 
+                WHERE c.full_name ILIKE %s 
+                   OR c.company ILIKE %s 
+                   OR c.telegram_username ILIKE %s
+                   OR c.email ILIKE %s
+            """
+            search_param = f"%{search}%"
+            params = [search_param] * 4
+        
+        query += " GROUP BY c.id ORDER BY c.created_at DESC"
+        
+        cursor.execute(query, params)
+        clients = cursor.fetchall()
+        
+        return render_template('mobile_clients.html', 
+                             clients=clients, 
+                             search=search)
+        
+    except Exception as e:
+        app.logger.error(f"Ошибка в clients_list: {str(e)}")
+        flash('Ошибка загрузки клиентов', 'error')
+        return render_template('mobile_clients.html', clients=[], search='')
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/clients/add', methods=['GET', 'POST'])
+@require_auth
+def add_client():
+    if request.method == 'POST':
+        conn = connect_to_db()
+        cursor = conn.cursor()
+        
+        try:
+            # Получаем данные из JSON запроса
+            data = request.get_json()
+            
+            cursor.execute("""
+                INSERT INTO delivery_test.clients 
+                (full_name, telegram_username, telegram_chat_id, 
+                 company, phone, email, comment, created_by)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                RETURNING id
+            """, (
+                data.get('full_name', ''),
+                data.get('telegram_username', ''),
+                data.get('telegram_chat_id', ''),
+                data.get('company', ''),
+                data.get('phone', ''),
+                data.get('email', ''),
+                data.get('comment', ''),
+                session['user_email']
+            ))
+            
+            client_id = cursor.fetchone()[0]
+            conn.commit()
+            
+            log_user_action('client_create', client_id, 'client', 
+                          f"Создан клиент {data.get('full_name')}")
+            
+            return jsonify({
+                'success': True,
+                'message': 'Клиент успешно создан',
+                'client_id': client_id
+            })
+            
+        except Exception as e:
+            conn.rollback()
+            app.logger.error(f"Ошибка создания клиента: {str(e)}")
+            return jsonify({
+                'success': False, 
+                'error': str(e)
+            }), 400
+        finally:
+            cursor.close()
+            conn.close()
+    
+    # GET запрос - показываем форму
+    # Используем правильное имя шаблона
+    return render_template('mobile_client_add.html')       
+
+@app.route('/orders/<int:order_id>')
+@require_auth
+def order_detail(order_id):
+    """Детальная страница заявки"""
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        cursor.execute("""
+            SELECT 
+                pr.*,
+                tu.username,
+                tu.first_name,
+                tu.last_name,
+                tu.full_name,
+                tu.company,
+                tu.phone as user_phone
+            FROM delivery_test.purchase_requests pr
+            LEFT JOIN delivery_test.telegram_users tu ON pr.telegram_user_id = tu.id
+            WHERE pr.id = %s
+        """, (order_id,))
+        
+        order = cursor.fetchone()
+        
+        if not order:
+            flash('Заявка не найдена', 'error')
+            return redirect(url_for('orders_list'))
+        
+        # Преобразуем order_amount
+        if order.get('order_amount'):
+            try:
+                amount_str = str(order['order_amount']).replace('$', '').replace(',', '').strip()
+                order['order_amount'] = float(amount_str) if amount_str else 0
+            except:
+                order['order_amount'] = 0
+        
+        return render_template('mobile_order_detail.html', order=order)
+        
+    except Exception as e:
+        app.logger.error(f"Ошибка в order_detail: {str(e)}")
+        flash('Ошибка загрузки заявки', 'error')
+        return redirect(url_for('orders_list'))
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/clients/<int:client_id>')
+@require_auth
+def client_detail(client_id):
+    """Детальная страница клиента"""
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        cursor.execute("""
+            SELECT c.*, 
+                   COUNT(DISTINCT o.id) as orders_count,
+                   COALESCE(SUM(CASE 
+                       WHEN o.order_amount ~ '^[0-9.]+$' THEN o.order_amount::numeric 
+                       ELSE 0 
+                   END), 0) as total_amount
+            FROM delivery_test.clients c
+            LEFT JOIN delivery_test.orders o ON c.id = o.client_id
+            WHERE c.id = %s
+            GROUP BY c.id
+        """, (client_id,))
+        
+        client = cursor.fetchone()
+        
+        if not client:
+            flash('Клиент не найден', 'error')
+            return redirect(url_for('clients_list'))
+        
+        # Получаем заказы клиента
+        cursor.execute("""
+            SELECT * FROM delivery_test.orders 
+            WHERE client_id = %s 
+            ORDER BY created_at DESC
+            LIMIT 10
+        """, (client_id,))
+        
+        orders = cursor.fetchall()
+        
+        return render_template('mobile_client_detail.html', 
+                             client=client, 
+                             orders=orders)
+        
+    except Exception as e:
+        app.logger.error(f"Ошибка в client_detail: {str(e)}")
+        flash('Ошибка загрузки данных клиента', 'error')
+        return redirect(url_for('clients_list'))
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/clients/<int:client_id>/edit', methods=['GET', 'POST'])
+@require_auth
+def edit_client(client_id):
+    """Редактирование клиента"""
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        if request.method == 'POST':
+            data = request.get_json() if request.is_json else request.form
+            
+            cursor.execute("""
+                UPDATE delivery_test.clients 
+                SET full_name = %s,
+                    telegram_username = %s,
+                    telegram_chat_id = %s,
+                    company = %s,
+                    phone = %s,
+                    email = %s,
+                    comment = %s,
+                    updated_at = NOW()
+                WHERE id = %s
+                RETURNING id
+            """, (
+                data.get('full_name'),
+                data.get('telegram_username'),
+                data.get('telegram_chat_id'),
+                data.get('company'),
+                data.get('phone'),
+                data.get('email'),
+                data.get('comment'),
+                client_id
+            ))
+            
+            conn.commit()
+            
+            if request.is_json:
+                return jsonify({'success': True, 'message': 'Клиент обновлен'})
+            else:
+                flash('Клиент обновлен', 'success')
+                return redirect(url_for('client_detail', client_id=client_id))
+        
+        # GET запрос
+        cursor.execute("SELECT * FROM delivery_test.clients WHERE id = %s", (client_id,))
+        client = cursor.fetchone()
+        
+        if not client:
+            flash('Клиент не найден', 'error')
+            return redirect(url_for('clients_list'))
+        
+        return render_template('mobile_edit_client.html', client=client)
+        
+    except Exception as e:
+        app.logger.error(f"Ошибка редактирования клиента: {str(e)}")
+        if request.is_json:
+            return jsonify({'success': False, 'error': str(e)}), 400
+        else:
+            flash('Ошибка сохранения', 'error')
+            return redirect(url_for('client_detail', client_id=client_id))
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/api/debug/check-data')
+@require_role('director')
+def debug_check_data():
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        # Проверяем purchase_requests
+        cursor.execute("SELECT COUNT(*) as count FROM delivery_test.purchase_requests")
+        pr_count = cursor.fetchone()['count']
+        
+        # Проверяем telegram_users  
+        cursor.execute("SELECT COUNT(*) as count FROM delivery_test.telegram_users")
+        tu_count = cursor.fetchone()['count']
+        
+        # Проверяем clients
+        cursor.execute("SELECT COUNT(*) as count FROM delivery_test.clients")
+        cl_count = cursor.fetchone()['count']
+        
+        # Проверяем orders
+        cursor.execute("SELECT COUNT(*) as count FROM delivery_test.orders")
+        ord_count = cursor.fetchone()['count']
+        
+        return jsonify({
+            'purchase_requests': pr_count,
+            'telegram_users': tu_count,
+            'clients': cl_count,
+            'orders': ord_count
+        })
+        
+    finally:
+        cursor.close()
+        conn.close()
 
 @app.route('/orders')
 @require_auth
 def orders_list():
-    # Упрощенная версия для экономии места
-    return render_template('mobile_orders.html', orders=[], managers=[])
+        conn = connect_to_db()
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+        
+        try:
+            # Получаем фильтры из запроса
+            status_filter = request.args.get('status', '')
+            manager_filter = request.args.get('manager', '')
+            
+            # Базовый запрос - используем таблицу purchase_requests
+            query = """
+                SELECT 
+                    pr.id,
+                    pr.telegram_user_id,
+                    pr.calculation_id,
+                    pr.manager_email,
+                    pr.status,
+                    pr.email,
+                    pr.telegram_contact,
+                    pr.supplier_link,
+                    pr.order_amount,
+                    pr.promo_code,
+                    pr.additional_notes,
+                    pr.created_at,
+                    pr.updated_at,
+                    tu.username,
+                    tu.first_name,
+                    tu.last_name,
+                    tu.full_name,
+                    tu.company
+                FROM delivery_test.purchase_requests pr
+                LEFT JOIN delivery_test.telegram_users tu ON pr.telegram_user_id = tu.id
+                WHERE 1=1
+            """
+            params = []
+            
+            # Применяем фильтры
+            if status_filter:
+                query += " AND pr.status = %s"
+                params.append(status_filter)
+                
+            if manager_filter:
+                query += " AND pr.manager_email = %s"
+                params.append(manager_filter)
+            
+            # Для менеджера показываем только его заявки и новые
+            if session.get('user_role') == 'manager':
+                query += " AND (pr.manager_email = %s OR pr.manager_email IS NULL OR pr.status = 'new')"
+                params.append(session.get('user_email'))
+            
+            query += " ORDER BY pr.created_at DESC"
+            
+            cursor.execute(query, params)
+            orders = cursor.fetchall()
+
+            for order in orders:
+                if order.get('order_amount'):
+                    try:
+                        # Убираем возможные символы валюты и пробелы
+                        amount_str = str(order['order_amount']).replace('$', '').replace(',', '').strip()
+                        order['order_amount'] = float(amount_str) if amount_str else 0
+                    except (ValueError, TypeError):
+                        order['order_amount'] = 0
+                else:
+                    order['order_amount'] = 0
+            
+            # Получаем список менеджеров для фильтра
+            cursor.execute("""
+                SELECT DISTINCT manager_email 
+                FROM delivery_test.purchase_requests 
+                WHERE manager_email IS NOT NULL
+            """)
+            managers = [row['manager_email'] for row in cursor.fetchall()]
+            
+            return render_template('mobile_orders.html', 
+                                orders=orders, 
+                                managers=managers,
+                                status_filter=status_filter,
+                                manager_filter=manager_filter)
+            
+        except Exception as e:
+            app.logger.error(f"Ошибка в orders_list: {str(e)}")
+            flash('Ошибка загрузки заявок', 'error')
+            return render_template('mobile_orders.html', orders=[], managers=[])
+        finally:
+            cursor.close()
+            conn.close()
+        
 
 @app.route('/calculator')
 @require_auth
