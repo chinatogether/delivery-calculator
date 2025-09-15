@@ -28,7 +28,7 @@
         <label class="form-label">Информация о клиенте</label>
         <div class="list-item" style="border: 1px solid var(--border); border-radius: 8px;">
             <div class="list-item-content">
-                <div class="list-item-title">{{ order.full_name or order.first_name or 'Не указано' }}</div>
+                <div class="list-item-title">{{ order.telegram_contact or 'Не указано' }}</div>
                 <div class="list-item-subtitle">
                     {% if order.company %}Компания: {{ order.company }}<br>{% endif %}
                     {% if order.email %}Email: {{ order.email }}<br>{% endif %}
