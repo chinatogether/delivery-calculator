@@ -352,30 +352,58 @@ def logout():
 def dashboard():
     try:
         stats = get_dashboard_stats()
+        kanban_orders = get_kanban_orders()
         
-        if stats is None:
-            stats = {
-                'total_clients': 0,
-                'orders_this_month': 0,
-                'my_orders': 0,
-                'my_revenue': 0,
-                'new_orders': 0,
-                'manager_stats': []
-            }
-        
-        return render_template('mobile_dashboard.html', stats=stats)
+        return render_template('mobile_dashboard.html', 
+                             stats=stats,
+                             kanban_orders=kanban_orders)
         
     except Exception as e:
         app.logger.error(f"Ошибка в dashboard: {str(e)}")
-        stats = {
-            'total_clients': 0,
-            'orders_this_month': 0,
-            'my_orders': 0,
-            'my_revenue': 0,
-            'new_orders': 0,
-            'manager_stats': []
-        }
-        return render_template('mobile_dashboard.html', stats=stats)
+        return render_template('mobile_dashboard.html', 
+                             stats={'total_clients': 0, 'orders_this_month': 0},
+                             kanban_orders={'new': [], 'assigned': [], 'ordered': [], 'purchased': []})
+
+def get_kanban_orders():
+    """Получение заявок для канбан доски"""
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        kanban = {'new': [], 'assigned': [], 'ordered': [], 'purchased': []}
+        
+        # Получаем заявки по статусам
+        query = """
+            SELECT 
+                pr.id, pr.status, pr.order_amount, pr.manager_email,
+                pr.created_at, pr.telegram_contact,
+                tu.full_name, tu.first_name
+            FROM delivery_test.purchase_requests pr
+            LEFT JOIN delivery_test.telegram_users tu ON pr.telegram_user_id = tu.id
+            WHERE pr.status IN ('new', 'assigned', 'ordered', 'purchased')
+        """
+        
+        # Для менеджера показываем его заявки и новые
+        if session.get('user_role') == 'manager':
+            query += " AND (pr.manager_email = %s OR pr.manager_email IS NULL)"
+            cursor.execute(query + " ORDER BY pr.created_at DESC", (session.get('user_email'),))
+        else:
+            cursor.execute(query + " ORDER BY pr.created_at DESC")
+        
+        orders = cursor.fetchall()
+        
+        for order in orders:
+            if order['status'] in kanban:
+                kanban[order['status']].append(order)
+        
+        return kanban
+        
+    except Exception as e:
+        app.logger.error(f"Ошибка получения канбан заявок: {str(e)}")
+        return {'new': [], 'assigned': [], 'ordered': [], 'purchased': []}
+    finally:
+        cursor.close()
+        conn.close()
 
 def get_dashboard_stats():
     conn = connect_to_db()
@@ -1179,13 +1207,11 @@ def client_detail(client_id):
     cursor = conn.cursor(cursor_factory=RealDictCursor)
     
     try:
+        # Исправленный запрос - order_amount уже числовой тип
         cursor.execute("""
             SELECT c.*, 
                    COUNT(DISTINCT o.id) as orders_count,
-                   COALESCE(SUM(CASE 
-                       WHEN o.order_amount ~ '^[0-9.]+$' THEN o.order_amount::numeric 
-                       ELSE 0 
-                   END), 0) as total_amount
+                   COALESCE(SUM(o.order_amount), 0) as total_amount
             FROM delivery_test.clients c
             LEFT JOIN delivery_test.orders o ON c.id = o.client_id
             WHERE c.id = %s
@@ -1320,92 +1346,92 @@ def debug_check_data():
 @app.route('/orders')
 @require_auth
 def orders_list():
-        conn = connect_to_db()
-        cursor = conn.cursor(cursor_factory=RealDictCursor)
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        # Получаем фильтры
+        status_filter = request.args.get('status', '')
+        manager_filter = request.args.get('manager', '')
         
-        try:
-            # Получаем фильтры из запроса
-            status_filter = request.args.get('status', '')
-            manager_filter = request.args.get('manager', '')
+        # Запрос для purchase_requests
+        query = """
+            SELECT 
+                pr.id,
+                pr.telegram_user_id,
+                pr.calculation_id,
+                pr.manager_email,
+                pr.status,
+                pr.email,
+                pr.telegram_contact,
+                pr.supplier_link,
+                pr.order_amount,  -- это VARCHAR
+                pr.promo_code,
+                pr.additional_notes,
+                pr.created_at,
+                pr.updated_at,
+                tu.username,
+                tu.first_name,
+                tu.last_name,
+                tu.full_name,
+                tu.company
+            FROM delivery_test.purchase_requests pr
+            LEFT JOIN delivery_test.telegram_users tu ON pr.telegram_user_id = tu.id
+            WHERE 1=1
+        """
+        params = []
+        
+        if status_filter:
+            query += " AND pr.status = %s"
+            params.append(status_filter)
             
-            # Базовый запрос - используем таблицу purchase_requests
-            query = """
-                SELECT 
-                    pr.id,
-                    pr.telegram_user_id,
-                    pr.calculation_id,
-                    pr.manager_email,
-                    pr.status,
-                    pr.email,
-                    pr.telegram_contact,
-                    pr.supplier_link,
-                    pr.order_amount,
-                    pr.promo_code,
-                    pr.additional_notes,
-                    pr.created_at,
-                    pr.updated_at,
-                    tu.username,
-                    tu.first_name,
-                    tu.last_name,
-                    tu.full_name,
-                    tu.company
-                FROM delivery_test.purchase_requests pr
-                LEFT JOIN delivery_test.telegram_users tu ON pr.telegram_user_id = tu.id
-                WHERE 1=1
-            """
-            params = []
-            
-            # Применяем фильтры
-            if status_filter:
-                query += " AND pr.status = %s"
-                params.append(status_filter)
-                
-            if manager_filter:
-                query += " AND pr.manager_email = %s"
-                params.append(manager_filter)
-            
-            # Для менеджера показываем только его заявки и новые
-            if session.get('user_role') == 'manager':
-                query += " AND (pr.manager_email = %s OR pr.manager_email IS NULL OR pr.status = 'new')"
-                params.append(session.get('user_email'))
-            
-            query += " ORDER BY pr.created_at DESC"
-            
-            cursor.execute(query, params)
-            orders = cursor.fetchall()
-
-            for order in orders:
-                if order.get('order_amount'):
-                    try:
-                        # Убираем возможные символы валюты и пробелы
-                        amount_str = str(order['order_amount']).replace('$', '').replace(',', '').strip()
-                        order['order_amount'] = float(amount_str) if amount_str else 0
-                    except (ValueError, TypeError):
-                        order['order_amount'] = 0
-                else:
-                    order['order_amount'] = 0
-            
-            # Получаем список менеджеров для фильтра
-            cursor.execute("""
-                SELECT DISTINCT manager_email 
-                FROM delivery_test.purchase_requests 
-                WHERE manager_email IS NOT NULL
-            """)
-            managers = [row['manager_email'] for row in cursor.fetchall()]
-            
-            return render_template('mobile_orders.html', 
-                                orders=orders, 
-                                managers=managers,
-                                status_filter=status_filter,
-                                manager_filter=manager_filter)
-            
-        except Exception as e:
-            app.logger.error(f"Ошибка в orders_list: {str(e)}")
-            flash('Ошибка загрузки заявок', 'error')
-            return render_template('mobile_orders.html', orders=[], managers=[])
-        finally:
-            cursor.close()
-            conn.close()
+        if manager_filter:
+            query += " AND pr.manager_email = %s"
+            params.append(manager_filter)
+        
+        if session.get('user_role') == 'manager':
+            query += " AND (pr.manager_email = %s OR pr.manager_email IS NULL OR pr.status = 'new')"
+            params.append(session.get('user_email'))
+        
+        query += " ORDER BY pr.created_at DESC"
+        
+        cursor.execute(query, params)
+        orders = cursor.fetchall()
+        
+        # Преобразуем order_amount из строки в число
+        for order in orders:
+            if order.get('order_amount'):
+                try:
+                    # Убираем символы валюты и пробелы
+                    amount_str = str(order['order_amount']).replace('$', '').replace(',', '').replace(' ', '').strip()
+                    # Пытаемся преобразовать в float
+                    order['order_amount_numeric'] = float(amount_str) if amount_str and amount_str.replace('.', '').isdigit() else 0
+                except (ValueError, TypeError):
+                    order['order_amount_numeric'] = 0
+            else:
+                order['order_amount_numeric'] = 0
+        
+        # Получаем список менеджеров
+        cursor.execute("""
+            SELECT DISTINCT manager_email 
+            FROM delivery_test.purchase_requests 
+            WHERE manager_email IS NOT NULL
+        """)
+        managers = [row['manager_email'] for row in cursor.fetchall()]
+        
+        return render_template('mobile_orders.html', 
+                             orders=orders, 
+                             managers=managers,
+                             status_filter=status_filter,
+                             manager_filter=manager_filter)
+        
+    except Exception as e:
+        app.logger.error(f"Ошибка в orders_list: {str(e)}")
+        flash('Ошибка загрузки заявок', 'error')
+        return render_template('mobile_orders.html', orders=[], managers=[])
+    finally:
+        cursor.close()
+        conn.close()
         
 
 @app.route('/calculator')
@@ -1416,7 +1442,71 @@ def calculator():
 @app.route('/analytics')
 @require_role('director')
 def analytics():
-    return render_template('mobile_analytics.html', manager_stats=[], status_stats=[])
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        # Получаем выбранный месяц (или текущий)
+        selected_month = request.args.get('month')
+        if not selected_month:
+            selected_month = datetime.now().strftime("%Y-%m")
+        
+        # Определяем даты начала и конца месяца
+        month_start = datetime.strptime(selected_month, "%Y-%m")
+        if month_start.month == 12:
+            month_end = datetime(month_start.year + 1, 1, 1)
+        else:
+            month_end = datetime(month_start.year, month_start.month + 1, 1)
+        
+        # === Статистика по менеджерам ===
+        cursor.execute("""
+            SELECT 
+                manager_email,
+                COUNT(*) as orders_count,
+                COALESCE(SUM(order_amount), 0) as total_amount,
+                COALESCE(SUM(commission_amount), 0) as total_commission
+            FROM delivery_test.orders
+            WHERE created_at >= %s AND created_at < %s
+              AND manager_email IS NOT NULL
+            GROUP BY manager_email
+            ORDER BY total_amount DESC
+        """, (month_start, month_end))
+        
+        manager_stats = cursor.fetchall()
+        
+        # === Статистика по статусам ===
+        cursor.execute("""
+            SELECT 
+                status,
+                COUNT(*) as orders_count,
+                COALESCE(SUM(order_amount), 0) as total_amount
+            FROM delivery_test.orders
+            WHERE created_at >= %s AND created_at < %s
+            GROUP BY status
+            ORDER BY orders_count DESC
+        """, (month_start, month_end))
+        
+        status_stats = cursor.fetchall()
+        
+        return render_template(
+            "mobile_analytics.html",
+            manager_stats=manager_stats,
+            status_stats=status_stats,
+            selected_month=selected_month
+        )
+    
+    except Exception as e:
+        app.logger.error(f"Ошибка в analytics: {str(e)}")
+        flash("Ошибка загрузки аналитики", "error")
+        return render_template(
+            "mobile_analytics.html",
+            manager_stats=[],
+            status_stats=[],
+            selected_month=datetime.now().strftime("%Y-%m")
+        )
+    finally:
+        cursor.close()
+        conn.close()
 
 # === API ENDPOINTS ===
 
@@ -1474,6 +1564,107 @@ def user_activity():
     finally:
         cursor.close()
         conn.close()
+
+
+@app.route('/api/orders/<int:order_id>/assign', methods=['POST'])
+@require_auth
+def assign_order(order_id):
+    """Взять заявку в работу - обновляет менеджера в БД"""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    
+    try:
+        manager_email = session.get('user_email')
+        
+        # Обновляем менеджера и статус в БД
+        cursor.execute("""
+            UPDATE delivery_test.purchase_requests 
+            SET manager_email = %s, 
+                status = 'assigned',
+                updated_at = NOW()
+            WHERE id = %s AND (manager_email IS NULL OR manager_email = '')
+            RETURNING id
+        """, (manager_email, order_id))
+        
+        result = cursor.fetchone()
+        if not result:
+            return jsonify({'success': False, 'error': 'Заявка уже назначена или не найдена'}), 400
+        
+        conn.commit()
+        
+        log_user_action('order_assign', order_id, 'order', 
+                       f'Заявка #{order_id} взята в работу менеджером {manager_email}')
+        
+        return jsonify({
+            'success': True, 
+            'message': 'Заявка взята в работу'
+        })
+        
+    except Exception as e:
+        conn.rollback()
+        app.logger.error(f"Ошибка назначения заявки: {str(e)}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/api/orders/<int:order_id>/status', methods=['POST'])
+@require_auth
+def update_order_status(order_id):
+    """Изменить статус заявки и сохранить причину отказа если нужно"""
+    data = request.get_json()
+    new_status = data.get('status')
+    notes = data.get('notes', '')
+    
+    if not new_status:
+        return jsonify({'success': False, 'error': 'Не указан статус'}), 400
+    
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    
+    try:
+        # Если статус "rejected", сохраняем причину отказа
+        if new_status == 'rejected':
+            cursor.execute("""
+                UPDATE delivery_test.purchase_requests 
+                SET status = %s,
+                    additional_notes = COALESCE(additional_notes, '') || 
+                        CASE WHEN additional_notes IS NOT NULL AND additional_notes != '' 
+                        THEN E'\\n' ELSE '' END || 
+                        'Причина отказа: ' || %s,
+                    updated_at = NOW()
+                WHERE id = %s
+            """, (new_status, notes, order_id))
+        else:
+            cursor.execute("""
+                UPDATE delivery_test.purchase_requests 
+                SET status = %s,
+                    updated_at = NOW()
+                WHERE id = %s
+            """, (new_status, order_id))
+        
+        if cursor.rowcount == 0:
+            return jsonify({'success': False, 'error': 'Заявка не найдена'}), 404
+        
+        conn.commit()
+        
+        log_user_action('order_status_change', order_id, 'order', 
+                       f'Изменен статус заявки #{order_id} на {new_status}',
+                       {'new_status': new_status, 'notes': notes})
+        
+        return jsonify({
+            'success': True,
+            'message': f'Статус изменен на {new_status}'
+        })
+        
+    except Exception as e:
+        conn.rollback()
+        app.logger.error(f"Ошибка изменения статуса: {str(e)}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
 
 # === ОБРАБОТЧИКИ ОШИБОК ===
 

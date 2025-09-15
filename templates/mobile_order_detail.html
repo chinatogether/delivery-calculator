@@ -3,7 +3,7 @@
 {% block page_title %}Заявка #{{ order.id }}{% endblock %}
 
 {% block content %}
-<!-- Информация о заявке -->
+<!-- Основная информация о заявке -->
 <div class="card">
     <div class="card-header">
         <div class="card-title">
@@ -17,112 +17,86 @@
             {% elif order.status == 'purchased' %}Выкуплен
             {% elif order.status == 'paid' %}Оплачено
             {% elif order.status == 'rejected' %}Отказ
+            {% elif order.status == 'cancelled' %}Отменено
             {% else %}{{ order.status }}
             {% endif %}
         </span>
     </div>
 
-    <!-- Клиент -->
-    {% if order.client_id %}
-    <div class="mb-3">
-        <a href="{{ url_for('client_detail', client_id=order.client_id) }}" class="d-flex align-items-center gap-3" style="text-decoration: none; color: inherit;">
-            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
-                {{ (order.full_name or 'К')[0].upper() }}
+    <!-- Информация о клиенте -->
+    <div class="form-group">
+        <label class="form-label">Информация о клиенте</label>
+        <div class="list-item" style="border: 1px solid var(--border); border-radius: 8px;">
+            <div class="list-item-content">
+                <div class="list-item-title">{{ order.full_name or order.first_name or 'Не указано' }}</div>
+                <div class="list-item-subtitle">
+                    {% if order.company %}Компания: {{ order.company }}<br>{% endif %}
+                    {% if order.email %}Email: {{ order.email }}<br>{% endif %}
+                    {% if order.telegram_contact %}Telegram: {{ order.telegram_contact }}{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Детали заказа -->
+    <div class="form-group">
+        <label class="form-label">Детали заказа</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+            <div>
+                <small class="text-muted">Сумма:</small><br>
+                <strong class="text-primary">{{ order.order_amount or 'Не указана' }}</strong>
             </div>
             <div>
-                <div class="fw-bold">{{ order.full_name or 'Клиент не указан' }}</div>
-                {% if order.company %}
-                <div class="text-muted">{{ order.company }}</div>
-                {% endif %}
-                {% if order.telegram_username %}
-                <div class="text-muted">@{{ order.telegram_username }}</div>
-                {% endif %}
+                <small class="text-muted">Промокод:</small><br>
+                <span class="text-muted">{{ order.promo_code or 'Нет' }}</span>
             </div>
-        </a>
+        </div>
     </div>
-    {% endif %}
-
-    <!-- Детали заявки -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-        {% if order.order_amount %}
-        <div>
-            <label class="text-muted">Сумма заказа</label>
-            <div class="fw-bold">${{ "%.2f"|format(order.order_amount) }}</div>
-        </div>
-        {% endif %}
-        
-        {% if order.commission_amount %}
-        <div>
-            <label class="text-muted">Комиссия</label>
-            <div class="fw-bold">${{ "%.2f"|format(order.commission_amount) }}</div>
-        </div>
-        {% endif %}
-        
-        <div>
-            <label class="text-muted">Создана</label>
-            <div>{{ order.created_at.strftime('%d.%m.%Y %H:%M') }}</div>
-        </div>
-        
-        {% if order.manager_email %}
-        <div>
-            <label class="text-muted">Менеджер</label>
-            <div>{{ order.manager_email.split('@')[0] }}</div>
-        </div>
-        {% endif %}
-    </div>
-
+    
     {% if order.supplier_link %}
-    <div class="mt-3">
-        <label class="text-muted">Ссылка на товар</label>
-        <div>
-            <a href="{{ order.supplier_link }}" target="_blank" class="btn btn-outline btn-sm">
-                <i class="fas fa-external-link-alt"></i> Открыть ссылку
-            </a>
+    <div class="form-group">
+        <label class="form-label">Ссылка на товар</label>
+        <div class="form-control" style="word-break: break-all; font-size: 0.9em; min-height: auto; color: var(--text);">
+            {{ order.supplier_link }}
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if order.additional_notes %}
+    <div class="form-group">
+        <label class="form-label">Дополнительные заметки</label>
+        <div class="form-control" style="min-height: auto; color: var(--text);">
+            {{ order.additional_notes }}
         </div>
     </div>
     {% endif %}
 
-    {% if order.product_description %}
-    <div class="mt-3">
-        <label class="text-muted">Описание товара</label>
-        <div class="p-2" style="background: #f8fafc; border-radius: 6px;">{{ order.product_description }}</div>
-    </div>
-    {% endif %}
-
-    {% if order.reject_reason %}
-    <div class="mt-3 p-3" style="background: #fef2f2; border-radius: 8px; border-left: 4px solid #ef4444;">
-        <label class="text-muted">Причина отказа</label>
-        <div>{{ order.reject_reason }}</div>
-    </div>
-    {% endif %}
-</div>
-
-<!-- Быстрые контакты -->
-{% if order.telegram_chat_id or order.phone %}
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">
-            <i class="fas fa-phone"></i>
-            Связаться с клиентом
+    <!-- Служебная информация -->
+    <div class="form-group">
+        <label class="form-label">Служебная информация</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+            <div>
+                <small class="text-muted">ID записи:</small><br>
+                <span class="text-muted">#{{ order.id }}</span>
+            </div>
+            <div>
+                <small class="text-muted">Менеджер:</small><br>
+                <strong>{{ order.manager_email or 'Не назначен' }}</strong>
+            </div>
+            <div>
+                <small class="text-muted">Создана:</small><br>
+                <span class="text-muted">{{ order.created_at.strftime('%d.%m.%Y %H:%M') if order.created_at else 'Не указано' }}</span>
+            </div>
+            <div>
+                <small class="text-muted">Обновлена:</small><br>
+                <span class="text-muted">{{ order.updated_at.strftime('%d.%m.%Y %H:%M') if order.updated_at else 'Не указано' }}</span>
+            </div>
         </div>
     </div>
-    <div class="d-flex gap-2">
-        {% if order.telegram_chat_id %}
-        <a href="https://t.me/{{ order.telegram_chat_id }}" class="btn btn-primary btn-sm" style="flex: 1;">
-            <i class="fab fa-telegram-plane"></i> Telegram
-        </a>
-        {% endif %}
-        {% if order.phone %}
-        <a href="tel:{{ order.phone }}" class="btn btn-success btn-sm" style="flex: 1;">
-            <i class="fas fa-phone"></i> Позвонить
-        </a>
-        {% endif %}
-    </div>
 </div>
-{% endif %}
 
-<!-- Управление статусом -->
-{% if order.manager_email == session.user_email or (order.status == 'new' and not order.manager_email) %}
+<!-- Управление заявкой -->
+{% if session.user_role in ['manager', 'director'] %}
 <div class="card">
     <div class="card-header">
         <div class="card-title">
@@ -131,145 +105,106 @@
         </div>
     </div>
 
-    <!-- Назначить себе (если заявка новая) -->
     {% if order.status == 'new' and not order.manager_email %}
     <button class="btn btn-primary w-100 mb-2" onclick="assignToMe()">
         <i class="fas fa-hand-paper"></i> Взять в работу
     </button>
     {% endif %}
 
-    <!-- Изменение статуса -->
-    {% if order.manager_email == session.user_email %}
-    <div class="d-flex gap-2" style="flex-wrap: wrap;">
-        {% if order.status == 'assigned' %}
-        <button class="btn btn-success btn-sm" onclick="updateStatus('ordered')" style="flex: 1;">
-            <i class="fas fa-check"></i> Заказал
+    {% if order.manager_email == session.user_email or session.user_role == 'director' %}
+    <div class="form-group">
+        <label class="form-label">Изменить статус:</label>
+        <select id="statusSelect" class="form-control mb-2">
+            <option value="">-- Выберите статус --</option>
+            <option value="new" {% if order.status == 'new' %}selected{% endif %}>Новая</option>
+            <option value="assigned" {% if order.status == 'assigned' %}selected{% endif %}>Назначена</option>
+            <option value="ordered" {% if order.status == 'ordered' %}selected{% endif %}>Заказал</option>
+            <option value="purchased" {% if order.status == 'purchased' %}selected{% endif %}>Выкуплен</option>
+            <option value="paid" {% if order.status == 'paid' %}selected{% endif %}>Оплачено</option>
+            <option value="rejected" {% if order.status == 'rejected' %}selected{% endif %}>Отказ</option>
+            <option value="cancelled" {% if order.status == 'cancelled' %}selected{% endif %}>Отменено</option>
+        </select>
+        
+        <div id="rejectReasonDiv" style="display: none;">
+            <label class="form-label">Причина отказа:</label>
+            <textarea id="rejectReason" class="form-control mb-2" rows="3" placeholder="Укажите причину отказа..."></textarea>
+        </div>
+        
+        <button class="btn btn-success w-100" onclick="updateStatus()">
+            <i class="fas fa-save"></i> Сохранить статус
         </button>
-        <button class="btn btn-danger btn-sm" onclick="showRejectModal()" style="flex: 1;">
-            <i class="fas fa-times"></i> Отказался
-        </button>
-        {% elif order.status == 'ordered' %}
-        <button class="btn btn-success btn-sm" onclick="updateStatus('purchased')" style="flex: 1;">
-            <i class="fas fa-shopping-cart"></i> Выкуплен
-        </button>
-        {% elif order.status == 'purchased' %}
-        <button class="btn btn-success btn-sm" onclick="updateStatus('paid')" style="flex: 1;">
-            <i class="fas fa-dollar-sign"></i> Оплачено
-        </button>
-        {% endif %}
     </div>
     {% endif %}
 </div>
 {% endif %}
 
-<!-- Модальное окно отказа -->
-<div id="rejectModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3 class="modal-title">Причина отказа</h3>
-            <button class="modal-close" onclick="hideModal('rejectModal')">&times;</button>
-        </div>
-        
-        <form id="rejectForm">
-            <div class="form-group">
-                <label class="form-label">Выберите причину</label>
-                <select name="reject_reason" class="form-control" required>
-                    <option value="">Выберите причину</option>
-                    <option value="Высокая цена">Высокая цена</option>
-                    <option value="Долгая доставка">Долгая доставка</option>
-                    <option value="Не подходящий товар">Не подходящий товар</option>
-                    <option value="Передумал">Передумал</option>
-                    <option value="Другое">Другое</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">Дополнительный комментарий</label>
-                <textarea name="notes" class="form-control" rows="3" placeholder="Дополнительная информация..."></textarea>
-            </div>
-            
-            <div class="d-flex gap-2">
-                <button type="button" class="btn btn-secondary" onclick="hideModal('rejectModal')">Отмена</button>
-                <button type="submit" class="btn btn-danger">Отклонить заявку</button>
-            </div>
-        </form>
-    </div>
+<!-- Кнопка назад -->
+<div class="card">
+    <a href="{{ url_for('orders_list') }}" class="btn btn-secondary w-100">
+        <i class="fas fa-arrow-left"></i> Назад к списку
+    </a>
 </div>
 
 <script>
+document.getElementById('statusSelect').addEventListener('change', function() {
+    const rejectDiv = document.getElementById('rejectReasonDiv');
+    if (this.value === 'rejected') {
+        rejectDiv.style.display = 'block';
+    } else {
+        rejectDiv.style.display = 'none';
+    }
+});
+
 function assignToMe() {
-    apiRequest(`/api/orders/{{ order.id }}/assign`, {
-        method: 'POST'
+    if (!confirm('Взять заявку в работу?')) return;
+    
+    fetch(`/api/orders/{{ order.id }}/assign`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'}
     })
+    .then(response => response.json())
     .then(result => {
-        showNotification(result.message);
-        setTimeout(() => location.reload(), 1000);
-    })
-    .catch(error => {
-        showNotification(error.message, 'error');
+        if (result.success) {
+            showNotification('Заявка взята в работу');
+            setTimeout(() => location.reload(), 1000);
+        } else {
+            showNotification(result.error || 'Ошибка', 'error');
+        }
     });
 }
 
-function updateStatus(newStatus) {
-    apiRequest(`/api/orders/{{ order.id }}/status`, {
+function updateStatus() {
+    const statusSelect = document.getElementById('statusSelect');
+    const newStatus = statusSelect.value;
+    const rejectReason = document.getElementById('rejectReason').value;
+    
+    if (!newStatus) {
+        showNotification('Выберите статус', 'warning');
+        return;
+    }
+    
+    if (newStatus === 'rejected' && !rejectReason) {
+        showNotification('Укажите причину отказа', 'warning');
+        return;
+    }
+    
+    fetch(`/api/orders/{{ order.id }}/status`, {
         method: 'POST',
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
             status: newStatus,
-            notes: `Статус изменен на ${newStatus}`
+            notes: newStatus === 'rejected' ? rejectReason : ''
         })
     })
+    .then(response => response.json())
     .then(result => {
-        showNotification(result.message);
-        setTimeout(() => location.reload(), 1000);
-    })
-    .catch(error => {
-        showNotification(error.message, 'error');
+        if (result.success) {
+            showNotification('Статус обновлен');
+            setTimeout(() => location.reload(), 1000);
+        } else {
+            showNotification(result.error || 'Ошибка', 'error');
+        }
     });
 }
-
-function showRejectModal() {
-    showModal('rejectModal');
-}
-
-// Обработка формы отказа
-handleFormSubmit('rejectForm', `/api/orders/{{ order.id }}/status`, function(result) {
-    hideModal('rejectModal');
-    showNotification('Заявка отклонена');
-    setTimeout(() => location.reload(), 1000);
-});
-
-// Подмена данных формы отказа для отправки правильного статуса
-document.getElementById('rejectForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(this);
-    const data = {
-        status: 'rejected',
-        reject_reason: formData.get('reject_reason'),
-        notes: formData.get('notes')
-    };
-    
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<span class="loading"></span> Сохранение...';
-    submitBtn.disabled = true;
-    
-    apiRequest(`/api/orders/{{ order.id }}/status`, {
-        method: 'POST',
-        body: JSON.stringify(data)
-    })
-    .then(result => {
-        hideModal('rejectModal');
-        showNotification('Заявка отклонена');
-        setTimeout(() => location.reload(), 1000);
-    })
-    .catch(error => {
-        showNotification(error.message, 'error');
-    })
-    .finally(() => {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    });
-});
 </script>
 {% endblock %}

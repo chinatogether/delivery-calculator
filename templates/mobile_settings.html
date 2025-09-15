@@ -2,215 +2,367 @@
 
 {% block page_title %}Настройки системы{% endblock %}
 
-{% block top_actions %}
-<button class="btn btn-outline btn-sm" onclick="refreshSystemInfo()">
-    <i class="fas fa-sync-alt"></i>
-</button>
+{% block extra_css %}
+<style>
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--border);
+    overflow-x: auto;
+}
+
+.tab-button {
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+}
+
+.tab-button.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.system-metric {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: var(--light);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    color: var(--text-light);
+}
+
+.metric-value {
+    font-weight: 600;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.25rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s;
+}
+
+.log-entry {
+    padding: 0.5rem;
+    background: var(--light);
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    font-family: monospace;
+}
+
+.log-entry.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+}
+
+.user-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.permission-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+</style>
 {% endblock %}
 
 {% block content %}
-<!-- Мониторинг системы -->
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">
-            <i class="fas fa-server"></i>
-            Состояние сервера
-        </div>
-        <span class="status-badge status-paid">Онлайн</span>
-    </div>
-    
-    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem;">
-        <div class="stat-card">
-            <div class="stat-value">{{ "%.1f"|format(system_info.memory.percent) }}%</div>
-            <div class="stat-label">ОЗУ</div>
-            <small class="text-muted">{{ "%.1f"|format(system_info.memory.available) }}GB свободно</small>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">{{ "%.1f"|format(system_info.disk.percent) }}%</div>
-            <div class="stat-label">Диск</div>
-            <small class="text-muted">{{ "%.1f"|format(system_info.disk.free) }}GB свободно</small>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">{{ "%.1f"|format(system_info.cpu.percent) }}%</div>
-            <div class="stat-label">CPU</div>
-            <small class="text-muted">Загрузка процессора</small>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">{{ "%.1f"|format(system_info.process.memory_mb) }}MB</div>
-            <div class="stat-label">Приложение</div>
-            <small class="text-muted">Память процесса</small>
-        </div>
-    </div>
-    
-    <div style="font-size: 0.9rem; color: var(--text-light);">
-        <i class="fas fa-clock"></i> Время работы: {{ system_info.uptime.split('.')[0] }}
-    </div>
+<!-- Табы -->
+<div class="tabs">
+    <button class="tab-button active" onclick="switchTab('users')">
+        <i class="fas fa-users"></i> Пользователи
+    </button>
+    <button class="tab-button" onclick="switchTab('system')">
+        <i class="fas fa-server"></i> Система
+    </button>
+    <button class="tab-button" onclick="switchTab('data')">
+        <i class="fas fa-database"></i> Данные
+    </button>
+    <button class="tab-button" onclick="switchTab('logs')">
+        <i class="fas fa-file-alt"></i> Логи
+    </button>
 </div>
 
-<!-- Управление пользователями -->
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">
-            <i class="fas fa-users-cog"></i>
-            Пользователи системы
-        </div>
-        <button class="btn btn-primary btn-sm" onclick="showAddUserModal()">
-            <i class="fas fa-user-plus"></i>
-        </button>
-    </div>
-    
-    {% for user in users %}
-    <div class="list-item">
-        <div class="list-item-content">
-            <div class="list-item-title">
-                {{ user.name }}
-                {% if user.role == 'director' %}
-                    <i class="fas fa-crown" style="color: #f59e0b; margin-left: 0.5rem;"></i>
-                {% elif user.role == 'manager' %}
-                    <i class="fas fa-user-tie" style="color: var(--primary); margin-left: 0.5rem;"></i>
-                {% endif %}
+<!-- Таб: Управление пользователями -->
+<div id="users-tab" class="tab-content active">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-users"></i> Управление пользователями
             </div>
-            <div class="list-item-subtitle">
-                {{ user.email }} • {{ user.role }}
-                {% if user.permissions and user.permissions|length > 0 %}
-                    • {{ user.permissions|length }} прав
-                {% endif %}
-            </div>
+            <button class="btn btn-primary btn-sm" onclick="showCreateUserModal()">
+                <i class="fas fa-plus"></i> Добавить
+            </button>
         </div>
-        <div style="display: flex; gap: 0.5rem; align-items: center;">
-            {% if user.is_active %}
-                <span class="status-badge status-paid">Активен</span>
-            {% else %}
-                <span class="status-badge status-rejected">Отключен</span>
-            {% endif %}
-            
-            {% if user.email != session.user_email %}
-            <div class="dropdown">
-                <button class="btn btn-outline btn-sm" onclick="toggleUserActions({{ user.id }})">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div id="userActions{{ user.id }}" class="dropdown-menu" style="display: none; position: absolute; background: white; border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-md); z-index: 100; min-width: 150px;">
-                    <button class="dropdown-item" onclick="changePassword({{ user.id }}, '{{ user.name }}')">
-                        <i class="fas fa-key"></i> Сменить пароль
-                    </button>
-                    <button class="dropdown-item" onclick="toggleUserStatus({{ user.id }})">
-                        <i class="fas fa-power-off"></i> 
-                        {% if user.is_active %}Отключить{% else %}Включить{% endif %}
-                    </button>
-                    <button class="dropdown-item" onclick="editPermissions({{ user.id }}, '{{ user.name }}')">
-                        <i class="fas fa-shield-alt"></i> Права доступа
-                    </button>
+        
+        {% for user in users %}
+        <div class="user-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="fw-bold">{{ user.name }}</div>
+                    <div class="text-muted">{{ user.email }}</div>
+                    <div class="text-muted">Роль: {{ user.role }}</div>
+                </div>
+                <div class="d-flex gap-2">
+                    {% if user.is_active %}
+                        <span class="status-badge status-success">Активен</span>
+                    {% else %}
+                        <span class="status-badge status-danger">Заблокирован</span>
+                    {% endif %}
                 </div>
             </div>
+            
+            <div class="mt-2 d-flex gap-2">
+                <button class="btn btn-outline btn-sm" onclick="editUser({{ user.id }})">
+                    <i class="fas fa-edit"></i> Изменить
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="changePassword({{ user.id }})">
+                    <i class="fas fa-key"></i> Пароль
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="toggleUserStatus({{ user.id }})">
+                    {% if user.is_active %}
+                        <i class="fas fa-ban"></i> Заблокировать
+                    {% else %}
+                        <i class="fas fa-check"></i> Активировать
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Таб: Мониторинг системы -->
+<div id="system-tab" class="tab-content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-server"></i> Состояние системы
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="refreshSystemInfo()">
+                <i class="fas fa-sync"></i>
+            </button>
+        </div>
+        
+        <div class="system-metric">
+            <span class="metric-label">CPU</span>
+            <span class="metric-value" id="cpu-usage">{{ system_info.cpu.percent }}%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {{ system_info.cpu.percent }}%"></div>
+        </div>
+        
+        <div class="system-metric mt-3">
+            <span class="metric-label">Память</span>
+            <span class="metric-value">{{ system_info.memory.available }}GB / {{ system_info.memory.total }}GB</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {{ system_info.memory.percent }}%"></div>
+        </div>
+        
+        <div class="system-metric mt-3">
+            <span class="metric-label">Диск</span>
+            <span class="metric-value">{{ system_info.disk.free }}GB / {{ system_info.disk.total }}GB</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {{ system_info.disk.percent }}%"></div>
+        </div>
+        
+        <div class="system-metric mt-3">
+            <span class="metric-label">Uptime</span>
+            <span class="metric-value">{{ system_info.uptime }}</span>
+        </div>
+    </div>
+    
+    <!-- Информация о процессах -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-microchip"></i> Процессы
+            </div>
+        </div>
+        
+        <div class="list-item">
+            <div class="list-item-content">
+                <div class="list-item-title">Order Manager</div>
+                <div class="list-item-subtitle">/home/chinatogether/order-manager</div>
+            </div>
+            <div class="list-item-meta">
+                <span class="status-badge status-success">Работает</span>
+            </div>
+        </div>
+        
+        <div class="list-item">
+            <div class="list-item-content">
+                <div class="list-item-title">XLSX Web</div>
+                <div class="list-item-subtitle">/home/chinatogether/xlsx-web</div>
+            </div>
+            <div class="list-item-meta">
+                <span class="status-badge status-success">Работает</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Таб: Загрузка данных -->
+<div id="data-tab" class="tab-content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-file-excel"></i> Загрузка параметров доставки
+            </div>
+        </div>
+        
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="form-label">Excel файл с параметрами</label>
+                <input type="file" name="file" class="form-control" accept=".xlsx,.xls" required>
+                <small class="text-muted">Файл должен содержать листы "weight" и "density"</small>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-upload"></i> Загрузить в базу данных
+            </button>
+        </form>
+        
+        <div id="uploadResult" class="mt-3" style="display: none;"></div>
+    </div>
+    
+    <!-- Генерация PDF -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-file-pdf"></i> PDF с тарифами
+            </div>
+        </div>
+        
+        {% if pdf_info %}
+        <div class="form-group">
+            <div class="list-item">
+                <div class="list-item-content">
+                    <div class="list-item-title">{{ pdf_info.filename }}</div>
+                    <div class="list-item-subtitle">
+                        Размер: {{ pdf_info.size_kb }} КБ<br>
+                        Создан: {{ pdf_info.created }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="d-flex gap-2">
+            <button class="btn btn-success" onclick="generatePDF()">
+                <i class="fas fa-sync"></i> Создать заново
+            </button>
+            {% if pdf_info %}
+            <a href="/api/download-pdf" class="btn btn-secondary">
+                <i class="fas fa-download"></i> Скачать
+            </a>
             {% endif %}
         </div>
     </div>
-    {% endfor %}
 </div>
 
-<!-- Активность пользователей -->
-{% if user_activity %}
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">
-            <i class="fas fa-chart-line"></i>
-            Активность за неделю
-        </div>
-    </div>
-    
-    {% for activity in user_activity %}
-    <div class="list-item">
-        <div class="list-item-content">
-            <div class="list-item-title">{{ activity.manager_email.split('@')[0] }}</div>
-            <div class="list-item-subtitle">{{ activity.actions_count }} действий</div>
-        </div>
-        <div class="list-item-meta">
-            <div class="text-muted">{{ activity.last_activity.strftime('%d.%m %H:%M') }}</div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
-{% endif %}
-
-<!-- Последние ошибки -->
-{% if recent_errors %}
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">
-            <i class="fas fa-exclamation-triangle"></i>
-            Последние ошибки
-        </div>
-        {% if recent_errors|length > 0 %}
-        <span class="status-badge status-warning">{{ recent_errors|length }}</span>
-        {% endif %}
-    </div>
-    
-    {% for error in recent_errors[:5] %}
-    <div class="list-item">
-        <div class="list-item-content">
-            <div class="list-item-title" style="font-size: 0.8rem; font-family: monospace;">
-                {{ error.message[:60] }}{% if error.message|length > 60 %}...{% endif %}
+<!-- Таб: Логи системы -->
+<div id="logs-tab" class="tab-content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-file-alt"></i> Последние ошибки
             </div>
-            <div class="list-item-subtitle">{{ error.timestamp }}</div>
+            <button class="btn btn-outline btn-sm" onclick="clearLogs()">
+                <i class="fas fa-trash"></i> Очистить
+            </button>
         </div>
-    </div>
-    {% endfor %}
-    
-    {% if recent_errors|length > 5 %}
-    <div class="text-center mt-2">
-        <button class="btn btn-outline btn-sm" onclick="showAllErrors()">
-            Показать все ({{ recent_errors|length }})
-        </button>
-    </div>
-    {% endif %}
-</div>
-{% endif %}
-
-<!-- Дополнительные функции -->
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">
-            <i class="fas fa-tools"></i>
-            Инструменты
+        
+        <div style="max-height: 400px; overflow-y: auto;">
+            {% for error in recent_errors %}
+            <div class="log-entry error">
+                <strong>{{ error.timestamp }}</strong><br>
+                {{ error.message }}
+            </div>
+            {% endfor %}
+            
+            {% if not recent_errors %}
+            <div class="text-center text-muted p-3">
+                Ошибок не обнаружено
+            </div>
+            {% endif %}
         </div>
     </div>
     
-    <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
-        <a href="/upload-excel" class="btn btn-primary">
-            <i class="fas fa-file-excel"></i> Загрузить Excel
-        </a>
+    <!-- Активность пользователей -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-history"></i> Активность за неделю
+            </div>
+        </div>
         
-        <button class="btn btn-success" onclick="exportSystemReport()">
-            <i class="fas fa-download"></i> Экспорт отчета
-        </button>
-        
-        <button class="btn btn-warning" onclick="initDemoData()">
-            <i class="fas fa-database"></i> Демо данные
-        </button>
-        
-        <button class="btn btn-secondary" onclick="cleanupLogs()">
-            <i class="fas fa-broom"></i> Очистить логи
-        </button>
+        {% for activity in user_activity %}
+        <div class="list-item">
+            <div class="list-item-content">
+                <div class="list-item-title">{{ activity.manager_email }}</div>
+                <div class="list-item-subtitle">{{ activity.actions_count }} действий</div>
+            </div>
+            <div class="list-item-meta">
+                <small>{{ activity.last_activity.strftime('%d.%m %H:%M') if activity.last_activity else '-' }}</small>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 
-<!-- Модальное окно добавления пользователя -->
-<div id="addUserModal" class="modal">
+<!-- Модальное окно создания пользователя -->
+<div id="createUserModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <h3 class="modal-title">Новый пользователь</h3>
-            <button class="modal-close" onclick="hideModal('addUserModal')">&times;</button>
+            <button class="modal-close" onclick="hideModal('createUserModal')">&times;</button>
         </div>
         
-        <form id="addUserForm">
-            <div class="form-group">
-                <label class="form-label">Имя</label>
-                <input type="text" name="name" class="form-control" required>
-            </div>
-            
+        <form id="createUserForm">
             <div class="form-group">
                 <label class="form-label">Email</label>
                 <input type="email" name="email" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Имя</label>
+                <input type="text" name="name" class="form-control" required>
             </div>
             
             <div class="form-group">
@@ -222,266 +374,217 @@
             </div>
             
             <div class="form-group">
-                <label class="form-label">Временный пароль</label>
-                <input type="password" name="password" class="form-control" required>
+                <label class="form-label">Пароль</label>
+                <input type="password" name="password" class="form-control" required minlength="6">
             </div>
             
             <div class="form-group">
                 <label class="form-label">Права доступа</label>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; font-size: 0.9rem;">
-                    <label><input type="checkbox" name="permissions" value="clients"> Клиенты</label>
-                    <label><input type="checkbox" name="permissions" value="orders"> Заявки</label>
-                    <label><input type="checkbox" name="permissions" value="calculator"> Калькулятор</label>
-                    <label><input type="checkbox" name="permissions" value="exchange_rate"> Курсы</label>
-                    <label><input type="checkbox" name="permissions" value="analytics"> Аналитика</label>
-                    <label><input type="checkbox" name="permissions" value="excel"> Excel/PDF</label>
+                <div class="permission-checkbox">
+                    <input type="checkbox" name="permissions" value="orders" id="perm-orders" checked>
+                    <label for="perm-orders">Заявки</label>
+                </div>
+                <div class="permission-checkbox">
+                    <input type="checkbox" name="permissions" value="clients" id="perm-clients" checked>
+                    <label for="perm-clients">Клиенты</label>
+                </div>
+                <div class="permission-checkbox">
+                    <input type="checkbox" name="permissions" value="calculator" id="perm-calc" checked>
+                    <label for="perm-calc">Калькулятор</label>
+                </div>
+                <div class="permission-checkbox">
+                    <input type="checkbox" name="permissions" value="analytics" id="perm-analytics">
+                    <label for="perm-analytics">Аналитика</label>
                 </div>
             </div>
             
             <div class="d-flex gap-2">
-                <button type="button" class="btn btn-secondary" onclick="hideModal('addUserModal')">Отмена</button>
-                <button type="submit" class="btn btn-primary">Создать</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Модальное окно смены пароля -->
-<div id="changePasswordModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3 class="modal-title">Смена пароля</h3>
-            <button class="modal-close" onclick="hideModal('changePasswordModal')">&times;</button>
-        </div>
-        
-        <form id="changePasswordForm">
-            <input type="hidden" id="changePasswordUserId">
-            <div class="form-group">
-                <label class="form-label">Пользователь</label>
-                <input type="text" id="changePasswordUserName" class="form-control" readonly>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">Новый пароль</label>
-                <input type="password" name="password" class="form-control" required>
-            </div>
-            
-            <div class="d-flex gap-2">
-                <button type="button" class="btn btn-secondary" onclick="hideModal('changePasswordModal')">Отмена</button>
-                <button type="submit" class="btn btn-primary">Изменить</button>
+                <button type="button" class="btn btn-secondary" onclick="hideModal('createUserModal')">
+                    Отмена
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    Создать пользователя
+                </button>
             </div>
         </form>
     </div>
 </div>
 
 <script>
-// Управление пользователями
-function showAddUserModal() {
-    showModal('addUserModal');
-}
-
-function toggleUserActions(userId) {
-    const menu = document.getElementById(`userActions${userId}`);
-    // Сначала скрываем все другие меню
-    document.querySelectorAll('.dropdown-menu').forEach(m => {
-        if (m !== menu) m.style.display = 'none';
+function switchTab(tabName) {
+    // Скрываем все табы
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
     });
-    // Переключаем текущее
-    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-}
-
-function changePassword(userId, userName) {
-    document.getElementById('changePasswordUserId').value = userId;
-    document.getElementById('changePasswordUserName').value = userName;
-    hideAllDropdowns();
-    showModal('changePasswordModal');
-}
-
-function toggleUserStatus(userId) {
-    if (confirm('Изменить статус пользователя?')) {
-        apiRequest(`/api/users/${userId}/toggle`, {
-            method: 'POST'
-        })
-        .then(result => {
-            showNotification(result.message);
-            setTimeout(() => location.reload(), 1000);
-        })
-        .catch(error => {
-            showNotification(error.message, 'error');
-        });
-    }
-    hideAllDropdowns();
-}
-
-function editPermissions(userId, userName) {
-    // Здесь можно добавить модальное окно для редактирования прав
-    showNotification('Функция в разработке', 'warning');
-    hideAllDropdowns();
-}
-
-function hideAllDropdowns() {
-    document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = 'none');
-}
-
-// Системные функции
-function refreshSystemInfo() {
-    apiRequest('/api/system-status')
-    .then(result => {
-        showNotification('Информация о системе обновлена');
-        setTimeout(() => location.reload(), 500);
-    })
-    .catch(error => {
-        showNotification('Ошибка обновления', 'error');
+    document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.remove('active');
     });
+    
+    // Показываем выбранный таб
+    document.getElementById(tabName + '-tab').classList.add('active');
+    event.target.classList.add('active');
 }
 
-function exportSystemReport() {
-    window.location.href = '/api/analytics/export?format=excel&full=true';
+function showCreateUserModal() {
+    showModal('createUserModal');
 }
 
-function initDemoData() {
-    if (confirm('Добавить демонстрационные данные? Это добавит тестовых клиентов и заявки.')) {
-        apiRequest('/api/init-demo-data', {
-            method: 'POST'
-        })
-        .then(result => {
-            showNotification('Демо данные успешно добавлены!');
-        })
-        .catch(error => {
-            showNotification(error.message, 'error');
-        });
-    }
-}
-
-function cleanupLogs() {
-    if (confirm('Очистить старые логи? Это действие необратимо.')) {
-        apiRequest('/api/cleanup-logs', {
-            method: 'POST'
-        })
-        .then(result => {
-            showNotification('Логи очищены');
-        })
-        .catch(error => {
-            showNotification(error.message, 'error');
-        });
-    }
-}
-
-function showAllErrors() {
-    // Можно открыть отдельную страницу с полным списком ошибок
-    window.open('/admin/errors', '_blank');
-}
-
-// Обработка формы добавления пользователя
-handleFormSubmit('addUserForm', '/api/users/create', function(result) {
-    hideModal('addUserModal');
-    showNotification('Пользователь создан!');
-    setTimeout(() => location.reload(), 1000);
-});
-
-// Обработка формы смены пароля
-document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+// Создание пользователя
+document.getElementById('createUserForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    const userId = document.getElementById('changePasswordUserId').value;
     const formData = new FormData(this);
-    const data = Object.fromEntries(formData);
+    const permissions = [];
+    formData.getAll('permissions').forEach(p => permissions.push(p));
     
-    apiRequest(`/api/users/${userId}/password`, {
-        method: 'POST',
-        body: JSON.stringify(data)
-    })
-    .then(result => {
-        hideModal('changePasswordModal');
-        showNotification('Пароль изменен!');
-        this.reset();
-    })
-    .catch(error => {
-        showNotification(error.message, 'error');
-    });
-});
-
-// Закрытие выпадающих меню при клике вне их
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.dropdown')) {
-        hideAllDropdowns();
-    }
-});
-
-// Автоматическое обновление системной информации каждые 30 секунд
-setInterval(function() {
-    if (document.visibilityState === 'visible') {
-        apiRequest('/api/system-status')
-        .then(result => {
-            // Можно обновить показатели без перезагрузки страницы
-            console.log('Системная информация обновлена');
-        })
-        .catch(error => {
-            console.log('Ошибка обновления системной информации');
+    const data = {
+        email: formData.get('email'),
+        name: formData.get('name'),
+        role: formData.get('role'),
+        password: formData.get('password'),
+        permissions: permissions
+    };
+    
+    try {
+        const response = await fetch('/api/users/create', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
         });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showNotification('Пользователь создан');
+            hideModal('createUserModal');
+            setTimeout(() => location.reload(), 1000);
+        } else {
+            showNotification(result.error, 'error');
+        }
+    } catch (error) {
+        showNotification('Ошибка создания пользователя', 'error');
     }
-}, 30000);
+});
+
+// Изменение пароля
+async function changePassword(userId) {
+    const newPassword = prompt('Введите новый пароль (минимум 6 символов):');
+    if (!newPassword || newPassword.length < 6) {
+        showNotification('Пароль должен быть не менее 6 символов', 'warning');
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/users/${userId}/password`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({password: newPassword})
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showNotification('Пароль изменен');
+        } else {
+            showNotification(result.error, 'error');
+        }
+    } catch (error) {
+        showNotification('Ошибка изменения пароля', 'error');
+    }
+}
+
+// Переключение статуса пользователя
+async function toggleUserStatus(userId) {
+    if (!confirm('Изменить статус пользователя?')) return;
+    
+    try {
+        const response = await fetch(`/api/users/${userId}/toggle`, {
+            method: 'POST'
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showNotification(result.message);
+            setTimeout(() => location.reload(), 1000);
+        } else {
+            showNotification(result.error, 'error');
+        }
+    } catch (error) {
+        showNotification('Ошибка изменения статуса', 'error');
+    }
+}
+
+// Загрузка Excel файла
+document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const resultDiv = document.getElementById('uploadResult');
+    
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = '<div class="alert alert-warning">Загрузка файла...</div>';
+    
+    try {
+        const response = await fetch('/api/upload-excel', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            resultDiv.innerHTML = `<div class="alert alert-success">${result.message}</div>`;
+            this.reset();
+        } else {
+            resultDiv.innerHTML = `<div class="alert alert-error">${result.error}</div>`;
+        }
+    } catch (error) {
+        resultDiv.innerHTML = `<div class="alert alert-error">Ошибка загрузки: ${error.message}</div>`;
+    }
+});
+
+// Генерация PDF
+async function generatePDF() {
+    if (!confirm('Создать новый PDF с тарифами?')) return;
+    
+    showNotification('Генерация PDF...', 'warning');
+    
+    try {
+        const response = await fetch('/api/generate-pdf', {
+            method: 'POST'
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showNotification('PDF создан успешно');
+            setTimeout(() => location.reload(), 1000);
+        } else {
+            showNotification(result.error, 'error');
+        }
+    } catch (error) {
+        showNotification('Ошибка генерации PDF', 'error');
+    }
+}
+
+// Обновление информации о системе
+async function refreshSystemInfo() {
+    try {
+        const response = await fetch('/api/system-status');
+        const data = await response.json();
+        
+        // Обновляем отображение
+        document.getElementById('cpu-usage').textContent = data.info.cpu.percent + '%';
+        // ... обновляем остальные метрики
+        
+        showNotification('Данные обновлены');
+    } catch (error) {
+        showNotification('Ошибка обновления', 'error');
+    }
+}
+
+// Автообновление системной информации каждые 30 секунд
+setInterval(refreshSystemInfo, 30000);
 </script>
-
-<style>
-.dropdown {
-    position: relative;
-}
-
-.dropdown-menu {
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    box-shadow: var(--shadow-md);
-    z-index: 100;
-    min-width: 180px;
-    padding: 0.5rem 0;
-}
-
-.dropdown-item {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 1rem;
-    border: none;
-    background: none;
-    text-align: left;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.2s;
-}
-
-.dropdown-item:hover {
-    background: var(--light);
-}
-
-.dropdown-item i {
-    width: 1rem;
-    margin-right: 0.5rem;
-}
-
-.stat-card {
-    text-align: center;
-    padding: 1rem;
-    background: white;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-}
-
-.stat-value {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: var(--primary);
-    margin-bottom: 0.25rem;
-}
-
-.stat-label {
-    font-size: 0.8rem;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
-}
-</style>
 {% endblock %}

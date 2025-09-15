@@ -8,6 +8,95 @@
 </a>
 {% endblock %}
 
+{% block extra_css %}
+<style>
+.kanban-container {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    margin: 0 -0.5rem;
+}
+
+.kanban-column {
+    flex: 0 0 280px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    padding: 0.75rem;
+}
+
+.kanban-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.kanban-title {
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 0.9rem;
+}
+
+.kanban-count {
+    background: var(--primary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+}
+
+.kanban-card {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.kanban-card:hover {
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+}
+
+.kanban-card-title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: var(--dark);
+    font-size: 0.85rem;
+}
+
+.kanban-card-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.kanban-card-amount {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 0.85rem;
+}
+
+.kanban-card-date {
+    font-size: 0.7rem;
+    color: var(--text-light);
+}
+
+.kanban-empty {
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+</style>
+{% endblock %}
+
 {% block content %}
 <!-- Приветствие -->
 <div class="card">
@@ -45,24 +134,120 @@
     {% endif %}
 </div>
 
-<!-- Новые заявки -->
-{% if stats.new_orders > 0 %}
+<!-- Канбан доска заявок -->
 <div class="card">
     <div class="card-header">
         <div class="card-title">
-            <i class="fas fa-bell text-warning"></i>
-            Требуют внимания
+            <i class="fas fa-columns"></i>
+            Доска заявок
         </div>
-        <span class="status-badge status-new">{{ stats.new_orders }}</span>
-    </div>
-    <p class="text-muted mb-0">Новых заявок без назначенного менеджера</p>
-    <div class="mt-2">
-        <a href="{{ url_for('orders_list') }}?status=new" class="btn btn-primary btn-sm">
-            <i class="fas fa-eye"></i> Посмотреть
+        <a href="{{ url_for('orders_list') }}" class="btn btn-outline btn-sm">
+            Все заявки
         </a>
     </div>
 </div>
-{% endif %}
+
+<div class="kanban-container">
+    <!-- Новые заявки -->
+    <div class="kanban-column">
+        <div class="kanban-header">
+            <div class="kanban-title">🆕 Новые</div>
+            <div class="kanban-count">{{ kanban_orders.new|length if kanban_orders else 0 }}</div>
+        </div>
+        {% if kanban_orders and kanban_orders.new %}
+            {% for order in kanban_orders.new[:5] %}
+            <div class="kanban-card" onclick="window.location.href='/orders/{{ order.id }}'">
+                <div class="kanban-card-title">#{{ order.id }}</div>
+                <div class="kanban-card-subtitle">
+                    {{ order.full_name or order.telegram_contact or 'Без имени' }}
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="kanban-card-amount">{{ order.order_amount or '?' }}</span>
+                    <span class="kanban-card-date">{{ order.created_at.strftime('%d.%m') }}</span>
+                </div>
+                {% if not order.manager_email %}
+                <button class="btn btn-primary btn-sm w-100 mt-2" onclick="event.stopPropagation(); assignOrder({{ order.id }})">
+                    <i class="fas fa-hand-paper"></i> Взять
+                </button>
+                {% endif %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="kanban-empty">Нет новых заявок</div>
+        {% endif %}
+    </div>
+
+    <!-- Назначенные -->
+    <div class="kanban-column">
+        <div class="kanban-header">
+            <div class="kanban-title">📋 В работе</div>
+            <div class="kanban-count">{{ kanban_orders.assigned|length if kanban_orders else 0 }}</div>
+        </div>
+        {% if kanban_orders and kanban_orders.assigned %}
+            {% for order in kanban_orders.assigned[:5] %}
+            <div class="kanban-card" onclick="window.location.href='/orders/{{ order.id }}'">
+                <div class="kanban-card-title">#{{ order.id }}</div>
+                <div class="kanban-card-subtitle">
+                    {{ order.full_name or 'Без имени' }}
+                    {% if order.manager_email == session.user_email %}
+                    <span style="background: var(--primary); color: white; padding: 1px 4px; border-radius: 4px; font-size: 0.65rem;">МОЯ</span>
+                    {% endif %}
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="kanban-card-amount">{{ order.order_amount or '?' }}</span>
+                    <span class="kanban-card-date">{{ order.created_at.strftime('%d.%m') }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="kanban-empty">Нет заявок</div>
+        {% endif %}
+    </div>
+
+    <!-- Заказаны -->
+    <div class="kanban-column">
+        <div class="kanban-header">
+            <div class="kanban-title">🛒 Заказаны</div>
+            <div class="kanban-count">{{ kanban_orders.ordered|length if kanban_orders else 0 }}</div>
+        </div>
+        {% if kanban_orders and kanban_orders.ordered %}
+            {% for order in kanban_orders.ordered[:5] %}
+            <div class="kanban-card" onclick="window.location.href='/orders/{{ order.id }}'">
+                <div class="kanban-card-title">#{{ order.id }}</div>
+                <div class="kanban-card-subtitle">{{ order.full_name or 'Без имени' }}</div>
+                <div class="d-flex justify-content-between">
+                    <span class="kanban-card-amount">{{ order.order_amount or '?' }}</span>
+                    <span class="kanban-card-date">{{ order.created_at.strftime('%d.%m') }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="kanban-empty">Нет заявок</div>
+        {% endif %}
+    </div>
+
+    <!-- Выкуплены -->
+    <div class="kanban-column">
+        <div class="kanban-header">
+            <div class="kanban-title">✅ Выкуплены</div>
+            <div class="kanban-count">{{ kanban_orders.purchased|length if kanban_orders else 0 }}</div>
+        </div>
+        {% if kanban_orders and kanban_orders.purchased %}
+            {% for order in kanban_orders.purchased[:5] %}
+            <div class="kanban-card" onclick="window.location.href='/orders/{{ order.id }}'">
+                <div class="kanban-card-title">#{{ order.id }}</div>
+                <div class="kanban-card-subtitle">{{ order.full_name or 'Без имени' }}</div>
+                <div class="d-flex justify-content-between">
+                    <span class="kanban-card-amount">{{ order.order_amount or '?' }}</span>
+                    <span class="kanban-card-date">{{ order.created_at.strftime('%d.%m') }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="kanban-empty">Нет заявок</div>
+        {% endif %}
+    </div>
+</div>
 
 <!-- Быстрые действия -->
 <div class="card">
@@ -82,6 +267,9 @@
         {% if session.user_role == 'director' %}
         <a href="{{ url_for('analytics') }}" class="btn btn-success btn-sm" style="flex: 1;">
             <i class="fas fa-chart-bar"></i> Отчеты
+        </a>
+        <a href="{{ url_for('settings') }}" class="btn btn-warning btn-sm" style="flex: 1;">
+            <i class="fas fa-cog"></i> Настройки
         </a>
         {% endif %}
     </div>
@@ -110,4 +298,24 @@
     {% endfor %}
 </div>
 {% endif %}
+
+<script>
+function assignOrder(orderId) {
+    if (!confirm('Взять заявку в работу?')) return;
+    
+    fetch(`/api/orders/${orderId}/assign`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            showNotification('Заявка взята в работу');
+            setTimeout(() => location.reload(), 500);
+        } else {
+            showNotification(result.error || 'Ошибка', 'error');
+        }
+    });
+}
+</script>
 {% endblock %}
