@@ -1140,6 +1140,10 @@ def dashboard():
                             <span>🏠</span>
                             Вернуться на главную
                         </a>
+                        <a href="/orders_dashboard" class="button success">
+                             <span>📦</span> 
+                             Метрики заказов
+                        </a>
                         <a href="#" onclick="refreshData()" class="button">
                             <span>🔄</span>
                             Обновить данные
@@ -1318,6 +1322,144 @@ def dashboard():
          user_analytics=user_analytics,
          analytics=analytics,
          funnel_data=funnel_data)
+
+@app.route('/orders_dashboard')
+def orders_dashboard():
+    conn = connect_to_db()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    try:
+        today = datetime.now()
+        first_day_current = today.replace(day=1)
+        first_day_previous = (first_day_current - timedelta(days=1)).replace(day=1)
+
+        # --- Основные метрики ---
+        # Заказы за текущий месяц
+        cursor.execute("""
+            SELECT COUNT(*) AS count
+            FROM delivery_test.purchase_requests
+            WHERE created_at >= %s
+              AND telegram_contact NOT IN ('@emilienches', '@dukudrin')
+        """, (first_day_current,))
+        current_month_orders = cursor.fetchone()['count']
+
+        # Заказы за предыдущий месяц
+        cursor.execute("""
+            SELECT COUNT(*) AS count
+            FROM delivery_test.purchase_requests
+            WHERE created_at >= %s
+              AND created_at < %s
+              AND telegram_contact NOT IN ('@emilienches', '@dukudrin')
+        """, (first_day_previous, first_day_current))
+        previous_month_orders = cursor.fetchone()['count']
+
+        # Всего заказов
+        cursor.execute("""
+            SELECT COUNT(*) AS count
+            FROM delivery_test.purchase_requests
+            WHERE telegram_contact NOT IN ('@emilienches', '@dukudrin')
+        """)
+        total_orders = cursor.fetchone()['count']
+
+        # --- График заказов по дням (2 последних месяца) ---
+        cursor.execute("""
+            SELECT DATE(created_at) AS date, COUNT(*) AS count
+            FROM delivery_test.purchase_requests
+            WHERE created_at >= %s
+              AND telegram_contact NOT IN ('@emilienches', '@dukudrin')
+            GROUP BY DATE(created_at)
+            ORDER BY date
+        """, (first_day_previous,))
+        orders_by_day = [(row['date'].strftime('%d.%m'), row['count']) for row in cursor.fetchall()]
+
+        # --- Списки заказов ---
+        # Все заказы за текущий месяц
+        cursor.execute("""
+           SELECT o.id, 
+                  o.telegram_contact AS telegram_username, 
+                  o.order_amount, 
+                  o.supplier_link,
+                  o.additional_notes,
+                  o.promo_code,
+                  o.created_at
+            FROM delivery_test.purchase_requests o
+            WHERE o.created_at >= %s
+              AND o.telegram_contact NOT IN ('@emilienches', '@dukudrin')
+            ORDER BY o.created_at DESC
+        """, (first_day_current,))
+        current_month_list = cursor.fetchall()
+
+        # Все заказы за предыдущий месяц
+        cursor.execute("""
+            SELECT o.id, 
+                   o.telegram_contact AS telegram_username, 
+                   o.order_amount, 
+                   o.supplier_link,
+                   o.additional_notes,
+                   o.promo_code,
+                   o.created_at
+            FROM delivery_test.purchase_requests o
+            WHERE o.created_at >= %s 
+              AND o.created_at < %s
+              AND o.telegram_contact NOT IN ('@emilienches', '@dukudrin')
+            ORDER BY o.created_at DESC
+        """, (first_day_previous, first_day_current))
+        previous_month_list = cursor.fetchall()
+
+        # --- Пользователи ---
+        # Не делали заказ более 2 месяцев
+        cursor.execute("""
+            SELECT '@'||tu.username as username, coalesce(pr.created_at, ua.created_at, uc.created_at) AS last_order
+            FROM  delivery_test.telegram_users tu
+            left join delivery_test.purchase_requests pr
+            	on pr.telegram_user_id=tu.id
+            	and tu.username NOT IN ('emilienches', 'dukudrin', 'test_user', 'test_user','Andrew_klimenko01')
+            left join (select telegram_user_id, max(created_at) as created_at from delivery_test.user_actions ua 
+            				group by telegram_user_id) ua
+            	on ua.telegram_user_id::text=tu.id::text
+            left join (select telegram_user_id, max(created_at) as created_at from delivery_test.user_calculation ua 
+            				group by telegram_user_id) uc           	
+            	on uc.telegram_user_id=tu.id
+            where pr.created_at < NOW() - INTERVAL '2 months' OR pr.created_at IS null           
+            and coalesce(pr.created_at, ua.created_at, uc.created_at) is not null            
+            and tu.username NOT IN ('emilienches', 'dukudrin', 'test_user', 'test_user','Andrew_klimenko01')
+            ORDER BY last_order desc
+        """)
+        inactive_users = cursor.fetchall()
+
+        # Сделали больше всего заказов
+        cursor.execute("""
+            SELECT telegram_contact AS username, COUNT(*) AS order_count
+            FROM delivery_test.purchase_requests
+            WHERE telegram_contact NOT IN ('@emilienches', '@dukudrin')
+            GROUP BY telegram_contact
+            ORDER BY order_count DESC
+            LIMIT 10
+        """)
+        top_users = cursor.fetchall()
+
+    except Exception as e:
+        print(f"Ошибка orders_dashboard: {e}")
+        return render_error("Ошибка при загрузке метрик заказов")
+    finally:
+        cursor.close()
+        conn.close()
+
+    return render_template(
+        'orders_dashboard.html',
+        current_month_orders=current_month_orders,
+        previous_month_orders=previous_month_orders,
+        total_orders=total_orders,
+        orders_by_day=orders_by_day,
+        current_month_list=current_month_list,
+        previous_month_list=previous_month_list,
+        inactive_users=inactive_users,
+        top_users=top_users
+    )
+
+
+
+
+
 
 # API маршруты
 @app.route('/api/stats')

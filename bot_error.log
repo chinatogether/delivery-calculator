@@ -19609,3 +19609,6 @@ INFO:__main__:Удалено сообщений для пользователя 
 INFO:aiogram.event:Update id=450955881 is handled. Duration 42436 ms by bot id=7709869722
 INFO:__main__:Пользователь 148440745 скачал тарифы
 INFO:aiogram.event:Update id=450955883 is handled. Duration 564 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450955884 is handled. Duration 222 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450955885 is handled. Duration 228 ms by bot id=7709869722
+INFO:aiogram.event:Update id=450955886 is handled. Duration 107 ms by bot id=7709869722
