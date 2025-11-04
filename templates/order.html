@@ -751,7 +751,7 @@
             
             // Приоритет: сначала из Telegram, потом из URL
             if (!telegramUserId) {
-                telegramUserId = urlParams.get('telegram_id') || 'test_user';
+                telegramUserId = urlParams.get('telegram_id') || '12345';
                 console.log('📋 Telegram ID из URL:', telegramUserId);
             }
             
@@ -1158,7 +1158,7 @@
         window.addEventListener('load', function() {
             console.log('🏁 Страница полностью загружена');
             // Дополнительные проверки после полной загрузки
-            if (!telegramUserId || telegramUserId === 'test_user') {
+            if (!telegramUserId || telegramUserId === '12345') {
                 console.log('⚠️ Внимание: используются тестовые данные пользователя');
             }
         });
