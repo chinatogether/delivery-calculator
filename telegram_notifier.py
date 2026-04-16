@@ -153,7 +153,8 @@ class TelegramNotifier:
                 f"🆕 <b>НОВАЯ ЗАЯВКА НА ДОСТАВКУ</b>\n\n"
                 f"📅 <b>Дата:</b> {moscow_time.strftime('%d.%m.%Y %H:%M')} (МСК)\n"
                 f"🆔 <b>ID заявки:</b> #{order_data.get('request_id', 'N/A')}\n"
-                f"👤 <b>Пользователь:</b> {order_data.get('telegram_contact', 'N/A')}\n"
+                f"👤 <b>Пользователь:</b> {order_data.get('telegram_contact', 'N/A')}\n"              
+                f"👤 <b>e-mail::</b> {order_data.get('email', 'N/A')}\n"
                 f"💰 <b>Сумма заказа:</b> {order_data.get('order_amount', 'Не указано')}\n"
                 f"💰 <b>Промокод:</b> {order_data.get('promo_code', 'Не указано')}\n"
             )
@@ -212,7 +213,8 @@ class TelegramNotifier:
                 f"🆕 <b>НОВАЯ ЗАЯВКА НА ДОСТАВКУ</b>\n\n"
                 f"📅 <b>Дата:</b> {moscow_time.strftime('%d.%m.%Y %H:%M')} (МСК)\n"
                 f"🆔 <b>ID заявки:</b> #{order_data.get('request_id', 'N/A')}\n"
-                f"👤 <b>Пользователь:</b> {order_data.get('telegram_contact', 'N/A')}\n"
+                f"👤 <b>Пользователь:</b> {order_data.get('telegram_contact', 'N/A')}\n" 
+                f"👤 <b>e-mail::</b> {order_data.get('email', 'N/A')}\n"
                 f"💰 <b>Сумма заказа:</b> {order_data.get('order_amount', 'Не указано')}\n"
             )
             

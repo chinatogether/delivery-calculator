@@ -223,12 +223,16 @@
         }
 
         @keyframes shake {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateX(0);
             }
+
             25% {
                 transform: translateX(-5px);
             }
+
             75% {
                 transform: translateX(5px);
             }
@@ -485,24 +489,35 @@
         }
 
         /* Переопределение для любых возможных контейнеров Telegram */
-        #root, .app, .main-container, [data-telegram] {
+        #root,
+        .app,
+        .main-container,
+        [data-telegram] {
             background: var(--background-color) !important;
             color: var(--text-color) !important;
         }
 
         /* Принудительно устанавливаем цвета для всех текстовых элементов */
-        p, span, div, label, strong {
+        p,
+        span,
+        div,
+        label,
+        strong {
             color: var(--text-color) !important;
         }
 
         /* Переопределяем цвета hint элементов */
-        .help-text, .subtitle {
+        .help-text,
+        .subtitle {
             color: var(--hint-color) !important;
         }
 
         /* Для iOS Safari */
         @supports (-webkit-appearance: none) {
-            input, select, textarea {
+
+            input,
+            select,
+            textarea {
                 -webkit-appearance: none;
                 appearance: none;
             }
@@ -562,6 +577,17 @@
                         Если у вас его нет, добавьте. Это необходимо для дальнейшей коммуникации.
                     </div>
                     <div id="telegramContactError" class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">
+                        Email <span class="required">*</span>
+                    </label>
+                    <input type="email" id="email" name="email" required placeholder="example@mail.ru">
+                    <div class="help-text">
+                        Для отправки документов и уведомлений о заказе.
+                    </div>
+                    <div id="emailError" class="error-message"></div>
                 </div>
 
                 <!-- Ссылка на поставщика или описание товара - ОБЯЗАТЕЛЬНОЕ ПОЛЕ -->
@@ -690,7 +716,7 @@
         console.log('🚀 Скрипт order.html запущен');
 
         // Обработка ошибок JavaScript
-        window.addEventListener('error', function(e) {
+        window.addEventListener('error', function (e) {
             console.error('❌ JavaScript error:', e.error);
         });
 
@@ -704,26 +730,26 @@
         // Улучшенная инициализация Telegram Web App
         function initTelegramWebApp() {
             console.log('🔄 Инициализация Telegram Web App...');
-            
+
             try {
                 if (window.Telegram && window.Telegram.WebApp) {
                     tg = window.Telegram.WebApp;
                     console.log('✅ Telegram Web App доступен');
-                    
+
                     tg.ready();
                     tg.expand();
-                    
+
                     // ВАЖНО: Очищаем все предыдущие обработчики
                     if (tg.BackButton) {
                         tg.BackButton.offClick(); // Убираем все предыдущие обработчики
                         tg.BackButton.hide(); // Скрываем кнопку перед настройкой
                     }
-                    
+
                     if (tg.MainButton) {
                         tg.MainButton.offClick(); // Убираем все предыдущие обработчики
                         tg.MainButton.hide(); // Скрываем кнопку перед настройкой
                     }
-                    
+
                     // Получаем данные пользователя из Telegram
                     if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
                         telegramUserId = tg.initDataUnsafe.user.id;
@@ -746,20 +772,20 @@
         // Получение данных из URL параметров
         function getDataFromURL() {
             console.log('🔄 Получение данных из URL...');
-            
+
             const urlParams = new URLSearchParams(window.location.search);
-            
+
             // Приоритет: сначала из Telegram, потом из URL
             if (!telegramUserId) {
                 telegramUserId = urlParams.get('telegram_id') || '12345';
                 console.log('📋 Telegram ID из URL:', telegramUserId);
             }
-            
+
             if (!telegramUsername) {
                 telegramUsername = urlParams.get('username') || 'test_username';
                 console.log('📋 Username из URL:', telegramUsername);
             }
-            
+
             if (!calculationId) {
                 calculationId = urlParams.get('calculation_id');
                 console.log('📋 Calculation ID из URL:', calculationId);
@@ -776,7 +802,7 @@
             document.getElementById('debugUsername').textContent = telegramUsername || 'не определен';
             document.getElementById('debugCalculationId').textContent = calculationId || 'не определен';
             document.getElementById('debugSource').textContent = isFromResults ? 'из результатов расчета' : 'прямой доступ';
-            
+
             // Показываем отладочную информацию в dev режиме
             if (window.location.search.includes('debug=1')) {
                 document.getElementById('debugInfo').style.display = 'block';
@@ -786,7 +812,7 @@
         // Предзаполнение полей формы
         function prefillForm() {
             console.log('🔄 Предзаполнение формы...');
-            
+
             // Предзаполняем Telegram контакт
             const telegramContactField = document.getElementById('telegramContact');
             if (telegramUsername && telegramUsername !== 'test_username') {
@@ -799,16 +825,16 @@
         // Настройка кнопок Telegram
         function setupTelegramButtons() {
             console.log('🔄 Настройка кнопок Telegram...');
-            
+
             try {
                 if (tg && tg.BackButton) {
                     // Настраиваем кнопку "Назад"
                     tg.BackButton.show();
-                    
+
                     // Устанавливаем новый обработчик
                     tg.BackButton.onClick(() => {
                         console.log('🔙 Нажата кнопка "Назад"');
-                        
+
                         if (isFromResults) {
                             // Если пришли из результатов, показываем подтверждение
                             if (confirm('Вернуться к результатам расчета?')) {
@@ -822,7 +848,7 @@
                             }
                         }
                     });
-                    
+
                     console.log('✅ Кнопка "Назад" настроена');
                 }
             } catch (e) {
@@ -835,12 +861,12 @@
                     tg.MainButton.text = "Отправить заявку";
                     tg.MainButton.color = "#E74C3C";
                     tg.MainButton.show();
-                    
+
                     tg.MainButton.onClick(() => {
                         console.log('📤 Нажата главная кнопка');
                         document.getElementById('purchaseRequestForm').dispatchEvent(new Event('submit'));
                     });
-                    
+
                     console.log('✅ Главная кнопка настроена');
                 }
             } catch (e) {
@@ -851,13 +877,13 @@
         // Инициализация всех компонентов
         function initialize() {
             console.log('🚀 Начало инициализации...');
-            
+
             initTelegramWebApp();
             getDataFromURL();
             updateDebugInfo();
             prefillForm();
             setupTelegramButtons();
-            
+
             console.log('✅ Инициализация завершена');
             console.log('📊 Итоговые данные:', {
                 telegramUserId,
@@ -912,7 +938,7 @@
         // Функция валидации формы - ОБНОВЛЕНА
         function validateForm() {
             console.log('🔄 Валидация формы...');
-            
+
             let isValid = true;
             const fields = [
                 {
@@ -921,7 +947,7 @@
                     message: 'Формат: @nickname или https://t.me/nickname'
                 },
                 {
-                    id: 'supplierLink',  
+                    id: 'supplierLink',
                     validator: (val) => val.trim().length >= 3, // Минимум 3 символа
                     message: 'Укажите ссылку на поставщика или опишите что ищете (минимум 3 символа)'
                 },
@@ -929,6 +955,11 @@
                     id: 'orderAmount',
                     validator: (val) => val !== '',
                     message: 'Выберите сумму заказа'
+                },
+                {
+                    id: 'email',
+                    validator: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+                    message: 'Введите корректный email адрес'
                 },
                 {
                     id: 'termsAccepted',
@@ -994,7 +1025,7 @@
                 const formData = {
                     telegram_id: telegramUserId,
                     calculation_id: calculationId,
-                    email: `${telegramUserId}@telegram.user`,
+                    email: document.getElementById('email').value.trim(),
                     telegram_contact: document.getElementById('telegramContact').value.trim(),
                     supplier_link: document.getElementById('supplierLink').value.trim(),  // ТЕПЕРЬ ОБЯЗАТЕЛЬНОЕ
                     order_amount: document.getElementById('orderAmount').value,
@@ -1022,7 +1053,7 @@
 
                 if (result.success) {
                     console.log('✅ Заявка успешно отправлена!');
-                    
+
                     if (tg && tg.HapticFeedback) {
                         tg.HapticFeedback.notificationOccurred('success');
                     }
@@ -1049,7 +1080,7 @@
                     // Очищаем форму
                     document.getElementById('purchaseRequestForm').reset();
                     updateCheckboxStyle(); // Обновляем стиль checkbox после сброса
-                    
+
                     // Восстанавливаем предзаполненные данные
                     prefillForm();
 
@@ -1125,7 +1156,7 @@
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
                 closePrivacyModal();
-                
+
                 // Если нажали Escape и пришли из результатов, возвращаемся назад
                 if (isFromResults && tg) {
                     if (confirm('Вернуться к результатам расчета?')) {
@@ -1136,7 +1167,7 @@
         });
 
         // Обработка кнопки "назад" браузера
-        window.addEventListener('popstate', function(event) {
+        window.addEventListener('popstate', function (event) {
             console.log('🔙 Обработка popstate события');
             if (isFromResults) {
                 // Если пришли из результатов, позволяем вернуться
@@ -1148,14 +1179,14 @@
         });
 
         // Запуск инициализации при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('📄 DOM загружен, запуск инициализации...');
             initialize();
             updateCheckboxStyle(); // Инициализация стиля checkbox
         });
 
         // Дополнительная инициализация при полной загрузке
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             console.log('🏁 Страница полностью загружена');
             // Дополнительные проверки после полной загрузки
             if (!telegramUserId || telegramUserId === '12345') {

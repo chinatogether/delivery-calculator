@@ -1586,3 +1586,1279 @@ Original description: Too Many Requests: retry after 5
 2025-11-04 15:27:13,220 - __main__ - INFO - TelegramNotifier инициализирован. Chat ID: -1002768839240
 2025-11-04 15:27:13,434 - __main__ - INFO - Уведомление об обновлении курса отправлено в канал
 2025-11-04 15:27:13,623 - aiogram.event - INFO - Update id=33789673 is handled. Duration 449 ms by bot id=8024421344
+2025-11-05 06:09:48,976 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-11-05 06:09:48,981 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-11-05 06:09:48,981 - aiogram.dispatcher - INFO - Polling stopped
+2025-11-05 06:10:17,524 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-11-05 06:10:17,671 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-11-05 06:10:17,671 - aiogram.dispatcher - INFO - Start polling
+2025-11-05 06:10:17,718 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-11-05 06:14:37,203 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-11-05 06:14:37,304 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-11-05 06:14:37,304 - aiogram.dispatcher - INFO - Polling stopped
+2025-11-05 06:14:45,619 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-11-05 06:14:45,782 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-11-05 06:14:45,784 - aiogram.dispatcher - INFO - Start polling
+2025-11-05 06:14:45,831 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-11-05 06:15:28,751 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-11-05 06:15:28,751 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-11-05 06:15:28,752 - aiogram.dispatcher - INFO - Polling stopped
+2025-11-05 06:15:45,099 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-11-05 06:15:45,328 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-11-05 06:15:45,328 - aiogram.dispatcher - INFO - Start polling
+2025-11-05 06:15:45,379 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-11-05 22:18:54,836 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-11-05 22:18:54,839 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-05 22:19:05,978 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-06 01:10:36,687 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-11-06 01:10:36,687 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-06 01:10:37,732 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-11-06 01:10:37,732 - aiogram.dispatcher - WARNING - Sleep for 1.323801 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-11-06 01:10:39,102 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-11-06 01:10:39,102 - aiogram.dispatcher - WARNING - Sleep for 1.698061 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-11-06 01:10:44,240 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-06 01:10:44,240 - aiogram.dispatcher - WARNING - Sleep for 2.281300 seconds and try again... (tryings = 3, bot id = 8024421344)
+2025-11-06 01:10:46,568 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-06 01:10:46,569 - aiogram.dispatcher - WARNING - Sleep for 2.888257 seconds and try again... (tryings = 4, bot id = 8024421344)
+2025-11-06 01:10:49,504 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-06 01:10:49,504 - aiogram.dispatcher - WARNING - Sleep for 3.793678 seconds and try again... (tryings = 5, bot id = 8024421344)
+2025-11-06 01:11:13,303 - aiogram.dispatcher - INFO - Connection established (tryings = 6, bot id = 8024421344)
+2025-11-06 15:55:30,147 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-11-06 15:55:30,147 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-06 15:55:41,296 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-06 15:55:41,297 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-11-06 15:55:41,297 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-06 15:55:52,436 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-08 17:10:12,874 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-11-08 17:10:12,874 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-08 17:10:24,014 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-08 17:10:44,154 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-11-08 17:10:44,154 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-08 17:10:55,302 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-08 17:14:36,444 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-11-08 17:14:36,444 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-08 17:14:47,594 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-11 15:18:28,925 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-11-11 15:18:28,925 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-11 15:18:40,082 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-17 01:10:36,606 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-11-17 01:10:36,606 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-17 01:10:37,659 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-11-17 01:10:37,659 - aiogram.dispatcher - WARNING - Sleep for 1.403730 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-11-17 01:10:39,113 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-11-17 01:10:39,113 - aiogram.dispatcher - WARNING - Sleep for 1.753268 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-11-17 01:10:44,266 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-17 01:10:44,266 - aiogram.dispatcher - WARNING - Sleep for 2.328396 seconds and try again... (tryings = 3, bot id = 8024421344)
+2025-11-17 01:10:46,645 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-17 01:10:46,645 - aiogram.dispatcher - WARNING - Sleep for 3.137047 seconds and try again... (tryings = 4, bot id = 8024421344)
+2025-11-17 01:11:11,301 - aiogram.dispatcher - INFO - Connection established (tryings = 5, bot id = 8024421344)
+2025-11-17 06:48:09,745 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-17 06:48:09,745 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-17 06:48:31,950 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-20 01:10:37,725 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-11-20 01:10:37,726 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-20 01:10:38,772 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-11-20 01:10:38,773 - aiogram.dispatcher - WARNING - Sleep for 1.176267 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-11-20 01:10:42,979 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-20 01:10:42,980 - aiogram.dispatcher - WARNING - Sleep for 1.636167 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-11-20 01:10:44,664 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-20 01:10:44,664 - aiogram.dispatcher - WARNING - Sleep for 2.403245 seconds and try again... (tryings = 3, bot id = 8024421344)
+2025-11-20 01:11:10,099 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2025-11-20 07:19:28,313 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-11-20 07:19:28,313 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-20 07:19:39,451 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-20 11:34:54,058 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-11-20 11:34:54,058 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-20 11:35:05,203 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-21 14:18:44,436 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-11-21 14:18:44,438 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-21 14:18:55,589 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-22 00:46:30,770 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-11-22 00:46:30,771 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-22 00:46:41,917 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-22 00:49:12,661 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-11-22 00:49:12,661 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-22 00:49:23,798 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-22 01:10:41,609 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-22 01:10:41,609 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-22 01:10:42,657 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-22 01:10:42,658 - aiogram.dispatcher - WARNING - Sleep for 1.448312 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-11-22 01:10:44,155 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-22 01:10:44,156 - aiogram.dispatcher - WARNING - Sleep for 1.864374 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-11-22 01:11:19,713 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2025-11-25 01:10:43,195 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-25 01:10:43,198 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-25 01:10:44,242 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-11-25 01:10:44,242 - aiogram.dispatcher - WARNING - Sleep for 1.526560 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-11-25 01:11:22,085 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2025-11-25 06:28:44,629 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2025-11-25 06:28:47,694 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-11-25 06:28:47,809 - aiogram.dispatcher - INFO - Polling stopped
+2025-11-25 06:29:16,241 - __main__ - INFO - ExchangeRateBot инициализирован
+2025-11-25 06:29:16,449 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2025-11-25 06:29:16,450 - aiogram.dispatcher - INFO - Start polling
+2025-11-25 06:29:16,500 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2025-11-25 13:52:09,686 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-11-25 13:52:09,686 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-25 13:52:20,837 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-25 18:55:41,373 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-11-25 18:55:41,373 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-25 18:55:53,598 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-11-27 02:59:03,349 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-11-27 02:59:03,349 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-11-27 02:59:14,486 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-01 17:13:47,639 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-12-01 17:13:48,268 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-01 17:13:59,579 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-01 17:26:53,353 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-12-01 17:26:53,353 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-01 17:27:04,494 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-01 17:40:58,349 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-12-01 17:40:58,349 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-01 17:41:09,498 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-02 20:04:08,657 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-12-02 20:04:08,657 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-02 20:04:19,820 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-02 20:06:30,533 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-12-02 20:06:30,534 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-02 20:06:41,689 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-05 01:10:47,528 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-05 01:10:47,528 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-05 01:10:48,585 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-05 01:10:48,585 - aiogram.dispatcher - WARNING - Sleep for 1.284593 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-05 01:10:49,922 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-05 01:10:49,922 - aiogram.dispatcher - WARNING - Sleep for 1.893132 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-12-05 01:10:51,869 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-05 01:10:51,869 - aiogram.dispatcher - WARNING - Sleep for 2.417125 seconds and try again... (tryings = 3, bot id = 8024421344)
+2025-12-05 01:11:16,474 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2025-12-05 21:57:01,034 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-12-05 21:57:01,034 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-05 21:57:12,184 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-05 21:59:46,782 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-12-05 21:59:46,782 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-05 21:59:57,943 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-07 14:05:25,900 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-12-07 14:05:25,900 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-07 14:05:41,445 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-08 08:29:03,385 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-08 08:29:03,385 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-08 08:29:14,527 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-08 08:29:34,664 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-12-08 08:29:34,664 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-08 08:29:45,803 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-09 19:50:15,619 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-12-09 19:50:15,619 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-09 19:50:26,769 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-12 01:10:47,305 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-12 01:10:47,305 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-12 01:10:48,351 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-12 01:10:48,351 - aiogram.dispatcher - WARNING - Sleep for 1.090721 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-12 01:10:49,487 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-12 01:10:49,487 - aiogram.dispatcher - WARNING - Sleep for 1.372263 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-12-12 01:11:20,284 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2025-12-15 08:10:10,346 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 08:10:10,348 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-15 08:10:21,499 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-15 09:54:01,395 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-12-15 09:54:01,396 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-15 09:54:12,675 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-15 23:24:39,381 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:24:39,381 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-15 23:25:51,348 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:25:51,349 - aiogram.dispatcher - WARNING - Sleep for 1.286771 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-15 23:27:03,357 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:27:03,357 - aiogram.dispatcher - WARNING - Sleep for 1.732494 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-12-15 23:28:15,378 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:28:15,378 - aiogram.dispatcher - WARNING - Sleep for 2.181858 seconds and try again... (tryings = 3, bot id = 8024421344)
+2025-12-15 23:29:28,381 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:29:28,381 - aiogram.dispatcher - WARNING - Sleep for 2.864248 seconds and try again... (tryings = 4, bot id = 8024421344)
+2025-12-15 23:30:41,410 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:30:41,410 - aiogram.dispatcher - WARNING - Sleep for 3.850617 seconds and try again... (tryings = 5, bot id = 8024421344)
+2025-12-15 23:31:55,406 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:31:55,406 - aiogram.dispatcher - WARNING - Sleep for 5.050410 seconds and try again... (tryings = 6, bot id = 8024421344)
+2025-12-15 23:33:11,381 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:33:11,381 - aiogram.dispatcher - WARNING - Sleep for 5.043663 seconds and try again... (tryings = 7, bot id = 8024421344)
+2025-12-15 23:34:27,381 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:34:27,381 - aiogram.dispatcher - WARNING - Sleep for 5.043636 seconds and try again... (tryings = 8, bot id = 8024421344)
+2025-12-15 23:35:43,357 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:35:43,357 - aiogram.dispatcher - WARNING - Sleep for 5.071628 seconds and try again... (tryings = 9, bot id = 8024421344)
+2025-12-15 23:36:59,381 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:36:59,381 - aiogram.dispatcher - WARNING - Sleep for 5.084343 seconds and try again... (tryings = 10, bot id = 8024421344)
+2025-12-15 23:37:20,411 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Temporary failure in name resolution]
+2025-12-15 23:37:20,411 - aiogram.dispatcher - WARNING - Sleep for 4.906851 seconds and try again... (tryings = 11, bot id = 8024421344)
+2025-12-15 23:38:35,381 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:38:35,381 - aiogram.dispatcher - WARNING - Sleep for 5.097048 seconds and try again... (tryings = 12, bot id = 8024421344)
+2025-12-15 23:39:51,392 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-15 23:39:51,392 - aiogram.dispatcher - WARNING - Sleep for 4.963813 seconds and try again... (tryings = 13, bot id = 8024421344)
+2025-12-15 23:40:17,735 - aiogram.dispatcher - INFO - Connection established (tryings = 14, bot id = 8024421344)
+2025-12-16 03:50:59,405 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-12-16 03:50:59,406 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-16 03:51:10,555 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-16 06:37:09,395 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-16 06:37:09,396 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-16 06:37:20,549 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-16 23:01:33,365 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-16 23:01:33,365 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-16 23:01:44,523 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-16 23:02:03,454 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-12-16 23:02:03,455 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-16 23:02:14,503 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-17 14:01:44,097 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-12-17 14:01:44,097 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-17 14:01:55,233 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-18 01:10:38,458 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-12-18 01:10:38,466 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-18 01:10:39,516 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-12-18 01:10:39,516 - aiogram.dispatcher - WARNING - Sleep for 1.360744 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-18 01:10:40,927 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-12-18 01:10:40,928 - aiogram.dispatcher - WARNING - Sleep for 1.828419 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-12-18 01:10:42,807 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-12-18 01:10:42,807 - aiogram.dispatcher - WARNING - Sleep for 2.522459 seconds and try again... (tryings = 3, bot id = 8024421344)
+2025-12-18 01:10:46,618 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-18 01:10:46,618 - aiogram.dispatcher - WARNING - Sleep for 3.257974 seconds and try again... (tryings = 4, bot id = 8024421344)
+2025-12-18 01:11:13,447 - aiogram.dispatcher - INFO - Connection established (tryings = 5, bot id = 8024421344)
+2025-12-18 10:35:39,417 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2025-12-18 10:35:39,417 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-18 10:35:50,554 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-24 11:46:12,342 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-24 11:46:12,342 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-24 11:46:23,485 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-26 09:46:34,720 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-12-26 09:46:34,720 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-26 09:46:43,953 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Network is unreachable]
+2025-12-26 09:46:43,954 - aiogram.dispatcher - WARNING - Sleep for 1.429364 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-26 09:47:12,449 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2025-12-26 09:48:01,855 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-26 09:48:01,855 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-26 09:48:11,028 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-26 09:48:11,028 - aiogram.dispatcher - WARNING - Sleep for 1.252759 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-26 09:48:24,251 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2025-12-27 08:21:19,121 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-27 08:21:19,121 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-27 08:21:30,963 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-27 11:30:50,382 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-27 11:30:50,382 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-27 11:32:02,343 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-27 11:32:02,343 - aiogram.dispatcher - WARNING - Sleep for 1.390488 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-27 11:32:13,881 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2025-12-28 01:10:38,784 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-12-28 01:10:38,785 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-28 01:10:39,850 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-12-28 01:10:39,850 - aiogram.dispatcher - WARNING - Sleep for 1.304116 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-28 01:10:41,207 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2025-12-28 01:10:41,207 - aiogram.dispatcher - WARNING - Sleep for 1.631162 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-12-28 01:10:46,514 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-28 01:10:46,514 - aiogram.dispatcher - WARNING - Sleep for 1.954093 seconds and try again... (tryings = 3, bot id = 8024421344)
+2025-12-28 01:10:48,518 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-28 01:10:48,518 - aiogram.dispatcher - WARNING - Sleep for 2.539031 seconds and try again... (tryings = 4, bot id = 8024421344)
+2025-12-28 01:11:14,503 - aiogram.dispatcher - INFO - Connection established (tryings = 5, bot id = 8024421344)
+2025-12-28 11:10:17,405 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-28 11:10:17,405 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-28 11:11:22,589 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Network is unreachable]
+2025-12-28 11:11:22,590 - aiogram.dispatcher - WARNING - Sleep for 1.534149 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-28 11:12:34,348 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-28 11:12:34,348 - aiogram.dispatcher - WARNING - Sleep for 1.966364 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-12-28 11:13:00,078 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2025-12-28 11:14:10,381 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-28 11:14:10,381 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-28 11:14:27,608 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-29 08:20:41,865 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-29 08:20:41,865 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-29 08:21:22,478 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-29 23:42:21,555 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-29 23:42:21,555 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-29 23:42:22,604 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-29 23:42:22,604 - aiogram.dispatcher - WARNING - Sleep for 1.236358 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-29 23:42:23,890 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-29 23:42:23,890 - aiogram.dispatcher - WARNING - Sleep for 1.585947 seconds and try again... (tryings = 2, bot id = 8024421344)
+2025-12-29 23:42:25,526 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-29 23:42:25,526 - aiogram.dispatcher - WARNING - Sleep for 2.082369 seconds and try again... (tryings = 3, bot id = 8024421344)
+2025-12-29 23:42:49,288 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2025-12-29 23:54:12,788 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-12-29 23:54:12,788 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-29 23:54:23,938 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-29 23:54:23,939 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-12-29 23:54:23,939 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-29 23:54:35,084 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-30 00:28:10,928 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-30 00:28:10,928 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-30 00:28:11,979 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-30 00:28:11,979 - aiogram.dispatcher - WARNING - Sleep for 1.316002 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-30 00:28:34,473 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2025-12-30 15:45:56,581 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-30 15:45:56,581 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-30 15:46:13,983 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-30 15:46:13,984 - aiogram.dispatcher - WARNING - Sleep for 1.323482 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-30 15:46:35,973 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2025-12-30 15:47:36,025 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-12-30 15:47:36,025 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-30 15:47:52,625 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-30 15:49:35,357 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-12-30 15:49:35,357 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-30 15:49:46,526 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-30 23:12:22,139 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-30 23:12:22,139 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-30 23:13:33,373 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-30 23:13:33,373 - aiogram.dispatcher - WARNING - Sleep for 1.271178 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-30 23:14:11,806 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2025-12-30 23:17:01,381 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-30 23:17:01,381 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-30 23:17:12,524 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-30 23:18:53,381 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-30 23:18:53,381 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-30 23:19:05,647 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-30 23:23:46,785 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-30 23:23:46,786 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-30 23:23:47,834 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2025-12-30 23:23:47,834 - aiogram.dispatcher - WARNING - Sleep for 1.292299 seconds and try again... (tryings = 1, bot id = 8024421344)
+2025-12-30 23:24:10,960 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2025-12-31 12:54:21,395 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-12-31 12:54:21,395 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-31 12:54:33,603 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2025-12-31 12:54:51,756 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-12-31 12:54:51,756 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2025-12-31 12:55:03,003 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-01 13:49:57,406 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-01 13:49:57,407 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-01 13:50:08,584 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-01 13:50:27,512 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-01-01 13:50:27,513 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-01 13:50:38,867 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-02 00:15:42,343 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-02 00:15:42,344 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-02 00:16:45,572 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-02 00:16:45,572 - aiogram.dispatcher - WARNING - Sleep for 1.438980 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-01-02 00:16:57,210 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2026-01-03 21:27:18,218 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-03 21:27:18,218 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-03 21:27:29,356 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-05 13:49:25,891 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-05 13:49:25,891 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-05 13:49:37,051 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-05 13:49:37,052 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-05 13:49:37,052 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-05 13:49:48,200 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-06 06:02:43,381 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-06 06:02:43,382 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-06 06:02:54,531 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-07 11:23:59,357 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-07 11:23:59,357 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-07 11:24:10,834 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-07 11:31:45,341 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-07 11:31:45,342 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-07 11:31:56,584 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-07 11:47:03,560 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-07 11:47:03,560 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-07 11:47:20,512 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-07 11:52:23,357 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-07 11:52:23,357 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-07 11:52:35,295 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-07 12:16:46,343 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-07 12:16:46,344 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-07 12:16:59,877 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-07 12:51:17,373 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-07 12:51:17,373 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-07 12:52:10,738 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-07 13:00:45,113 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-07 13:00:45,113 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-07 13:01:03,751 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-07 13:01:45,970 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-07 13:01:45,970 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-07 13:02:57,365 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-07 13:02:57,365 - aiogram.dispatcher - WARNING - Sleep for 1.263009 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-01-07 13:03:08,853 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2026-01-07 13:06:11,161 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-07 13:06:11,161 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-07 13:06:30,036 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-07 13:08:13,100 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-07 13:08:13,100 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-07 13:08:24,609 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-07 13:10:34,387 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-07 13:10:34,387 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-07 13:10:46,232 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-10 01:10:43,720 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-01-10 01:10:43,720 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-10 01:10:44,765 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-01-10 01:10:44,765 - aiogram.dispatcher - WARNING - Sleep for 1.397161 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-01-10 01:10:49,586 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-10 01:10:49,586 - aiogram.dispatcher - WARNING - Sleep for 1.785047 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-01-10 01:10:51,418 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-10 01:10:51,418 - aiogram.dispatcher - WARNING - Sleep for 2.296423 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-01-10 01:10:53,762 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-10 01:10:53,762 - aiogram.dispatcher - WARNING - Sleep for 2.900939 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-01-10 01:11:17,536 - aiogram.dispatcher - INFO - Connection established (tryings = 5, bot id = 8024421344)
+2026-01-13 05:56:27,529 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-13 05:56:27,529 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-13 05:56:38,680 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-13 06:35:44,611 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2026-01-13 06:35:44,611 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-01-13 06:35:44,611 - aiogram.dispatcher - INFO - Polling stopped
+2026-01-13 06:35:55,691 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-01-13 06:35:55,846 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-01-13 06:35:55,847 - aiogram.dispatcher - INFO - Start polling
+2026-01-13 06:35:55,895 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-01-14 07:07:13,206 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-01-14 07:07:13,238 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-14 07:07:24,380 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-14 07:07:34,464 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-01-14 07:07:34,464 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-14 07:07:45,610 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-17 01:10:49,207 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-17 01:10:49,210 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-17 01:10:50,256 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-17 01:10:50,256 - aiogram.dispatcher - WARNING - Sleep for 1.360488 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-01-17 01:10:51,668 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-17 01:10:51,669 - aiogram.dispatcher - WARNING - Sleep for 1.673799 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-01-17 01:11:15,489 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2026-01-20 00:13:59,374 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-20 00:13:59,378 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-20 00:14:10,517 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-21 11:35:26,374 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-21 11:35:26,377 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-21 11:35:37,531 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-21 11:42:29,642 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-21 11:42:29,642 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-21 11:42:40,797 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-22 10:30:36,485 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-01-22 10:30:36,488 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-22 10:30:47,649 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-22 14:29:04,524 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-22 14:29:04,525 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-22 14:29:15,669 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-23 01:10:49,111 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-23 01:10:49,111 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-23 01:10:50,156 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-23 01:10:50,156 - aiogram.dispatcher - WARNING - Sleep for 1.153142 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-01-23 01:10:51,355 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-23 01:10:51,355 - aiogram.dispatcher - WARNING - Sleep for 1.398852 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-01-23 01:10:52,800 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-23 01:10:52,800 - aiogram.dispatcher - WARNING - Sleep for 1.959461 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-01-23 01:11:32,891 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2026-01-23 06:32:12,348 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-01-23 06:32:12,351 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-23 06:32:31,100 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-28 06:45:26,785 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2026-01-28 06:45:29,893 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-01-28 06:45:29,979 - aiogram.dispatcher - INFO - Polling stopped
+2026-01-28 06:45:58,864 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-01-28 06:45:59,039 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-01-28 06:45:59,040 - aiogram.dispatcher - INFO - Start polling
+2026-01-28 06:45:59,091 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-01-29 01:10:44,049 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-01-29 01:10:44,049 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-29 01:10:48,460 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-29 01:10:48,460 - aiogram.dispatcher - WARNING - Sleep for 1.360834 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-01-29 01:10:49,872 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-29 01:10:49,872 - aiogram.dispatcher - WARNING - Sleep for 1.904151 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-01-29 01:10:51,828 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-01-29 01:10:51,829 - aiogram.dispatcher - WARNING - Sleep for 2.357496 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-01-29 01:11:15,275 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2026-01-30 14:42:01,699 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-30 14:42:01,704 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-30 14:42:12,844 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-30 14:42:53,029 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-30 14:42:53,029 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-30 14:43:06,280 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-30 14:43:16,332 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-30 14:43:16,333 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-30 14:43:27,473 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-30 14:43:37,519 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-30 14:43:37,519 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-30 14:43:48,669 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-01-31 21:10:06,735 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-01-31 21:10:06,735 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-01-31 21:10:17,874 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-01 21:05:25,366 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-02-01 21:05:25,366 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-01 21:05:36,504 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-02 12:49:56,308 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-02 12:49:56,308 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-02 12:50:07,444 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-02 12:50:07,445 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-02 12:50:07,445 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-02 12:50:18,597 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-02 15:55:44,784 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-02 15:55:44,784 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-02 15:55:55,924 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-03 15:47:40,478 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-03 15:47:40,478 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-03 15:47:51,650 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-04 01:10:47,861 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-04 01:10:47,861 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-04 01:10:48,910 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-04 01:10:48,910 - aiogram.dispatcher - WARNING - Sleep for 1.361005 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-04 01:10:50,321 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-04 01:10:50,321 - aiogram.dispatcher - WARNING - Sleep for 1.722657 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-02-04 01:10:52,095 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-04 01:10:52,095 - aiogram.dispatcher - WARNING - Sleep for 2.357287 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-02-04 01:11:16,534 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2026-02-04 06:45:32,437 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2026-02-04 06:45:32,438 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-02-04 06:45:32,438 - aiogram.dispatcher - INFO - Polling stopped
+2026-02-04 06:46:06,497 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-02-04 06:46:06,820 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-02-04 06:46:06,821 - aiogram.dispatcher - INFO - Start polling
+2026-02-04 06:46:06,870 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-02-06 22:15:03,815 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-06 22:15:03,815 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-06 22:15:14,952 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-06 22:15:14,953 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-06 22:15:14,953 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-06 22:15:26,090 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-06 22:15:26,091 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-06 22:15:26,091 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-06 22:15:37,235 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-06 22:15:37,236 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-06 22:15:37,237 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-06 22:15:48,372 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-06 22:15:48,372 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-06 22:15:48,373 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-06 22:15:59,506 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-06 22:16:49,734 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-06 22:16:49,735 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-06 22:17:00,879 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-06 22:38:57,390 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-06 22:38:57,390 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-06 22:38:58,442 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-06 22:38:58,442 - aiogram.dispatcher - WARNING - Sleep for 1.249710 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-06 22:38:59,742 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-06 22:38:59,742 - aiogram.dispatcher - WARNING - Sleep for 1.730144 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-02-06 22:39:03,645 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-06 22:39:03,645 - aiogram.dispatcher - WARNING - Sleep for 2.325586 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-02-06 22:39:06,022 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-06 22:39:06,022 - aiogram.dispatcher - WARNING - Sleep for 3.123760 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-02-06 22:39:32,721 - aiogram.dispatcher - INFO - Connection established (tryings = 5, bot id = 8024421344)
+2026-02-07 06:21:07,730 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2026-02-07 06:21:07,732 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-02-07 06:21:07,732 - aiogram.dispatcher - INFO - Polling stopped
+2026-02-07 06:21:18,024 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-02-07 06:21:18,253 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-02-07 06:21:18,253 - aiogram.dispatcher - INFO - Start polling
+2026-02-07 06:21:18,302 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-02-07 22:38:22,316 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-07 22:38:22,319 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-07 22:38:33,465 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-07 22:38:33,466 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-07 22:38:33,466 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-07 22:38:44,605 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 10:59:08,914 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 10:59:08,915 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 10:59:20,077 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 11:07:52,823 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 11:07:52,823 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 11:08:03,966 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 11:11:45,787 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 11:11:45,787 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 11:11:56,928 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 11:11:56,929 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 11:11:56,929 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 11:12:08,077 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 12:56:04,390 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-02-09 12:56:04,390 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 12:56:15,539 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 13:58:34,324 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 13:58:34,324 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 13:58:45,466 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 13:59:15,912 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 13:59:15,912 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 13:59:27,073 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:06:09,159 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:06:09,159 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:06:20,312 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:06:20,562 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:06:20,562 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:06:31,722 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:06:31,723 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:06:31,723 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:06:42,871 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:07:43,535 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:07:43,535 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:07:54,669 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:11:25,903 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:11:25,904 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:11:37,041 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:11:37,041 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:11:37,042 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:11:48,193 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:13:48,805 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:13:48,805 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:13:59,941 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:15:30,597 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:15:30,597 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:15:41,741 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:24:14,053 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:24:14,053 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:24:25,200 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:28:36,459 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:28:36,459 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:28:47,599 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:35:59,562 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:35:59,562 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:36:10,713 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:44:44,013 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:44:44,013 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:44:55,172 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:48:06,106 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:48:06,106 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:48:17,288 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 14:49:07,540 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 14:49:07,540 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 14:49:19,784 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 17:59:58,184 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-09 17:59:58,184 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 18:00:09,320 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 18:00:09,364 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-09 18:00:09,364 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 18:00:20,507 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 18:00:20,551 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-09 18:00:20,551 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 18:00:31,707 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-09 18:44:25,868 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 18:44:25,868 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 18:44:26,915 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Network is unreachable]
+2026-02-09 18:44:26,915 - aiogram.dispatcher - WARNING - Sleep for 1.343407 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-09 18:44:38,393 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2026-02-09 19:04:44,037 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-09 19:04:44,037 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-09 19:04:55,187 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-10 05:25:35,389 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-02-10 05:25:35,390 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-10 05:25:46,528 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-10 05:52:30,697 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-10 05:52:30,697 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-10 05:52:41,852 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-10 06:38:05,262 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-10 06:38:05,262 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-10 06:38:16,409 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-10 07:06:46,932 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-10 07:06:46,937 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-10 07:06:58,088 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-10 07:07:37,965 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-10 07:07:37,966 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-10 07:07:49,440 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-10 07:13:22,579 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-10 07:13:22,579 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-10 07:13:33,714 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-10 07:17:14,700 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-10 07:17:14,700 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-10 07:17:25,839 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-10 07:17:45,953 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-10 07:17:45,953 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-10 07:17:57,102 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-10 14:21:17,390 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-02-10 14:21:17,390 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-10 14:21:28,541 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-10 20:54:57,390 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-02-10 20:54:57,390 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-10 20:55:08,535 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-11 21:08:46,389 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-02-11 21:08:46,392 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-11 21:08:57,541 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-11 21:09:16,484 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-11 21:09:16,485 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-11 21:09:27,540 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-11 23:05:35,400 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-02-11 23:05:35,400 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-11 23:05:46,555 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-12 11:33:28,390 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-02-12 11:33:28,392 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-12 11:33:39,534 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-12 11:33:58,476 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-12 11:33:58,477 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-12 11:34:09,522 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-14 19:23:23,983 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-14 19:23:23,995 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-14 19:23:35,147 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-14 19:26:05,878 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-14 19:26:05,879 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-14 19:26:17,119 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-14 20:57:23,316 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-14 20:57:23,316 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-14 20:57:34,461 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-14 21:00:25,271 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-14 21:00:25,271 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-14 21:00:36,418 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-14 21:03:57,375 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-14 21:03:57,375 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-14 21:04:08,521 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-14 21:32:56,998 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-14 21:32:56,998 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-14 21:33:08,139 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-14 21:33:08,140 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-14 21:33:08,140 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-14 21:33:19,278 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-14 22:10:39,536 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-14 22:10:39,537 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-14 22:10:50,675 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-14 22:10:50,676 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-14 22:10:50,676 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-14 22:11:01,808 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-15 01:10:42,696 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-15 01:10:42,697 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-15 01:10:43,744 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-15 01:10:43,744 - aiogram.dispatcher - WARNING - Sleep for 1.205742 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-15 01:10:45,001 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-15 01:10:45,001 - aiogram.dispatcher - WARNING - Sleep for 1.540650 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-02-15 01:10:50,310 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-15 01:10:50,310 - aiogram.dispatcher - WARNING - Sleep for 1.885952 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-02-15 01:10:52,245 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-15 01:10:52,245 - aiogram.dispatcher - WARNING - Sleep for 2.457154 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-02-15 01:10:54,751 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-15 01:10:54,751 - aiogram.dispatcher - WARNING - Sleep for 3.244836 seconds and try again... (tryings = 5, bot id = 8024421344)
+2026-02-15 01:11:37,330 - aiogram.dispatcher - INFO - Connection established (tryings = 6, bot id = 8024421344)
+2026-02-16 07:37:08,041 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-16 07:37:08,041 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-16 07:37:19,183 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-16 07:40:40,134 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-16 07:40:40,135 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-16 07:40:51,273 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-16 08:02:07,194 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-16 08:02:07,194 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-16 08:02:18,342 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-16 15:51:23,376 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-16 15:51:23,376 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-16 15:51:34,531 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-16 15:51:54,679 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-16 15:51:54,679 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-16 15:52:05,820 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-17 06:50:49,000 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2026-02-17 06:50:49,025 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-02-17 06:50:49,027 - aiogram.dispatcher - INFO - Polling stopped
+2026-02-17 06:51:14,129 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-02-17 06:51:14,285 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-02-17 06:51:14,285 - aiogram.dispatcher - INFO - Start polling
+2026-02-17 06:51:14,332 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-02-18 07:43:45,866 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-18 07:43:45,868 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-18 07:43:57,005 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-19 11:44:30,254 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-19 11:44:30,255 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-19 11:44:41,400 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-21 01:10:38,240 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-21 01:10:38,241 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-21 01:10:39,286 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-21 01:10:39,287 - aiogram.dispatcher - WARNING - Sleep for 1.278985 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-21 01:10:40,613 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-21 01:10:40,613 - aiogram.dispatcher - WARNING - Sleep for 1.536674 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-02-21 01:10:45,226 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-21 01:10:45,227 - aiogram.dispatcher - WARNING - Sleep for 2.020995 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-02-21 01:10:47,294 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-21 01:10:47,294 - aiogram.dispatcher - WARNING - Sleep for 2.511146 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-02-21 01:11:31,388 - aiogram.dispatcher - INFO - Connection established (tryings = 5, bot id = 8024421344)
+2026-02-21 20:11:48,390 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-02-21 20:11:48,390 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-21 20:13:00,342 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-02-21 20:13:00,342 - aiogram.dispatcher - WARNING - Sleep for 1.415547 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-21 20:13:11,913 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2026-02-23 01:10:37,285 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-23 01:10:37,288 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-23 01:10:38,334 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-23 01:10:38,334 - aiogram.dispatcher - WARNING - Sleep for 1.311697 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-23 01:10:39,695 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-23 01:10:39,695 - aiogram.dispatcher - WARNING - Sleep for 1.623141 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-02-23 01:10:41,366 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-23 01:10:41,366 - aiogram.dispatcher - WARNING - Sleep for 2.065181 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-02-23 01:10:45,446 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-23 01:10:45,446 - aiogram.dispatcher - WARNING - Sleep for 2.763890 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-02-23 01:10:48,256 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-23 01:10:48,256 - aiogram.dispatcher - WARNING - Sleep for 3.416201 seconds and try again... (tryings = 5, bot id = 8024421344)
+2026-02-23 01:11:30,789 - aiogram.dispatcher - INFO - Connection established (tryings = 6, bot id = 8024421344)
+2026-02-24 01:10:37,463 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-24 01:10:37,467 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-24 01:10:38,513 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-24 01:10:38,513 - aiogram.dispatcher - WARNING - Sleep for 1.282612 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-24 01:10:39,842 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-24 01:10:39,842 - aiogram.dispatcher - WARNING - Sleep for 1.580241 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-02-24 01:10:43,187 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-24 01:10:43,187 - aiogram.dispatcher - WARNING - Sleep for 1.982683 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-02-24 01:10:45,216 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-24 01:10:45,217 - aiogram.dispatcher - WARNING - Sleep for 2.574738 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-02-24 01:11:31,869 - aiogram.dispatcher - INFO - Connection established (tryings = 5, bot id = 8024421344)
+2026-02-25 01:10:44,674 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-25 01:10:44,676 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-25 01:10:45,726 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-25 01:10:45,726 - aiogram.dispatcher - WARNING - Sleep for 1.269352 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-25 01:10:47,048 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-25 01:10:47,048 - aiogram.dispatcher - WARNING - Sleep for 1.818110 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-02-25 01:11:37,670 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2026-02-26 01:10:42,663 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-26 01:10:42,668 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-26 01:10:43,715 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-26 01:10:43,716 - aiogram.dispatcher - WARNING - Sleep for 1.428460 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-26 01:10:46,109 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-26 01:10:46,109 - aiogram.dispatcher - WARNING - Sleep for 1.796057 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-02-26 01:10:47,966 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-26 01:10:47,966 - aiogram.dispatcher - WARNING - Sleep for 2.389113 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-02-26 01:11:24,960 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2026-02-27 01:10:45,198 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-27 01:10:45,206 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-27 01:10:46,329 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-27 01:10:46,329 - aiogram.dispatcher - WARNING - Sleep for 1.289255 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-27 01:10:47,666 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-27 01:10:47,666 - aiogram.dispatcher - WARNING - Sleep for 1.799897 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-02-27 01:10:49,521 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-27 01:10:49,522 - aiogram.dispatcher - WARNING - Sleep for 2.206545 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-02-27 01:11:27,056 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2026-02-28 01:10:40,610 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-02-28 01:10:40,610 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-28 01:10:43,129 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-28 01:10:43,129 - aiogram.dispatcher - WARNING - Sleep for 1.514485 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-28 01:10:44,690 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-28 01:10:44,690 - aiogram.dispatcher - WARNING - Sleep for 2.089418 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-02-28 01:11:52,123 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2026-02-28 06:03:19,312 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2026-02-28 06:03:22,463 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-02-28 06:03:22,523 - aiogram.dispatcher - INFO - Polling stopped
+2026-02-28 06:03:51,414 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-02-28 06:03:51,618 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-02-28 06:03:51,618 - aiogram.dispatcher - INFO - Start polling
+2026-02-28 06:03:51,664 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-02-28 12:29:15,623 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-28 12:29:15,623 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-28 12:29:26,776 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-28 17:00:37,086 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-02-28 17:00:37,086 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-28 17:00:48,235 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-02-28 23:21:36,288 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-28 23:21:36,288 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-02-28 23:21:37,339 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-28 23:21:37,339 - aiogram.dispatcher - WARNING - Sleep for 1.268919 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-02-28 23:21:38,658 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-02-28 23:21:38,659 - aiogram.dispatcher - WARNING - Sleep for 1.575298 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-02-28 23:22:02,995 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2026-03-01 00:00:41,104 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-01 00:00:41,104 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-01 00:00:42,153 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-01 00:00:42,153 - aiogram.dispatcher - WARNING - Sleep for 1.371167 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-01 00:01:06,074 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2026-03-02 10:00:38,004 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-03-02 10:00:38,004 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-02 10:00:49,148 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-02 14:02:29,582 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-02 14:02:29,582 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-02 14:02:40,761 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-02 14:12:23,928 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-02 14:12:23,928 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-02 14:12:35,093 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-02 14:39:16,802 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-02 14:39:16,802 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-02 14:39:27,947 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-02 14:53:42,240 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-02 14:53:42,241 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-02 14:53:53,377 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-03 04:50:57,370 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-03 04:50:57,370 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-03 04:51:08,523 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-03 04:51:18,621 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-03 04:51:18,621 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-03 04:51:29,773 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-03 07:38:09,233 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-03 07:38:09,233 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-03 07:38:20,372 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-03 15:11:25,167 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-03 15:11:25,167 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-03 15:11:36,316 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-05 18:30:40,205 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-03-05 18:30:40,205 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-05 18:30:51,361 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-05 18:32:41,968 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-03-05 18:32:41,968 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-05 18:32:53,120 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-05 18:32:53,121 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-03-05 18:32:53,121 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-05 18:33:04,254 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-08 09:21:58,125 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-08 09:21:58,126 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-08 09:22:10,151 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-10 01:10:47,098 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-10 01:10:47,098 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-10 01:10:48,146 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-10 01:10:48,146 - aiogram.dispatcher - WARNING - Sleep for 1.267705 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-10 01:10:49,462 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-10 01:10:49,462 - aiogram.dispatcher - WARNING - Sleep for 1.437766 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-03-10 01:11:42,238 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2026-03-10 07:00:36,641 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2026-03-10 07:00:36,642 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-03-10 07:00:36,642 - aiogram.dispatcher - INFO - Polling stopped
+2026-03-10 07:01:02,270 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-03-10 07:01:02,968 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-03-10 07:01:02,968 - aiogram.dispatcher - INFO - Start polling
+2026-03-10 07:01:03,016 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-03-10 18:11:02,064 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-03-10 18:11:02,065 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-10 18:11:13,222 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-12 03:25:44,110 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-12 03:25:44,110 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-12 03:25:55,244 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-13 20:51:45,160 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-13 20:51:45,164 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-13 20:51:56,312 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-16 10:24:31,869 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-16 10:24:31,869 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-16 10:24:53,118 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-16 10:52:29,390 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-03-16 10:52:29,390 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-16 10:52:41,157 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-16 10:52:59,481 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-16 10:52:59,481 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-16 10:53:10,532 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-17 18:01:53,212 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-03-17 18:01:53,212 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-17 18:02:04,366 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-17 18:02:04,367 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-03-17 18:02:04,367 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-17 18:02:15,506 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-18 01:10:45,079 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-18 01:10:45,079 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-18 01:10:46,125 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-18 01:10:46,126 - aiogram.dispatcher - WARNING - Sleep for 1.400836 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-18 01:10:47,573 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-18 01:10:47,573 - aiogram.dispatcher - WARNING - Sleep for 1.853496 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-03-18 01:11:48,380 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2026-03-19 15:22:01,506 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-19 15:22:01,506 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-19 15:22:12,643 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-20 01:10:44,173 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-20 01:10:44,173 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-20 01:10:45,217 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-20 01:10:45,217 - aiogram.dispatcher - WARNING - Sleep for 1.333713 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-20 01:10:46,596 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-20 01:10:46,596 - aiogram.dispatcher - WARNING - Sleep for 1.723071 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-03-20 01:10:48,367 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-20 01:10:48,367 - aiogram.dispatcher - WARNING - Sleep for 2.186432 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-03-20 01:11:33,514 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2026-03-21 01:10:42,375 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-21 01:10:42,375 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-21 01:10:43,426 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-21 01:10:43,426 - aiogram.dispatcher - WARNING - Sleep for 1.282198 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-21 01:10:44,758 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-21 01:10:44,758 - aiogram.dispatcher - WARNING - Sleep for 1.714716 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-03-21 01:11:14,122 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2026-03-23 08:18:38,293 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-23 08:18:38,293 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-23 08:18:49,465 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-23 10:33:46,488 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-23 10:33:46,488 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-23 10:33:57,660 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-23 10:57:23,183 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-23 10:57:23,183 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-23 10:58:14,466 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-23 10:58:38,821 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-23 10:58:38,821 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-23 10:58:49,963 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-23 10:59:00,053 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-23 10:59:00,053 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-23 10:59:11,192 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-23 11:29:36,389 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-03-23 11:29:36,390 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-23 11:29:50,436 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-23 11:41:05,066 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-23 11:41:05,066 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-23 11:41:25,127 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-23 11:41:25,127 - aiogram.dispatcher - WARNING - Sleep for 1.265136 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-23 11:41:37,928 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2026-03-23 14:22:17,304 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-03-23 14:22:17,304 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-23 14:22:28,562 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-03-24 01:10:36,571 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-24 01:10:36,571 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-24 01:10:37,616 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-24 01:10:37,616 - aiogram.dispatcher - WARNING - Sleep for 1.307666 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-24 01:10:38,969 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-24 01:10:38,969 - aiogram.dispatcher - WARNING - Sleep for 1.876572 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-03-24 01:10:40,891 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-24 01:10:40,891 - aiogram.dispatcher - WARNING - Sleep for 2.343151 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-03-24 01:10:45,100 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-24 01:10:45,100 - aiogram.dispatcher - WARNING - Sleep for 2.995155 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-03-24 01:10:48,144 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-24 01:10:48,144 - aiogram.dispatcher - WARNING - Sleep for 3.706366 seconds and try again... (tryings = 5, bot id = 8024421344)
+2026-03-24 01:11:31,160 - aiogram.dispatcher - INFO - Connection established (tryings = 6, bot id = 8024421344)
+2026-03-26 01:10:37,973 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-26 01:10:37,975 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-26 01:10:39,024 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-26 01:10:39,025 - aiogram.dispatcher - WARNING - Sleep for 1.387887 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-26 01:10:40,466 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-26 01:10:40,466 - aiogram.dispatcher - WARNING - Sleep for 1.847704 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-03-26 01:10:45,103 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-26 01:10:45,103 - aiogram.dispatcher - WARNING - Sleep for 2.436347 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-03-26 01:10:47,595 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-26 01:10:47,595 - aiogram.dispatcher - WARNING - Sleep for 3.252218 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-03-26 01:10:50,903 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-26 01:10:50,903 - aiogram.dispatcher - WARNING - Sleep for 4.210160 seconds and try again... (tryings = 5, bot id = 8024421344)
+2026-03-26 01:11:46,236 - aiogram.dispatcher - INFO - Connection established (tryings = 6, bot id = 8024421344)
+2026-03-27 01:10:46,222 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-27 01:10:46,223 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-27 01:10:47,271 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-27 01:10:47,272 - aiogram.dispatcher - WARNING - Sleep for 1.487924 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-27 01:10:48,809 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-27 01:10:48,809 - aiogram.dispatcher - WARNING - Sleep for 2.030685 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-03-27 01:11:30,742 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 8024421344)
+2026-03-28 01:10:42,752 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-28 01:10:42,753 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-28 01:10:43,799 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-28 01:10:43,799 - aiogram.dispatcher - WARNING - Sleep for 1.377278 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-28 01:10:45,221 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-28 01:10:45,221 - aiogram.dispatcher - WARNING - Sleep for 1.765840 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-03-28 01:10:47,032 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-28 01:10:47,032 - aiogram.dispatcher - WARNING - Sleep for 2.280056 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-03-28 01:11:44,533 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2026-03-29 01:10:42,581 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-29 01:10:42,582 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-29 01:10:45,051 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-29 01:10:45,051 - aiogram.dispatcher - WARNING - Sleep for 1.253839 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-29 01:10:46,351 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-29 01:10:46,351 - aiogram.dispatcher - WARNING - Sleep for 1.901523 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-03-29 01:10:48,300 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-29 01:10:48,300 - aiogram.dispatcher - WARNING - Sleep for 2.367927 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-03-29 01:11:54,351 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2026-03-30 01:10:40,159 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-30 01:10:40,161 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-30 01:10:42,974 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-30 01:10:42,974 - aiogram.dispatcher - WARNING - Sleep for 1.391063 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-30 01:10:44,417 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-30 01:10:44,417 - aiogram.dispatcher - WARNING - Sleep for 1.915544 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-03-30 01:10:46,383 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-30 01:10:46,383 - aiogram.dispatcher - WARNING - Sleep for 2.396087 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-03-30 01:11:26,947 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2026-03-31 01:10:39,109 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-31 01:10:39,109 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-03-31 01:10:40,158 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-31 01:10:40,159 - aiogram.dispatcher - WARNING - Sleep for 1.209424 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-03-31 01:10:41,418 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-03-31 01:10:41,419 - aiogram.dispatcher - WARNING - Sleep for 1.646196 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-03-31 01:10:44,900 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-31 01:10:44,900 - aiogram.dispatcher - WARNING - Sleep for 2.164776 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-03-31 01:10:47,117 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-03-31 01:10:47,117 - aiogram.dispatcher - WARNING - Sleep for 2.837734 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-03-31 01:11:14,444 - aiogram.dispatcher - INFO - Connection established (tryings = 5, bot id = 8024421344)
+2026-04-01 01:10:40,614 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-04-01 01:10:40,617 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-01 01:10:41,666 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-04-01 01:10:41,666 - aiogram.dispatcher - WARNING - Sleep for 1.116434 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-04-01 01:10:45,050 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-01 01:10:45,051 - aiogram.dispatcher - WARNING - Sleep for 1.306895 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-04-01 01:10:46,406 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-01 01:10:46,407 - aiogram.dispatcher - WARNING - Sleep for 1.694910 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-04-01 01:10:48,151 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-01 01:10:48,151 - aiogram.dispatcher - WARNING - Sleep for 2.397957 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-04-01 01:11:24,763 - aiogram.dispatcher - INFO - Connection established (tryings = 5, bot id = 8024421344)
+2026-04-02 14:38:36,162 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-04-02 14:38:36,383 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-04-02 14:38:36,384 - aiogram.dispatcher - INFO - Start polling
+2026-04-02 14:38:36,431 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-04-03 01:10:43,100 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-03 01:10:43,101 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-03 01:10:44,150 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-03 01:10:44,150 - aiogram.dispatcher - WARNING - Sleep for 1.335422 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-04-03 01:11:24,302 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2026-04-03 13:58:47,266 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-03 13:58:47,273 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-03 13:58:48,322 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-03 13:58:48,323 - aiogram.dispatcher - WARNING - Sleep for 1.356307 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-04-03 13:58:49,727 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-03 13:58:49,727 - aiogram.dispatcher - WARNING - Sleep for 1.727850 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-04-03 13:58:51,502 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-03 13:58:51,502 - aiogram.dispatcher - WARNING - Sleep for 2.239621 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-04-03 13:59:51,242 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 8024421344)
+2026-04-03 23:50:25,853 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-03 23:50:25,853 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-03 23:50:26,903 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-03 23:50:26,904 - aiogram.dispatcher - WARNING - Sleep for 1.360750 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-04-03 23:50:51,856 - aiogram.dispatcher - INFO - Connection established (tryings = 2, bot id = 8024421344)
+2026-04-07 11:44:47,928 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-04-07 11:44:47,928 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-07 11:44:59,071 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-04-08 22:01:51,790 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-04-08 22:01:51,790 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-08 22:02:06,084 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-04-08 22:02:21,884 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-04-08 22:02:21,884 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-08 22:02:32,938 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-04-09 10:28:30,979 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-04-09 10:28:30,979 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-09 10:28:42,131 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-04-09 12:05:40,919 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-09 12:05:40,919 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-09 12:05:52,073 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-04-10 06:35:40,842 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2026-04-10 06:35:40,842 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-04-10 06:35:40,843 - aiogram.dispatcher - INFO - Polling stopped
+2026-04-10 06:35:50,946 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-04-10 06:35:51,131 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-04-10 06:35:51,132 - aiogram.dispatcher - INFO - Start polling
+2026-04-10 06:35:51,185 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-04-13 01:10:39,660 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-04-13 01:10:39,665 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-13 01:10:40,711 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-04-13 01:10:40,711 - aiogram.dispatcher - WARNING - Sleep for 1.198028 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-04-13 01:10:41,960 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-04-13 01:10:41,960 - aiogram.dispatcher - WARNING - Sleep for 1.605768 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-04-13 01:10:45,612 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-13 01:10:45,612 - aiogram.dispatcher - WARNING - Sleep for 1.959148 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-04-13 01:10:47,618 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-13 01:10:47,618 - aiogram.dispatcher - WARNING - Sleep for 2.409091 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-04-13 01:10:50,077 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-13 01:10:50,077 - aiogram.dispatcher - WARNING - Sleep for 3.135805 seconds and try again... (tryings = 5, bot id = 8024421344)
+2026-04-13 01:11:47,259 - aiogram.dispatcher - INFO - Connection established (tryings = 6, bot id = 8024421344)
+2026-04-13 05:55:21,933 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 104] Connection reset by peer
+2026-04-13 05:55:21,934 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-13 05:55:33,085 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-04-14 08:01:57,878 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-14 08:01:57,878 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-14 08:02:09,019 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-04-14 08:02:09,021 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-14 08:02:09,021 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-14 08:02:20,166 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-04-16 01:10:39,273 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-04-16 01:10:39,273 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-16 01:10:40,330 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-04-16 01:10:40,330 - aiogram.dispatcher - WARNING - Sleep for 1.377497 seconds and try again... (tryings = 1, bot id = 8024421344)
+2026-04-16 01:10:41,759 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-04-16 01:10:41,759 - aiogram.dispatcher - WARNING - Sleep for 1.645579 seconds and try again... (tryings = 2, bot id = 8024421344)
+2026-04-16 01:10:43,454 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramRetryAfter: Telegram server says - Flood control exceeded on method 'GetUpdates'. Retry in 5 seconds.
+Original description: Too Many Requests: retry after 5
+(background on this error at: https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)
+2026-04-16 01:10:43,454 - aiogram.dispatcher - WARNING - Sleep for 2.067216 seconds and try again... (tryings = 3, bot id = 8024421344)
+2026-04-16 01:10:47,701 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-16 01:10:47,701 - aiogram.dispatcher - WARNING - Sleep for 2.820133 seconds and try again... (tryings = 4, bot id = 8024421344)
+2026-04-16 01:10:50,579 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramServerError: Telegram server says - Bad Gateway
+2026-04-16 01:10:50,579 - aiogram.dispatcher - WARNING - Sleep for 3.715415 seconds and try again... (tryings = 5, bot id = 8024421344)
+2026-04-16 01:11:36,918 - aiogram.dispatcher - INFO - Connection established (tryings = 6, bot id = 8024421344)
+2026-04-16 07:07:17,056 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-16 07:07:17,056 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8024421344)
+2026-04-16 07:07:28,196 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8024421344)
+2026-04-16 19:16:24,226 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2026-04-16 19:16:24,289 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-04-16 19:16:24,293 - aiogram.dispatcher - INFO - Polling stopped
+2026-04-16 19:16:28,290 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-04-16 19:16:28,456 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-04-16 19:16:28,456 - aiogram.dispatcher - INFO - Start polling
+2026-04-16 19:16:28,507 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-04-16 19:26:07,159 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2026-04-16 19:26:07,159 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-04-16 19:26:07,160 - aiogram.dispatcher - INFO - Polling stopped
+2026-04-16 19:26:11,141 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-04-16 19:26:11,311 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-04-16 19:26:11,312 - aiogram.dispatcher - INFO - Start polling
+2026-04-16 19:26:11,362 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-04-16 19:31:53,490 - aiogram.dispatcher - WARNING - Received SIGTERM signal
+2026-04-16 19:31:53,491 - aiogram.dispatcher - INFO - Polling stopped for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'
+2026-04-16 19:31:53,491 - aiogram.dispatcher - INFO - Polling stopped
+2026-04-16 19:31:57,767 - __main__ - INFO - ExchangeRateBot инициализирован
+2026-04-16 19:31:57,974 - __main__ - INFO - 🤖 Exchange Rate Bot запущен!
+2026-04-16 19:31:57,975 - aiogram.dispatcher - INFO - Start polling
+2026-04-16 19:31:58,022 - aiogram.dispatcher - INFO - Run polling for bot @ZayavkaCT_bot id=8024421344 - 'ZayavkaCT_bot'

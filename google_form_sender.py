@@ -111,13 +111,8 @@ class GoogleFormsSender:
             
             # Email - пробуем разные варианты
             email = order_data.get('email', '')
-            if email:
-                # Пробуем основной вариант
+            if email and not email.endswith('@telegram.user'):
                 form_data[self.field_mapping['email']] = email
-                # Добавляем альтернативные варианты для надежности
-                for alt_email_field in self.email_alternatives:
-                    if alt_email_field != self.field_mapping['email']:
-                        form_data[alt_email_field] = email
             
             # Остальные поля - точно по маппингу из FB_PUBLIC_LOAD_DATA_
             form_data.update({
